@@ -30,18 +30,30 @@ def merge_chunks(chunks_pattern: str = "chunks_output/*.json", output_file: str 
         except Exception as e:
             print(f"[!] Error reading {fpath}: {e}")
 
-    # Re-index
-    for i, r in enumerate(all_records, 1):
+    seen_rolls = set()
+    unique_records = []
+    total_success = 0
+
+    for r in all_records:
+        roll = str(r.get("roll_no", "")).strip()
+        if roll and roll not in seen_rolls:
+            seen_rolls.add(roll)
+            unique_records.append(r)
+            if r.get("success"):
+                total_success += 1
+
+    # Re-index cleanly
+    for i, r in enumerate(unique_records, 1):
         r["index"] = i
 
     final_payload = {
         "summary": {
-            "total_records": len(all_records),
+            "total_unique_records": len(unique_records),
             "total_success": total_success,
-            "total_failed": len(all_records) - total_success,
+            "total_failed": len(unique_records) - total_success,
             "total_chunks_merged": len(files)
         },
-        "records": all_records
+        "records": unique_records
     }
 
     os.makedirs(os.path.dirname(os.path.abspath(output_file)) if os.path.dirname(output_file) else ".", exist_ok=True)
