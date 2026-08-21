@@ -1,0 +1,70 @@
+name: Distributed Parallel Board Scraper
+
+on:
+  workflow_dispatch:
+    inputs:
+      delay:
+        description: 'Delay between requests (seconds)'
+        required: false
+        default: '2.0'
+
+jobs:
+  scrape_matrix:
+    name: Scrape Chunk ${{ matrix.chunk }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        chunk: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] # 10 parallel VM runners
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Scraper Chunk ${{ matrix.chunk }}
+        run: |
+          python scrape_chunk.py --chunk ${{ matrix.chunk }} --total-chunks 10 --input rolls.json --output chunks_output/chunk_${{ matrix.chunk }}.json --delay ${{ github.event.inputs.delay || '2.0' }}
+
+      - name: Upload Chunk Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: chunk-result-${{ matrix.chunk }}
+          path: chunks_output/chunk_${{ matrix.chunk }}.json
+
+  merge_and_publish:
+    name: Merge All Chunks & Publish Master JSON
+    needs: scrape_matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download all chunk artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: chunks_output
+          merge-multiple: true
+
+      - name: Merge all chunks
+        run: |
+          python merge_results.py "chunks_output/*.json" "scraped_results_master.json"
+
+      - name: Upload Final Scraped Master JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: all-scraped-results-json
+          path: scraped_results_master.json

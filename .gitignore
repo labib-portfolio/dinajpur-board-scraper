@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+env/
+venv/
+.pytest_cache/
+tests/test_output.json
+test_chunks/
+chunks_output/
