@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Scraper Monitor & Preview Dashboard</title>
+    <link rel="stylesheet" href="/static/preview.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="monitor-navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="live-dot"></span>
+                <span class="brand-icon">⚡</span>
+                <div>
+                    <h1>Live Scraper Monitor</h1>
+                    <span class="brand-sub">Real-Time Progression & Student Results Stream</span>
+                </div>
+            </div>
+            <div class="nav-controls">
+                <a href="/" class="btn btn-outline btn-sm">⚙️ Scraper Config</a>
+                <button id="btn-toggle-stream" class="btn btn-primary btn-sm">🔴 Live (Syncing)</button>
+                <button id="btn-export-csv" class="btn btn-secondary btn-sm">📊 Export CSV</button>
+                <button id="btn-export-json" class="btn btn-secondary btn-sm">📥 Download JSON</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="monitor-container">
+        <!-- Live Stat Cards -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">TOTAL PROGRESS</div>
+                <div class="stat-value" id="stat-progress-count">0 / 3,112</div>
+                <div class="stat-sub" id="stat-percent">0% Completed</div>
+            </div>
+            <div class="stat-card stat-success">
+                <div class="stat-label">SUCCESSFUL RESULTS</div>
+                <div class="stat-value" id="stat-success-count">0</div>
+                <div class="stat-sub">100% Success Rate</div>
+            </div>
+            <div class="stat-card stat-info">
+                <div class="stat-label">LATEST SCRAPED ROLL</div>
+                <div class="stat-value" id="stat-latest-roll">--</div>
+                <div class="stat-sub" id="stat-latest-name">Waiting for data...</div>
+            </div>
+            <div class="stat-card stat-warning">
+                <div class="stat-label">ACTIVE SOURCES</div>
+                <div class="stat-value">Local + Cloud</div>
+                <div class="stat-sub" id="stat-sync-time">Just now</div>
+            </div>
+        </section>
+
+        <!-- Progress Bar Section -->
+        <section class="progress-section">
+            <div class="progress-header">
+                <span class="progress-title">⚡ Batch Scraping Status</span>
+                <span class="progress-stats" id="progress-percentage-label">0%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-glow" id="progress-bar-fill" style="width: 0%;"></div>
+            </div>
+            <div class="progress-footer">
+                <span id="progress-status-msg">🚀 Auto-scraper running and saving to scraped_results_all.json...</span>
+                <span id="progress-remaining-text">-- remaining</span>
+            </div>
+        </section>
+
+        <!-- Live Table Section -->
+        <section class="table-section">
+            <div class="table-header-row">
+                <div class="table-title">
+                    <h2>📋 Scraped Student Records (<span id="table-count">0</span>)</h2>
+                    <span class="table-subtitle">Records stream here in real-time as they are completed</span>
+                </div>
+                <div class="table-filters">
+                    <input type="text" id="search-input" placeholder="🔍 Search by Roll, Name, GPA, or Institute...">
+                    <select id="filter-result">
+                        <option value="ALL">All Results</option>
+                        <option value="GPA">Passed (GPA)</option>
+                        <option value="FAILED">Failed</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="live-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 60px;">#</th>
+                            <th style="width: 100px;">Roll No</th>
+                            <th>Student Name</th>
+                            <th>Father's Name</th>
+                            <th style="width: 120px;">Result / GPA</th>
+                            <th style="width: 90px;">Marks</th>
+                            <th>Institute</th>
+                            <th style="width: 110px;">Subject Grades</th>
+                            <th style="width: 90px;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="live-table-body">
+                        <tr>
+                            <td colspan="9" class="empty-state">
+                                <div class="spinner"></div>
+                                <p>Connecting to live data stream...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Detailed Subject Marks -->
+    <div id="modal-details" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modal-student-title">Student Result Details</h3>
+                <button id="modal-close" class="btn-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-student-body">
+                <!-- Details injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/preview.js"></script>
+</body>
+</html>

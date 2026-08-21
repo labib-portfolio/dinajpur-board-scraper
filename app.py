@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from typing import Any, Dict, List, Optional
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
@@ -61,6 +62,13 @@ class CaptchaTestRequest(BaseModel):
 async def serve_dashboard(request: Request):
     """Serve the main web UI dashboard."""
     return templates.TemplateResponse(request=request, name="index.html")
+
+
+@app.get("/preview", response_class=HTMLResponse)
+@app.get("/monitor", response_class=HTMLResponse)
+async def serve_preview_dashboard(request: Request):
+    """Serve the dedicated live monitor & student preview dashboard."""
+    return templates.TemplateResponse(request=request, name="preview.html")
 
 
 @app.post("/api/scrape")
@@ -157,6 +165,19 @@ def receive_stream_record(record: dict):
         return {"status": "ok", "total_records": len(data.get("records", []))}
     except Exception as e:
         return {"status": "error", "message": str(e)}
+
+
+@app.get("/api/live-status")
+def get_live_status():
+    """Returns the latest live progress summary and all records from scraped_results_all.json."""
+    output_path = "scraped_results_all.json"
+    if os.path.exists(output_path):
+        try:
+            with open(output_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            return {"error": str(e)}
+    return {"summary": {"total_rolls_in_file": 3223, "scraped_so_far": 0, "total_success": 0, "total_failed": 0}, "records": []}
 
 
 if __name__ == "__main__":

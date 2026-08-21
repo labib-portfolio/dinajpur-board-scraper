@@ -85,9 +85,14 @@ def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file:
         # Non-blocking real-time webhook push (0ms overhead)
         if webhook_url:
             try:
-                requests.post(webhook_url, json=structured_entry, timeout=1.5)
+                requests.post(
+                    webhook_url,
+                    json=structured_entry,
+                    headers={"Bypass-Tunnel-Reminder": "true", "User-Agent": "Mozilla/5.0"},
+                    timeout=2.0
+                )
             except Exception as e:
-                logger.debug(f"Webhook push failed: {e}")
+                pass
 
         # Checkpoint save
         payload = {
