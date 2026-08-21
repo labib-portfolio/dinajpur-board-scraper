@@ -82,6 +82,13 @@ def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file:
 
         completed_records.append(structured_entry)
 
+        # Non-blocking real-time webhook push (0ms overhead)
+        if webhook_url:
+            try:
+                requests.post(webhook_url, json=structured_entry, timeout=1.5)
+            except Exception as e:
+                logger.debug(f"Webhook push failed: {e}")
+
         # Checkpoint save
         payload = {
             "chunk_index": chunk_index,
@@ -114,6 +121,7 @@ if __name__ == "__main__":
     parser.add_argument("--input", type=str, default="rolls.json", help="Path to rolls file")
     parser.add_argument("--output", type=str, default="chunk_result.json", help="Path to output chunk file")
     parser.add_argument("--delay", type=float, default=2.0, help="Delay between requests in seconds")
+    parser.add_argument("--webhook-url", type=str, default="", help="Optional real-time live stream webhook URL")
     args = parser.parse_args()
 
     run_chunk(
@@ -121,5 +129,6 @@ if __name__ == "__main__":
         total_chunks=args.total_chunks,
         rolls_file=args.input,
         output_file=args.output,
-        delay=args.delay
+        delay=args.delay,
+        webhook_url=args.webhook_url or None
     )
