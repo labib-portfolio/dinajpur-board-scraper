@@ -162,21 +162,27 @@ def main():
             print(f"\n{GREEN}{BOLD}🎉 All {total_appeared} candidate rolls are already completely scraped!{RESET}\n")
             continue
 
-        # 2. Write rolls.json
+        # 2. Write rolls.json with unique timestamp to guarantee git commit & GitHub Actions trigger
+        payload = {
+            "session_id": f"batch_{int(time.time())}",
+            "triggered_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "total_rolls": len(pending_rolls),
+            "rolls": pending_rolls
+        }
         with open(rolls_file, "w", encoding="utf-8") as f:
-            json.dump({"total_rolls": len(pending_rolls), "rolls": pending_rolls}, f, indent=2)
+            json.dump(payload, f, indent=2)
 
         print(f"\n[*] Committing & pushing {len(pending_rolls)} rolls to all 5 GitHub repositories...")
         subprocess.run(["git", "add", "rolls.json"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        subprocess.run(["git", "commit", "-m", f"Trigger 100-worker cloud scraping for {len(pending_rolls)} rolls"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.run(["git", "commit", "-m", f"Trigger 100-worker cloud scraping for {len(pending_rolls)} rolls [{payload['session_id']}]"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
         push_procs = []
         for remote_name, _ in REPOS:
-            p = subprocess.Popen(["git", "push", remote_name, "main"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            p = subprocess.Popen(["git", "push", remote_name, "main"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             push_procs.append((remote_name, p))
 
         for remote_name, p in push_procs:
-            p.wait()
+            out, err = p.communicate()
             print(f"  • Pushed to {remote_name.upper()} (Triggered 20 Cloud VMs)")
 
         print(f"\n{CYAN}{BOLD}⚡ 100 GITHUB ACTIONS CLOUD VMs ARE NOW RUNNING IN PARALLEL!{RESET}")
