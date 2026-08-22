@@ -271,6 +271,7 @@ def run_cloud_cli():
 
                         seen_rolls.add(r_roll)
                         received_count += 1
+                        last_recv_time = time.time()
                         
                         s_name = r.get("student_name") or "STUDENT"
                         gpa_res = r.get("result", "N/A")
@@ -333,22 +334,18 @@ def run_cloud_cli():
                         with open(temp_upz_file, 'w', encoding='utf-8') as out_f:
                             json.dump(upz_data, out_f, indent=2, ensure_ascii=False)
                         os.replace(temp_upz_file, upz_file)
-                        last_recv_time = time.time()
             except Exception:
                 pass
 
         if received_count >= target_count:
             break
 
-        chunk_size = (target_count + 40 - 1) // 40
-        total_active_chunks = (target_count + chunk_size - 1) // chunk_size if chunk_size > 0 else 1
+        # If not connected yet, keep last_recv_time fresh
+        if not boot_announced:
+            last_recv_time = time.time()
 
-        # Finish if all active non-empty chunks have reported completion
-        if len(completed_chunks) >= total_active_chunks and received_count >= (target_count * 0.95):
-            break
-
-        # If idle for 45s after initial streaming started, conclude
-        if received_count > 0 and (time.time() - last_recv_time) > 45:
+        # If stream started and idle for >60s with all runners finished
+        if boot_announced and received_count > 0 and (time.time() - last_recv_time) > 60:
             break
 
         time.sleep(0.5)
