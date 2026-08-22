@@ -138,10 +138,13 @@ def run_scraper_cli():
             print(f"\n{YELLOW}[!] No EIIN entered. Exiting... Goodbye!{RESET}\n")
             break
 
+        batch_start_time = time.time()
+
         # ==========================================
         # Step 1: Harvest Candidate Rolls from Gazette
         # ==========================================
         print(f"\n{CYAN}[Step 1/2] Harvesting Gazette Records for {len(eiins)} Institution(s)...{RESET}")
+        harvest_start_time = time.time()
         
         all_target_rolls = []
         roll_metadata_map = {}
@@ -217,6 +220,7 @@ def run_scraper_cli():
             if not is_cached:
                 time.sleep(2.5)
 
+        harvest_elapsed = time.time() - harvest_start_time
         all_unique_rolls = list(dict.fromkeys(all_target_rolls))
 
         print(f"\n=======================================================")
@@ -410,11 +414,28 @@ def run_scraper_cli():
             # Check if any rolls are still missing for the next pass
             current_rolls_to_scrape = [r for r in pending_rolls if r not in seen_rolls]
 
-        elapsed = round(time.time() - start_time, 2)
+        total_elapsed = time.time() - batch_start_time
+        scrape_elapsed = time.time() - start_time
+        
+        mins, secs = divmod(total_elapsed, 60)
+        time_str = f"{int(mins)}m {secs:.2f}s" if mins > 0 else f"{secs:.2f}s"
+        
+        speed = (received_count / max(0.001, scrape_elapsed))
+        speed_rpm = int(speed * 60)
+
+        print(f"\n=======================================================")
+        print(f"⏱️ {BOLD}PROCESS EXECUTION TIME & PERFORMANCE:{RESET}")
+        print(f"  • Total Time Taken:     {CYAN}{BOLD}{time_str}{RESET}")
+        print(f"  • Gazette Harvest Time: {harvest_elapsed:.2f}s")
+        print(f"  • Roll Scraping Time:   {scrape_elapsed:.2f}s")
+        print(f"  • Average Scraping Speed: {GREEN}{speed:.1f} rolls/sec ({speed_rpm} rolls/min){RESET}")
+        print(f"  • Records Completed:    {received_count}/{target_count} ({100.0 * received_count / max(1, target_count):.1f}%)")
+        print(f"=======================================================")
+
         if len(current_rolls_to_scrape) == 0:
-            print(f"\n{GREEN}{BOLD}🎉 Finished Batch! All {received_count}/{target_count} (100%) student results saved across Upazilla files in {elapsed}s!{RESET}")
+            print(f"\n{GREEN}{BOLD}🎉 Finished Batch! All {received_count}/{target_count} (100%) student results saved across Upazilla files in {time_str}!{RESET}")
         else:
-            print(f"\n{YELLOW}{BOLD}⚠️ Finished Batch! {received_count}/{target_count} student results saved ({len(current_rolls_to_scrape)} unretrieved) in {elapsed}s!{RESET}")
+            print(f"\n{YELLOW}{BOLD}⚠️ Finished Batch! {received_count}/{target_count} student results saved ({len(current_rolls_to_scrape)} unretrieved) in {time_str}!{RESET}")
         print(f"{CYAN}───────────────────────────────────────────────────────────{RESET}\n")
 
 if __name__ == "__main__":
