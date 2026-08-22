@@ -326,11 +326,11 @@ def run_scraper_cli():
                     pass
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-            # 1. Fast 2-proxy attempt with 2.0s reliable timeout (max 4s per roll)
+            # 1. Rotate through up to 5 verified proxy sessions with 2.0s reliable timeout
             if proxy_sessions:
                 num_sessions = len(proxy_sessions)
-                for offset in range(min(2, num_sessions)):
-                    sess = proxy_sessions[(worker_idx * 3 + offset) % num_sessions]
+                for offset in range(min(5, num_sessions)):
+                    sess = proxy_sessions[(worker_idx * 5 + offset) % num_sessions]
                     try:
                         url = ENDPOINT.format(roll=roll_str)
                         r = sess.get(url, timeout=2.0)
@@ -477,8 +477,13 @@ def run_scraper_cli():
                         break
                     continue
 
-                roll_str, meta = item
-                res = fetch_worker(roll_str, worker_idx)
+                if len(item) == 3:
+                    roll_str, meta, attempts = item
+                else:
+                    roll_str, meta = item
+                    attempts = 0
+
+                res = fetch_worker(roll_str, worker_idx + attempts * 13)
                 if res and res.get("success"):
                     save_record_to_upazilla(res, meta)
                     
@@ -497,6 +502,9 @@ def run_scraper_cli():
 
                     with print_lock:
                         print(f"{CYAN}{p_bar}{RESET} {cur_rec:4d}/{cur_target}  Roll {roll_str:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+                else:
+                    if attempts < 3 and not stop_event.is_set():
+                        rolls_queue.put((roll_str, meta, attempts + 1))
 
                 rolls_queue.task_done()
 
