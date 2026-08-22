@@ -71,7 +71,7 @@ def format_progress_bar(current: int, total: int, width: int = 20) -> str:
     filled = int(width * current // total)
     return f"[{'█' * filled}{'░' * (width - filled)}]"
 
-def dispatch_to_github_cloud(rolls: List[str]) -> bool:
+def dispatch_to_github_cloud(rolls: List[str], eiins: List[str]) -> bool:
     """Partitions rolls across Repo 1 and Repo 2 and triggers GitHub Actions."""
     try:
         rolls_file = os.path.join(BASE_DIR, "rolls.json")
@@ -80,12 +80,14 @@ def dispatch_to_github_cloud(rolls: List[str]) -> bool:
 
         print(f"{CYAN}[🚀 Cloud Dispatch] Launching 40 Parallel Cloud Workers on GitHub Actions...{RESET}")
         
+        commit_msg = f"EIIN {', '.join(eiins)}: {len(rolls)} rolls"
+
         subprocess.run(
             ["git", "add", "rolls.json", "tunnel_config.json"],
             cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
         )
         subprocess.run(
-            ["git", "commit", "--allow-empty", "-m", f"Dispatch {len(rolls)} rolls to 40 cloud workers ({int(time.time())})"],
+            ["git", "commit", "--allow-empty", "-m", commit_msg],
             cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
         )
         
@@ -201,7 +203,7 @@ def run_cloud_cli():
 
     # Step 2: Dispatch Entire Pool to 40 Cloud Workers
     print(f"\n{CYAN}[Step 2/2] Launching 40 Cloud Workers for {len(pending_rolls)} Rolls...{RESET}")
-    dispatch_to_github_cloud(pending_rolls)
+    dispatch_to_github_cloud(pending_rolls, eiins)
 
     print(f"{BOLD}⏳ Connecting to 40 GitHub Cloud Workers (Booting VMs ~20-30s)...{RESET}")
 
