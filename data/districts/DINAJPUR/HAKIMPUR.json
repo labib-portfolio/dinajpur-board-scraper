@@ -1,0 +1,123 @@
+{
+  "district": "DINAJPUR",
+  "upazilla": "HAKIMPUR",
+  "total_institutions": 19,
+  "eiin_list": [
+    "120511",
+    "120507",
+    "120514",
+    "120521",
+    "120512",
+    "120510",
+    "120516",
+    "120519",
+    "120517",
+    "120505",
+    "120504",
+    "120503",
+    "120509",
+    "120506",
+    "120515",
+    "120508",
+    "120513",
+    "120518",
+    "120520"
+  ],
+  "institutions": [
+    {
+      "eiin": "120511",
+      "code": "7782",
+      "name": "KOKTARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120507",
+      "code": "7780",
+      "name": "MONSHAPUR BI-LAT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120514",
+      "code": "7787",
+      "name": "BANSHMURI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120521",
+      "code": "7790",
+      "name": "NOWPARA GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120512",
+      "code": "8897",
+      "name": "BAONA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120510",
+      "code": "7781",
+      "name": "JANGAI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120516",
+      "code": "7788",
+      "name": "CHHATNI CHOUMUHANI IDEAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120519",
+      "code": "7789",
+      "name": "RIKARI BILETARAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120517",
+      "code": "7785",
+      "name": "BISHAPARA ADARSHA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120505",
+      "code": "7779",
+      "name": "PAUSHGARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120504",
+      "code": "7775",
+      "name": "BANGLA HILI PILOT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120503",
+      "code": "7784",
+      "name": "DANGAPARA GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120509",
+      "code": "7778",
+      "name": "KHATTA USNA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120506",
+      "code": "7776",
+      "name": "BANGLA HILI GOVT. GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120515",
+      "code": "1334",
+      "name": "NAYANAGAR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120508",
+      "code": "7777",
+      "name": "BOALDER BILATERAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120513",
+      "code": "7783",
+      "name": "JALALPUR B.L. HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120518",
+      "code": "7786",
+      "name": "GOHARA B. L. HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120520",
+      "code": "7791",
+      "name": "HATISO ADIBASI HIGH SCHOOL, DINAJPUR"
+    }
+  ]
+}

@@ -1,0 +1,435 @@
+{
+  "district": "DINAJPUR",
+  "upazilla": "PARBATIPUR",
+  "total_institutions": 71,
+  "eiin_list": [
+    "120959",
+    "121064",
+    "120986",
+    "120954",
+    "120982",
+    "120958",
+    "120964",
+    "121004",
+    "120992",
+    "120951",
+    "120993",
+    "121070",
+    "120960",
+    "120972",
+    "120984",
+    "120988",
+    "121001",
+    "120990",
+    "120976",
+    "121008",
+    "120957",
+    "120968",
+    "120999",
+    "120979",
+    "120997",
+    "133679",
+    "120980",
+    "121003",
+    "120981",
+    "120989",
+    "137779",
+    "120963",
+    "120994",
+    "120985",
+    "120969",
+    "120956",
+    "121068",
+    "137751",
+    "130959",
+    "121002",
+    "120965",
+    "120949",
+    "120977",
+    "121005",
+    "120983",
+    "121065",
+    "120974",
+    "120996",
+    "120998",
+    "120967",
+    "121069",
+    "120978",
+    "120973",
+    "120953",
+    "120995",
+    "121012",
+    "120970",
+    "139331",
+    "139679",
+    "120962",
+    "120952",
+    "120971",
+    "120991",
+    "120975",
+    "121000",
+    "121067",
+    "120987",
+    "120966",
+    "134140",
+    "120955",
+    "120961"
+  ],
+  "institutions": [
+    {
+      "eiin": "120959",
+      "code": "7571",
+      "name": "MANMATHAPUR CO-OPERATIVE HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121064",
+      "code": "7586",
+      "name": "CANTONMENT PUBLIC SCHOOL & COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "120986",
+      "code": "7581",
+      "name": "JOSAI GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120954",
+      "code": "8909",
+      "name": "MONIRIA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120982",
+      "code": "7593",
+      "name": "MITALI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120958",
+      "code": "7563",
+      "name": "HABRA BI-LATERAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120964",
+      "code": "7565",
+      "name": "SONA PUKUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121004",
+      "code": "7583",
+      "name": "HALDIBARI MADHAMIK BIDYA NIKETON, DINAJPUR"
+    },
+    {
+      "eiin": "120992",
+      "code": "7579",
+      "name": "HAMIDPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120951",
+      "code": "7573",
+      "name": "BALIKA BIDHYAPIT, PARBATIPUR, DINAJPUR"
+    },
+    {
+      "eiin": "120993",
+      "code": "9202",
+      "name": "BHATIPARA MODEL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121070",
+      "code": "7564",
+      "name": "UTTAR SALONDAR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120960",
+      "code": "7572",
+      "name": "JASHAI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120972",
+      "code": "7561",
+      "name": "DAGLAGANJ HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120984",
+      "code": "1338",
+      "name": "ADHYAPAK AFZAL SOBHAN HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120988",
+      "code": "8994",
+      "name": "SABUJ SATHI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121001",
+      "code": "7584",
+      "name": "MATTRE VIDDAYATANA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120990",
+      "code": "1324",
+      "name": "MUKTI JODHYA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120976",
+      "code": "7574",
+      "name": "DOANIA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121008",
+      "code": "9200",
+      "name": "SHID MUKTIZODDHA GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120957",
+      "code": "7556",
+      "name": "HARIRAMPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120968",
+      "code": "7569",
+      "name": "FARIDPUR S. M. BILATERAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120999",
+      "code": "7595",
+      "name": "PURBA HOSSAINPUR GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120979",
+      "code": "7669",
+      "name": "MADHYA SHILA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120997",
+      "code": "7585",
+      "name": "HABRA GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "133679",
+      "code": "9206",
+      "name": "MAITRY SECONDARY SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120980",
+      "code": "7589",
+      "name": "SARDER MUNIM HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121003",
+      "code": "7594",
+      "name": "SINGIMARY HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120981",
+      "code": "8896",
+      "name": "AZIZAR SARKER GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120989",
+      "code": "7580",
+      "name": "IDEAL BIDYA NIKETON, DINAJPUR"
+    },
+    {
+      "eiin": "137779",
+      "code": "9207",
+      "name": "PIROJPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120963",
+      "code": "7664",
+      "name": "AMBARI MULTILATERAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120994",
+      "code": "7598",
+      "name": "DACULA IDIAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120985",
+      "code": "1347",
+      "name": "SONA PUKUR SURABHI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120969",
+      "code": "7558",
+      "name": "BASUPARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120956",
+      "code": "7555",
+      "name": "NURUL MAJID HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121068",
+      "code": "7667",
+      "name": "BARNAMALA NIKETAN HIGH SCHOOL AND COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "137751",
+      "code": "9205",
+      "name": "MADDHAPARA GRANITE MINE SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "130959",
+      "code": "7568",
+      "name": "KHALILPUR HAZI S. ULLAH HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121002",
+      "code": "7591",
+      "name": "DANRARPAR BAGUA JANGAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120965",
+      "code": "7562",
+      "name": "SIRAJUL HUDA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120949",
+      "code": "9204",
+      "name": "DAKHEN SALONDAR MODEL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120977",
+      "code": "7552",
+      "name": "PARBATIPUR ABDUS SHAFI MEMORIAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121005",
+      "code": "7596",
+      "name": "BONGABANDHU GOVERNMENT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120983",
+      "code": "7576",
+      "name": "PATIKAGHAT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121065",
+      "code": "7575",
+      "name": "RAJA BASHAR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120974",
+      "code": "7560",
+      "name": "JAMIR HAT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120996",
+      "code": "7592",
+      "name": "INDRO PUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120998",
+      "code": "9201",
+      "name": "DEUL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120967",
+      "code": "7567",
+      "name": "DOLAIKOTA BI-LATERAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121069",
+      "code": "7665",
+      "name": "BARA PUKURIA SCHOOL AND COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "120978",
+      "code": "7587",
+      "name": "PUBLIC HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120973",
+      "code": "7578",
+      "name": "MANMATH PUR M. R. GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120953",
+      "code": "1293",
+      "name": "CANTONMENT BOARD HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120995",
+      "code": "7590",
+      "name": "BARO HARIPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121012",
+      "code": "8995",
+      "name": "STAR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120970",
+      "code": "7557",
+      "name": "AMANATULLAH HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "139331",
+      "code": "9209",
+      "name": "ECHITES RESIDENTIAL SCHOOL AND COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "139679",
+      "code": "9208",
+      "name": "ALO RESIDENTIAL MODEL SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120962",
+      "code": "8914",
+      "name": "SUNDAR PIR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120952",
+      "code": "7550",
+      "name": "JANANGKUR PILOT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120971",
+      "code": "7566",
+      "name": "SHERPUR BHOWANIPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120991",
+      "code": "7588",
+      "name": "RUSTOMNAGAR GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120975",
+      "code": "7559",
+      "name": "JHARUARDANGA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121000",
+      "code": "7599",
+      "name": "MA-MASHI GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "121067",
+      "code": "7570",
+      "name": "BELAICHANDI HIGH SCHOOL AND COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "120987",
+      "code": "7577",
+      "name": "PATIKAGHAT SULTANPUR ADARSHA MULTILETARAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120966",
+      "code": "7553",
+      "name": "MUSTAFAPUR M.L. HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "134140",
+      "code": "9203",
+      "name": "BARAPUKURIA COAL MINE SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120955",
+      "code": "7551",
+      "name": "PARBATIPUR PILOT GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120961",
+      "code": "7554",
+      "name": "NURUL HUDA HIGH SCHOOL, DINAJPUR"
+    }
+  ]
+}

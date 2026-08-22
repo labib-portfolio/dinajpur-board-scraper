@@ -1,0 +1,153 @@
+{
+  "district": "DINAJPUR",
+  "upazilla": "GHORAGHAT",
+  "total_institutions": 24,
+  "eiin_list": [
+    "120472",
+    "120474",
+    "120476",
+    "120462",
+    "120466",
+    "120470",
+    "120463",
+    "120475",
+    "120479",
+    "120477",
+    "120469",
+    "120471",
+    "137022",
+    "120461",
+    "120468",
+    "120465",
+    "120458",
+    "120457",
+    "120460",
+    "137615",
+    "120464",
+    "120467",
+    "120459",
+    "120473"
+  ],
+  "institutions": [
+    {
+      "eiin": "120472",
+      "code": "7804",
+      "name": "JOYRAMPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120474",
+      "code": "7809",
+      "name": "CHACHURA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120476",
+      "code": "7812",
+      "name": "RANIGONJ GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120462",
+      "code": "7802",
+      "name": "GHORAGHAT R. C. PILOT GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120466",
+      "code": "7803",
+      "name": "OSMANPUR GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120470",
+      "code": "7805",
+      "name": "KULANANDAPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120463",
+      "code": "7828",
+      "name": "BALAGARI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120475",
+      "code": "7808",
+      "name": "BARO PAIKER GAR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120479",
+      "code": "7813",
+      "name": "SHALIKADAHA ADARSHA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120477",
+      "code": "7810",
+      "name": "PURAIL DUGDUGI HAT GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120469",
+      "code": "7832",
+      "name": "VARNAPARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120471",
+      "code": "7806",
+      "name": "BARATIPUR MODEL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "137022",
+      "code": "7814",
+      "name": "RANIGONJ ADARSHA BIDYANIKETON, DINAJPUR"
+    },
+    {
+      "eiin": "120461",
+      "code": "7827",
+      "name": "CHATSHAL BI LATERAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120468",
+      "code": "8901",
+      "name": "DUGDUGI HAT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120465",
+      "code": "7826",
+      "name": "GOPALPUR SHAHIDA RASHID CHOWDHURY BILATERAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120458",
+      "code": "7825",
+      "name": "BALAHAR BILATERAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120457",
+      "code": "1335",
+      "name": "NURJAHANPUR RETIRD MILITARY COLONY HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120460",
+      "code": "7829",
+      "name": "RANIGONJ GOVT. SECOND BILATERAL HIGH SCHOOL AND COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "137615",
+      "code": "7811",
+      "name": "ABIRERPARA ST. JOHN MARY VIANNEY HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120464",
+      "code": "7800",
+      "name": "OSMANPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120467",
+      "code": "7831",
+      "name": "HARIPARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120459",
+      "code": "7801",
+      "name": "GHORAGHAT KAILASH CHANDRA PILOT SCHOOL AND COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "120473",
+      "code": "7807",
+      "name": "GHORAGHAT SHA ISMAIL GAJI (R) GIRLS' HIGH SCHOOL, DINAJPUR"
+    }
+  ]
+}

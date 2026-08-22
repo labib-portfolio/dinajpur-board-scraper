@@ -1,0 +1,591 @@
+{
+  "district": "RANGPUR",
+  "upazilla": "RANGPUR SADAR",
+  "total_institutions": 97,
+  "eiin_list": [
+    "127447",
+    "127426",
+    "131017",
+    "127414",
+    "127510",
+    "127364",
+    "127390",
+    "127509",
+    "127444",
+    "127497",
+    "127365",
+    "127416",
+    "127400",
+    "127421",
+    "127379",
+    "127408",
+    "127391",
+    "127374",
+    "127501",
+    "127386",
+    "127405",
+    "127381",
+    "127388",
+    "127424",
+    "127412",
+    "127496",
+    "127373",
+    "127385",
+    "127505",
+    "127383",
+    "127418",
+    "127406",
+    "127508",
+    "127363",
+    "127430",
+    "127392",
+    "127404",
+    "127507",
+    "127438",
+    "127410",
+    "127498",
+    "127413",
+    "136022",
+    "127387",
+    "127441",
+    "138456",
+    "127502",
+    "127389",
+    "127382",
+    "127399",
+    "132068",
+    "127433",
+    "127384",
+    "127362",
+    "127366",
+    "127367",
+    "127368",
+    "127369",
+    "127372",
+    "127375",
+    "127377",
+    "127378",
+    "127380",
+    "127393",
+    "127394",
+    "127395",
+    "127396",
+    "127397",
+    "127398",
+    "127401",
+    "127402",
+    "127403",
+    "127407",
+    "127409",
+    "127411",
+    "127415",
+    "127417",
+    "127419",
+    "127420",
+    "127422",
+    "127423",
+    "127427",
+    "127428",
+    "127431",
+    "127434",
+    "127435",
+    "127437",
+    "127442",
+    "127446",
+    "127483",
+    "127500",
+    "127503",
+    "127504",
+    "127506",
+    "131032",
+    "134127",
+    "139058"
+  ],
+  "institutions": [
+    {
+      "eiin": "127447",
+      "code": "5319",
+      "name": "BAHAR KACHNA GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127426",
+      "code": "5313",
+      "name": "TALUK TAMPHAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "131017",
+      "code": "5320",
+      "name": "SIDDIQUE MEMORIAL SCHOOL & COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127414",
+      "code": "8948",
+      "name": "DR. AFTAB UDDIN GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127510",
+      "code": "5282",
+      "name": "CARMICHAEL COLLEGIATE HIGH SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127364",
+      "code": "5251",
+      "name": "KERAMATIA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127390",
+      "code": "5466",
+      "name": "MOMINPUR SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127509",
+      "code": "5267",
+      "name": "KERANIR HAT HIGH SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127444",
+      "code": "5323",
+      "name": "NAJIRDIGAR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127497",
+      "code": "5314",
+      "name": "RANGPUR CHAMBER OF COMMERCE & INDUSTRY PUBLIC SCHOOL AND COLLEG, RANGP"
+    },
+    {
+      "eiin": "127365",
+      "code": "5256",
+      "name": "AFAN ULLAH HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127416",
+      "code": "5298",
+      "name": "SHIKSH ANGAN HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127400",
+      "code": "8850",
+      "name": "SHAHABAJPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127421",
+      "code": "8947",
+      "name": "MEKURA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127379",
+      "code": "5255",
+      "name": "ROBERTSONGANJ HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127408",
+      "code": "5287",
+      "name": "SHAHEBGANJ SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127391",
+      "code": "5278",
+      "name": "BURIR HAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127374",
+      "code": "8852",
+      "name": "SHISHU NIKETAN HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127501",
+      "code": "5289",
+      "name": "POLICE LINES SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127386",
+      "code": "5254",
+      "name": "ADARSHA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127405",
+      "code": "5293",
+      "name": "SHALBON POURA GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127381",
+      "code": "5258",
+      "name": "SALEMA GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127388",
+      "code": "5306",
+      "name": "AL-FALAH INSTITUTE, RANGPUR"
+    },
+    {
+      "eiin": "127424",
+      "code": "5316",
+      "name": "GONGAHARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127412",
+      "code": "5307",
+      "name": "FATEPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127496",
+      "code": "5297",
+      "name": "LIONS SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127373",
+      "code": "8993",
+      "name": "RANGPUR POURA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127385",
+      "code": "5252",
+      "name": "KAILASH RANJAN HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127505",
+      "code": "5263",
+      "name": "ROBERTSONGANJ GIRLS' HIGH SCHOOL & COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127383",
+      "code": "5291",
+      "name": "BEGUM ROKEYA GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127418",
+      "code": "5301",
+      "name": "MOSLEM UDDIN GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127406",
+      "code": "5290",
+      "name": "AZIZULLAH HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127508",
+      "code": "5265",
+      "name": "DARSHANA BASIRON NESSA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127363",
+      "code": "5264",
+      "name": "AZIZNAGAR GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127430",
+      "code": "5315",
+      "name": "JANKI DHAPER HAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127392",
+      "code": "5274",
+      "name": "HARIDEVPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127404",
+      "code": "8982",
+      "name": "MISTRIPARA POURO HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127507",
+      "code": "5478",
+      "name": "SHYAMPUR GIRLS' HIGH SCHOOL & COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127438",
+      "code": "5326",
+      "name": "MOMINPUR GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127410",
+      "code": "5294",
+      "name": "SENPARA CITY CORPORATION HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127498",
+      "code": "5259",
+      "name": "SAMAJ KALYAN BALIKA BIDDYABITHI SCHOOL & COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127413",
+      "code": "5305",
+      "name": "NAGAR MIRGANJ HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "136022",
+      "code": "5327",
+      "name": "INTERNATIONAL GRAMMAR SCHOOL-IGS, RANGPUR"
+    },
+    {
+      "eiin": "127387",
+      "code": "5292",
+      "name": "AL-HERA INSTITUTE (HIGH SCHOOL), RANGPUR"
+    },
+    {
+      "eiin": "127441",
+      "code": "5330",
+      "name": "KATABARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "138456",
+      "code": "5328",
+      "name": "BIAM LABORATORY SCHOOL & COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127502",
+      "code": "5260",
+      "name": "MAHIGANJ GIRLS' HIGH SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127389",
+      "code": "8990",
+      "name": "RADHA BALLAVE GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127382",
+      "code": "5261",
+      "name": "MARIUM NESSA GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127399",
+      "code": "5280",
+      "name": "JAFARGONJ SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "132068",
+      "code": "5318",
+      "name": "BIAM MODEL SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127433",
+      "code": "5311",
+      "name": "POLYTECHNIC HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127384",
+      "code": "5269",
+      "name": "TAJHAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127362",
+      "code": "1146",
+      "name": "JANPUR MUNSHIR HAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127366",
+      "code": "5253",
+      "name": "RANGPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127367",
+      "code": "5295",
+      "name": "JAHEDA KHATUN GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127368",
+      "code": "1147",
+      "name": "BEGUM JOBEDA AZIZON GIRLS' HIGH SCHOOL & COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127369",
+      "code": "1136",
+      "name": "AL-MADINA INSTITUTE, RANGPUR"
+    },
+    {
+      "eiin": "127372",
+      "code": "5250",
+      "name": "RANGPUR ZILA SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127375",
+      "code": "5277",
+      "name": "UTTAM SCHOOL & COLLEGE RANGPUR"
+    },
+    {
+      "eiin": "127377",
+      "code": "5272",
+      "name": "BIR UTTAM SHAEED SAMAD HIGH SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127378",
+      "code": "5775",
+      "name": "BORDER GUARD PUBLIC SCHOOL & COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127380",
+      "code": "5257",
+      "name": "RANGPUR GOVT. GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127393",
+      "code": "5279",
+      "name": "MANOHAR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127394",
+      "code": "5266",
+      "name": "BARABARI BOYEZ UDDIN HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127395",
+      "code": "5275",
+      "name": "AKKEL PUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127396",
+      "code": "5270",
+      "name": "GULAL BUDAI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127397",
+      "code": "5285",
+      "name": "PALICHARA MOHIRUNNESA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127398",
+      "code": "5286",
+      "name": "CHANDANPAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127401",
+      "code": "5271",
+      "name": "KHATKHATIA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127402",
+      "code": "5283",
+      "name": "HARATI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127403",
+      "code": "5273",
+      "name": "RADHA KRISHNAPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127407",
+      "code": "5284",
+      "name": "MAINAKUTY B.L. HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127409",
+      "code": "5276",
+      "name": "AMASHU PRAGATI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127411",
+      "code": "5296",
+      "name": "MULATOLE GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127415",
+      "code": "8842",
+      "name": "BABU KHAW HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127417",
+      "code": "8949",
+      "name": "ANANDALOKE BIDDYAPITH HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127419",
+      "code": "1148",
+      "name": "MAHABBAT KHAN HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127420",
+      "code": "5299",
+      "name": "MEDICAL COLLEGE PUBLIC SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127422",
+      "code": "5324",
+      "name": "PARBOTIPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127423",
+      "code": "1149",
+      "name": "NISHBETGONJ JARIMUN NESSA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127427",
+      "code": "5308",
+      "name": "CHANDER HAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127428",
+      "code": "5300",
+      "name": "KABI DILRUBA SHAHADAT V.I.P CENTER HAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127431",
+      "code": "5317",
+      "name": "CANTONMENT BOARD GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127434",
+      "code": "5281",
+      "name": "KHARUA BADHA B. L. HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127435",
+      "code": "5310",
+      "name": "JALSATTRA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127437",
+      "code": "5309",
+      "name": "BALAR BAZAR GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127442",
+      "code": "5321",
+      "name": "TALTALA GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127446",
+      "code": "5322",
+      "name": "BIR MUKTI JODDHA TAIBUR RAHMAN HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127483",
+      "code": "5325",
+      "name": "RANGPUR CADET COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127500",
+      "code": "5350",
+      "name": "CANTONMENT PUBLIC SCHOOL & COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127503",
+      "code": "5312",
+      "name": "COLLECTORATE SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127504",
+      "code": "5262",
+      "name": "LALKUTHI GIRLS' HIGH SCHOOL & COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127506",
+      "code": "5268",
+      "name": "PAGLAPIR SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "131032",
+      "code": "5777",
+      "name": "RESIDENTIAL MODEL SCHOOL & COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "134127",
+      "code": "5776",
+      "name": "THE MILLENNIUM STARS SCHOOL AND COLLEGE, RANGPUR CANTT., RANGPUR"
+    },
+    {
+      "eiin": "139058",
+      "code": "5329",
+      "name": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR"
+    }
+  ]
+}

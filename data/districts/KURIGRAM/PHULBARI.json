@@ -1,0 +1,213 @@
+{
+  "district": "KURIGRAM",
+  "upazilla": "PHULBARI",
+  "total_institutions": 34,
+  "eiin_list": [
+    "122193",
+    "122186",
+    "122243",
+    "122204",
+    "122181",
+    "122182",
+    "122188",
+    "122190",
+    "122180",
+    "122244",
+    "122206",
+    "122184",
+    "138166",
+    "122196",
+    "138331",
+    "122200",
+    "122203",
+    "122192",
+    "122195",
+    "122187",
+    "122198",
+    "122194",
+    "122205",
+    "122183",
+    "122207",
+    "122211",
+    "122185",
+    "138165",
+    "122197",
+    "122202",
+    "122189",
+    "122191",
+    "122199",
+    "122217"
+  ],
+  "institutions": [
+    {
+      "eiin": "122193",
+      "code": "6967",
+      "name": "BARALAI HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122186",
+      "code": "6956",
+      "name": "GANGERHAT MOHAMMAD ALI SARKER HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122243",
+      "code": "6953",
+      "name": "NAODANGA HIGH SCHOOL AND COLLEGE, KURIGRAM"
+    },
+    {
+      "eiin": "122204",
+      "code": "6970",
+      "name": "NAGRAJPUR GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122181",
+      "code": "6952",
+      "name": "KASHIPUR M/L HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122182",
+      "code": "6955",
+      "name": "RABAITARY SHEIKH BROTHERS MULTILATERAL HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122188",
+      "code": "6951",
+      "name": "FULBARI GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122190",
+      "code": "6961",
+      "name": "FULBARI ADARSHA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122180",
+      "code": "6950",
+      "name": "FULBARI JACHHI MIAN MODEL GOVT. HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122244",
+      "code": "6960",
+      "name": "RABAITARI ADARSHA M.L. GIRLS' HIGH SCHOOL & COLLEGE, KURIGRAM"
+    },
+    {
+      "eiin": "122206",
+      "code": "6973",
+      "name": "EKOTA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122184",
+      "code": "6959",
+      "name": "SHIMULBARI MIAPARA NAZIMUDDIN HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "138166",
+      "code": "7204",
+      "name": "DASHEAR SHORA SAMONNOYPARA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122196",
+      "code": "6966",
+      "name": "BALARHAT GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "138331",
+      "code": "7203",
+      "name": "KAMALPUR MAINUL HAQUE HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122200",
+      "code": "6962",
+      "name": "GONGARHAT GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122203",
+      "code": "6971",
+      "name": "UTTAR RABAITARI HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122192",
+      "code": "1249",
+      "name": "UTTAR SHIMULBARI HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122195",
+      "code": "6968",
+      "name": "KUTIBARI MODERN HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122187",
+      "code": "6957",
+      "name": "NAGARAJPUR HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122198",
+      "code": "6969",
+      "name": "BARABHITA GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122194",
+      "code": "6964",
+      "name": "SHAH BAZAR HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122205",
+      "code": "6972",
+      "name": "AJOWATARI MASTERPARA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122183",
+      "code": "6954",
+      "name": "BARABHITA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122207",
+      "code": "7200",
+      "name": "ANANTAPUR GIRLS' SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122211",
+      "code": "7205",
+      "name": "NAJAR MAMUD ADORSHA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122185",
+      "code": "6958",
+      "name": "BERAKUTI HAT HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "138165",
+      "code": "7202",
+      "name": "DASHIAR CHHARA GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122197",
+      "code": "6965",
+      "name": "PASCHIM FULMOTI HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122202",
+      "code": "6963",
+      "name": "PURBO CHANDRO KHANA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122189",
+      "code": "6974",
+      "name": "RANGAMATI SARDERPARA ADARSHA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122191",
+      "code": "1247",
+      "name": "BALARHAT ADARSHA SCHOOL AND COLLEGE, KURIGRAM"
+    },
+    {
+      "eiin": "122199",
+      "code": "1233",
+      "name": "ANANTAPUR ADARSHA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122217",
+      "code": "7201",
+      "name": "UTTAR KUTECHANDROKHANA HIGH SCHOOL, KURIGRAM"
+    }
+  ]
+}

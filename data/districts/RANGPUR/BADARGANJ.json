@@ -1,0 +1,309 @@
+{
+  "district": "RANGPUR",
+  "upazilla": "BADARGANJ",
+  "total_institutions": 50,
+  "eiin_list": [
+    "127193",
+    "127166",
+    "127174",
+    "127167",
+    "127170",
+    "127197",
+    "127188",
+    "127156",
+    "127162",
+    "127172",
+    "127168",
+    "127190",
+    "127153",
+    "127169",
+    "127177",
+    "127186",
+    "127201",
+    "127183",
+    "127157",
+    "127161",
+    "127173",
+    "127179",
+    "127195",
+    "127178",
+    "127159",
+    "127160",
+    "127238",
+    "127181",
+    "127154",
+    "127180",
+    "127196",
+    "127176",
+    "127158",
+    "127189",
+    "127175",
+    "127185",
+    "127187",
+    "127192",
+    "127194",
+    "127198",
+    "127163",
+    "127191",
+    "127155",
+    "127165",
+    "127710",
+    "127184",
+    "127239",
+    "127171",
+    "127240",
+    "127182"
+  ],
+  "institutions": [
+    {
+      "eiin": "127193",
+      "code": "5687",
+      "name": "KHAMARPARA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127166",
+      "code": "5303",
+      "name": "GOPINATHPUR HAIDARIA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127174",
+      "code": "5467",
+      "name": "MADHUPUR KAZI HAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127167",
+      "code": "5463",
+      "name": "KALUPARA MAHADIPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127170",
+      "code": "8847",
+      "name": "LALBARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127197",
+      "code": "5686",
+      "name": "ROSTOMABAD HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127188",
+      "code": "5685",
+      "name": "GOPINATHPUR SARDAR PARA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127156",
+      "code": "5455",
+      "name": "BAKSHIGANJ BILATERAL HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127162",
+      "code": "5459",
+      "name": "GOPALPUR SHEKHER HAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127172",
+      "code": "5302",
+      "name": "HAZIPUR BADIUZZAMAN HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127168",
+      "code": "5461",
+      "name": "KACHABARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127190",
+      "code": "5682",
+      "name": "MADHUPUR ADARSHA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127153",
+      "code": "5688",
+      "name": "CHAMPATOLI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127169",
+      "code": "5458",
+      "name": "ASHRAFGANJ HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127177",
+      "code": "5468",
+      "name": "BADARGANJ COLLEGIATE SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127186",
+      "code": "5683",
+      "name": "PER BISHNUPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127201",
+      "code": "5926",
+      "name": "MOWAGACH GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127183",
+      "code": "5473",
+      "name": "DAMODARPUR DHUGDHUGIR HAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127157",
+      "code": "5452",
+      "name": "RADHANAGAR BILATERAL HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127161",
+      "code": "1137",
+      "name": "AZAD SHALBARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127173",
+      "code": "8843",
+      "name": "BAIRAMPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127179",
+      "code": "5288",
+      "name": "SHYAMPUR SUGAR MILLS HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127195",
+      "code": "5677",
+      "name": "KHANABARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127178",
+      "code": "5469",
+      "name": "DILAL PUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127159",
+      "code": "5460",
+      "name": "LOHANIPARA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127160",
+      "code": "5475",
+      "name": "NATARAM HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127238",
+      "code": "5462",
+      "name": "KUTUBPUR ARUN NESSA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127181",
+      "code": "5471",
+      "name": "RAJARAMPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127154",
+      "code": "5925",
+      "name": "GHATABIL SHAHEED SRETY GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127180",
+      "code": "5465",
+      "name": "AWLIA GONJ HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127196",
+      "code": "5680",
+      "name": "MOYNAKURI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127176",
+      "code": "5464",
+      "name": "PATHAN PARA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127158",
+      "code": "5476",
+      "name": "SHYAMPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127189",
+      "code": "5470",
+      "name": "CHAND KUTIRDANGA GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127175",
+      "code": "8988",
+      "name": "PANAR HAT GHIRNAI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127185",
+      "code": "5684",
+      "name": "UTTAR AMRULBARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127187",
+      "code": "5472",
+      "name": "KALUPARA GUTIR DANGA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127192",
+      "code": "5679",
+      "name": "CHANG MARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127194",
+      "code": "5675",
+      "name": "MUKSUDPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127198",
+      "code": "5678",
+      "name": "KHIAR PARA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127163",
+      "code": "5457",
+      "name": "BADARGANJ GOVT. GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127191",
+      "code": "5681",
+      "name": "OSMANPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127155",
+      "code": "5676",
+      "name": "CHOWDHURYPARA GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127165",
+      "code": "5454",
+      "name": "BURIR PUKUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127710",
+      "code": "5456",
+      "name": "KALIGANJ HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127184",
+      "code": "5474",
+      "name": "AMRUL BARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127239",
+      "code": "5450",
+      "name": "BADARGANJ MODEL MULTILATERAL HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127171",
+      "code": "5453",
+      "name": "LALDIGHI WAKF ESTATE BI-LATERAL HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127240",
+      "code": "5451",
+      "name": "KUTUBPUR BILATERAL HIGH SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127182",
+      "code": "8855",
+      "name": "V. I. P. SHAHADAT HOSSAIN HIGH SCHOOL, RANGPUR"
+    }
+  ]
+}

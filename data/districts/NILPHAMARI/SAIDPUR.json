@@ -1,0 +1,189 @@
+{
+  "district": "NILPHAMARI",
+  "upazilla": "SAIDPUR",
+  "total_institutions": 30,
+  "eiin_list": [
+    "134974",
+    "125248",
+    "125218",
+    "125214",
+    "125215",
+    "125206",
+    "125209",
+    "125242",
+    "125226",
+    "133955",
+    "125208",
+    "125247",
+    "125252",
+    "125207",
+    "125205",
+    "125203",
+    "125219",
+    "125210",
+    "125251",
+    "125211",
+    "125202",
+    "125198",
+    "125213",
+    "125200",
+    "125212",
+    "125201",
+    "125221",
+    "125204",
+    "125250",
+    "125217"
+  ],
+  "institutions": [
+    {
+      "eiin": "134974",
+      "code": "6627",
+      "name": "BIDDUT UNNAYAN BOARD HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125248",
+      "code": "6625",
+      "name": "SAIDPUR CANTONMENT PUBLIC SCHOOL & COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125218",
+      "code": "6617",
+      "name": "SAMIRUDDIN ADARSHA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125214",
+      "code": "6612",
+      "name": "BOTLAGARI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125215",
+      "code": "6616",
+      "name": "KAMAR PUKUR HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125206",
+      "code": "6626",
+      "name": "SAIDPUR CANTONMENT BOARD HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125209",
+      "code": "6608",
+      "name": "BANGALIPUR HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125242",
+      "code": "6600",
+      "name": "SAIDPUR GOVT. SCIENCE COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125226",
+      "code": "6628",
+      "name": "SASKANDAR BENGMARY HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "133955",
+      "code": "6624",
+      "name": "BANGABANDHU HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125208",
+      "code": "6604",
+      "name": "KAYANIZ PARA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125247",
+      "code": "6611",
+      "name": "HAJARI HAT HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125252",
+      "code": "6619",
+      "name": "SAIDPUR ADARSHA GIRLS' SCHOOL & COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125207",
+      "code": "6602",
+      "name": "SAIDPUR MUSLIM HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125205",
+      "code": "6618",
+      "name": "AL-FARUQUE ACADEMY, NILPHAMARI"
+    },
+    {
+      "eiin": "125203",
+      "code": "6601",
+      "name": "SHER-E-BANGLA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125219",
+      "code": "6620",
+      "name": "CHOWRA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125210",
+      "code": "6610",
+      "name": "BANGLADESH RAILWAY GOVT. HIGH SCHOOL, SYEDPUR, NILPHAMARI"
+    },
+    {
+      "eiin": "125251",
+      "code": "6621",
+      "name": "SUNFLOWER SCHOOL & COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125211",
+      "code": "5634",
+      "name": "KHALISHA BELPUKUR SCHOOL AND COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125202",
+      "code": "6603",
+      "name": "SAIDPUR ISLAMIA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125198",
+      "code": "6607",
+      "name": "SAIDPUR HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125213",
+      "code": "6613",
+      "name": "SATPAI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125200",
+      "code": "6609",
+      "name": "TULSHIRAM GOVT. GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125212",
+      "code": "6606",
+      "name": "LAKSHMANPUR SCHOOL & COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125201",
+      "code": "6605",
+      "name": "SYEDPUR PILOT GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125221",
+      "code": "6623",
+      "name": "BOTLAGARI ADARSHA GIRL'S NIKETAN, NILPHAMARI"
+    },
+    {
+      "eiin": "125204",
+      "code": "6614",
+      "name": "LIONS SCHOOL AND COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125250",
+      "code": "6615",
+      "name": "KAYAGOLA HAT HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125217",
+      "code": "6622",
+      "name": "SHEPAIGANJ HIGH SCHOOL, NILPHAMARI"
+    }
+  ]
+}

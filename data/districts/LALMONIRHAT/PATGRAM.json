@@ -1,0 +1,189 @@
+{
+  "district": "LALMONIRHAT",
+  "upazilla": "PATGRAM",
+  "total_institutions": 30,
+  "eiin_list": [
+    "122998",
+    "122993",
+    "123009",
+    "138266",
+    "123015",
+    "123014",
+    "123001",
+    "134867",
+    "123010",
+    "123012",
+    "123000",
+    "122992",
+    "123006",
+    "122995",
+    "123002",
+    "122996",
+    "123003",
+    "122999",
+    "123008",
+    "123007",
+    "122994",
+    "139151",
+    "123011",
+    "123016",
+    "138273",
+    "123018",
+    "122997",
+    "123004",
+    "123013",
+    "123005"
+  ],
+  "institutions": [
+    {
+      "eiin": "122998",
+      "code": "7329",
+      "name": "KAWAMARI APTAR UDDIN PRODHAN HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122993",
+      "code": "7331",
+      "name": "JAGATBER HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123009",
+      "code": "7341",
+      "name": "KACHUAR PER HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "138266",
+      "code": "9251",
+      "name": "BASHKATA DOYALTARI SECONDARY SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123015",
+      "code": "7346",
+      "name": "ISLAMI ADARSHA BIDDYA NIKATON HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123014",
+      "code": "7347",
+      "name": "LALITAR HAT HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123001",
+      "code": "7333",
+      "name": "DAHAGRAM GOVT. HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "134867",
+      "code": "7348",
+      "name": "AMANTULLAH PRODHAN SECONDARY SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123010",
+      "code": "7342",
+      "name": "SREERAMPUR HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123012",
+      "code": "7340",
+      "name": "KALERHAT HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123000",
+      "code": "7337",
+      "name": "BHANDAR DAHA JANATA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122992",
+      "code": "7325",
+      "name": "PATGRAM TARAKNATH (T.N) SCHOOL AND COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "123006",
+      "code": "7339",
+      "name": "MOHAMMADPUR HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122995",
+      "code": "7327",
+      "name": "BAURA PUBLIC HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123002",
+      "code": "8893",
+      "name": "PANBARI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122996",
+      "code": "7330",
+      "name": "JONGRA NATIONAL HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123003",
+      "code": "7334",
+      "name": "RASULPUR ABDAL HOSSAIN BASUNIA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122999",
+      "code": "8892",
+      "name": "MIRZAR KOTE HAJI MOHIMUDDIN HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123008",
+      "code": "7338",
+      "name": "DHABALGURI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123007",
+      "code": "7336",
+      "name": "BAURA AREFA KHATUN GIRLS' HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122994",
+      "code": "7328",
+      "name": "BURIMARI HASHAR UDDIN HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "139151",
+      "code": "9252",
+      "name": "DHARIKAMARI SECONDARY SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123011",
+      "code": "7335",
+      "name": "ALIMUDDIN SHABUR UDDIN GIRLS' HIGH SCHOOL, BURIMARI, LALMONIRHAT"
+    },
+    {
+      "eiin": "123016",
+      "code": "7345",
+      "name": "KAWAMARI GIRLS' HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "138273",
+      "code": "9250",
+      "name": "MOMINPUR BASHKATA SECONDARY SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123018",
+      "code": "7349",
+      "name": "PATGRAM PAURO GIRLS' HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122997",
+      "code": "7326",
+      "name": "PATGRAM GOVT. HUJUR UDDIN GIRLS' HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123004",
+      "code": "1286",
+      "name": "DHABALSATI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123013",
+      "code": "7344",
+      "name": "PATGRAM ADARSHA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "123005",
+      "code": "7343",
+      "name": "MOMINPUR KUCHLIBARI HIGH SCHOOL, LALMONIRHAT"
+    }
+  ]
+}

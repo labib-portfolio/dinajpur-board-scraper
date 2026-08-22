@@ -1,0 +1,261 @@
+{
+  "district": "GAIBANDHA",
+  "upazilla": "SAGHATTA",
+  "total_institutions": 42,
+  "eiin_list": [
+    "121550",
+    "121583",
+    "121563",
+    "136021",
+    "121562",
+    "121564",
+    "121555",
+    "121566",
+    "121580",
+    "121552",
+    "121558",
+    "121556",
+    "121570",
+    "121581",
+    "121561",
+    "121559",
+    "121573",
+    "131021",
+    "121576",
+    "121557",
+    "121569",
+    "121585",
+    "121567",
+    "121565",
+    "121579",
+    "121574",
+    "121560",
+    "121568",
+    "121577",
+    "121554",
+    "121553",
+    "121613",
+    "121549",
+    "121571",
+    "121548",
+    "121614",
+    "131041",
+    "121572",
+    "121575",
+    "121551",
+    "121578",
+    "134885"
+  ],
+  "institutions": [
+    {
+      "eiin": "121550",
+      "code": "6232",
+      "name": "BHARAT KHALI HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121583",
+      "code": "6143",
+      "name": "ITAKURI GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121563",
+      "code": "1190",
+      "name": "KACHUA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "136021",
+      "code": "6146",
+      "name": "SKS NUTONKURI BIDYAPITH, GAIBANDHA"
+    },
+    {
+      "eiin": "121562",
+      "code": "6152",
+      "name": "RAMNAGAR BILATERAL HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121564",
+      "code": "6233",
+      "name": "ULLAH GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121555",
+      "code": "6235",
+      "name": "BHARATKHALI BANDAR GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121566",
+      "code": "6131",
+      "name": "KACHUAHAT SHAHID H. R. M. GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121580",
+      "code": "6141",
+      "name": "HOLDIABERA ADARSHA GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121552",
+      "code": "6151",
+      "name": "BONAR PARA ISLAMIA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121558",
+      "code": "6037",
+      "name": "DIMLA PADAMSAHAR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121556",
+      "code": "6156",
+      "name": "PADUM SHAHAR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121570",
+      "code": "6134",
+      "name": "SHIMULBARI HAMIDUN NESA GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121581",
+      "code": "6137",
+      "name": "BHANGAMORE HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121561",
+      "code": "1195",
+      "name": "MATHAR PARA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121559",
+      "code": "6128",
+      "name": "BAROKONA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121573",
+      "code": "8874",
+      "name": "ULLAH SONATOLA GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "131021",
+      "code": "6145",
+      "name": "PABANTAIR ADARSHO HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121576",
+      "code": "6133",
+      "name": "JADUR TAIR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121557",
+      "code": "1197",
+      "name": "OSMANAR PARA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121569",
+      "code": "1185",
+      "name": "GOBINDAPUR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121585",
+      "code": "6140",
+      "name": "MOTHARPARA GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121567",
+      "code": "1189",
+      "name": "JUMAR BARI GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121565",
+      "code": "6155",
+      "name": "NAYA BONDAR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121579",
+      "code": "6142",
+      "name": "BADINARPARA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121574",
+      "code": "6135",
+      "name": "GURIDAHA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121560",
+      "code": "1186",
+      "name": "DAHICHARA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121568",
+      "code": "6132",
+      "name": "MUNSHIR HAT HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121577",
+      "code": "1196",
+      "name": "JHARABARSHA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121554",
+      "code": "6127",
+      "name": "KAMALERPARA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121553",
+      "code": "6125",
+      "name": "KACHUA HAT HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121613",
+      "code": "6154",
+      "name": "BONARPARA GIRLS' HIGH SCHOOL & COLLEGE, GAIBANDHA"
+    },
+    {
+      "eiin": "121549",
+      "code": "6126",
+      "name": "SHAGHATA PILOT HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121571",
+      "code": "1187",
+      "name": "KUNDAPARA UNITED HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121548",
+      "code": "6130",
+      "name": "JUMARBARI HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121614",
+      "code": "6129",
+      "name": "SHAGHATA PILOT GIRLS' HIGH SCHOOL & COLLEGE, GAIBANDHA"
+    },
+    {
+      "eiin": "131041",
+      "code": "6139",
+      "name": "AMARDESH RESIDENTIAL SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121572",
+      "code": "6157",
+      "name": "MUKTINAGAR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121575",
+      "code": "6136",
+      "name": "UDAYAN GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121551",
+      "code": "6150",
+      "name": "KAZI AZHAR ALI GOVT. MODEL HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121578",
+      "code": "6138",
+      "name": "ULLA-SONATOLA BOYS HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "134885",
+      "code": "6144",
+      "name": "SHAGHATA SHISU NIKETON HIGH SCHOOL, GAIBANDHA"
+    }
+  ]
+}

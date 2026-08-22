@@ -1,0 +1,111 @@
+{
+  "district": "KURIGRAM",
+  "upazilla": "CHILMARI",
+  "total_institutions": 17,
+  "eiin_list": [
+    "122164",
+    "122154",
+    "122150",
+    "122155",
+    "122161",
+    "122162",
+    "122148",
+    "122151",
+    "122156",
+    "136546",
+    "122153",
+    "122152",
+    "122157",
+    "122158",
+    "122160",
+    "122159",
+    "122149"
+  ],
+  "institutions": [
+    {
+      "eiin": "122164",
+      "code": "7150",
+      "name": "DAKHIN KHAURIA HIGH SCHOOL & COLLEGE, KURIGRAM"
+    },
+    {
+      "eiin": "122154",
+      "code": "6900",
+      "name": "THANA HAT A. U. PILOT GOVT. HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122150",
+      "code": "6903",
+      "name": "FAKIRER HAT HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122155",
+      "code": "6908",
+      "name": "RANIGANJ BAZAR HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122161",
+      "code": "6913",
+      "name": "NOTAR KANDI HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122162",
+      "code": "6915",
+      "name": "RADHABALLOV HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122148",
+      "code": "6901",
+      "name": "CHILMARI HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122151",
+      "code": "6911",
+      "name": "MUDAFAT THANA S.C. HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122156",
+      "code": "6905",
+      "name": "THANAHAT PILOT GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "136546",
+      "code": "6916",
+      "name": "CHILMARI CANAAN HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122153",
+      "code": "6904",
+      "name": "SHARIFER HAT M. U. HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122152",
+      "code": "6902",
+      "name": "BALABARI HAT HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122157",
+      "code": "6909",
+      "name": "KANCH KOLA HAT MOHIRUNNESSA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122158",
+      "code": "1239",
+      "name": "KAYARPAR BIR BIKROM HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122160",
+      "code": "6912",
+      "name": "BAZRA TABAKPUR HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122159",
+      "code": "6910",
+      "name": "BALABARI HAT GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122149",
+      "code": "6914",
+      "name": "CHILMARI GIRLS' HIGH SCHOOL, KURIGRAM"
+    }
+  ]
+}

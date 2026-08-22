@@ -1,0 +1,69 @@
+{
+  "district": "KURIGRAM",
+  "upazilla": "RAJIBPUR",
+  "total_institutions": 10,
+  "eiin_list": [
+    "122134",
+    "122133",
+    "122135",
+    "122128",
+    "122130",
+    "122131",
+    "139274",
+    "122136",
+    "122132",
+    "122129"
+  ],
+  "institutions": [
+    {
+      "eiin": "122134",
+      "code": "7060",
+      "name": "SHANKAR MADHABPUR HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122133",
+      "code": "6980",
+      "name": "JAUNIAR CHAR HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122135",
+      "code": "7054",
+      "name": "SHIBER DANGI HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122128",
+      "code": "6976",
+      "name": "CHAR-NEWAJI BL HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122130",
+      "code": "6977",
+      "name": "SADAKAT HOSSAIN HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122131",
+      "code": "6978",
+      "name": "RAJIBPUR GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "139274",
+      "code": "6983",
+      "name": "GOLDEN LIFE ACADEMY, KURIGRAM"
+    },
+    {
+      "eiin": "122136",
+      "code": "6981",
+      "name": "KODALKATI GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122132",
+      "code": "6979",
+      "name": "NAYA CHAR BAZAR GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122129",
+      "code": "6975",
+      "name": "RAJIBPUR GOVT. MODEL PILOT HIGH SCHOOL, KURIGRAM"
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "district": "THAKURGAON",
+  "upazilla": "HARIPUR",
+  "total_institutions": 36,
+  "eiin_list": [
+    "128784",
+    "128802",
+    "128776",
+    "128774",
+    "128775",
+    "128804",
+    "128772",
+    "128800",
+    "128777",
+    "128801",
+    "128816",
+    "128789",
+    "128778",
+    "128790",
+    "128773",
+    "128809",
+    "128779",
+    "128785",
+    "128786",
+    "128791",
+    "128782",
+    "128798",
+    "128783",
+    "128805",
+    "128787",
+    "128817",
+    "128788",
+    "128793",
+    "128792",
+    "128795",
+    "128794",
+    "128799",
+    "128803",
+    "128810",
+    "128796",
+    "128781"
+  ],
+  "institutions": [
+    {
+      "eiin": "128784",
+      "code": "1363",
+      "name": "DHIRGONJ HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128802",
+      "code": "8413",
+      "name": "DANGIPARA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128776",
+      "code": "8405",
+      "name": "RUHUL AMIN KANTHALDANGI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128774",
+      "code": "8403",
+      "name": "BONGAON HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128775",
+      "code": "8402",
+      "name": "TORRAH HAFIZIA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128804",
+      "code": "9079",
+      "name": "RUHEYA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128772",
+      "code": "8400",
+      "name": "HARIPUR GOVERNMENT PILOT HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128800",
+      "code": "8420",
+      "name": "MASHANGOAN HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128777",
+      "code": "8406",
+      "name": "RANHATTA CHOWRANGI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128801",
+      "code": "8423",
+      "name": "RAMPUR BHATURIA GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128816",
+      "code": "9081",
+      "name": "THAKI THUKI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128789",
+      "code": "8414",
+      "name": "KAMARPUKUR HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128778",
+      "code": "8409",
+      "name": "AMGAON JAMUN HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128790",
+      "code": "9076",
+      "name": "MEDNI SAGOR HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128773",
+      "code": "8401",
+      "name": "JADURANI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128809",
+      "code": "9078",
+      "name": "B. S HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128779",
+      "code": "8917",
+      "name": "BHATURIA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128785",
+      "code": "8417",
+      "name": "BAHATH HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128786",
+      "code": "1389",
+      "name": "RANAHATTA CHOWRANGI GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128791",
+      "code": "8410",
+      "name": "DHULA MEDNI SAGAR GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128782",
+      "code": "8407",
+      "name": "TAJUL ISLAM UNION SECONDARY SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128798",
+      "code": "8419",
+      "name": "BALUYA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128783",
+      "code": "8408",
+      "name": "KATHAL DANGI GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128805",
+      "code": "9077",
+      "name": "BIRGAR HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128787",
+      "code": "1368",
+      "name": "JADURANI GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128817",
+      "code": "9080",
+      "name": "RUHIA DHUKURIA MANIKKHARI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128788",
+      "code": "1390",
+      "name": "ATGHARIA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128793",
+      "code": "8411",
+      "name": "TORRAH GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128792",
+      "code": "8415",
+      "name": "SHITOLPUR HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128795",
+      "code": "8421",
+      "name": "JAMUN GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128794",
+      "code": "8412",
+      "name": "BROMPUR GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128799",
+      "code": "8416",
+      "name": "TENGRIA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128803",
+      "code": "8424",
+      "name": "AMGAON CENTRAL HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128810",
+      "code": "8418",
+      "name": "KHOLORA ADARSHA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128796",
+      "code": "8422",
+      "name": "MAHENDRAGOAN HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128781",
+      "code": "8404",
+      "name": "HARIPUR GIRLS' HIGH SCHOOL, THAKURGAON"
+    }
+  ]
+}

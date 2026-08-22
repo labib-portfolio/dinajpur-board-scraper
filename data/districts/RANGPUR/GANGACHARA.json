@@ -1,0 +1,213 @@
+{
+  "district": "RANGPUR",
+  "upazilla": "GANGACHARA",
+  "total_institutions": 34,
+  "eiin_list": [
+    "127244",
+    "127301",
+    "127246",
+    "127264",
+    "127249",
+    "127242",
+    "131061",
+    "127250",
+    "127265",
+    "127251",
+    "127252",
+    "127243",
+    "127268",
+    "127241",
+    "127258",
+    "127255",
+    "127256",
+    "139603",
+    "125006",
+    "127266",
+    "127260",
+    "127261",
+    "127248",
+    "131025",
+    "127300",
+    "127254",
+    "127253",
+    "127262",
+    "127245",
+    "127267",
+    "127257",
+    "127247",
+    "127259",
+    "127302"
+  ],
+  "institutions": [
+    {
+      "eiin": "127244",
+      "code": "5601",
+      "name": "MAHIPUR B. L. HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127301",
+      "code": "5604",
+      "name": "KHALEYA KHAPRI KHAL HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127246",
+      "code": "5611",
+      "name": "KACUA NOHALI BAGDOHRA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127264",
+      "code": "5623",
+      "name": "DHAMUR PURBAPARA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127249",
+      "code": "5608",
+      "name": "KHALEYA GANJIPUR SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127242",
+      "code": "5600",
+      "name": "GANGACHARA GOVT. MODEL HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "131061",
+      "code": "6689",
+      "name": "KUTUB GANESH HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127250",
+      "code": "5617",
+      "name": "BETGARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127265",
+      "code": "5620",
+      "name": "UTTAR PANA PUKUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127251",
+      "code": "5613",
+      "name": "THAKURADAHA SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127252",
+      "code": "5612",
+      "name": "ALAM BIDITOR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127243",
+      "code": "5610",
+      "name": "BARAIBARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127268",
+      "code": "5728",
+      "name": "KOLKONDA ABDUS SAMAD HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127241",
+      "code": "5603",
+      "name": "PAKURIA SHARIF B.L. HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127258",
+      "code": "8845",
+      "name": "GANGACHARA ADARSHA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127255",
+      "code": "5614",
+      "name": "CHENG MARI MANDRAIN BI-LATERAL HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127256",
+      "code": "5616",
+      "name": "ALDADPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "139603",
+      "code": "5732",
+      "name": "DAKHIN PANAPUKUR CHOWDHURYHAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "125006",
+      "code": "6697",
+      "name": "TULSHIR HAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127266",
+      "code": "5621",
+      "name": "RAJBALLAVE HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127260",
+      "code": "5726",
+      "name": "BAGPUR MASUM ALI PRAMANIC HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127261",
+      "code": "5731",
+      "name": "GHAGOTTARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127248",
+      "code": "5615",
+      "name": "SHERPUR PUTIMARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "131025",
+      "code": "5729",
+      "name": "MORNEYA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127300",
+      "code": "5606",
+      "name": "GAJAGHANTA HIGH SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127254",
+      "code": "5619",
+      "name": "LALCHADPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127253",
+      "code": "5609",
+      "name": "HAJI DELWAR HOSSAIN GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127262",
+      "code": "5727",
+      "name": "MONIRAM HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127245",
+      "code": "5605",
+      "name": "BARABIL HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127267",
+      "code": "5730",
+      "name": "BINBINA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127257",
+      "code": "5618",
+      "name": "KUTIPARA CHANGMARI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127247",
+      "code": "5607",
+      "name": "KOLKONDA MOHAMMAD ALI MEMORIAL HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127259",
+      "code": "1165",
+      "name": "TALUK HABU HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127302",
+      "code": "5602",
+      "name": "DHANTALA REAJ UDDIN SCHOOL AND COLLEGE, RANGPUR"
+    }
+  ]
+}

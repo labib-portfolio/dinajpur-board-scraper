@@ -1,0 +1,297 @@
+{
+  "district": "DINAJPUR",
+  "upazilla": "KHANSAMA",
+  "total_institutions": 48,
+  "eiin_list": [
+    "120656",
+    "120614",
+    "120647",
+    "120628",
+    "120635",
+    "120611",
+    "120634",
+    "120618",
+    "120650",
+    "120641",
+    "120610",
+    "120633",
+    "120702",
+    "120617",
+    "120649",
+    "120704",
+    "120624",
+    "120659",
+    "120705",
+    "120663",
+    "120627",
+    "120639",
+    "120629",
+    "120613",
+    "120622",
+    "120638",
+    "120619",
+    "120615",
+    "120616",
+    "120281",
+    "120640",
+    "120637",
+    "120642",
+    "120623",
+    "120625",
+    "120636",
+    "120632",
+    "120630",
+    "120607",
+    "120631",
+    "120612",
+    "120620",
+    "120621",
+    "120653",
+    "120644",
+    "120608",
+    "120643",
+    "120657"
+  ],
+  "institutions": [
+    {
+      "eiin": "120656",
+      "code": "7924",
+      "name": "DHARMAPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120614",
+      "code": "7903",
+      "name": "ALOKJHARI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120647",
+      "code": "7916",
+      "name": "ALLUKJHARI GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120628",
+      "code": "1297",
+      "name": "GOALDIHI GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120635",
+      "code": "7912",
+      "name": "CHAK SAKOA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120611",
+      "code": "7902",
+      "name": "GOALDIHI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120634",
+      "code": "7909",
+      "name": "PASCHIM BASULI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120618",
+      "code": "7904",
+      "name": "SARHADDA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120650",
+      "code": "7938",
+      "name": "KUTUB DANGA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120641",
+      "code": "7917",
+      "name": "DAKHIN GARPARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120610",
+      "code": "7921",
+      "name": "UTTAR CHHATIAN GARH MIRZAPARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120633",
+      "code": "1315",
+      "name": "JOBEDA BEGUM HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120702",
+      "code": "7926",
+      "name": "KACHINIA HIGH SCHOOL AND COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "120617",
+      "code": "7927",
+      "name": "DUHA SHUHA M. L. HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120649",
+      "code": "7914",
+      "name": "TANGUA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120704",
+      "code": "7925",
+      "name": "JAMIR UDDIN SHAH GIRLS' HIGH SCHOOL & COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "120624",
+      "code": "7907",
+      "name": "NALBARI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120659",
+      "code": "7940",
+      "name": "HASEMPUR AOUKARA MASHJID HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120705",
+      "code": "7934",
+      "name": "SHAPLA GIRLS' SCHOOL & COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "120663",
+      "code": "7935",
+      "name": "KHAMAR BISHNUGANG ADORSHO GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120627",
+      "code": "7933",
+      "name": "AKBAR ALI SHAH HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120639",
+      "code": "7920",
+      "name": "NALBARI GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120629",
+      "code": "1316",
+      "name": "KACHINIA GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120613",
+      "code": "7929",
+      "name": "NEW PAKER HAT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120622",
+      "code": "7905",
+      "name": "CHAKRAMPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120638",
+      "code": "7919",
+      "name": "UTTAR NALBARI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120619",
+      "code": "7931",
+      "name": "KUMRIA B.L. HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120615",
+      "code": "7928",
+      "name": "ANGARPARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120616",
+      "code": "7930",
+      "name": "KAYEMPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120281",
+      "code": "7918",
+      "name": "HASHIMPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120640",
+      "code": "7913",
+      "name": "SHAHPARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120637",
+      "code": "7910",
+      "name": "VERVERI KALITALA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120642",
+      "code": "7911",
+      "name": "ISAMOTI SHAHPARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120623",
+      "code": "8957",
+      "name": "CHAROK DANGA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120625",
+      "code": "1319",
+      "name": "MAGURMARI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120636",
+      "code": "7939",
+      "name": "TANGUA ADARSHA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120632",
+      "code": "7923",
+      "name": "SUBARANAKHULI SHABUDEB HAT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120630",
+      "code": "7915",
+      "name": "RAMNAGAR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120607",
+      "code": "7906",
+      "name": "HOSENPUR HIGH SCHOOL AND COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "120631",
+      "code": "7908",
+      "name": "BASULI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120612",
+      "code": "7900",
+      "name": "KHANSAMA GOVT. PILOT MODEL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120620",
+      "code": "7932",
+      "name": "CHHATIANGORH SCHOOL & COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "120621",
+      "code": "7901",
+      "name": "KHANSAMA PILOT GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120653",
+      "code": "7936",
+      "name": "MOYETREE HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120644",
+      "code": "7922",
+      "name": "BALADANGI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120608",
+      "code": "1298",
+      "name": "KHAMARPARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120643",
+      "code": "1348",
+      "name": "SAKHINA-FAZLUL HAQUE GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120657",
+      "code": "7941",
+      "name": "SUSULI GIRLS' HIGH SCHOOL, DINAJPUR"
+    }
+  ]
+}

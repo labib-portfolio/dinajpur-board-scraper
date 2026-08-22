@@ -1,0 +1,225 @@
+{
+  "district": "THAKURGAON",
+  "upazilla": "BALIADANGI",
+  "total_institutions": 36,
+  "eiin_list": [
+    "128697",
+    "128713",
+    "128704",
+    "128699",
+    "128771",
+    "128695",
+    "128731",
+    "128701",
+    "128730",
+    "128708",
+    "128694",
+    "128698",
+    "128710",
+    "128688",
+    "128719",
+    "128711",
+    "128714",
+    "128715",
+    "128696",
+    "128706",
+    "128703",
+    "128689",
+    "128702",
+    "128707",
+    "128705",
+    "128687",
+    "128700",
+    "128718",
+    "128692",
+    "128725",
+    "128690",
+    "128709",
+    "128712",
+    "128716",
+    "128693",
+    "128691"
+  ],
+  "institutions": [
+    {
+      "eiin": "128697",
+      "code": "8434",
+      "name": "DOLUA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128713",
+      "code": "8438",
+      "name": "VANDARDAHA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128704",
+      "code": "1364",
+      "name": "FARABARI KUSHUMUDDIN HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128699",
+      "code": "8337",
+      "name": "HARINMARI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128771",
+      "code": "8426",
+      "name": "KALMEGH RAMJAN ALI HIGH SCHOOL AND COLLEGE, THAKURGAON"
+    },
+    {
+      "eiin": "128695",
+      "code": "8433",
+      "name": "BHANOR NANGTIHARA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128731",
+      "code": "9056",
+      "name": "IDEAL HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128701",
+      "code": "8437",
+      "name": "LOLPUKUR DUOSUO MOHISHMARI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128730",
+      "code": "9054",
+      "name": "SABAJPUR HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128708",
+      "code": "8442",
+      "name": "KUSHALDANGI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128694",
+      "code": "8924",
+      "name": "RAIMAHAL HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128698",
+      "code": "8435",
+      "name": "LAHIRI GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128710",
+      "code": "8440",
+      "name": "DOGACHHI GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128688",
+      "code": "8432",
+      "name": "BALIADANGI GOVT. GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128719",
+      "code": "9053",
+      "name": "RATNAI GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128711",
+      "code": "9050",
+      "name": "KALOMEGH GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128714",
+      "code": "8444",
+      "name": "MODHUPUR HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128715",
+      "code": "8448",
+      "name": "HALDIBARI GIRLS' HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128696",
+      "code": "8923",
+      "name": "MACHHKHURIA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128706",
+      "code": "8447",
+      "name": "GANDIKARI ADARSHA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128703",
+      "code": "8336",
+      "name": "DOGACHHI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128689",
+      "code": "8427",
+      "name": "CHARTA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128702",
+      "code": "8443",
+      "name": "LOHAGARA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128707",
+      "code": "8439",
+      "name": "DHANIRHAT HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128705",
+      "code": "8441",
+      "name": "DUOSUO HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128687",
+      "code": "8425",
+      "name": "BALIADANGI PILOT MODEL HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128700",
+      "code": "8445",
+      "name": "MORAL HAT JANATA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128718",
+      "code": "8446",
+      "name": "CHOWRANGI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128692",
+      "code": "8429",
+      "name": "BARA PALASHBARI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128725",
+      "code": "9055",
+      "name": "DHONTOLA HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128690",
+      "code": "8430",
+      "name": "LAHIRI MULTI-LATERAL HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128709",
+      "code": "9051",
+      "name": "BALIADANGI COLLEGIATE HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128712",
+      "code": "8436",
+      "name": "CHAROL HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128716",
+      "code": "8449",
+      "name": "GOALKARI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128693",
+      "code": "8431",
+      "name": "RATNAI BAGULA BARI HIGH SCHOOL, THAKURGAON"
+    },
+    {
+      "eiin": "128691",
+      "code": "8428",
+      "name": "KHOCHABARI (2) HIGH SCHOOL, THAKURGAON"
+    }
+  ]
+}

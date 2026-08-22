@@ -1,0 +1,99 @@
+{
+  "district": "GAIBANDHA",
+  "upazilla": "PHULCHHARI",
+  "total_institutions": 15,
+  "eiin_list": [
+    "121073",
+    "121080",
+    "121083",
+    "121077",
+    "121079",
+    "121075",
+    "121072",
+    "121100",
+    "121085",
+    "121076",
+    "121084",
+    "121078",
+    "121082",
+    "121081",
+    "121074"
+  ],
+  "institutions": [
+    {
+      "eiin": "121073",
+      "code": "6229",
+      "name": "KANCHIPARA MOHAMMAD ALI UNITED ACADEMY, GAIBANDHA"
+    },
+    {
+      "eiin": "121080",
+      "code": "6231",
+      "name": "KANCHIPARA NAZRUL HOQUE ADARSHA GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121083",
+      "code": "6898",
+      "name": "UDAKHALI ADARSHA GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121077",
+      "code": "6228",
+      "name": "ZIGABARI HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121079",
+      "code": "6230",
+      "name": "UDAKHALI HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121075",
+      "code": "6226",
+      "name": "GOONVARI B. L. HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121072",
+      "code": "6225",
+      "name": "FULCHHARI GOVT. PILOT HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121100",
+      "code": "6899",
+      "name": "BURAIL MODEL SCHOOL AND COLLEGE, GAIBANDHA"
+    },
+    {
+      "eiin": "121085",
+      "code": "6376",
+      "name": "CHANDONSUR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121076",
+      "code": "6234",
+      "name": "GOLAKATI HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121084",
+      "code": "6375",
+      "name": "JAMILA AKTER HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121078",
+      "code": "8866",
+      "name": "MANIKKOR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121082",
+      "code": "6897",
+      "name": "HORICHANDI HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121081",
+      "code": "6896",
+      "name": "SALUA FAZLE RABBI GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121074",
+      "code": "6227",
+      "name": "SAYEDPUR BILATERAL HIGH SCHOOL, GAIBANDHA"
+    }
+  ]
+}

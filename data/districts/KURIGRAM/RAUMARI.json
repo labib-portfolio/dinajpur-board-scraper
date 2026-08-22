@@ -1,0 +1,165 @@
+{
+  "district": "KURIGRAM",
+  "upazilla": "RAUMARI",
+  "total_institutions": 26,
+  "eiin_list": [
+    "122545",
+    "122541",
+    "122555",
+    "122540",
+    "122549",
+    "122546",
+    "137681",
+    "122558",
+    "122543",
+    "122563",
+    "122550",
+    "122584",
+    "122548",
+    "122562",
+    "122557",
+    "122542",
+    "122552",
+    "122553",
+    "135862",
+    "122551",
+    "122556",
+    "137699",
+    "122554",
+    "122547",
+    "122544",
+    "138954"
+  ],
+  "institutions": [
+    {
+      "eiin": "122545",
+      "code": "6926",
+      "name": "ROWMARI GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122541",
+      "code": "6927",
+      "name": "JADUR CHAR HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122555",
+      "code": "6940",
+      "name": "CHAKTA BARI HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122540",
+      "code": "6928",
+      "name": "TAPURCHAR SCHOOL AND COLLEGE, KURIGRAM"
+    },
+    {
+      "eiin": "122549",
+      "code": "6935",
+      "name": "FULBARI HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122546",
+      "code": "6933",
+      "name": "PAKHI URA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "137681",
+      "code": "6947",
+      "name": "KAZAIKATA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122558",
+      "code": "6939",
+      "name": "KUTIR CHAR SCHOOL & COLLEGE, KURIGRAM"
+    },
+    {
+      "eiin": "122543",
+      "code": "6930",
+      "name": "CHAR SHOULMARI B. L. HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122563",
+      "code": "6943",
+      "name": "ROWMARI HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122550",
+      "code": "6934",
+      "name": "KOMAR VANGI HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122584",
+      "code": "6929",
+      "name": "DANTBHANGA HIGH SCHOOL & COLLEGE, KURIGRAM"
+    },
+    {
+      "eiin": "122548",
+      "code": "6936",
+      "name": "CHAR SHOULMARI GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122562",
+      "code": "6944",
+      "name": "SONAVORI MODEL HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122557",
+      "code": "6941",
+      "name": "SONAPUR HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122542",
+      "code": "6925",
+      "name": "CHOWDHURY GAWHARUZZAMAN GOVT. HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122552",
+      "code": "6948",
+      "name": "BATKAMARY HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122553",
+      "code": "6942",
+      "name": "TAPURCHAR BALURGRAM HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "135862",
+      "code": "6945",
+      "name": "BAITKAMARI MODEL HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122551",
+      "code": "6764",
+      "name": "SHOULMARI M. R. SCHOOL AND COLLEGE, KURIGRAM"
+    },
+    {
+      "eiin": "122556",
+      "code": "6938",
+      "name": "KALABARI BARBANDA BORAIBARI CHULIYAR CHAR HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "137699",
+      "code": "6946",
+      "name": "GASBARI MODEL HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122554",
+      "code": "6937",
+      "name": "DANTBHANGA GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122547",
+      "code": "6932",
+      "name": "JADUR CHAR GIRLS' HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "122544",
+      "code": "8887",
+      "name": "BOKBANDHA HIGH SCHOOL, KURIGRAM"
+    },
+    {
+      "eiin": "138954",
+      "code": "6949",
+      "name": "DANGUA PARA RABEYA KADER HIGH SCHOOL, KURIGRAM"
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "district": "PANCHAGARH",
+  "upazilla": "BODA",
+  "total_institutions": 64,
+  "eiin_list": [
+    "125888",
+    "125907",
+    "125913",
+    "125914",
+    "125927",
+    "125894",
+    "125917",
+    "125873",
+    "125918",
+    "125889",
+    "125875",
+    "125906",
+    "125883",
+    "125874",
+    "125877",
+    "125871",
+    "125903",
+    "125895",
+    "125881",
+    "125887",
+    "125898",
+    "125922",
+    "125916",
+    "125878",
+    "125897",
+    "125910",
+    "125909",
+    "125870",
+    "125893",
+    "125905",
+    "125933",
+    "125912",
+    "125886",
+    "125876",
+    "125945",
+    "125904",
+    "125908",
+    "125902",
+    "125940",
+    "125885",
+    "125884",
+    "125900",
+    "125915",
+    "125892",
+    "125879",
+    "125946",
+    "125936",
+    "125868",
+    "125948",
+    "125949",
+    "125880",
+    "125901",
+    "125911",
+    "138270",
+    "125869",
+    "125899",
+    "125924",
+    "125896",
+    "125872",
+    "125929",
+    "125882",
+    "125891",
+    "125890",
+    "125928"
+  ],
+  "institutions": [
+    {
+      "eiin": "125888",
+      "code": "8590",
+      "name": "MAIDAN DIGHI GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125907",
+      "code": "1122",
+      "name": "SAKOWA GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125913",
+      "code": "9048",
+      "name": "MANIKPIR GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125914",
+      "code": "8599",
+      "name": "KADERPUR HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125927",
+      "code": "9034",
+      "name": "BARASHASHI EDEN GIRLS HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125894",
+      "code": "8932",
+      "name": "PATHRAJ ADARSHA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125917",
+      "code": "9039",
+      "name": "DHARDHARA RIVER VIEW GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125873",
+      "code": "8580",
+      "name": "NUTAN HAT SAFIUDDIN HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125918",
+      "code": "9040",
+      "name": "NOWABGONJ BIR MUKTIJODHA SERAJUL ISLAM HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125889",
+      "code": "1393",
+      "name": "CHOWRANGI HAT HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125875",
+      "code": "8577",
+      "name": "NAYADIGHI HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125906",
+      "code": "8519",
+      "name": "MIRGANJ MOHINI MOHAN HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125883",
+      "code": "8554",
+      "name": "KALIAGANJ NABARUN HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125874",
+      "code": "8578",
+      "name": "CHANDANBARI HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125877",
+      "code": "8576",
+      "name": "BODA PILOT GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125871",
+      "code": "8551",
+      "name": "AMTALA KAZIPARA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125903",
+      "code": "9031",
+      "name": "NUTANHAT ADARSHA GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125895",
+      "code": "8521",
+      "name": "SHALSHIRI GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125881",
+      "code": "8579",
+      "name": "BALARAM HAT BI-LATERAL HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125887",
+      "code": "8596",
+      "name": "BAMANHAT HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125898",
+      "code": "9028",
+      "name": "FUTKIBARI HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125922",
+      "code": "9036",
+      "name": "KALIBARI HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125916",
+      "code": "9026",
+      "name": "BAKSHIGONJ GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125878",
+      "code": "8585",
+      "name": "TEPUKHARIA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125897",
+      "code": "8597",
+      "name": "DABAR BHANGA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125910",
+      "code": "9027",
+      "name": "BARASHASHI BALAPARA ADARSHA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125909",
+      "code": "8594",
+      "name": "NUTAN BANDAR FULTALA GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125870",
+      "code": "8586",
+      "name": "SAKOWA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125893",
+      "code": "1410",
+      "name": "KAMAR HAT IDEAL BI-LATERAL HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125905",
+      "code": "9030",
+      "name": "KALITALA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125933",
+      "code": "9176",
+      "name": "DHONIPARA GAIGHATA GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125912",
+      "code": "9025",
+      "name": "BADESHWARIBARI ADARSHA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125886",
+      "code": "8927",
+      "name": "BAGANBARI HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125876",
+      "code": "8583",
+      "name": "MAREYA MODEL HIGH SCHOOL AND COLLEGE, PANCHAGARH"
+    },
+    {
+      "eiin": "125945",
+      "code": "9044",
+      "name": "MAREYA JONGLIPIR HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125904",
+      "code": "8595",
+      "name": "PANCHPIR GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125908",
+      "code": "9029",
+      "name": "MAREYA GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125902",
+      "code": "1414",
+      "name": "PRAMANIKPARA ADARSHA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125940",
+      "code": "9043",
+      "name": "CHANDANBARI ADARSHA GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125885",
+      "code": "8592",
+      "name": "BARASHASHI HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125884",
+      "code": "8591",
+      "name": "GOBINDA GURU TAFSHILI HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125900",
+      "code": "9032",
+      "name": "DHAMERGHAT DIMUKHI HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125915",
+      "code": "9033",
+      "name": "BALAVIR HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125892",
+      "code": "1392",
+      "name": "BATTALI ADARSHA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125879",
+      "code": "8584",
+      "name": "MANIK PIR HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125946",
+      "code": "9041",
+      "name": "BODA SARDARPARA GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125936",
+      "code": "9035",
+      "name": "BARASHOSHI B.L HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125868",
+      "code": "8575",
+      "name": "BODA GOVT. PILOT MODEL SCHOOL AND COLLEGE, PANCHAGARH"
+    },
+    {
+      "eiin": "125948",
+      "code": "9037",
+      "name": "KAMALAPUKHURY PRODHANHAT(K.P) HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125949",
+      "code": "9038",
+      "name": "SARDER PARA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125880",
+      "code": "8593",
+      "name": "NATUN BANDER BENGHARI HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125901",
+      "code": "1394",
+      "name": "DHARDHARA ADARSHA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125911",
+      "code": "8517",
+      "name": "KHARIZA MAREYA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "138270",
+      "code": "9045",
+      "name": "DOIKHATA NAZIRGONJ HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125869",
+      "code": "8587",
+      "name": "KALIAGONJ NAZIRATON HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125899",
+      "code": "8518",
+      "name": "KAJAL DIGHI SHAHID ZIA GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125924",
+      "code": "9049",
+      "name": "MIRGANG GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125896",
+      "code": "1396",
+      "name": "JHALJHALI ADARSHA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125872",
+      "code": "8582",
+      "name": "MAIDAN DIGHI B. L. HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125929",
+      "code": "9057",
+      "name": "GUA GRAM PRODHAN PARA ADARSHA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125882",
+      "code": "8588",
+      "name": "BAIRATI HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125891",
+      "code": "8598",
+      "name": "DHAKARHAT ADARSHA HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125890",
+      "code": "8959",
+      "name": "TEPUKURIA ADARSHA GIRLS' HIGH SCHOOL, PANCHAGARH"
+    },
+    {
+      "eiin": "125928",
+      "code": "9046",
+      "name": "BALARAMHAT MODEL GIRLS' HIGH SCHOOL, PANCHAGARH"
+    }
+  ]
+}

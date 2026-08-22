@@ -1,0 +1,117 @@
+{
+  "district": "RANGPUR",
+  "upazilla": "TARAGANJ",
+  "total_institutions": 18,
+  "eiin_list": [
+    "131028",
+    "127953",
+    "127980",
+    "127960",
+    "127948",
+    "127981",
+    "127950",
+    "127979",
+    "127956",
+    "127962",
+    "127959",
+    "131022",
+    "127949",
+    "127955",
+    "127951",
+    "127954",
+    "127961",
+    "127958"
+  ],
+  "institutions": [
+    {
+      "eiin": "131028",
+      "code": "5642",
+      "name": "TARAGANJ SHISHU NIKATON, RANGPUR"
+    },
+    {
+      "eiin": "127953",
+      "code": "5635",
+      "name": "FAZILPUR HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127980",
+      "code": "5626",
+      "name": "TARAGONJ WAQF ESTATE GIRLS' SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127960",
+      "code": "5641",
+      "name": "LUXMIPUR BIRABARI HAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127948",
+      "code": "5625",
+      "name": "TARAGANJ W/E GOVERNMENT MODEL HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127981",
+      "code": "5632",
+      "name": "SAYER KAZI PARA SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127950",
+      "code": "5629",
+      "name": "KASHIABARI SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127979",
+      "code": "5630",
+      "name": "DANGIR HAT SCHOOL AND COLLEGE, RANGPUR"
+    },
+    {
+      "eiin": "127956",
+      "code": "5637",
+      "name": "KURSHA ADARSHA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127962",
+      "code": "5643",
+      "name": "EKARCHALI GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127959",
+      "code": "5638",
+      "name": "CHANDER PUKUR GIRLS' HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "131022",
+      "code": "8844",
+      "name": "CHILAPAK HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127949",
+      "code": "5628",
+      "name": "BURIR HAT HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127955",
+      "code": "5631",
+      "name": "IKARCHALI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127951",
+      "code": "5627",
+      "name": "TETULTOLA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127954",
+      "code": "5633",
+      "name": "BARATI HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127961",
+      "code": "5640",
+      "name": "HATIBANDHA HIGH SCHOOL, RANGPUR"
+    },
+    {
+      "eiin": "127958",
+      "code": "5639",
+      "name": "GHANIRAMPUR BAROGOLA HIGH SCHOOL, RANGPUR"
+    }
+  ]
+}

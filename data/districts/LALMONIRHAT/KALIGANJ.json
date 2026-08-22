@@ -1,0 +1,243 @@
+{
+  "district": "LALMONIRHAT",
+  "upazilla": "KALIGANJ",
+  "total_institutions": 39,
+  "eiin_list": [
+    "122849",
+    "122863",
+    "122838",
+    "122861",
+    "122867",
+    "122835",
+    "122857",
+    "122848",
+    "122837",
+    "122854",
+    "122853",
+    "122862",
+    "137678",
+    "122856",
+    "122850",
+    "122841",
+    "122832",
+    "122847",
+    "122844",
+    "122864",
+    "122843",
+    "122834",
+    "122842",
+    "122846",
+    "122840",
+    "122836",
+    "122895",
+    "122839",
+    "122851",
+    "122866",
+    "122868",
+    "122831",
+    "122859",
+    "122833",
+    "122855",
+    "122845",
+    "122858",
+    "122860",
+    "122852"
+  ],
+  "institutions": [
+    {
+      "eiin": "122849",
+      "code": "1285",
+      "name": "DAKSHIN GHANA SHYAM SCHOOL & COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "122863",
+      "code": "7324",
+      "name": "DR. CHANDANA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122838",
+      "code": "7305",
+      "name": "CHAPAR HAT HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122861",
+      "code": "7427",
+      "name": "GOPALRAY PANCHAPATHY HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122867",
+      "code": "7430",
+      "name": "DAKSHIN GORAL ADARSHA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122835",
+      "code": "7306",
+      "name": "BHOTEMARI S. C. HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122857",
+      "code": "7317",
+      "name": "CHAPARHAT GIRLS' HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122848",
+      "code": "8972",
+      "name": "CHAMTA HAT HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122837",
+      "code": "7309",
+      "name": "SHAKHATI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122854",
+      "code": "7322",
+      "name": "GAGLARPAR HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122853",
+      "code": "7318",
+      "name": "BABUR ALI PUBLIC HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122862",
+      "code": "7429",
+      "name": "A.M. RATHBARI GIRLS' HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "137678",
+      "code": "7434",
+      "name": "MOHISHAMURI BEER MUKTIZODDHA NURUL ISLAM HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122856",
+      "code": "7428",
+      "name": "TAPERHAT HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122850",
+      "code": "1283",
+      "name": "AFZAL UDDIN PUBLIC HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122841",
+      "code": "7308",
+      "name": "TUSHVANDAR N. GOVT. GIRLS' HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122832",
+      "code": "7300",
+      "name": "KALIGANJ KARIM UDDIN PUBLIC PILOT HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122847",
+      "code": "7313",
+      "name": "NITHAK SAYEDUL HOQUE PUBLIC HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122844",
+      "code": "7310",
+      "name": "DUHULI S.C. HIGH SCHOOL & COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "122864",
+      "code": "7433",
+      "name": "BURIR HAT ADARSHA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122843",
+      "code": "7311",
+      "name": "SHIAL KHOWA S.C SCHOOL AND COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "122834",
+      "code": "7302",
+      "name": "KAKINA MAHIMA RANJAN MEMORIAL HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122842",
+      "code": "7307",
+      "name": "BANINAGAR HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122846",
+      "code": "8968",
+      "name": "BARAJAN S. C. HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122840",
+      "code": "7312",
+      "name": "LOHAKUCHI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122836",
+      "code": "7301",
+      "name": "DALGRAM HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122895",
+      "code": "7314",
+      "name": "CHANDRAPUR HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122839",
+      "code": "7304",
+      "name": "HAZRANIA BI-LATERAL HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122851",
+      "code": "7323",
+      "name": "KHANDOR CHARA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122866",
+      "code": "7425",
+      "name": "KAKINA GIRLS' HIGH SCHOOL AND COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "122868",
+      "code": "7431",
+      "name": "ISHORCOL HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122831",
+      "code": "7432",
+      "name": "HARARAM KISAMOT GORAL HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122859",
+      "code": "7321",
+      "name": "UTTAR DALGRAM ADARSHA SCHOOL AND COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "122833",
+      "code": "7303",
+      "name": "TUSHBHANDAR RAMONI MOHON MEMORIAL GOVT. HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122855",
+      "code": "7316",
+      "name": "UTTAR BALAPARA ADARSHA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122845",
+      "code": "7315",
+      "name": "SONARHAT SCHOOL & COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "122858",
+      "code": "7319",
+      "name": "RUDDRESHWAR SCHOOL & COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "122860",
+      "code": "7426",
+      "name": "SUNDRAHABI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122852",
+      "code": "7320",
+      "name": "TALUK SHAKHATI HIGH SCHOOL, LALMONIRHAT"
+    }
+  ]
+}

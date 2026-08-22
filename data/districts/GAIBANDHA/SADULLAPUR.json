@@ -1,0 +1,369 @@
+{
+  "district": "GAIBANDHA",
+  "upazilla": "SADULLAPUR",
+  "total_institutions": 60,
+  "eiin_list": [
+    "121462",
+    "121441",
+    "121440",
+    "121473",
+    "121478",
+    "121470",
+    "121446",
+    "121485",
+    "121439",
+    "121471",
+    "121455",
+    "121465",
+    "121476",
+    "121490",
+    "121466",
+    "121434",
+    "121453",
+    "121445",
+    "121433",
+    "121458",
+    "121460",
+    "121443",
+    "121475",
+    "121481",
+    "121442",
+    "121544",
+    "121435",
+    "121483",
+    "121457",
+    "121461",
+    "133725",
+    "121454",
+    "121464",
+    "121474",
+    "121450",
+    "121486",
+    "121463",
+    "121480",
+    "121437",
+    "121545",
+    "121438",
+    "121436",
+    "121546",
+    "121547",
+    "121456",
+    "132089",
+    "121447",
+    "121492",
+    "121468",
+    "121472",
+    "121452",
+    "121479",
+    "121487",
+    "121467",
+    "121451",
+    "121444",
+    "121459",
+    "121469",
+    "121482",
+    "121477"
+  ],
+  "institutions": [
+    {
+      "eiin": "121462",
+      "code": "8867",
+      "name": "MOHISHBANDI GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121441",
+      "code": "6176",
+      "name": "FARIDPUR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121440",
+      "code": "6204",
+      "name": "RASULPUR B.L. HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121473",
+      "code": "6209",
+      "name": "BUZRUK RASULPUR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121478",
+      "code": "6217",
+      "name": "JAMALPUR GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121470",
+      "code": "6218",
+      "name": "MARUADAH HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121446",
+      "code": "6200",
+      "name": "NIAMATNAGAR M. U. BL. HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121485",
+      "code": "6478",
+      "name": "JOYENPUR ADARSHA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121439",
+      "code": "6186",
+      "name": "SADULLAPUR KHODEJA MEMORIAL PILOT GOVT. GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121471",
+      "code": "6211",
+      "name": "BHATGRAM GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121455",
+      "code": "6188",
+      "name": "KRISHNAPUR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121465",
+      "code": "6210",
+      "name": "TARAF KAMAL GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121476",
+      "code": "6214",
+      "name": "CHAND KARIM MOJIBAR RAHMAN DI-MUKHI HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121490",
+      "code": "6477",
+      "name": "MAOAGARI DI-MUKHI HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121466",
+      "code": "6193",
+      "name": "DARIJAMALPUR ROKEYA SAMAD GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121434",
+      "code": "6175",
+      "name": "SADULLAPUR MULTILATERAL PILOT HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121453",
+      "code": "8869",
+      "name": "MONDUAR MOTIUN NESSA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121445",
+      "code": "6184",
+      "name": "JAMALPUR MAJIDIA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121433",
+      "code": "6179",
+      "name": "KHORDOKOMARPUR MULTILATERAL HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121458",
+      "code": "6196",
+      "name": "KISHAMOT KHEJU HAJI KIAS UDDIN GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121460",
+      "code": "6194",
+      "name": "ALDADPUR BAHUMUKEY GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121443",
+      "code": "6206",
+      "name": "NALDANGA JNANENDRA CHANDRA GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121475",
+      "code": "6221",
+      "name": "MADARIPUR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121481",
+      "code": "6222",
+      "name": "BOSNOB DUSH HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121442",
+      "code": "6177",
+      "name": "BAKSHIGONJ AKINA KHATUN HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121544",
+      "code": "6178",
+      "name": "BHATGRAM SCHOOL & COLLEGE, GAIBANDHA"
+    },
+    {
+      "eiin": "121435",
+      "code": "6205",
+      "name": "KAMARPARA PIRAMADHAB MULTILATERAL INSTITUTION, GAIBANDHA"
+    },
+    {
+      "eiin": "121483",
+      "code": "6219",
+      "name": "HINGER PARA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121457",
+      "code": "6274",
+      "name": "MOHIPUR BAZAR BILETERAL GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121461",
+      "code": "6479",
+      "name": "UTTAR DAMODARPUR KAGIPARA GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "133725",
+      "code": "6185",
+      "name": "KUNJA MOHIPUR BAHAR ULLA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121454",
+      "code": "6277",
+      "name": "LAKSHMIPUR RAHIMA KHATUN BI-LATERAL HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121464",
+      "code": "6195",
+      "name": "IDRAKPUR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121474",
+      "code": "6213",
+      "name": "BUJRUK ZAMALPUR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121450",
+      "code": "6271",
+      "name": "DHAPERHAT B. M. P. B. L. HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121486",
+      "code": "6224",
+      "name": "KISHAMOT TAJPUR ADARSHA GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121463",
+      "code": "6192",
+      "name": "KISHAMAT SHERPUR GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121480",
+      "code": "6220",
+      "name": "MADARHAT ADARSHA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121437",
+      "code": "6180",
+      "name": "MOLONG BAZAR B.L. HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121545",
+      "code": "6190",
+      "name": "HINGAR PARA GIRLS' HIGH SCHOOL & COLLEGE, GAIBANDHA"
+    },
+    {
+      "eiin": "121438",
+      "code": "6181",
+      "name": "MIRPUR MULTILATERAL HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121436",
+      "code": "6202",
+      "name": "NALDANGA UMESH CHANDRA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121546",
+      "code": "6199",
+      "name": "DHAPERHAT PRIYABALA GIRLS' HIGH SCHOOL & COLLEGE, GAIBANDHA"
+    },
+    {
+      "eiin": "121547",
+      "code": "6183",
+      "name": "DHOLBHANGA HIGH SCHOOL & COLLEGE, GAIBANDHA"
+    },
+    {
+      "eiin": "121456",
+      "code": "6201",
+      "name": "KESHALIDANGA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "132089",
+      "code": "6182",
+      "name": "ROUSHAN ALAM GHANI SCHOOL AND COLLEGE, GAIBANDHA"
+    },
+    {
+      "eiin": "121447",
+      "code": "6187",
+      "name": "KHORD KOMARPUR GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121492",
+      "code": "6223",
+      "name": "PATILLAKURA CHALK DARIA B.L HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121468",
+      "code": "8864",
+      "name": "KHAMAR DASHALIA ADARSHA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121472",
+      "code": "6212",
+      "name": "MATHER HAT GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121452",
+      "code": "6191",
+      "name": "AMBAGAN EABATULLAH MONDOL GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121479",
+      "code": "6216",
+      "name": "MOHIPUR BAZAR ADARSHA HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121487",
+      "code": "6476",
+      "name": "KUNJAMOHIPUR JHE MOKY GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121467",
+      "code": "1191",
+      "name": "KAMAR PARA GIRLS' HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121451",
+      "code": "8860",
+      "name": "ISLAMPUR FASIR UDDIN BILATERAL HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121444",
+      "code": "6203",
+      "name": "KANTANAGAR BINOY BHUSHAN BI-LATERAL HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121459",
+      "code": "6189",
+      "name": "AMBAGAN HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121469",
+      "code": "6475",
+      "name": "MADYA DAMODURPUR BY-LATARAL HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121482",
+      "code": "6197",
+      "name": "BHANGAMOR HIGH SCHOOL, GAIBANDHA"
+    },
+    {
+      "eiin": "121477",
+      "code": "6215",
+      "name": "KRISHNAPUR ADARSHA B.L. GIRLS' HIGH SCHOOL, GAIBANDHA"
+    }
+  ]
+}

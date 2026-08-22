@@ -1,0 +1,429 @@
+{
+  "district": "NILPHAMARI",
+  "upazilla": "NILPHAMARI SADAR",
+  "total_institutions": 70,
+  "eiin_list": [
+    "125061",
+    "125110",
+    "125088",
+    "125130",
+    "125058",
+    "125080",
+    "125081",
+    "125196",
+    "125122",
+    "125083",
+    "125084",
+    "125096",
+    "125099",
+    "125060",
+    "125078",
+    "125118",
+    "125103",
+    "125119",
+    "125095",
+    "125102",
+    "125101",
+    "125077",
+    "125117",
+    "125065",
+    "125112",
+    "125064",
+    "125132",
+    "125073",
+    "125121",
+    "125085",
+    "139073",
+    "125138",
+    "125086",
+    "125059",
+    "125109",
+    "125094",
+    "125195",
+    "125092",
+    "125108",
+    "125067",
+    "125100",
+    "125076",
+    "125071",
+    "125105",
+    "125068",
+    "125063",
+    "125062",
+    "125070",
+    "125098",
+    "125115",
+    "125075",
+    "125113",
+    "125114",
+    "125104",
+    "125066",
+    "125072",
+    "125197",
+    "125091",
+    "125074",
+    "125079",
+    "125093",
+    "125087",
+    "125106",
+    "133344",
+    "125082",
+    "125107",
+    "139113",
+    "125124",
+    "125069",
+    "125090"
+  ],
+  "institutions": [
+    {
+      "eiin": "125061",
+      "code": "6525",
+      "name": "NILPHAMARI GOVT. HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125110",
+      "code": "6569",
+      "name": "PALASHBARI GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125088",
+      "code": "6545",
+      "name": "JADUR HAT HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125130",
+      "code": "9280",
+      "name": "VANGAMALI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125058",
+      "code": "6720",
+      "name": "BARUNIR DANGA ADARSHA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125080",
+      "code": "1224",
+      "name": "MUSHRAT GORE GRAM DUKURI RAMKALA(M.D.R) HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125081",
+      "code": "8882",
+      "name": "NAGOR DAROANI SCHOOL AND COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125196",
+      "code": "6533",
+      "name": "CHARAIKHOLA SCHOOL AND COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125122",
+      "code": "9275",
+      "name": "KUKHAPARA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125083",
+      "code": "6535",
+      "name": "KUNDOPUKUR HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125084",
+      "code": "8880",
+      "name": "KHOKSHABARI M. U. HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125096",
+      "code": "6557",
+      "name": "LAXMICHAP HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125099",
+      "code": "6566",
+      "name": "FULTALA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125060",
+      "code": "6526",
+      "name": "SAMIR UDDIN SCHOOL AND COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125078",
+      "code": "6537",
+      "name": "KANCHAN PARA F. A. B/L HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125118",
+      "code": "6572",
+      "name": "SARAR PAR HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125103",
+      "code": "6574",
+      "name": "ITAKHOLA KALITALA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125119",
+      "code": "6568",
+      "name": "GORGRAM NIJPARA GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125095",
+      "code": "1222",
+      "name": "KUKRADANGA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125102",
+      "code": "6573",
+      "name": "TEPUR DANGA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125101",
+      "code": "6571",
+      "name": "JADUR HAT GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125077",
+      "code": "6530",
+      "name": "NILPHAMARI NATUN BI-LATERAL HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125117",
+      "code": "6562",
+      "name": "TUPAMARI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125065",
+      "code": "6549",
+      "name": "KACHUKATA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125112",
+      "code": "6724",
+      "name": "DHOBADANGA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125064",
+      "code": "6544",
+      "name": "CHAKDUBLIA SCHEDULED CASTE BILATERAL HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125132",
+      "code": "7228",
+      "name": "DUBACHURI GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125073",
+      "code": "6539",
+      "name": "SONAROY SONGALSHI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125121",
+      "code": "6723",
+      "name": "SHALHATI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125085",
+      "code": "6547",
+      "name": "NILPHAMARI ADARSHA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "139073",
+      "code": "9277",
+      "name": "BEPZA PUBLIC SCHOOL AND COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125138",
+      "code": "9278",
+      "name": "TILAI JOYCHANDI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125086",
+      "code": "6536",
+      "name": "DARUL HUDA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125059",
+      "code": "6534",
+      "name": "RABEYA BALIKA BIDYA NIKETAN, NILPHAMARI"
+    },
+    {
+      "eiin": "125109",
+      "code": "6558",
+      "name": "CHAPRA KACHARI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125094",
+      "code": "7225",
+      "name": "SHATRASHAL HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125195",
+      "code": "6721",
+      "name": "COLLECTORATE PUBLIC SCHOOL & COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125092",
+      "code": "1212",
+      "name": "BISHMURI CHANDER HAT HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125108",
+      "code": "6556",
+      "name": "NATIBARI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125067",
+      "code": "6543",
+      "name": "GOREGRAM B.L. HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125100",
+      "code": "6554",
+      "name": "DAKSHIN PARA GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125076",
+      "code": "6542",
+      "name": "KIRTINIA PARA B.L. HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125071",
+      "code": "6532",
+      "name": "DUHULI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125105",
+      "code": "6567",
+      "name": "RAMKOLA SHAILBARI S R HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125068",
+      "code": "6527",
+      "name": "PANCHAPUKUR SCHOOL & COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125063",
+      "code": "7227",
+      "name": "BAHALI PARA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125062",
+      "code": "6528",
+      "name": "NILPHAMARI GOVT. GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125070",
+      "code": "6550",
+      "name": "KAKOI BARAGACHHA PROTHOMA CHARAN HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125098",
+      "code": "6563",
+      "name": "UTTAR KANCHAPARA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125115",
+      "code": "1223",
+      "name": "KACHUA CHOWRANGI SHEBA SCHOOL AND COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125075",
+      "code": "6538",
+      "name": "CHOWRA BARA GACHA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125113",
+      "code": "1220",
+      "name": "CHANDER HAT GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125114",
+      "code": "6570",
+      "name": "SHAPLA GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125104",
+      "code": "1230",
+      "name": "PANCHA PUKUR GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125066",
+      "code": "6529",
+      "name": "RAMGANJ B.L. HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125072",
+      "code": "6541",
+      "name": "BABRIJHAR B.L. HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125197",
+      "code": "6548",
+      "name": "UTTOR CHOWRA BARAGACHHA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125091",
+      "code": "1219",
+      "name": "KANIAL KHATA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125074",
+      "code": "6546",
+      "name": "PALASHBARI PARASHMANI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125079",
+      "code": "1214",
+      "name": "CHARCHARABARI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125093",
+      "code": "7226",
+      "name": "UTTARASHASHI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125087",
+      "code": "1232",
+      "name": "TARANIBARI SCHOOL AND COLLEGE, NILPHAMARI"
+    },
+    {
+      "eiin": "125106",
+      "code": "6559",
+      "name": "SHAHID ZIA GIRLS' HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "133344",
+      "code": "6722",
+      "name": "POLICE LINES ACADEMY, NILPHAMARI"
+    },
+    {
+      "eiin": "125082",
+      "code": "6540",
+      "name": "RAMNAGAR HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125107",
+      "code": "6564",
+      "name": "UTTAR PATHKUMARI HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "139113",
+      "code": "7181",
+      "name": "MATUKPUR SOPTORSHI BIDYAPITH, NILPHAMARI"
+    },
+    {
+      "eiin": "125124",
+      "code": "9279",
+      "name": "UTTAR KANIALKHATA HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125069",
+      "code": "6531",
+      "name": "DAROANI BI-LATERAL HIGH SCHOOL, NILPHAMARI"
+    },
+    {
+      "eiin": "125090",
+      "code": "6555",
+      "name": "KAZI ABDUR RASHID HIGH SCHOOL, NILPHAMARI"
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "district": "LALMONIRHAT",
+  "upazilla": "ADITMARI",
+  "total_institutions": 33,
+  "eiin_list": [
+    "122738",
+    "122745",
+    "135921",
+    "122734",
+    "122743",
+    "122748",
+    "122731",
+    "122727",
+    "122750",
+    "122719",
+    "122741",
+    "122733",
+    "122732",
+    "122772",
+    "133961",
+    "122721",
+    "122736",
+    "122726",
+    "122770",
+    "122744",
+    "122723",
+    "122718",
+    "122717",
+    "122725",
+    "122740",
+    "122742",
+    "122739",
+    "122730",
+    "122729",
+    "122737",
+    "122722",
+    "122728",
+    "122724"
+  ],
+  "institutions": [
+    {
+      "eiin": "122738",
+      "code": "7398",
+      "name": "TALUK DULALI RAJKACHARI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122745",
+      "code": "7390",
+      "name": "SARPUKUR HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "135921",
+      "code": "7478",
+      "name": "MALIPARA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122734",
+      "code": "7475",
+      "name": "BHADAI DAKSHIN PARA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122743",
+      "code": "7394",
+      "name": "BURIR DIGHI ADARSHA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122748",
+      "code": "7395",
+      "name": "MADHUPUR NAMITA AND NALINI BARMA GIRLS' HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122731",
+      "code": "7476",
+      "name": "DEODOBA TARAK NATH SARKAR HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122727",
+      "code": "8895",
+      "name": "SARALKHAN HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122750",
+      "code": "7477",
+      "name": "DR. SHAFIA KHATUN HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122719",
+      "code": "7376",
+      "name": "KUMRIR HAT S. C. B. L. HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122741",
+      "code": "7392",
+      "name": "KISAMAT CHARITA BARI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122733",
+      "code": "1290",
+      "name": "SABERA KHATUN GIRLS' HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122732",
+      "code": "7396",
+      "name": "MAHISHTULI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122772",
+      "code": "7377",
+      "name": "ADITMARI KANTESWAR BARMAN GIRLS' HIGH SCHOOL & COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "133961",
+      "code": "7399",
+      "name": "SUKHOMOYE BAIDHOR CHANDRA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122721",
+      "code": "7381",
+      "name": "GOBARDHAN HAIDARIA BL.HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122736",
+      "code": "7397",
+      "name": "PASHCHIM BHELABARI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122726",
+      "code": "7382",
+      "name": "MAHISHA SHAHAR HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122770",
+      "code": "7380",
+      "name": "MAHISHKHOCHA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122744",
+      "code": "7389",
+      "name": "NAMURI ADARSHA MULTILATERAL GIRLS' HIGH SCHOOL & COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "122723",
+      "code": "7379",
+      "name": "SAPTIBARI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122718",
+      "code": "7383",
+      "name": "NAMURI B. L. HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122717",
+      "code": "7375",
+      "name": "GOVT. ADITMARI GIRIJA SANKAR MODEL SCHOOL AND COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "122725",
+      "code": "7266",
+      "name": "GANDHA MARUA B.L. HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122740",
+      "code": "1288",
+      "name": "PALASHI HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122742",
+      "code": "7393",
+      "name": "MOHISH KHOCHA GIRLS' HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122739",
+      "code": "7391",
+      "name": "BALAPUKUR HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122730",
+      "code": "7386",
+      "name": "HAZIGONJ SCHOOL AND COLLEGE, LALMONIRHAT"
+    },
+    {
+      "eiin": "122729",
+      "code": "7384",
+      "name": "HARIDAS HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122737",
+      "code": "7388",
+      "name": "MASOR DAILJOR HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122722",
+      "code": "7385",
+      "name": "DURGAPUR HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122728",
+      "code": "7387",
+      "name": "BHADHI ADARSHA HIGH SCHOOL, LALMONIRHAT"
+    },
+    {
+      "eiin": "122724",
+      "code": "7378",
+      "name": "BHELABARI SCHOOL AND COLLEGE, LALMONIRHAT"
+    }
+  ]
+}

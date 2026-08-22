@@ -1,0 +1,225 @@
+{
+  "district": "DINAJPUR",
+  "upazilla": "BIRAMPUR",
+  "total_institutions": 36,
+  "eiin_list": [
+    "119978",
+    "119964",
+    "119984",
+    "119981",
+    "138983",
+    "119958",
+    "119974",
+    "119959",
+    "119971",
+    "119957",
+    "119987",
+    "119975",
+    "119980",
+    "119973",
+    "119969",
+    "119955",
+    "119962",
+    "119983",
+    "119982",
+    "119963",
+    "119976",
+    "119988",
+    "119972",
+    "119965",
+    "119966",
+    "119967",
+    "119986",
+    "119989",
+    "119977",
+    "119953",
+    "119960",
+    "120072",
+    "119961",
+    "119956",
+    "119954",
+    "119970"
+  ],
+  "institutions": [
+    {
+      "eiin": "119978",
+      "code": "7724",
+      "name": "MIRZAPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119964",
+      "code": "8900",
+      "name": "DEBIPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119984",
+      "code": "8125",
+      "name": "CHALK HARIDASPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119981",
+      "code": "7538",
+      "name": "BEPARITOLA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "138983",
+      "code": "8130",
+      "name": "DHANJURI SAINT FRANCIS HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119958",
+      "code": "7703",
+      "name": "SHIBPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119974",
+      "code": "7712",
+      "name": "AMANULLA ADARSHA VIDDYA NIKETAN, DINAJPUR"
+    },
+    {
+      "eiin": "119959",
+      "code": "7705",
+      "name": "MOHANPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119971",
+      "code": "7713",
+      "name": "KETRA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119957",
+      "code": "7706",
+      "name": "EKAIR MONGOLPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119987",
+      "code": "8126",
+      "name": "UTTAR RAMCHANDRAPUR, DINAJPUR"
+    },
+    {
+      "eiin": "119975",
+      "code": "7714",
+      "name": "BIRAMPUR UPAZILLA COLLEGIATE HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119980",
+      "code": "7722",
+      "name": "DURGAPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119973",
+      "code": "7711",
+      "name": "TEGRA TAKIPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119969",
+      "code": "7717",
+      "name": "BIJUL MODEL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119955",
+      "code": "7701",
+      "name": "BIRAMPUR GOVT. GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119962",
+      "code": "7716",
+      "name": "GONGAPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119983",
+      "code": "1291",
+      "name": "ADARSHA HIGH SCHOOL BIRAMPUR, DINAJPUR"
+    },
+    {
+      "eiin": "119982",
+      "code": "7720",
+      "name": "SHIMULTALI GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119963",
+      "code": "7704",
+      "name": "KATLA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119976",
+      "code": "1345",
+      "name": "SHIALA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119988",
+      "code": "8129",
+      "name": "SANTINAGAR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119972",
+      "code": "1336",
+      "name": "PALIKHANPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119965",
+      "code": "7709",
+      "name": "PROSTAMPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119966",
+      "code": "7710",
+      "name": "HABIBPUR BI-LATERAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119967",
+      "code": "7719",
+      "name": "RATANPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119986",
+      "code": "7721",
+      "name": "BIRAMPUR PAURASHABHA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119989",
+      "code": "8128",
+      "name": "DIOR SHOULA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119977",
+      "code": "1313",
+      "name": "HARIHARPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119953",
+      "code": "8127",
+      "name": "KACHUA MIRJAPUR GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119960",
+      "code": "7702",
+      "name": "RAMKRISHNAPUR B. L. HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120072",
+      "code": "7718",
+      "name": "KOCHGRAM HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119961",
+      "code": "7708",
+      "name": "DESHMA DWI-MUKHI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119956",
+      "code": "7700",
+      "name": "BIRAMPUR PILOT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119954",
+      "code": "7723",
+      "name": "BIZUL GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "119970",
+      "code": "7707",
+      "name": "BINAIL HIGH SCHOOL, DINAJPUR"
+    }
+  ]
+}

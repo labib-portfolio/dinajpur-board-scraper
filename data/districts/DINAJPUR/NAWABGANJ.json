@@ -1,0 +1,327 @@
+{
+  "district": "DINAJPUR",
+  "upazilla": "NAWABGANJ",
+  "total_institutions": 53,
+  "eiin_list": [
+    "120856",
+    "120865",
+    "120857",
+    "120867",
+    "120834",
+    "120874",
+    "120889",
+    "120843",
+    "120852",
+    "120849",
+    "120873",
+    "120872",
+    "120841",
+    "120855",
+    "120948",
+    "120836",
+    "120838",
+    "120854",
+    "120842",
+    "120866",
+    "120835",
+    "120885",
+    "120832",
+    "120868",
+    "120858",
+    "120848",
+    "120886",
+    "120882",
+    "120884",
+    "120878",
+    "120877",
+    "120870",
+    "120947",
+    "120876",
+    "120839",
+    "120859",
+    "120860",
+    "120851",
+    "120871",
+    "120880",
+    "137816",
+    "120864",
+    "120883",
+    "120869",
+    "120892",
+    "120898",
+    "120861",
+    "120853",
+    "120850",
+    "120862",
+    "120881",
+    "120863",
+    "120888"
+  ],
+  "institutions": [
+    {
+      "eiin": "120856",
+      "code": "7854",
+      "name": "LOKA B.L. HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120865",
+      "code": "7883",
+      "name": "AZAMPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120857",
+      "code": "7856",
+      "name": "BINOD NOGOR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120867",
+      "code": "7860",
+      "name": "BAMAN GHAR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120834",
+      "code": "7891",
+      "name": "KAMARPARA DIMUKHI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120874",
+      "code": "7867",
+      "name": "AFTABGANJ GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120889",
+      "code": "7898",
+      "name": "BINODNAGAR GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120843",
+      "code": "7875",
+      "name": "MATIHARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120852",
+      "code": "7882",
+      "name": "PALASHBARI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120849",
+      "code": "7870",
+      "name": "MADHYAM MAGURA KATHALPARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120873",
+      "code": "7861",
+      "name": "NANDANPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120872",
+      "code": "7862",
+      "name": "ZAT BHAWANIPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120841",
+      "code": "7849",
+      "name": "SIRAJ PANCHGACHI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120855",
+      "code": "7857",
+      "name": "AFTABGONJ BASIR UDDIN HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120948",
+      "code": "7881",
+      "name": "DAUDPUR GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120836",
+      "code": "7880",
+      "name": "DAUDPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120838",
+      "code": "7865",
+      "name": "JIGAGAR ADARSHA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120854",
+      "code": "7879",
+      "name": "DEOGAON RIAZ UDDIN HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120842",
+      "code": "7892",
+      "name": "KHALIPPUR (KAZIPARA) HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120866",
+      "code": "7866",
+      "name": "KHIDIRPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120835",
+      "code": "7874",
+      "name": "SHALTI MURADPUR GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120885",
+      "code": "7886",
+      "name": "BELGHAT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120832",
+      "code": "7868",
+      "name": "HEYATPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120868",
+      "code": "7863",
+      "name": "MONOHARPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120858",
+      "code": "7668",
+      "name": "JOYPUR DWI-MUKHI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120848",
+      "code": "7869",
+      "name": "ISLAMPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120886",
+      "code": "7887",
+      "name": "DR. ABDUL AZIZ HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120882",
+      "code": "7897",
+      "name": "PATNICHAN HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120884",
+      "code": "7873",
+      "name": "RAGHUNATHPUR GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120878",
+      "code": "7894",
+      "name": "MADHYA KHALIPPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120877",
+      "code": "7871",
+      "name": "NABINGANJ B.L. HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120870",
+      "code": "1346",
+      "name": "SHIMOR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120947",
+      "code": "7876",
+      "name": "BHADURIA HIGH SCHOOL AND COLLEGE, DINAJPUR"
+    },
+    {
+      "eiin": "120876",
+      "code": "7889",
+      "name": "DHARNANDA JUNIOR SECONDARY SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120839",
+      "code": "1320",
+      "name": "MIRZAPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120859",
+      "code": "7853",
+      "name": "SHALKHURIA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120860",
+      "code": "7852",
+      "name": "PRANKRISHNAPUR ANDALGRAM HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120851",
+      "code": "7850",
+      "name": "NAWABGONJ GOVT. MULTILATERAL PILOT HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120871",
+      "code": "7888",
+      "name": "BALLABHPUR DIMUKHI HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120880",
+      "code": "7893",
+      "name": "CHHOTO TATULIA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "137816",
+      "code": "7899",
+      "name": "KUSHDAHA SABIDGANJ HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120864",
+      "code": "7851",
+      "name": "NAWABGANJ PILOT GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120883",
+      "code": "7872",
+      "name": "NARA YONPUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120869",
+      "code": "7864",
+      "name": "VOTERPARA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120892",
+      "code": "7896",
+      "name": "MALDAHA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120898",
+      "code": "7895",
+      "name": "HELENCHA HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120861",
+      "code": "7858",
+      "name": "KUSHDAHA M. U. HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120853",
+      "code": "7877",
+      "name": "MOGARPARA BI-LATERAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120850",
+      "code": "7855",
+      "name": "RAGHUNATH PUR HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120862",
+      "code": "7859",
+      "name": "GOLAPGANJ HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120881",
+      "code": "7885",
+      "name": "KUSHDAHA HILIR DANGA GIRLS' HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120863",
+      "code": "7878",
+      "name": "DARIA BILATERAL HIGH SCHOOL, DINAJPUR"
+    },
+    {
+      "eiin": "120888",
+      "code": "7890",
+      "name": "HARINATHPUR (RAJ-BARI) HIGH SCHOOL, DINAJPUR"
+    }
+  ]
+}
