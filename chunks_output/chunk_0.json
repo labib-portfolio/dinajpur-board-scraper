@@ -1,0 +1,30 @@
+{
+  "chunk_index": 0,
+  "total_chunks": 100,
+  "summary": {
+    "total_in_chunk": 1,
+    "scraped_so_far": 1,
+    "total_success": 1,
+    "total_failed": 0,
+    "elapsed_seconds": 2.54,
+    "last_updated": "2026-08-22 16:59:02"
+  },
+  "records": [
+    {
+      "index": 1,
+      "roll_no": "820203",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD SAROAR JAHAN",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "HUMANITIES",
+      "result": "GPA=2.50",
+      "total_marks": "554",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:59:02"
+    }
+  ]
+}

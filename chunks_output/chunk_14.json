@@ -1,0 +1,30 @@
+{
+  "chunk_index": 14,
+  "total_chunks": 100,
+  "summary": {
+    "total_in_chunk": 1,
+    "scraped_so_far": 1,
+    "total_success": 1,
+    "total_failed": 0,
+    "elapsed_seconds": 1.68,
+    "last_updated": "2026-08-22 16:59:19"
+  },
+  "records": [
+    {
+      "index": 15,
+      "roll_no": "183515",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MST. SHAKILA AKTER",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.56",
+      "total_marks": "809",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:59:19"
+    }
+  ]
+}

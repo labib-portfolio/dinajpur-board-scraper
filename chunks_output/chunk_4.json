@@ -1,0 +1,30 @@
+{
+  "chunk_index": 4,
+  "total_chunks": 100,
+  "summary": {
+    "total_in_chunk": 1,
+    "scraped_so_far": 1,
+    "total_success": 1,
+    "total_failed": 0,
+    "elapsed_seconds": 12.64,
+    "last_updated": "2026-08-22 16:59:44"
+  },
+  "records": [
+    {
+      "index": 5,
+      "roll_no": "183505",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MUSHFIKA JAHAN MOON",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.78",
+      "total_marks": "855",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:59:44"
+    }
+  ]
+}
