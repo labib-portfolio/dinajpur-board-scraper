@@ -6,7 +6,7 @@ on:
       delay:
         description: 'Delay between requests (seconds)'
         required: false
-        default: '3.2'
+        default: '0.5'
       webhook_url:
         description: 'Optional live stream Webhook / API URL'
         required: false
@@ -16,6 +16,9 @@ on:
       - main
     paths:
       - 'rolls.json'
+
+permissions:
+  contents: write
 
 jobs:
   scrape_matrix:

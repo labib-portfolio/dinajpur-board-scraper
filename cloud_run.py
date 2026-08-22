@@ -182,14 +182,27 @@ def main():
         print(f"\n{CYAN}{BOLD}⚡ 100 GITHUB ACTIONS CLOUD VMs ARE NOW RUNNING IN PARALLEL!{RESET}")
         print(f"[*] Cloud workers are scraping at ~80-100 rolls/sec...")
 
-        # 3. Pull / download results when done
-        print(f"\n[*] Waiting for cloud execution to complete...")
-        for wait_sec in range(45, 0, -5):
-            print(f"\r  ⏳ Checking cloud cluster status... ({wait_sec}s remaining)   ", end="", flush=True)
+        # 3. Dynamic Cloud Status Polling Loop
+        print(f"\n[*] Waiting for cloud execution to complete across all 100 VMs...")
+        expected_duration = max(60, int(len(pending_rolls) / 70) + 30)
+        start_wait = time.time()
+
+        while True:
+            elapsed_wait = int(time.time() - start_wait)
+            remaining = max(0, expected_duration - elapsed_wait)
+            print(f"\r  ⏳ 100 Cloud VMs Scraping in Progress... Elapsed: {elapsed_wait}s (Est. remaining: {remaining}s)   ", end="", flush=True)
+
+            if elapsed_wait >= expected_duration:
+                # Check for updates from remotes
+                updated = False
+                for remote_name, _ in REPOS:
+                    res = subprocess.run(["git", "fetch", remote_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                break
+
             time.sleep(5)
         print("\n")
 
-        # 4. Auto-pull latest updates from git or download artifacts
+        # 4. Auto-pull latest updates from git
         print(f"[*] Pulling latest scraped updates from cloud repositories...")
         for remote_name, _ in REPOS:
             subprocess.run(["git", "pull", remote_name, "main", "--no-rebase"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
