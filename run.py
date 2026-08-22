@@ -125,9 +125,9 @@ def run_scraper_cli():
     print_banner()
 
     fetcher = InstituteResultFetcher()
-    output_base = os.path.join(BASE_DIR, "upazilla_results")
+    results_root = os.path.join(BASE_DIR, "results")
     master_file = os.path.join(BASE_DIR, "scraped_results_all.json")
-    os.makedirs(output_base, exist_ok=True)
+    os.makedirs(results_root, exist_ok=True)
     
     proxy_pool = FastProxyPool()
     proxies = []
@@ -202,9 +202,13 @@ def run_scraper_cli():
             print(f"{YELLOW}[!] No candidate rolls discovered for this batch.{RESET}\n")
             continue
 
-        # Check already scraped rolls across datasets
+        # Check already scraped rolls across all district folders & datasets
         already_scraped_map = {}
-        for upz_path in glob.glob(os.path.join(output_base, "results_upazilla_*.json")):
+        all_existing_files = (
+            glob.glob(os.path.join(results_root, "**", "results_upazilla_*.json"), recursive=True) +
+            glob.glob(os.path.join(BASE_DIR, "upazilla_results", "*.json"))
+        )
+        for upz_path in all_existing_files:
             try:
                 with open(upz_path, 'r', encoding='utf-8') as f:
                     u_data = json.load(f)
@@ -281,13 +285,20 @@ def run_scraper_cli():
         def save_record_to_upazilla(r: Dict[str, Any]):
             r_roll = str(r.get("roll_no"))
             meta = roll_metadata_map.get(r_roll, {})
+            
+            # District-wise folder routing
+            district_name = meta.get("district") or r.get("district") or "UNKNOWN_DISTRICT"
+            district_slug = re.sub(r'[^a-zA-Z0-9]+', '_', district_name.strip().upper()).strip('_')
+            district_folder = os.path.join(results_root, district_slug)
+            os.makedirs(district_folder, exist_ok=True)
+
             upz_name = meta.get("upazila") or r.get("upazila") or "UNKNOWN_UPAZILLA"
             upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upz_name.strip().lower()).strip('_')
-            upz_file = os.path.join(output_base, f"results_upazilla_{upz_slug}.json")
+            upz_file = os.path.join(district_folder, f"results_upazilla_{upz_slug}.json")
 
             upz_data = {
                 "upazila": upz_name,
-                "district": meta.get("district", "NILPHAMARI"),
+                "district": district_name,
                 "summary": {"total_records": 0, "total_passed": 0, "total_failed": 0, "institutions_count": 0, "last_updated": ""},
                 "records": []
             }
@@ -301,7 +312,7 @@ def run_scraper_cli():
             existing_roll_map = {str(item.get("roll_no")): item for item in upz_data.get("records", [])}
 
             r["upazila"] = upz_name
-            r["district"] = meta.get("district", upz_data.get("district", "NILPHAMARI"))
+            r["district"] = district_name
             if meta.get("eiin"): r["eiin"] = meta.get("eiin")
             if meta.get("institute"): r["institute"] = meta.get("institute")
 
