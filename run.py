@@ -136,15 +136,20 @@ def run_cloud_cli():
         upazila = inst_data.get("upazila", "UNKNOWN")
         students = inst_data.get("students", [])
         
-        rolls = [str(s["roll"]) for s in students if s.get("roll")]
-        print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {GREEN}✓ {inst_name[:36]} ({len(rolls)} rolls){RESET}  ")
+        # Exclude absent students who didn't sit for the exam
+        appeared_students = [s for s in students if s.get("status") != "ABSENT" and "ABS" not in str(s.get("gpa", "")).upper()]
+        abs_count = len(students) - len(appeared_students)
+        
+        rolls = [str(s["roll"]) for s in appeared_students if s.get("roll")]
+        abs_info = f", {abs_count} absent excluded" if abs_count > 0 else ""
+        print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {GREEN}✓ {inst_name[:36]} ({len(rolls)} appeared rolls{abs_info}){RESET}  ")
 
         upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upazila.strip().lower()).strip('_')
         if upz_slug not in upazilla_summary:
             upazilla_summary[upz_slug] = {"upazila": upazila, "district": district, "rolls_count": 0}
         upazilla_summary[upz_slug]["rolls_count"] += len(rolls)
 
-        for s in students:
+        for s in appeared_students:
             r_str = str(s["roll"])
             all_target_rolls.append(r_str)
             roll_metadata_map[r_str] = {
