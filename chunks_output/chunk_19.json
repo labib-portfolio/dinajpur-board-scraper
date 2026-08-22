@@ -1,0 +1,21 @@
+{
+  "chunk_index": 19,
+  "total_chunks": 100,
+  "summary": {
+    "total_in_chunk": 1,
+    "scraped_so_far": 1,
+    "total_success": 0,
+    "total_failed": 1,
+    "elapsed_seconds": 18.29,
+    "last_updated": "2026-08-22 16:58:49"
+  },
+  "records": [
+    {
+      "index": 20,
+      "roll_no": "183521",
+      "success": false,
+      "status_code": 404,
+      "scraped_at": "2026-08-22 16:58:49"
+    }
+  ]
+}
