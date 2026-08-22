@@ -154,7 +154,6 @@ def format_progress_bar(current: int, total: int, width: int = 20) -> str:
 def run_scraper_cli():
     print_banner()
 
-    fetcher = InstituteResultFetcher()
     results_root = os.path.join(BASE_DIR, "results")
     master_file = os.path.join(BASE_DIR, "scraped_results_all.json")
     os.makedirs(results_root, exist_ok=True)
@@ -164,6 +163,7 @@ def run_scraper_cli():
     proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
     num_workers = min(35, max(15, len(proxies) - 20)) if len(proxies) > 0 else 20
     spare_proxies = max(0, len(proxies) - num_workers)
+    fetcher = InstituteResultFetcher(proxies=proxies)
     print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} ultra-fast nodes ready! ({num_workers} Parallel Workers + {spare_proxies} Standby Spares){RESET}\n")
 
     while True:
@@ -475,7 +475,7 @@ def run_scraper_cli():
                         print(f"  [{idx}/{len(eiins)}] EIIN {eiin}: {inst_name[:25]} {GREEN}+{queued_for_inst} rolls{RESET}", flush=True)
 
                 if not is_cached:
-                    time.sleep(0.3)
+                    time.sleep(1.2)
 
             with print_lock:
                 print(f"  {GREEN}✓ Loaded all {len(eiins)} institutions ({total_appeared_count} rolls queued){RESET}\n", flush=True)

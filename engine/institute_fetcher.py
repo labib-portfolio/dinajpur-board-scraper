@@ -14,12 +14,14 @@ from urllib.parse import urljoin
 
 
 class InstituteResultFetcher:
-    def __init__(self, base_url: str = "https://results.dinajpurboard.gov.bd"):
+    def __init__(self, base_url: str = "https://results.dinajpurboard.gov.bd", proxies: Optional[List[str]] = None):
         self.base_url = base_url
+        self.proxies = proxies or []
+        self.proxy_idx = 0
         self.reset_session()
 
     def reset_session(self):
-        """Creates a fresh HTTP session with standard browser headers."""
+        """Creates a fresh HTTP session with browser headers and optional proxy rotation."""
         self.session = requests.Session()
         self.current_token = None
         self.session.headers.update({
@@ -27,6 +29,10 @@ class InstituteResultFetcher:
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             "Referer": f"{self.base_url}/search/institute"
         })
+        if self.proxies:
+            p = self.proxies[self.proxy_idx % len(self.proxies)]
+            self.session.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
+            self.proxy_idx += 1
 
     def _solve_gateway(self, soup: BeautifulSoup, current_url: str) -> bool:
         """Solves the symbol challenge (human check) on the gateway."""
@@ -87,15 +93,22 @@ class InstituteResultFetcher:
             try:
                 r = self.session.get(url, timeout=15)
                 
-                # If rate limited, wait out cooldown and retry
+                # If rate limited, rotate proxy immediately or wait cooldown
                 if r.status_code == 429:
-                    retry_after = int(r.headers.get("Retry-After", 15))
-                    cooldown = min(retry_after + 1, 35)
-                    if status_callback:
-                        status_callback(f"Rate limited (429). Waiting {cooldown}s cooldown... (Attempt {attempt}/6)")
-                    time.sleep(cooldown)
-                    self.reset_session()
-                    continue
+                    if self.proxies:
+                        if status_callback:
+                            status_callback(f"Rotating proxy node... (Attempt {attempt}/6)")
+                        self.reset_session()
+                        time.sleep(0.5)
+                        continue
+                    else:
+                        retry_after = int(r.headers.get("Retry-After", 15))
+                        cooldown = min(retry_after + 1, 35)
+                        if status_callback:
+                            status_callback(f"Rate limited (429). Waiting {cooldown}s cooldown... (Attempt {attempt}/6)")
+                        time.sleep(cooldown)
+                        self.reset_session()
+                        continue
 
                 soup = BeautifulSoup(r.text, 'html.parser')
                 
@@ -171,13 +184,21 @@ class InstituteResultFetcher:
 
                 # Rate limit handling on POST
                 if post_r.status_code == 429:
-                    retry_after = int(post_r.headers.get("Retry-After", 15))
-                    cooldown = min(retry_after + 1, 35)
-                    if status_callback:
-                        status_callback(f"Rate limited on POST (429). Cooldown: {cooldown}s (Attempt {attempt}/{max_retries})")
-                    time.sleep(cooldown)
-                    self.reset_session()
-                    continue
+                    if self.proxies:
+                        if status_callback:
+                            status_callback(f"Rotating proxy node... (Attempt {attempt}/{max_retries})")
+                        self.current_token = None
+                        self.reset_session()
+                        time.sleep(0.5)
+                        continue
+                    else:
+                        retry_after = int(post_r.headers.get("Retry-After", 15))
+                        cooldown = min(retry_after + 1, 35)
+                        if status_callback:
+                            status_callback(f"Rate limited on POST (429). Cooldown: {cooldown}s (Attempt {attempt}/{max_retries})")
+                        time.sleep(cooldown)
+                        self.reset_session()
+                        continue
 
                 if post_r.status_code == 200:
                     soup = BeautifulSoup(post_r.text, 'html.parser')
