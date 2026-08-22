@@ -9,12 +9,16 @@ import time
 import requests
 from bs4 import BeautifulSoup
 from collections import Counter
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional, List, Callable
 
 
 class InstituteResultFetcher:
     def __init__(self, base_url: str = "https://results.dinajpurboard.gov.bd"):
         self.base_url = base_url
+        self.reset_session()
+
+    def reset_session(self):
+        """Creates a fresh HTTP session with standard browser headers."""
         self.session = requests.Session()
         self.session.headers.update({
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -22,81 +26,162 @@ class InstituteResultFetcher:
             "Referer": f"{self.base_url}/search/institute"
         })
 
-    def _unlock_session(self) -> Optional[str]:
+    def _solve_gateway(self, soup: BeautifulSoup) -> bool:
+        """Solves the symbol challenge (human check) on the gateway."""
+        try:
+            token_elem = soup.find('input', {'name': '_token'})
+            challenge_elem = soup.find('input', {'name': 'challenge_token'})
+            if not token_elem or not challenge_elem:
+                return False
+
+            token = token_elem['value']
+            challenge_token = challenge_elem['value']
+            choices = soup.select('.symbol-choice')
+            if not choices:
+                return False
+
+            symbols = []
+            for c in choices:
+                val_input = c.find('input')
+                span = c.find('span', {'aria-hidden': 'true'})
+                if val_input and span:
+                    symbols.append((val_input['value'], span.get_text(strip=True)))
+
+            if not symbols:
+                return False
+
+            counts = Counter([sym for val, sym in symbols])
+            odd_sym = min(counts, key=counts.get)
+            ans_val = next(val for val, sym in symbols if sym == odd_sym)
+            
+            resp = self.session.post(
+                f"{self.base_url}/result-check",
+                data={'_token': token, 'challenge_token': challenge_token, 'answer': ans_val},
+                timeout=15
+            )
+            time.sleep(0.3)
+            return resp.status_code in [200, 302]
+        except Exception:
+            return False
+
+    def _unlock_session(self, status_callback: Optional[Callable[[str], None]] = None) -> Optional[str]:
         url = f"{self.base_url}/search/institute"
-        for attempt in range(5):
+        for attempt in range(1, 6):
             try:
                 r = self.session.get(url, timeout=15)
                 
-                # If rate limited, wait out the cooldown automatically
+                # If rate limited, wait out cooldown and retry
                 if r.status_code == 429:
                     retry_after = int(r.headers.get("Retry-After", 15))
-                    time.sleep(min(retry_after + 1, 30))
+                    cooldown = min(retry_after + 1, 35)
+                    if status_callback:
+                        status_callback(f"Rate limited (429). Waiting {cooldown}s cooldown... (Attempt {attempt}/5)")
+                    time.sleep(cooldown)
+                    self.reset_session()
                     continue
 
                 soup = BeautifulSoup(r.text, 'html.parser')
                 
                 # Check if gateway challenge is present
                 if soup.find('form', class_='challenge-form'):
-                    token = soup.find('input', {'name': '_token'})['value']
-                    challenge_token = soup.find('input', {'name': 'challenge_token'})['value']
-                    choices = soup.select('.symbol-choice')
-                    symbols = [(c.find('input')['value'], c.find('span', {'aria-hidden': 'true'}).get_text(strip=True)) for c in choices]
-                    counts = Counter([sym for val, sym in symbols])
-                    odd_sym = min(counts, key=counts.get)
-                    ans_val = next(val for val, sym in symbols if sym == odd_sym)
-                    
-                    self.session.post(
-                        f"{self.base_url}/result-check",
-                        data={'_token': token, 'challenge_token': challenge_token, 'answer': ans_val},
-                        timeout=15
-                    )
+                    if status_callback:
+                        status_callback(f"Solving gateway pattern challenge... (Attempt {attempt}/5)")
+                    solved = self._solve_gateway(soup)
+                    if not solved:
+                        time.sleep(1.0)
+                        self.reset_session()
+                        continue
                     time.sleep(0.4)
                     continue
                 
                 form = soup.find('form')
                 if form and form.find('input', {'name': '_token'}):
                     return form.find('input', {'name': '_token'})['value']
-            except Exception:
+            except Exception as e:
                 time.sleep(1.0)
         return None
 
-    def fetch_by_eiin(self, eiin: Any, exam_year: str = "2026", board: str = "DINAJPUR") -> Dict[str, Any]:
-        for attempt in range(3):
-            token = self._unlock_session()
-            if not token:
-                time.sleep(1.0)
-                continue
+    def fetch_by_eiin(
+        self,
+        eiin: Any,
+        exam_year: str = "2026",
+        board: str = "DINAJPUR",
+        status_callback: Optional[Callable[[str], None]] = None,
+        max_retries: int = 6
+    ) -> Dict[str, Any]:
+        """
+        Fetches official gazette results for an EIIN with automatic retries for rate limits,
+        failed pattern challenges, and session renewals.
+        """
+        eiin_clean = str(eiin).strip()
+        url = f"{self.base_url}/search/institute"
 
-            post_r = self.session.post(
-                f"{self.base_url}/search/institute",
-                data={'_token': token, 'eiin_no': str(eiin).strip(), 'submit': '1'},
-                timeout=15
-            )
+        for attempt in range(1, max_retries + 1):
+            try:
+                token = self._unlock_session(status_callback=status_callback)
+                if not token:
+                    if status_callback and attempt < max_retries:
+                        status_callback(f"Retrying session unlock (Attempt {attempt}/{max_retries})...")
+                    self.reset_session()
+                    time.sleep(1.5)
+                    continue
 
-            if post_r.status_code == 429:
-                retry_after = int(post_r.headers.get("Retry-After", 15))
-                time.sleep(min(retry_after + 1, 30))
-                continue
+                post_r = self.session.post(
+                    url,
+                    data={'_token': token, 'eiin_no': eiin_clean, 'submit': '1'},
+                    timeout=15
+                )
 
-            if post_r.status_code == 200:
-                soup = BeautifulSoup(post_r.text, 'html.parser')
-                # Check if challenge intercepted the POST
-                if soup.find('form', class_='challenge-form'):
-                    token = self._unlock_session()
-                    post_r = self.session.post(
-                        f"{self.base_url}/search/institute",
-                        data={'_token': token, 'eiin_no': str(eiin).strip(), 'submit': '1'},
-                        timeout=15
-                    )
+                # Rate limit handling on POST
+                if post_r.status_code == 429:
+                    retry_after = int(post_r.headers.get("Retry-After", 15))
+                    cooldown = min(retry_after + 1, 35)
+                    if status_callback:
+                        status_callback(f"Rate limited on POST (429). Cooldown: {cooldown}s (Attempt {attempt}/{max_retries})")
+                    time.sleep(cooldown)
+                    self.reset_session()
+                    continue
+
+                if post_r.status_code == 200:
                     soup = BeautifulSoup(post_r.text, 'html.parser')
+                    
+                    # If challenge intercepted the POST response, solve and resubmit
+                    if soup.find('form', class_='challenge-form'):
+                        if status_callback:
+                            status_callback(f"Resolving post-challenge pattern (Attempt {attempt}/{max_retries})...")
+                        self._solve_gateway(soup)
+                        time.sleep(0.4)
+                        token = self._unlock_session(status_callback=status_callback)
+                        if token:
+                            post_r = self.session.post(
+                                url,
+                                data={'_token': token, 'eiin_no': eiin_clean, 'submit': '1'},
+                                timeout=15
+                            )
+                            soup = BeautifulSoup(post_r.text, 'html.parser')
 
-                info_table = soup.find('table', class_='inst-info-table')
-                if not info_table:
-                    if attempt < 2:
-                        time.sleep(1.0)
-                        continue
-                    return {"error": "Institute not found", "success": False, "name": None, "students": []}
+                    info_table = soup.find('table', class_='inst-info-table')
+                    if not info_table:
+                        if attempt < max_retries:
+                            if status_callback:
+                                status_callback(f"Retrying institute query... (Attempt {attempt}/{max_retries})")
+                            self.reset_session()
+                            time.sleep(1.5)
+                            continue
+                        return {"error": "Institute not found or empty response", "success": False, "name": None, "students": []}
+
+                    # Succeeded! Break out of retry loop
+                    break
+            except Exception as e:
+                if attempt < max_retries:
+                    if status_callback:
+                        status_callback(f"Connection glitch: {str(e)[:30]}... Retrying ({attempt}/{max_retries})")
+                    time.sleep(2.0)
+                    self.reset_session()
+                    continue
+                return {"error": f"Request failed: {str(e)}", "success": False, "name": None, "students": []}
+        else:
+            return {"error": "Max retries exceeded", "success": False, "name": None, "students": []}
 
             # Parse info
             name, upazila, district = "", "", ""

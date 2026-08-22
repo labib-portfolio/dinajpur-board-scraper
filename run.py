@@ -118,11 +118,14 @@ def run_cloud_cli():
     upazilla_summary = {}
 
     for idx, eiin in enumerate(eiins, 1):
-        print(f"  [{idx}/{len(eiins)}] Querying EIIN {eiin}...", end=" ", flush=True)
-        inst_data = fetcher.fetch_by_eiin(eiin)
+        def on_retry_status(msg):
+            print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {YELLOW}🔄 {msg}{RESET}   ", end="", flush=True)
+
+        print(f"  [{idx}/{len(eiins)}] Querying EIIN {eiin}...", end="", flush=True)
+        inst_data = fetcher.fetch_by_eiin(eiin, status_callback=on_retry_status)
 
         if not inst_data or "error" in inst_data or not inst_data.get("name"):
-            print(f"{RED}Failed (Not found){RESET}")
+            print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {RED}Failed (Not found or unreachable after retries){RESET}  ")
             continue
 
         inst_name = inst_data.get("name", "Unknown")
@@ -131,7 +134,7 @@ def run_cloud_cli():
         students = inst_data.get("students", [])
         
         rolls = [str(s["roll"]) for s in students if s.get("roll")]
-        print(f"{GREEN}✓ {inst_name[:32]} ({len(rolls)} rolls){RESET}")
+        print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {GREEN}✓ {inst_name[:36]} ({len(rolls)} rolls){RESET}  ")
 
         upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upazila.strip().lower()).strip('_')
         if upz_slug not in upazilla_summary:
