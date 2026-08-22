@@ -209,8 +209,9 @@ def run_scraper_cli():
             spare_proxies = max(0, len(proxies) - num_workers)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
-        # Build persistent Keep-Alive session pool (1 session per proxy node)
-        proxy_sessions = []
+        # Build persistent Keep-Alive session pool with Self-Healing Circuit Breaker
+        proxy_failure_counts = {p: 0 for p in proxies}
+        healthy_sessions = []
         for p in proxies:
             s = requests.Session()
             s.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
@@ -219,7 +220,22 @@ def run_scraper_cli():
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 "Connection": "keep-alive"
             })
-            proxy_sessions.append(s)
+            healthy_sessions.append((p, s))
+
+        proxy_lock = threading.Lock()
+
+        def mark_proxy_failure(proxy_ip: str):
+            with proxy_lock:
+                proxy_failure_counts[proxy_ip] = proxy_failure_counts.get(proxy_ip, 0) + 1
+                if proxy_failure_counts[proxy_ip] >= 2:
+                    for idx, (p, s) in enumerate(healthy_sessions):
+                        if p == proxy_ip:
+                            healthy_sessions.pop(idx)
+                            break
+
+        def mark_proxy_success(proxy_ip: str):
+            with proxy_lock:
+                proxy_failure_counts[proxy_ip] = 0
 
         print(f"\n=======================================================")
         print(f"🚀 {BOLD}ENGINE PIPELINE CONFIGURATION:{RESET}")
@@ -227,6 +243,7 @@ def run_scraper_cli():
         print(f"  • Concurrent Workers:      {CYAN}{BOLD}{num_workers} Parallel Threads{RESET}")
         print(f"  • Standby Failover Spares: {YELLOW}{BOLD}{spare_proxies} Spare Proxies{RESET}")
         print(f"  • Connection Mode:         {GREEN}Persistent Keep-Alive Session Pool{RESET}")
+        print(f"  • Self-Healing Engine:     {GREEN}Active Circuit Breaker (Auto-Prunes Dead Nodes){RESET}")
         print(f"  • Target Institutions:     {len(eiins)} Schools")
         print(f"=======================================================\n")
 
@@ -249,33 +266,36 @@ def run_scraper_cli():
         os.makedirs(cache_dir, exist_ok=True)
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-            # 1. Try rotating through persistent proxy sessions with Keep-Alive connection reuse
-            if proxy_sessions:
-                for offset in range(min(6, len(proxy_sessions))):
-                    sess = proxy_sessions[(worker_idx + offset) % len(proxy_sessions)]
+            # 1. Rotate through current healthy proxy sessions with 1.8s low-latency timeout
+            with proxy_lock:
+                current_sessions = list(healthy_sessions)
+
+            if current_sessions:
+                for offset in range(min(4, len(current_sessions))):
+                    p_ip, sess = current_sessions[(worker_idx + offset) % len(current_sessions)]
                     try:
                         url = ENDPOINT.format(roll=roll_str)
-                        r = sess.get(url, timeout=3.5)
+                        r = sess.get(url, timeout=1.8)
                         if r.status_code == 200:
                             parsed = parse_student_html(r.text, roll_str)
                             if parsed:
+                                mark_proxy_success(p_ip)
                                 return parsed
+                        elif r.status_code in (403, 429, 500, 502, 503):
+                            mark_proxy_failure(p_ip)
                     except Exception:
-                        pass
+                        mark_proxy_failure(p_ip)
 
-            # 2. Fallback to direct request with backoff
-            for att in range(1, 4):
-                try:
-                    url = ENDPOINT.format(roll=roll_str)
-                    r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=6)
-                    if r.status_code == 200:
-                        parsed = parse_student_html(r.text, roll_str)
-                        if parsed:
-                            return parsed
-                    elif r.status_code == 429:
-                        time.sleep(2.0 * att)
-                except Exception:
-                    time.sleep(1.0)
+            # 2. Fast single direct attempt with 2.5s timeout (non-blocking, zero sleep)
+            try:
+                url = ENDPOINT.format(roll=roll_str)
+                r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=2.5)
+                if r.status_code == 200:
+                    parsed = parse_student_html(r.text, roll_str)
+                    if parsed:
+                        return parsed
+            except Exception:
+                pass
             return None
 
         def save_record_to_upazilla(r: Dict[str, Any], meta: Dict[str, Any]):
@@ -485,18 +505,18 @@ def run_scraper_cli():
             for pass_num in range(1, max_recovery_passes + 1):
                 if not unretrieved:
                     break
-                print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(unretrieved)} unretrieved roll(s) with fresh proxies...{RESET}")
                 proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
-                proxy_sessions = []
-                for p in proxies:
-                    s = requests.Session()
-                    s.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
-                    s.headers.update({
-                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-                        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-                        "Connection": "keep-alive"
-                    })
-                    proxy_sessions.append(s)
+                with proxy_lock:
+                    healthy_sessions = []
+                    for p in proxies:
+                        s = requests.Session()
+                        s.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
+                        s.headers.update({
+                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+                            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                            "Connection": "keep-alive"
+                        })
+                        healthy_sessions.append((p, s))
                 time.sleep(1.0)
 
                 rec_workers = min(35, len(unretrieved))
