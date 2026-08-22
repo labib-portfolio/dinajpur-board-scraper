@@ -182,6 +182,9 @@ if __name__ == "__main__":
     parser.add_argument("--input", type=str, default="rolls.json", help="Path to rolls file")
     parser.add_argument("--output", type=str, default="chunk_result.json", help="Path to output chunk file")
     parser.add_argument("--delay", type=float, default=2.0, help="Delay between requests in seconds")
+    parser.add_argument("--webhook-url", type=str, default="", help="Optional real-time live stream webhook URL")
+    args = parser.parse_args()
+
     webhook = args.webhook_url
     if not webhook and os.path.exists("tunnel_config.json"):
         try:
