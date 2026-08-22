@@ -190,17 +190,27 @@ def run_cloud_cli():
     print(f"\n{CYAN}[Step 2/2] Launching 40 Cloud Workers for {len(pending_rolls)} Rolls...{RESET}")
     dispatch_to_github_cloud(pending_rolls)
 
-    print(f"{BOLD}Streaming results live from 40 GitHub Cloud Workers into Upazilla files...{RESET}\n")
+    print(f"{BOLD}⏳ Connecting to 40 GitHub Cloud Workers (Booting VMs ~20-30s)...{RESET}")
 
     received_count = 0
     target_count = len(pending_rolls)
     seen_rolls = set(already_scraped_map.keys())
     timeout_start = time.time()
+    boot_announced = False
 
     # Track Upazilla file records
     upazilla_records_map = {}
 
+    spinner_chars = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+    spin_idx = 0
+
     while received_count < target_count:
+        if not boot_announced and received_count == 0:
+            elapsed = int(time.time() - timeout_start)
+            spin_char = spinner_chars[spin_idx % len(spinner_chars)]
+            spin_idx += 1
+            print(f"\r  {CYAN}{spin_char}{RESET} Waiting for cloud workers to start streaming ({elapsed}s)...", end="", flush=True)
+
         if os.path.exists(master_file):
             try:
                 with open(master_file, 'r', encoding='utf-8') as f:
@@ -210,6 +220,10 @@ def run_cloud_cli():
                     for r in records:
                         r_roll = str(r.get("roll_no"))
                         if r_roll in pending_rolls and r_roll not in seen_rolls:
+                            if not boot_announced:
+                                boot_announced = True
+                                print(f"\r{GREEN}⚡ Connected! Receiving live stream from 40 cloud workers:{RESET}\n")
+
                             seen_rolls.add(r_roll)
                             received_count += 1
                             
