@@ -340,12 +340,15 @@ def run_cloud_cli():
         if received_count >= target_count:
             break
 
-        # Auto-finish if all 40 cloud workers completed
-        if len(completed_chunks) >= 40:
+        chunk_size = (target_count + 40 - 1) // 40
+        total_active_chunks = (target_count + chunk_size - 1) // chunk_size if chunk_size > 0 else 1
+
+        # Finish if all active non-empty chunks have reported completion
+        if len(completed_chunks) >= total_active_chunks and received_count >= (target_count * 0.95):
             break
 
-        # Auto-finish if idle for 12s after receiving data (all workers concluded)
-        if received_count > 0 and (time.time() - last_recv_time) > 12:
+        # If idle for 45s after initial streaming started, conclude
+        if received_count > 0 and (time.time() - last_recv_time) > 45:
             break
 
         time.sleep(0.5)
