@@ -49,29 +49,6 @@ def parse_student_html(html_text: str, roll: str) -> Optional[Dict[str, Any]]:
     if mark_m:
         marks_val = mark_m.group(1).strip()
 
-    # Subject Grades
-    subject_grades = []
-    for m in re.finditer(
-        r'<td class="l">([^<]+)</td>\s*<td class="c"><span class="grade-mark">'
-        r'<span class="grade-letter">([^<]+)</span>\s*<span class="grade-mod">([^<]*)</span>',
-        html_text, re.IGNORECASE
-    ):
-        subj_name = html.unescape(m.group(1).strip())
-        grade_str = m.group(2).strip() + m.group(3).strip()
-        subject_grades.append({
-            "subject_name": subj_name,
-            "grade": grade_str
-        })
-
-    # Fallback subject grades if different table layout
-    if not subject_grades:
-        for tr_m in re.finditer(r'<tr>\s*<td>(\d{3})</td>\s*<td>([^<]+)</td>\s*<td>([^<]+)</td>', html_text, re.IGNORECASE):
-            subject_grades.append({
-                "sub_code": tr_m.group(1).strip(),
-                "subject_name": html.unescape(tr_m.group(2).strip()),
-                "grade": tr_m.group(3).strip()
-            })
-
     return {
         "success": True,
         "status_code": 200,
@@ -84,7 +61,6 @@ def parse_student_html(html_text: str, roll: str) -> Optional[Dict[str, Any]]:
         "group": group,
         "result": result_val,
         "total_marks": marks_val,
-        "subject_grades": subject_grades,
         "scraped_at": time.strftime("%Y-%m-%d %H:%M:%S")
     }
 
