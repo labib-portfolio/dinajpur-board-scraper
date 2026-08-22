@@ -368,36 +368,53 @@ def run_scraper_cli():
                 json.dump(upz_data, out_f, indent=2, ensure_ascii=False)
             os.replace(temp_upz_file, upz_file)
 
-        # Run Concurrent Thread Pool
-        max_workers = min(15, len(pending_rolls)) if len(pending_rolls) > 0 else 1
-        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-            future_to_roll = {
-                executor.submit(fetch_worker, roll, idx): roll
-                for idx, roll in enumerate(pending_rolls)
-            }
+        # Step 2: High-Speed Concurrent Scrape with Automatic Multi-Pass Recovery Sweep
+        current_rolls_to_scrape = pending_rolls
+        max_recovery_passes = 3
 
-            for future in concurrent.futures.as_completed(future_to_roll):
-                roll = future_to_roll[future]
-                res = future.result()
-                
-                if res and res.get("success"):
-                    received_count += 1
-                    seen_rolls.add(roll)
-                    save_record_to_upazilla(res)
+        for pass_num in range(1, max_recovery_passes + 1):
+            if not current_rolls_to_scrape:
+                break
 
-                    s_name = res.get("student_name", "STUDENT")
-                    gpa_res = res.get("result", "N/A")
-                    is_pass = "GPA" in str(gpa_res)
-                    status_color = GREEN if is_pass else RED
-                    status_label = "PASSED" if is_pass else "FAILED"
-                    p_bar = format_progress_bar(received_count, target_count, width=20)
+            if pass_num > 1:
+                print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(current_rolls_to_scrape)} unretrieved roll(s) with fresh proxies...{RESET}")
+                # Refresh proxy pool for fresh nodes
+                proxies = proxy_pool.load_and_verify(max_valid=20)
+                time.sleep(1.0)
 
-                    print(f"{CYAN}{p_bar}{RESET} {received_count:4d}/{target_count}  Roll {roll:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
-                else:
-                    print(f"{RED}[!] Roll {roll} could not be retrieved after retries.{RESET}")
+            max_workers = min(15, len(current_rolls_to_scrape)) if len(current_rolls_to_scrape) > 0 else 1
+            with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+                future_to_roll = {
+                    executor.submit(fetch_worker, roll, idx): roll
+                    for idx, roll in enumerate(current_rolls_to_scrape)
+                }
+
+                for future in concurrent.futures.as_completed(future_to_roll):
+                    roll = future_to_roll[future]
+                    res = future.result()
+                    
+                    if res and res.get("success"):
+                        received_count += 1
+                        seen_rolls.add(roll)
+                        save_record_to_upazilla(res)
+
+                        s_name = res.get("student_name", "STUDENT")
+                        gpa_res = res.get("result", "N/A")
+                        is_pass = "GPA" in str(gpa_res)
+                        status_color = GREEN if is_pass else RED
+                        status_label = "PASSED" if is_pass else "FAILED"
+                        p_bar = format_progress_bar(received_count, target_count, width=20)
+
+                        print(f"{CYAN}{p_bar}{RESET} {received_count:4d}/{target_count}  Roll {roll:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+
+            # Check if any rolls are still missing for the next pass
+            current_rolls_to_scrape = [r for r in pending_rolls if r not in seen_rolls]
 
         elapsed = round(time.time() - start_time, 2)
-        print(f"\n{GREEN}{BOLD}🎉 Finished Batch! All {received_count}/{target_count} student results saved across Upazilla files in {elapsed}s!{RESET}")
+        if len(current_rolls_to_scrape) == 0:
+            print(f"\n{GREEN}{BOLD}🎉 Finished Batch! All {received_count}/{target_count} (100%) student results saved across Upazilla files in {elapsed}s!{RESET}")
+        else:
+            print(f"\n{YELLOW}{BOLD}⚠️ Finished Batch! {received_count}/{target_count} student results saved ({len(current_rolls_to_scrape)} unretrieved) in {elapsed}s!{RESET}")
         print(f"{CYAN}───────────────────────────────────────────────────────────{RESET}\n")
 
 if __name__ == "__main__":
