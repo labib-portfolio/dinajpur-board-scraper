@@ -260,15 +260,80 @@ def run_scraper_cli():
         cache_dir = os.path.join(BASE_DIR, "cache", "institutions")
         os.makedirs(cache_dir, exist_ok=True)
 
+        upazilla_memory = {}
+        dirty_upazillas = set()
+        last_flush_time = [time.time()]
+
+        def get_upazilla_data(upz_slug: str, upz_name: str, district_name: str, upz_file: str):
+            if upz_slug not in upazilla_memory:
+                upz_data = {
+                    "upazila": upz_name,
+                    "district": district_name,
+                    "summary": {"total_records": 0, "total_passed": 0, "total_failed": 0, "institutions_count": 0, "last_updated": ""},
+                    "records": []
+                }
+                if os.path.exists(upz_file):
+                    try:
+                        with open(upz_file, 'r', encoding='utf-8') as uf:
+                            upz_data = json.load(uf)
+                    except Exception:
+                        pass
+                existing_map = {str(item.get("roll_no")): item for item in upz_data.get("records", [])}
+                upazilla_memory[upz_slug] = {
+                    "data": upz_data,
+                    "roll_map": existing_map,
+                    "file_path": upz_file,
+                    "upz_name": upz_name,
+                    "district_name": district_name
+                }
+            return upazilla_memory[upz_slug]
+
+        def flush_dirty_upazillas(force=False):
+            now = time.time()
+            if not force and (now - last_flush_time[0] < 1.5 or not dirty_upazillas):
+                return
+            last_flush_time[0] = now
+            with file_lock:
+                to_flush = list(dirty_upazillas)
+                dirty_upazillas.clear()
+            for upz_slug in to_flush:
+                entry = upazilla_memory.get(upz_slug)
+                if not entry:
+                    continue
+                upz_data = entry["data"]
+                roll_map = entry["roll_map"]
+                upz_file = entry["file_path"]
+                all_upz_records = list(roll_map.values())
+                for i, rec in enumerate(all_upz_records, 1):
+                    rec["index"] = i
+                passed_count = sum(1 for item in all_upz_records if "GPA" in str(item.get("result", "")))
+                unique_eiins = sorted(list({int(item.get("eiin")) for item in all_upz_records if item.get("eiin")}))
+                upz_data["summary"] = {
+                    "total_records": len(all_upz_records),
+                    "total_passed": passed_count,
+                    "total_failed": len(all_upz_records) - passed_count,
+                    "institutions_count": len(unique_eiins),
+                    "scraped_eiins": unique_eiins,
+                    "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
+                }
+                upz_data["records"] = all_upz_records
+                temp_upz_file = upz_file + ".tmp"
+                try:
+                    with open(temp_upz_file, 'w', encoding='utf-8') as out_f:
+                        json.dump(upz_data, out_f, indent=2, ensure_ascii=False)
+                    os.replace(temp_upz_file, upz_file)
+                except Exception:
+                    pass
+
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-            # 1. Rotate through up to 8 persistent proxy sessions with 3.0s timeout
+            # 1. Rotate through up to 4 persistent proxy sessions with 1.8s timeout
             if proxy_sessions:
                 num_sessions = len(proxy_sessions)
-                for offset in range(min(8, num_sessions)):
+                for offset in range(min(4, num_sessions)):
                     sess = proxy_sessions[(worker_idx * 3 + offset) % num_sessions]
                     try:
                         url = ENDPOINT.format(roll=roll_str)
-                        r = sess.get(url, timeout=3.0)
+                        r = sess.get(url, timeout=1.8)
                         if r.status_code == 200:
                             parsed = parse_student_html(r.text, roll_str)
                             if parsed:
@@ -276,10 +341,10 @@ def run_scraper_cli():
                     except Exception:
                         pass
 
-            # 2. Fast direct attempt fallback
+            # 2. Fast direct attempt fallback with 2.0s timeout
             try:
                 url = ENDPOINT.format(roll=roll_str)
-                r = direct_session.get(url, timeout=3.0)
+                r = direct_session.get(url, timeout=2.0)
                 if r.status_code == 200:
                     parsed = parse_student_html(r.text, roll_str)
                     if parsed:
@@ -299,49 +364,17 @@ def run_scraper_cli():
             upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upz_name.strip().lower()).strip('_')
             upz_file = os.path.join(district_folder, f"results_upazilla_{upz_slug}.json")
 
-            upz_data = {
-                "upazila": upz_name,
-                "district": district_name,
-                "summary": {"total_records": 0, "total_passed": 0, "total_failed": 0, "institutions_count": 0, "last_updated": ""},
-                "records": []
-            }
-            if os.path.exists(upz_file):
-                try:
-                    with open(upz_file, 'r', encoding='utf-8') as uf:
-                        upz_data = json.load(uf)
-                except Exception:
-                    pass
-
-            existing_roll_map = {str(item.get("roll_no")): item for item in upz_data.get("records", [])}
-
             r["upazila"] = upz_name
             r["district"] = district_name
             if meta.get("eiin"): r["eiin"] = meta.get("eiin")
             if meta.get("institute"): r["institute"] = meta.get("institute")
 
-            existing_roll_map[r_roll] = r
+            with file_lock:
+                entry = get_upazilla_data(upz_slug, upz_name, district_name, upz_file)
+                entry["roll_map"][r_roll] = r
+                dirty_upazillas.add(upz_slug)
 
-            all_upz_records = list(existing_roll_map.values())
-            for i, rec in enumerate(all_upz_records, 1):
-                rec["index"] = i
-
-            passed_count = sum(1 for item in all_upz_records if "GPA" in str(item.get("result", "")))
-            unique_eiins = sorted(list({int(item.get("eiin")) for item in all_upz_records if item.get("eiin")}))
-
-            upz_data["summary"] = {
-                "total_records": len(all_upz_records),
-                "total_passed": passed_count,
-                "total_failed": len(all_upz_records) - passed_count,
-                "institutions_count": len(unique_eiins),
-                "scraped_eiins": unique_eiins,
-                "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
-            }
-            upz_data["records"] = all_upz_records
-
-            temp_upz_file = upz_file + ".tmp"
-            with open(temp_upz_file, 'w', encoding='utf-8') as out_f:
-                json.dump(upz_data, out_f, indent=2, ensure_ascii=False)
-            os.replace(temp_upz_file, upz_file)
+            flush_dirty_upazillas()
 
         def harvest_producer():
             nonlocal total_appeared_count, already_scraped_count
@@ -488,6 +521,8 @@ def run_scraper_cli():
             stop_event.set()
             print(f"\n\n{YELLOW}{BOLD}[!] Pipeline stopped by user (Ctrl+C). All {batch_received_count} scraped records are safely preserved!{RESET}")
 
+        flush_dirty_upazillas(force=True)
+
         # Auto-Recovery Passes on Missing Rolls (guaranteed 100% completion)
         if not stop_event.is_set():
             unretrieved = [r for r in pending_rolls if r not in seen_rolls]
@@ -522,7 +557,10 @@ def run_scraper_cli():
                             p_bar = format_progress_bar(batch_received_count, len(pending_rolls), width=18)
                             print(f"{CYAN}{p_bar}{RESET} {batch_received_count:4d}/{len(pending_rolls)}  Roll {roll:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
 
+                flush_dirty_upazillas(force=True)
                 unretrieved = [r for r in pending_rolls if r not in seen_rolls]
+
+        flush_dirty_upazillas(force=True)
 
         total_elapsed = time.time() - batch_start_time
         mins, secs = divmod(total_elapsed, 60)
