@@ -20,7 +20,12 @@ from engine.scraper_engine import AutoFormScraper
 
 def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file: str, delay: float = 3.2, webhook_url: Optional[str] = None):
     with open(rolls_file, 'r', encoding='utf-8') as f:
-        rolls = json.load(f)
+        rolls_data = json.load(f)
+
+    if isinstance(rolls_data, dict):
+        rolls = rolls_data.get("rolls", [])
+    else:
+        rolls = rolls_data
 
     # Standardize list
     roll_list = []

@@ -75,8 +75,14 @@ def dispatch_to_github_cloud(rolls: List[str], eiins: List[str]) -> bool:
     """Partitions rolls across Repo 1 and Repo 2 and triggers GitHub Actions."""
     try:
         rolls_file = os.path.join(BASE_DIR, "rolls.json")
+        payload = {
+            "dispatched_at": time.time(),
+            "eiins": eiins,
+            "total_rolls": len(rolls),
+            "rolls": rolls
+        }
         with open(rolls_file, 'w', encoding='utf-8') as f:
-            json.dump(rolls, f, indent=2)
+            json.dump(payload, f, indent=2)
 
         print(f"{CYAN}[🚀 Cloud Dispatch] Launching 40 Parallel Cloud Workers on GitHub Actions...{RESET}")
         
