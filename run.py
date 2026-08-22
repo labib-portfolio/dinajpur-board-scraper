@@ -162,7 +162,7 @@ def run_scraper_cli():
     proxy_pool = FastProxyPool()
     print(f"{DIM}Checking dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
     proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
-    num_workers = min(50, len(proxies)) if len(proxies) > 0 else 20
+    num_workers = min(35, max(15, len(proxies) - 20)) if len(proxies) > 0 else 20
     spare_proxies = max(0, len(proxies) - num_workers)
     print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} ultra-fast nodes ready! ({num_workers} Parallel Workers + {spare_proxies} Standby Spares){RESET}\n")
 
@@ -204,7 +204,7 @@ def run_scraper_cli():
         if len(proxies) < 30:
             print(f"{DIM}Refreshing proxy pool...{RESET}", end="", flush=True)
             proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
-            num_workers = min(50, len(proxies)) if len(proxies) > 0 else 20
+            num_workers = min(35, max(15, len(proxies) - 20)) if len(proxies) > 0 else 20
             spare_proxies = max(0, len(proxies) - num_workers)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
@@ -500,8 +500,8 @@ def run_scraper_cli():
 
                 rolls_queue.task_done()
 
-        # Launch Producer and Consumer threads concurrently (50 parallel workers)
-        num_workers = min(50, len(proxies)) if len(proxies) > 0 else 20
+        # Launch Producer and Consumer threads concurrently (35 parallel workers with 33+ standby spares)
+        num_workers = min(35, max(15, len(proxies) - 20)) if len(proxies) > 0 else 20
         producer_thread = threading.Thread(target=harvest_producer, daemon=True)
         consumer_threads = [
             threading.Thread(target=student_consumer, args=(i,), daemon=True)

@@ -15,8 +15,12 @@ PROXY_SOURCES = [
     "https://www.proxy-list.download/api/v1/get?type=http",
     "https://www.proxy-list.download/api/v1/get?type=https",
     "https://api.openproxylist.xyz/http.txt",
+    "https://proxyspace.pro/http.txt",
+    "https://proxyspace.pro/https.txt",
+    "https://raw.githubusercontent.com/Anonym0usWork1221/Free-Proxies/master/proxy_files/http_proxies.txt",
+    "https://raw.githubusercontent.com/Anonym0usWork1221/Free-Proxies/master/proxy_files/https_proxies.txt",
     
-    # Active GitHub Repositories (HTTP / HTTPS)
+    # Active GitHub Repositories (HTTP / HTTPS / SOCKS)
     "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt",
     "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/http.txt",
     "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/https.txt",
@@ -37,8 +41,6 @@ PROXY_SOURCES = [
     "https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/master/https.txt",
     "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt",
     "https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/https.txt",
-    "https://raw.githubusercontent.com/Anonym0usWork1221/Free-Proxies/master/proxy_files/http_proxies.txt",
-    "https://raw.githubusercontent.com/Anonym0usWork1221/Free-Proxies/master/proxy_files/https_proxies.txt",
     "https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/http/http.txt",
     "https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/https/https.txt",
     "https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt",
@@ -71,7 +73,14 @@ PROXY_SOURCES = [
     "https://raw.githubusercontent.com/proxy4parsing/proxy-list/main/http.txt",
     "https://raw.githubusercontent.com/almroot/proxylist/master/list.txt",
     "https://raw.githubusercontent.com/mmpx12/proxy-list/master/http.txt",
-    "https://raw.githubusercontent.com/mmpx12/proxy-list/master/https.txt"
+    "https://raw.githubusercontent.com/mmpx12/proxy-list/master/https.txt",
+    "https://raw.githubusercontent.com/im-notify/free-proxy-list/main/proxies/http.txt",
+    "https://raw.githubusercontent.com/im-notify/free-proxy-list/main/proxies/https.txt",
+    "https://raw.githubusercontent.com/yuc0/free-proxy-list/main/http.txt",
+    "https://raw.githubusercontent.com/yuc0/free-proxy-list/main/https.txt",
+    "https://raw.githubusercontent.com/hendrikbgr/Free-Proxy-Repo/master/proxy_list.txt",
+    "https://raw.githubusercontent.com/hanwaytech/free-proxy-list/main/http.txt",
+    "https://raw.githubusercontent.com/hanwaytech/free-proxy-list/main/https.txt"
 ]
 
 TARGET_ENDPOINT = (
