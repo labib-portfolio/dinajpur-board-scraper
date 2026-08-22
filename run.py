@@ -203,6 +203,9 @@ def run_scraper_cli():
             proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
+        num_workers = min(50, len(proxies)) if len(proxies) > 0 else 20
+        spare_proxies = max(0, len(proxies) - num_workers)
+
         # Build persistent Keep-Alive session pool (1 session per proxy node)
         proxy_sessions = []
         for p in proxies:
@@ -215,8 +218,14 @@ def run_scraper_cli():
             })
             proxy_sessions.append(s)
 
-        print(f"\n{CYAN}🚀 Launching Pipelined Stream Engine for {len(eiins)} Institution(s)...{RESET}")
-        print(f"{DIM}Institutions and Student Results scrape simultaneously in real time!{RESET}\n")
+        print(f"=======================================================")
+        print(f"🚀 {BOLD}ENGINE PIPELINE CONFIGURATION:{RESET}")
+        print(f"  • Active Proxy Pool:       {GREEN}{BOLD}{len(proxies)} Verified Nodes{RESET}")
+        print(f"  • Concurrent Workers:      {CYAN}{BOLD}{num_workers} Parallel Threads{RESET}")
+        print(f"  • Standby Failover Spares: {YELLOW}{BOLD}{spare_proxies} Spare Proxies{RESET}")
+        print(f"  • Connection Mode:         {GREEN}Persistent Keep-Alive Session Pool{RESET}")
+        print(f"  • Target Institutions:     {len(eiins)} Schools")
+        print(f"=======================================================\n")
 
         rolls_queue = queue.Queue()
         pending_rolls = []
