@@ -182,8 +182,8 @@ def main():
         print(f"\n{CYAN}{BOLD}⚡ 100 GITHUB ACTIONS CLOUD VMs ARE NOW RUNNING IN PARALLEL!{RESET}")
         print(f"[*] Cloud workers are scraping at ~80-100 rolls/sec...")
 
-        # 3. Live Event-Driven Remote Poller (Waits until cloud workflows actually finish & push!)
-        print(f"\n[*] Waiting for all 5 cloud repositories to complete scraping...")
+        # 3. Live Event-Driven Remote Poller (15s quiet interval, prints only on node completion)
+        print(f"\n[*] Waiting for all 5 cloud repositories to complete scraping (checking every 15s)...")
         start_wait = time.time()
         
         res = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True)
@@ -191,27 +191,28 @@ def main():
         node_status = {name: False for name, _ in REPOS}
 
         while not all(node_status.values()):
+            time.sleep(15)
             elapsed_wait = int(time.time() - start_wait)
+            mins, secs = divmod(elapsed_wait, 60)
+            time_tag = f"{int(mins)}m {secs:02d}s" if mins > 0 else f"{secs}s"
 
-            for remote_name, _ in REPOS:
+            for remote_name, repo_path in REPOS:
                 if not node_status[remote_name]:
                     try:
-                        ls_res = subprocess.run(["git", "ls-remote", remote_name, "refs/heads/main"], capture_output=True, text=True, timeout=8)
+                        ls_res = subprocess.run(["git", "ls-remote", remote_name, "refs/heads/main"], capture_output=True, text=True, timeout=10)
                         remote_hash = ls_res.stdout.split()[0] if ls_res.stdout else ""
                         if remote_hash and remote_hash != pushed_hash:
                             node_status[remote_name] = True
+                            display_name = "NODE 1 (ORIGIN)" if remote_name == "origin" else remote_name.upper()
+                            print(f"  • [{time_tag}] {display_name:<16} {GREEN}✓ 20 Cloud VMs Finished & Pushed Results!{RESET}")
                     except Exception:
                         pass
 
-            status_str = " | ".join([f"{name.upper()}: {GREEN}✓ DONE{RESET}" if done else f"{name.upper()}: {YELLOW}⏳ Running{RESET}" for name, done in node_status.items()])
-            print(f"\r  [{elapsed_wait}s] {status_str}   ", end="", flush=True)
-
-            if all(node_status.values()) or elapsed_wait >= 600:
+            if elapsed_wait >= 600:
+                print(f"  {YELLOW}[!] Reached maximum wait time (10m). Proceeding with completed nodes...{RESET}")
                 break
 
-            time.sleep(6)
-
-        print("\n\n[✓] Cloud scraping workflows finished! Pulling results from all 5 repositories...")
+        print(f"\n{GREEN}{BOLD}[✓] All active cloud repositories finished! Pulling results into local storage...{RESET}")
 
         # 4. Auto-pull latest updates from all 5 cloud repositories
         for remote_name, _ in REPOS:
