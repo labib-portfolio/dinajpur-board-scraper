@@ -208,20 +208,43 @@ def run_scraper_cli():
             spare_proxies = max(0, len(proxies) - num_workers)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
-        # Build persistent Keep-Alive session pool across all verified proxy nodes
-        proxy_sessions = []
-        for p in proxies:
+        # Build persistent Keep-Alive session pool with Auto-Recycle (Zero Stale Sockets)
+        def create_proxy_session(ip_str: str) -> requests.Session:
             s = requests.Session()
-            adapter = HTTPAdapter(pool_connections=50, pool_maxsize=50)
+            adapter = HTTPAdapter(pool_connections=20, pool_maxsize=20)
             s.mount("http://", adapter)
             s.mount("https://", adapter)
-            s.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
+            s.proxies.update({"http": f"http://{ip_str}", "https": f"http://{ip_str}"})
             s.headers.update({
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 "Connection": "keep-alive"
             })
-            proxy_sessions.append(s)
+            return s
+
+        proxy_session_wrappers = []
+        for p in proxies:
+            proxy_session_wrappers.append({
+                "ip": p,
+                "session": create_proxy_session(p),
+                "uses": 0
+            })
+
+        wrapper_lock = threading.Lock()
+
+        def get_proxy_session(idx: int) -> requests.Session:
+            with wrapper_lock:
+                item = proxy_session_wrappers[idx % len(proxy_session_wrappers)]
+                item["uses"] += 1
+                # Auto-recycle TCP socket every 25 requests to maintain maximum peak throughput indefinitely
+                if item["uses"] >= 25:
+                    try:
+                        item["session"].close()
+                    except Exception:
+                        pass
+                    item["session"] = create_proxy_session(item["ip"])
+                    item["uses"] = 0
+                return item["session"]
 
         direct_session = requests.Session()
         direct_adapter = HTTPAdapter(pool_connections=50, pool_maxsize=50)
@@ -236,9 +259,9 @@ def run_scraper_cli():
         print(f"\n=======================================================")
         print(f"🚀 {BOLD}ENGINE PIPELINE CONFIGURATION:{RESET}")
         print(f"  • Active Proxy Pool:       {GREEN}{BOLD}{len(proxies)} Verified Ultra-Fast Nodes{RESET}")
+        print(f"  • Auto-Recycle Mode:       {GREEN}{BOLD}Rolling TCP Socket Refresh (Every 25 reqs/node){RESET}")
         print(f"  • Concurrent Workers:      {CYAN}{BOLD}{num_workers} Parallel Threads{RESET}")
         print(f"  • Standby Failover Spares: {YELLOW}{BOLD}{spare_proxies} Spare Proxies{RESET}")
-        print(f"  • Connection Mode:         {GREEN}Persistent Keep-Alive Session Pool (1.2s Failover){RESET}")
         print(f"  • Target Institutions:     {len(eiins)} Schools")
         print(f"=======================================================\n")
 
@@ -326,11 +349,11 @@ def run_scraper_cli():
                     pass
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-            # 1. Rotate through up to 5 verified proxy sessions with 2.0s reliable timeout
-            if proxy_sessions:
-                num_sessions = len(proxy_sessions)
+            # 1. Rotate through up to 5 auto-recycled proxy sessions with 2.0s reliable timeout
+            if proxy_session_wrappers:
+                num_sessions = len(proxy_session_wrappers)
                 for offset in range(min(5, num_sessions)):
-                    sess = proxy_sessions[(worker_idx * 5 + offset) % num_sessions]
+                    sess = get_proxy_session(worker_idx * 5 + offset)
                     try:
                         url = ENDPOINT.format(roll=roll_str)
                         r = sess.get(url, timeout=2.0)
