@@ -210,6 +210,7 @@ def run_cloud_cli():
     if os.path.exists(jsonl_stream_file):
         read_pos = os.path.getsize(jsonl_stream_file)
 
+    last_recv_time = time.time()
     while received_count < target_count:
         if not boot_announced and received_count == 0:
             elapsed = int(time.time() - timeout_start)
@@ -300,15 +301,23 @@ def run_cloud_cli():
                         with open(temp_upz_file, 'w', encoding='utf-8') as out_f:
                             json.dump(upz_data, out_f, indent=2, ensure_ascii=False)
                         os.replace(temp_upz_file, upz_file)
+                        last_recv_time = time.time()
             except Exception:
                 pass
 
+        if received_count >= target_count:
+            break
+
+        # Auto-finish if all streaming workers have concluded and idle for 20s
+        if received_count > 0 and (time.time() - last_recv_time) > 25:
+            break
+
         time.sleep(0.5)
-        # Timeout safety (e.g. 30 mins)
+        # Global timeout safety
         if time.time() - timeout_start > 1800:
             break
 
-    print(f"\n{GREEN}{BOLD}🎉 Finished Massive Batch! All {received_count} student results saved across Upazilla files!{RESET}\n")
+    print(f"\n{GREEN}{BOLD}🎉 Finished Batch! All {received_count}/{target_count} student results saved across Upazilla files!{RESET}\n")
 
 
 if __name__ == "__main__":
