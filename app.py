@@ -138,30 +138,48 @@ def execute_batch_scrape_stream(payload: BatchScrapeRequest):
     return StreamingResponse(event_stream(), media_type="text/event-stream")
 
 
+import threading
+
+file_write_lock = threading.Lock()
+JSONL_STREAM_FILE = os.path.join(BASE_DIR, "stream_records.jsonl")
+
 @app.post("/api/webhook/stream-record")
 def receive_stream_record(record: dict):
     """Webhook receiver for live distributed runners to stream records in real time."""
-    output_path = "scraped_results_all.json"
+    output_path = os.path.join(BASE_DIR, "scraped_results_all.json")
     try:
-        data = {"summary": {"total_rolls_in_file": 3112, "scraped_so_far": 0, "total_success": 0, "total_failed": 0}, "records": []}
-        if os.path.exists(output_path):
-            with open(output_path, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-        
-        roll = record.get("roll_no")
-        existing_rolls = {r.get("roll_no") for r in data.get("records", [])}
-        if roll not in existing_rolls:
-            record["index"] = len(data.get("records", [])) + 1
-            data["records"].append(record)
-            succ = sum(1 for r in data["records"] if r.get("success"))
-            data["summary"]["scraped_so_far"] = len(data["records"])
-            data["summary"]["total_success"] = succ
-            data["summary"]["total_failed"] = len(data["records"]) - succ
-            data["summary"]["last_updated"] = time.strftime("%Y-%m-%d %H:%M:%S")
+        # 1. Atomic append to JSONL journal for instant reading
+        line = json.dumps(record, ensure_ascii=False)
+        with open(JSONL_STREAM_FILE, "a", encoding="utf-8") as jf:
+            jf.write(line + "\n")
+
+        # 2. Thread-safe update of scraped_results_all.json
+        with file_write_lock:
+            data = {"summary": {"total_rolls_in_file": 3223, "scraped_so_far": 0, "total_success": 0, "total_failed": 0}, "records": []}
+            if os.path.exists(output_path):
+                try:
+                    with open(output_path, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                except Exception:
+                    pass
             
-            with open(output_path, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=2, ensure_ascii=False)
+            roll = str(record.get("roll_no"))
+            existing_rolls = {str(r.get("roll_no")) for r in data.get("records", [])}
+            if roll and roll not in existing_rolls:
+                record["index"] = len(data.get("records", [])) + 1
+                data["records"].append(record)
+                succ = sum(1 for r in data["records"] if r.get("success"))
+                data["summary"]["scraped_so_far"] = len(data["records"])
+                data["summary"]["total_success"] = succ
+                data["summary"]["total_failed"] = len(data["records"]) - succ
+                data["summary"]["last_updated"] = time.strftime("%Y-%m-%d %H:%M:%S")
                 
+                # Write to temp file and rename atomically
+                temp_path = output_path + ".tmp"
+                with open(temp_path, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, indent=2, ensure_ascii=False)
+                os.replace(temp_path, output_path)
+                    
         return {"status": "ok", "total_records": len(data.get("records", []))}
     except Exception as e:
         return {"status": "error", "message": str(e)}

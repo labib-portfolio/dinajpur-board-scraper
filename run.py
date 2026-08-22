@@ -202,6 +202,11 @@ def run_cloud_cli():
     spinner_chars = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
     spin_idx = 0
 
+    jsonl_stream_file = os.path.join(BASE_DIR, "stream_records.jsonl")
+    read_pos = 0
+    if os.path.exists(jsonl_stream_file):
+        read_pos = os.path.getsize(jsonl_stream_file)
+
     while received_count < target_count:
         if not boot_announced and received_count == 0:
             elapsed = int(time.time() - timeout_start)
@@ -209,71 +214,76 @@ def run_cloud_cli():
             spin_idx += 1
             print(f"\r  {CYAN}{spin_char}{RESET} Waiting for cloud workers to start streaming ({elapsed}s)...", end="", flush=True)
 
-        if os.path.exists(master_file):
+        if os.path.exists(jsonl_stream_file):
             try:
-                with open(master_file, 'r', encoding='utf-8') as f:
-                    m_data = json.load(f)
-                    records = m_data.get("records", [])
-                    
-                    for r in records:
-                        r_roll = str(r.get("roll_no"))
-                        if r_roll in pending_rolls and r_roll not in seen_rolls:
-                            if not boot_announced:
-                                boot_announced = True
-                                print(f"\r{GREEN}⚡ Connected! Receiving live stream from 40 cloud workers:{RESET}\n")
+                with open(jsonl_stream_file, "r", encoding="utf-8") as jf:
+                    jf.seek(read_pos)
+                    lines = jf.readlines()
+                    read_pos = jf.tell()
 
-                            seen_rolls.add(r_roll)
-                            received_count += 1
-                            
-                            s_name = r.get("student_name") or "STUDENT"
-                            gpa_res = r.get("result", "N/A")
-                            is_pass = "GPA" in str(gpa_res)
-                            status_color = GREEN if is_pass else RED
-                            status_label = "PASSED" if is_pass else "FAILED"
-                            p_bar = format_progress_bar(received_count, target_count, width=20)
+                for line in lines:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    r = json.loads(line)
+                    r_roll = str(r.get("roll_no"))
 
-                            print(f"{CYAN}{p_bar}{RESET} {received_count:4d}/{target_count}  Roll {r_roll}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+                    if r_roll in pending_rolls and r_roll not in seen_rolls:
+                        if not boot_announced:
+                            boot_announced = True
+                            print(f"\r{GREEN}⚡ Connected! Receiving live stream from 40 cloud workers:{RESET}\n")
 
-                            # Route record to its respective Upazilla JSON
-                            meta = roll_metadata_map.get(r_roll, {})
-                            upz_name = meta.get("upazila") or r.get("upazilla") or "UNKNOWN_UPAZILLA"
-                            upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upz_name.strip().lower()).strip('_')
-                            upz_file = os.path.join(output_base, f"results_upazilla_{upz_slug}.json")
+                        seen_rolls.add(r_roll)
+                        received_count += 1
+                        
+                        s_name = r.get("student_name") or "STUDENT"
+                        gpa_res = r.get("result", "N/A")
+                        is_pass = "GPA" in str(gpa_res)
+                        status_color = GREEN if is_pass else RED
+                        status_label = "PASSED" if is_pass else "FAILED"
+                        p_bar = format_progress_bar(received_count, target_count, width=20)
 
-                            if upz_slug not in upazilla_records_map:
-                                upazilla_records_map[upz_slug] = []
-                                if os.path.exists(upz_file):
-                                    try:
-                                        with open(upz_file, 'r', encoding='utf-8') as uf:
-                                            upazilla_records_map[upz_slug] = json.load(uf).get("records", [])
-                                    except Exception:
-                                        pass
+                        print(f"{CYAN}{p_bar}{RESET} {received_count:4d}/{target_count}  Roll {r_roll}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
 
-                            r["upazila"] = upz_name
-                            r["district"] = meta.get("district", "NILPHAMARI")
-                            r["eiin"] = meta.get("eiin")
-                            upazilla_records_map[upz_slug].append(r)
+                        # Route record to its respective Upazilla JSON
+                        meta = roll_metadata_map.get(r_roll, {})
+                        upz_name = meta.get("upazila") or r.get("upazilla") or "UNKNOWN_UPAZILLA"
+                        upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upz_name.strip().lower()).strip('_')
+                        upz_file = os.path.join(output_base, f"results_upazilla_{upz_slug}.json")
 
-                            # Save Upazilla file checkpoint
-                            upz_payload = {
-                                "upazila": upz_name,
-                                "district": meta.get("district", "NILPHAMARI"),
-                                "summary": {
-                                    "total_records": len(upazilla_records_map[upz_slug]),
-                                    "total_passed": sum(1 for item in upazilla_records_map[upz_slug] if "GPA" in str(item.get("result", ""))),
-                                    "total_failed": sum(1 for item in upazilla_records_map[upz_slug] if not ("GPA" in str(item.get("result", "")))),
-                                    "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
-                                },
-                                "records": upazilla_records_map[upz_slug]
-                            }
+                        if upz_slug not in upazilla_records_map:
+                            upazilla_records_map[upz_slug] = []
+                            if os.path.exists(upz_file):
+                                try:
+                                    with open(upz_file, 'r', encoding='utf-8') as uf:
+                                        upazilla_records_map[upz_slug] = json.load(uf).get("records", [])
+                                except Exception:
+                                    pass
 
-                            with open(upz_file, 'w', encoding='utf-8') as out_f:
-                                json.dump(upz_payload, out_f, indent=2, ensure_ascii=False)
+                        r["upazila"] = upz_name
+                        r["district"] = meta.get("district", "NILPHAMARI")
+                        r["eiin"] = meta.get("eiin")
+                        upazilla_records_map[upz_slug].append(r)
 
+                        # Save Upazilla file checkpoint
+                        upz_payload = {
+                            "upazila": upz_name,
+                            "district": meta.get("district", "NILPHAMARI"),
+                            "summary": {
+                                "total_records": len(upazilla_records_map[upz_slug]),
+                                "total_passed": sum(1 for item in upazilla_records_map[upz_slug] if "GPA" in str(item.get("result", ""))),
+                                "total_failed": sum(1 for item in upazilla_records_map[upz_slug] if not ("GPA" in str(item.get("result", "")))),
+                                "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
+                            },
+                            "records": upazilla_records_map[upz_slug]
+                        }
+
+                        with open(upz_file, 'w', encoding='utf-8') as out_f:
+                            json.dump(upz_payload, out_f, indent=2, ensure_ascii=False)
             except Exception:
                 pass
 
-        time.sleep(1.0)
+        time.sleep(0.5)
         # Timeout safety (e.g. 30 mins)
         if time.time() - timeout_start > 1800:
             break
