@@ -172,6 +172,24 @@ def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file:
         if delay > 0:
             time.sleep(delay)
 
+    # Signal chunk completion to master CLI
+    if webhook_url:
+        try:
+            requests.post(
+                webhook_url,
+                json={
+                    "event": "chunk_completed",
+                    "chunk_index": chunk_index,
+                    "total_chunks": total_chunks,
+                    "total_in_chunk": len(my_rolls),
+                    "total_success": success_count
+                },
+                headers={"Bypass-Tunnel-Reminder": "true", "User-Agent": "Mozilla/5.0"},
+                timeout=3.0
+            )
+        except Exception:
+            pass
+
     print(f"\n🎉 Node {chunk_index + 1} finished {len(my_rolls)} rolls! Saved to {output_file}")
 
 

@@ -210,6 +210,7 @@ def run_cloud_cli():
     if os.path.exists(jsonl_stream_file):
         read_pos = os.path.getsize(jsonl_stream_file)
 
+    completed_chunks = set()
     last_recv_time = time.time()
     while received_count < target_count:
         if not boot_announced and received_count == 0:
@@ -230,6 +231,12 @@ def run_cloud_cli():
                     if not line:
                         continue
                     r = json.loads(line)
+                    
+                    if r.get("event") == "chunk_completed":
+                        completed_chunks.add(r.get("chunk_index"))
+                        last_recv_time = time.time()
+                        continue
+
                     r_roll = str(r.get("roll_no"))
 
                     if r_roll in pending_rolls and r_roll not in seen_rolls:
@@ -308,8 +315,12 @@ def run_cloud_cli():
         if received_count >= target_count:
             break
 
-        # Auto-finish if all streaming workers have concluded and idle for 20s
-        if received_count > 0 and (time.time() - last_recv_time) > 25:
+        # Auto-finish if all 40 cloud workers completed
+        if len(completed_chunks) >= 40:
+            break
+
+        # Auto-finish if idle for 12s after receiving data (all workers concluded)
+        if received_count > 0 and (time.time() - last_recv_time) > 12:
             break
 
         time.sleep(0.5)
