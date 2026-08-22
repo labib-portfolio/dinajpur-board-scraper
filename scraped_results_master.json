@@ -1,5 +1,10 @@
 {
-  "total_records": 39,
+  "summary": {
+    "total_unique_records": 39,
+    "total_success": 35,
+    "total_failed": 4,
+    "total_chunks_merged": 39
+  },
   "records": [
     {
       "index": 1,
@@ -34,7 +39,7 @@
       "scraped_at": "2026-08-22 16:59:07"
     },
     {
-      "index": 11,
+      "index": 3,
       "roll_no": "183511",
       "success": true,
       "status_code": 200,
@@ -50,7 +55,7 @@
       "scraped_at": "2026-08-22 16:59:44"
     },
     {
-      "index": 12,
+      "index": 4,
       "roll_no": "183512",
       "success": true,
       "status_code": 200,
@@ -66,7 +71,7 @@
       "scraped_at": "2026-08-22 16:58:42"
     },
     {
-      "index": 13,
+      "index": 5,
       "roll_no": "183513",
       "success": true,
       "status_code": 200,
@@ -82,14 +87,14 @@
       "scraped_at": "2026-08-22 16:59:17"
     },
     {
-      "index": 14,
+      "index": 6,
       "roll_no": "183514",
       "success": false,
       "status_code": 404,
       "scraped_at": "2026-08-22 16:59:46"
     },
     {
-      "index": 15,
+      "index": 7,
       "roll_no": "183515",
       "success": true,
       "status_code": 200,
@@ -105,7 +110,7 @@
       "scraped_at": "2026-08-22 16:59:19"
     },
     {
-      "index": 16,
+      "index": 8,
       "roll_no": "183516",
       "success": true,
       "status_code": 200,
@@ -121,7 +126,7 @@
       "scraped_at": "2026-08-22 16:58:54"
     },
     {
-      "index": 17,
+      "index": 9,
       "roll_no": "183517",
       "success": true,
       "status_code": 200,
@@ -137,7 +142,7 @@
       "scraped_at": "2026-08-22 16:58:46"
     },
     {
-      "index": 18,
+      "index": 10,
       "roll_no": "183518",
       "success": true,
       "status_code": 200,
@@ -153,7 +158,7 @@
       "scraped_at": "2026-08-22 16:59:28"
     },
     {
-      "index": 19,
+      "index": 11,
       "roll_no": "183519",
       "success": true,
       "status_code": 200,
@@ -169,14 +174,14 @@
       "scraped_at": "2026-08-22 16:59:29"
     },
     {
-      "index": 20,
+      "index": 12,
       "roll_no": "183521",
       "success": false,
       "status_code": 404,
       "scraped_at": "2026-08-22 16:58:49"
     },
     {
-      "index": 3,
+      "index": 13,
       "roll_no": "820205",
       "success": true,
       "status_code": 200,
@@ -192,7 +197,7 @@
       "scraped_at": "2026-08-22 16:59:37"
     },
     {
-      "index": 21,
+      "index": 14,
       "roll_no": "183522",
       "success": true,
       "status_code": 200,
@@ -205,10 +210,10 @@
       "result": "GPA=3.56",
       "total_marks": "658",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:58:07"
+      "scraped_at": "2026-08-22 17:03:00"
     },
     {
-      "index": 22,
+      "index": 15,
       "roll_no": "183523",
       "success": true,
       "status_code": 200,
@@ -221,10 +226,10 @@
       "result": "GPA=4.33",
       "total_marks": "771",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:58:39"
+      "scraped_at": "2026-08-22 17:03:04"
     },
     {
-      "index": 23,
+      "index": 16,
       "roll_no": "183524",
       "success": true,
       "status_code": 200,
@@ -237,10 +242,10 @@
       "result": "GPA=4.44",
       "total_marks": "828",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:58:35"
+      "scraped_at": "2026-08-22 17:03:28"
     },
     {
-      "index": 24,
+      "index": 17,
       "roll_no": "183525",
       "success": true,
       "status_code": 200,
@@ -253,10 +258,10 @@
       "result": "GPA=4.28",
       "total_marks": "776",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:58:41"
+      "scraped_at": "2026-08-22 17:03:15"
     },
     {
-      "index": 25,
+      "index": 18,
       "roll_no": "183526",
       "success": true,
       "status_code": 200,
@@ -269,10 +274,10 @@
       "result": "GPA=3.83",
       "total_marks": "708",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:59:02"
+      "scraped_at": "2026-08-22 17:02:24"
     },
     {
-      "index": 26,
+      "index": 19,
       "roll_no": "183527",
       "success": true,
       "status_code": 200,
@@ -285,17 +290,26 @@
       "result": "GPA=3.94",
       "total_marks": "724",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:58:10"
+      "scraped_at": "2026-08-22 17:03:24"
     },
     {
-      "index": 27,
+      "index": 20,
       "roll_no": "183528",
-      "success": false,
-      "status_code": 404,
-      "scraped_at": "2026-08-22 16:59:33"
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD MARUF ISLAM",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.17",
+      "total_marks": "733",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 17:02:25"
     },
     {
-      "index": 28,
+      "index": 21,
       "roll_no": "183529",
       "success": true,
       "status_code": 200,
@@ -308,10 +322,10 @@
       "result": "GPA=4.17",
       "total_marks": "737",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:59:01"
+      "scraped_at": "2026-08-22 17:03:37"
     },
     {
-      "index": 29,
+      "index": 22,
       "roll_no": "183530",
       "success": true,
       "status_code": 200,
@@ -324,10 +338,10 @@
       "result": "GPA=4.28",
       "total_marks": "794",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:58:13"
+      "scraped_at": "2026-08-22 17:03:29"
     },
     {
-      "index": 30,
+      "index": 23,
       "roll_no": "183531",
       "success": true,
       "status_code": 200,
@@ -340,17 +354,17 @@
       "result": "GPA=4.17",
       "total_marks": "725",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:58:48"
+      "scraped_at": "2026-08-22 17:03:32"
     },
     {
-      "index": 4,
+      "index": 24,
       "roll_no": "183504",
       "success": false,
       "status_code": 404,
       "scraped_at": "2026-08-22 16:58:57"
     },
     {
-      "index": 31,
+      "index": 25,
       "roll_no": "183532",
       "success": true,
       "status_code": 200,
@@ -363,31 +377,58 @@
       "result": "GPA=4.50",
       "total_marks": "792",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:58:40"
+      "scraped_at": "2026-08-22 17:02:19"
     },
     {
-      "index": 32,
+      "index": 26,
       "roll_no": "183533",
-      "success": false,
-      "status_code": 404,
-      "scraped_at": "2026-08-22 16:59:30"
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD ZIHANUR RAHMAN ZIHAN",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.72",
+      "total_marks": "868",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 17:03:27"
     },
     {
-      "index": 33,
+      "index": 27,
       "roll_no": "183534",
-      "success": false,
-      "status_code": 404,
-      "scraped_at": "2026-08-22 16:59:12"
+      "success": true,
+      "status_code": 200,
+      "student_name": "SHAH MD SHADMAN SHAIF",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=5.00",
+      "total_marks": "926",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 17:02:13"
     },
     {
-      "index": 34,
+      "index": 28,
       "roll_no": "183535",
-      "success": false,
-      "status_code": 404,
-      "scraped_at": "2026-08-22 16:59:14"
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD FAYIM ISLAM",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=3.61",
+      "total_marks": "651",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 17:02:56"
     },
     {
-      "index": 35,
+      "index": 29,
       "roll_no": "183536",
       "success": true,
       "status_code": 200,
@@ -400,10 +441,10 @@
       "result": "GPA=4.44",
       "total_marks": "800",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:58:45"
+      "scraped_at": "2026-08-22 17:03:24"
     },
     {
-      "index": 36,
+      "index": 30,
       "roll_no": "183537",
       "success": true,
       "status_code": 200,
@@ -416,10 +457,10 @@
       "result": "GPA=4.56",
       "total_marks": "823",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:58:52"
+      "scraped_at": "2026-08-22 17:03:31"
     },
     {
-      "index": 37,
+      "index": 31,
       "roll_no": "760048",
       "success": true,
       "status_code": 200,
@@ -432,10 +473,10 @@
       "result": "GPA=4.06",
       "total_marks": "786",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:59:22"
+      "scraped_at": "2026-08-22 17:03:40"
     },
     {
-      "index": 38,
+      "index": 32,
       "roll_no": "183520",
       "success": true,
       "status_code": 200,
@@ -448,10 +489,10 @@
       "result": "FAILED(F1)",
       "total_marks": "FAILED",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:59:18"
+      "scraped_at": "2026-08-22 17:03:17"
     },
     {
-      "index": 39,
+      "index": 33,
       "roll_no": "760047",
       "success": true,
       "status_code": 200,
@@ -464,10 +505,10 @@
       "result": "FAILED(F3)",
       "total_marks": "FAILED",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:59:11"
+      "scraped_at": "2026-08-22 17:02:58"
     },
     {
-      "index": 5,
+      "index": 34,
       "roll_no": "183505",
       "success": true,
       "status_code": 200,
@@ -483,7 +524,7 @@
       "scraped_at": "2026-08-22 16:59:44"
     },
     {
-      "index": 6,
+      "index": 35,
       "roll_no": "183506",
       "success": true,
       "status_code": 200,
@@ -499,7 +540,7 @@
       "scraped_at": "2026-08-22 16:59:40"
     },
     {
-      "index": 7,
+      "index": 36,
       "roll_no": "183507",
       "success": true,
       "status_code": 200,
@@ -515,7 +556,7 @@
       "scraped_at": "2026-08-22 16:59:26"
     },
     {
-      "index": 8,
+      "index": 37,
       "roll_no": "183508",
       "success": true,
       "status_code": 200,
@@ -531,14 +572,14 @@
       "scraped_at": "2026-08-22 16:59:49"
     },
     {
-      "index": 9,
+      "index": 38,
       "roll_no": "183509",
       "success": false,
       "status_code": 404,
       "scraped_at": "2026-08-22 16:58:08"
     },
     {
-      "index": 10,
+      "index": 39,
       "roll_no": "183510",
       "success": true,
       "status_code": 200,
