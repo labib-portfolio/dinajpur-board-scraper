@@ -72,11 +72,13 @@ class InstituteResultFetcher:
             if resp.status_code == 429:
                 retry_after = int(resp.headers.get("Retry-After", 15))
                 time.sleep(min(retry_after + 1, 35))
-                return False
+                return False, None
 
-            return resp.status_code in [200, 302]
+            if resp.status_code in [200, 302]:
+                return True, resp.text
+            return False, None
         except Exception:
-            return False
+            return False, None
 
     def _unlock_session(self, status_callback: Optional[Callable[[str], None]] = None) -> Optional[str]:
         url = f"{self.base_url}/search/institute"
@@ -96,21 +98,29 @@ class InstituteResultFetcher:
 
                 soup = BeautifulSoup(r.text, 'html.parser')
                 
-                # Check if gateway challenge is present
+                # If page is challenge, solve it directly
                 if soup.find('form', class_='challenge-form') or 'Find the different symbol' in r.text:
                     if status_callback:
                         status_callback(f"Solving gateway pattern challenge... (Attempt {attempt}/6)")
-                    solved = self._solve_gateway(soup, r.url)
+                    solved, post_html = self._solve_gateway(soup, r.url)
                     if not solved:
                         time.sleep(1.0)
                         self.reset_session()
                         continue
-                    time.sleep(0.5)
-                    # Fetch search form after unlock
+                    
+                    # If post_html has the search form, use it directly!
+                    if post_html:
+                        post_soup = BeautifulSoup(post_html, 'html.parser')
+                        if post_soup.find('input', {'name': 'eiin_no'}):
+                            tok = post_soup.find('input', {'name': '_token'})
+                            if tok:
+                                return tok['value']
+                    
+                    time.sleep(0.3)
                     r_after = self.session.get(url, timeout=15)
                     soup = BeautifulSoup(r_after.text, 'html.parser')
                 
-                # Verify search form has eiin_no
+                # If search form already present
                 if soup.find('input', {'name': 'eiin_no'}):
                     token_el = soup.find('input', {'name': '_token'})
                     if token_el:
@@ -167,7 +177,7 @@ class InstituteResultFetcher:
                     if soup.find('form', class_='challenge-form'):
                         if status_callback:
                             status_callback(f"Resolving post-challenge pattern (Attempt {attempt}/{max_retries})...")
-                        self._solve_gateway(soup)
+                        self._solve_gateway(soup, post_r.url)
                         time.sleep(0.4)
                         token = self._unlock_session(status_callback=status_callback)
                         if token:
@@ -201,102 +211,100 @@ class InstituteResultFetcher:
         else:
             return {"error": "Max retries exceeded", "success": False, "name": None, "students": []}
 
-            # Parse info
-            name, upazila, district = "", "", ""
-            stats = {"appeared": 0, "passed": 0, "failed": 0, "gpa5": 0, "pass_rate": 0.0, "avg_gpa": 0.0}
+        # Parse info
+        name, upazila, district = "", "", ""
+        stats = {"appeared": 0, "passed": 0, "failed": 0, "gpa5": 0, "pass_rate": 0.0, "avg_gpa": 0.0}
 
-            for tr in info_table.find_all('tr'):
-                tds = [td.get_text(strip=True) for td in tr.find_all(['td', 'th'])]
-                if len(tds) >= 4:
-                    if "District" in tds[2]: district = tds[3]
-                    if "GPA" in tds[0] and tds[1].isdigit(): stats["gpa5"] = int(tds[1])
-                    if "Appeared" in tds[2] and tds[3].isdigit(): stats["appeared"] = int(tds[3])
-                    if "Passed" in tds[0] and tds[1].isdigit(): stats["passed"] = int(tds[1])
-                    if "Pass %" in tds[2]:
-                        try: stats["pass_rate"] = float(tds[3])
-                        except ValueError: pass
-                elif len(tds) >= 2:
-                    if "Institute" in tds[0]: name = tds[1]
-                    if "Thana/Upazilla" in tds[0] or "Upazilla" in tds[0]: upazila = tds[1]
+        for tr in info_table.find_all('tr'):
+            tds = [td.get_text(strip=True) for td in tr.find_all(['td', 'th'])]
+            if len(tds) >= 4:
+                if "District" in tds[2]: district = tds[3]
+                if "GPA" in tds[0] and tds[1].isdigit(): stats["gpa5"] = int(tds[1])
+                if "Appeared" in tds[2] and tds[3].isdigit(): stats["appeared"] = int(tds[3])
+                if "Passed" in tds[0] and tds[1].isdigit(): stats["passed"] = int(tds[1])
+                if "Pass %" in tds[2]:
+                    try: stats["pass_rate"] = float(tds[3])
+                    except ValueError: pass
+            elif len(tds) >= 2:
+                if "Institute" in tds[0]: name = tds[1]
+                if "Thana/Upazilla" in tds[0] or "Upazilla" in tds[0]: upazila = tds[1]
 
-            stats["failed"] = max(0, stats["appeared"] - stats["passed"])
+        stats["failed"] = max(0, stats["appeared"] - stats["passed"])
 
-            # Groups and Student Roster
-            students = []
-            groups = {
-                "science": {"appeared": 0, "passed": 0, "gpa5": 0},
-                "humanities": {"appeared": 0, "passed": 0, "gpa5": 0},
-                "business_studies": {"appeared": 0, "passed": 0, "gpa5": 0}
-            }
+        # Groups and Student Roster
+        students = []
+        groups = {
+            "science": {"appeared": 0, "passed": 0, "gpa5": 0},
+            "humanities": {"appeared": 0, "passed": 0, "gpa5": 0},
+            "business_studies": {"appeared": 0, "passed": 0, "gpa5": 0}
+        }
 
-            gpa_sum = 0.0
-            passed_gpa_count = 0
+        gpa_sum = 0.0
+        passed_gpa_count = 0
 
-            for section in soup.find_all("div", class_="result-section"):
-                title_el = section.find("div", class_="section-title")
-                title_text = title_el.get_text(strip=True).lower() if title_el else ""
-                
-                group_key = "science"
-                if "humanities" in title_text or "arts" in title_text:
-                    group_key = "humanities"
-                elif "business" in title_text or "commerce" in title_text:
-                    group_key = "business_studies"
+        for section in soup.find_all("div", class_="result-section"):
+            title_el = section.find("div", class_="section-title")
+            title_text = title_el.get_text(strip=True).lower() if title_el else ""
+            
+            group_key = "science"
+            if "humanities" in title_text or "arts" in title_text:
+                group_key = "humanities"
+            elif "business" in title_text or "commerce" in title_text:
+                group_key = "business_studies"
 
-                for block in section.find_all("div", class_="rest-block"):
-                    is_fail = "fail-line" in block.get("class", [])
-                    is_abs = "abs-line" in block.get("class", [])
+            for block in section.find_all("div", class_="rest-block"):
+                is_fail = "fail-line" in block.get("class", [])
+                is_abs = "abs-line" in block.get("class", [])
 
-                    for item in block.select(".rest-item"):
-                        txt = item.get_text(strip=True)
-                        match = re.search(r'\b(\d{6})\[([^\]]+)\]', txt)
-                        if match:
-                            roll_str, score_str = match.group(1), match.group(2).strip()
-                            roll_num = int(roll_str)
-                            
-                            if is_abs or "ABS" in score_str:
-                                status = "ABSENT"
-                                gpa_val = "ABS."
-                                groups[group_key]["appeared"] += 1
-                            elif is_fail or score_str.startswith("F") or "FAIL" in score_str:
-                                status = "FAILED"
-                                gpa_val = score_str
-                                groups[group_key]["appeared"] += 1
-                            else:
-                                status = "PASSED"
-                                gpa_val = score_str
-                                groups[group_key]["appeared"] += 1
-                                groups[group_key]["passed"] += 1
-                                try:
-                                    num_gpa = float(score_str)
-                                    gpa_sum += num_gpa
-                                    passed_gpa_count += 1
-                                    if num_gpa == 5.0:
-                                        groups[group_key]["gpa5"] += 1
-                                except ValueError:
-                                    pass
+                for item in block.select(".rest-item"):
+                    txt = item.get_text(strip=True)
+                    match = re.search(r'\b(\d{6})\[([^\]]+)\]', txt)
+                    if match:
+                        roll_str, score_str = match.group(1), match.group(2).strip()
+                        roll_num = int(roll_str)
+                        
+                        if is_abs or "ABS" in score_str:
+                            status = "ABSENT"
+                            gpa_val = "ABS."
+                            groups[group_key]["appeared"] += 1
+                        elif is_fail or score_str.startswith("F") or "FAIL" in score_str:
+                            status = "FAILED"
+                            gpa_val = score_str
+                            groups[group_key]["appeared"] += 1
+                        else:
+                            status = "PASSED"
+                            gpa_val = score_str
+                            groups[group_key]["appeared"] += 1
+                            groups[group_key]["passed"] += 1
+                            try:
+                                num_gpa = float(score_str)
+                                gpa_sum += num_gpa
+                                passed_gpa_count += 1
+                                if num_gpa == 5.0:
+                                    groups[group_key]["gpa5"] += 1
+                            except ValueError:
+                                pass
 
-                            students.append({
-                                "roll": roll_num,
-                                "gpa": gpa_val,
-                                "group": group_key.upper(),
-                                "status": status,
-                                "eiin": int(eiin)
-                            })
+                        students.append({
+                            "roll": roll_num,
+                            "gpa": gpa_val,
+                            "group": group_key.upper(),
+                            "status": status,
+                            "eiin": int(eiin)
+                        })
 
-            if passed_gpa_count > 0:
-                stats["avg_gpa"] = round(gpa_sum / passed_gpa_count, 2)
+        if passed_gpa_count > 0:
+            stats["avg_gpa"] = round(gpa_sum / passed_gpa_count, 2)
 
-            return {
-                "eiin": int(eiin),
-                "name": name,
-                "district": district,
-                "upazila": upazila,
-                "board": board.upper(),
-                "exam_year": str(exam_year),
-                "statistics": stats,
-                "groups": groups,
-                "students": students,
-                "success": True
-            }
-
-        return {"error": f"HTTP Status {post_r.status_code}", "success": False, "name": None, "students": []}
+        return {
+            "eiin": int(eiin),
+            "name": name,
+            "district": district,
+            "upazila": upazila,
+            "board": board.upper(),
+            "exam_year": str(exam_year),
+            "statistics": stats,
+            "groups": groups,
+            "students": students,
+            "success": True
+        }

@@ -10,6 +10,7 @@ import argparse
 import logging
 from typing import Optional, List, Dict, Any
 import requests
+from bs4 import BeautifulSoup
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.stdout.reconfigure(encoding='utf-8')
@@ -44,16 +45,69 @@ def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file:
     success_count = 0
     start_time = time.time()
 
+    def scrape_student_fast(roll: str) -> Optional[dict]:
+        try:
+            url = f"https://results.dinajpurboard.gov.bd/fast/student?roll={roll}&exam=1&exp=1787224774&t=769debce061f8471859fb4cd1069e0454aae3b18294e70c8454edd2fc416320a"
+            r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=6)
+            if r.status_code == 200:
+                soup = BeautifulSoup(r.text, 'html.parser')
+                name, father, mother, inst, result, marks, group = "", "", "", "", "", "", ""
+                for tr in soup.find_all('tr'):
+                    tds = [td.get_text(strip=True) for td in tr.find_all(['td', 'th'])]
+                    if len(tds) >= 2:
+                        k = tds[0].lower()
+                        if 'name of student' in k: name = tds[1]
+                        elif 'father' in k: father = tds[1]
+                        elif 'mother' in k: mother = tds[1]
+                        elif 'institute' in k: inst = tds[1]
+                        elif 'result' in k: result = tds[1]
+                        elif 'total mark' in k: marks = tds[1]
+                        elif 'group' in k: group = tds[1]
+
+                grades = []
+                for tr in soup.find_all('tr'):
+                    tds = tr.find_all('td')
+                    if len(tds) >= 3 and tds[0].get_text(strip=True).isdigit():
+                        code = tds[0].get_text(strip=True)
+                        subj = tds[1].get_text(strip=True)
+                        grade = tds[2].get_text(strip=True)
+                        grades.append({"sub_code": code, "subject_name": subj, "grade": grade})
+
+                if name:
+                    return {
+                        "success": True,
+                        "status_code": 200,
+                        "student_name": name,
+                        "father_name": father,
+                        "mother_name": mother,
+                        "institute": inst,
+                        "board": "DINAJPUR",
+                        "group": group or "GENERAL",
+                        "result": result or "N/A",
+                        "total_marks": marks or "N/A",
+                        "subject_grades": grades
+                    }
+        except Exception:
+            pass
+        return None
+
     for idx, roll in enumerate(my_rolls, 1):
         print(f"[{idx}/{len(my_rolls)}] Node {chunk_index + 1} -> Scraping Roll {roll}...")
-        res = scraper.scrape(
-            url="https://results.dinajpurboard.gov.bd/search/student",
-            input_fields={"roll_no": roll},
-            captcha_input_name="captcha",
-            button_selector='button[name="submit"]',
-            method="POST",
-            _retry_count=2
-        )
+        
+        # 1. Primary high-speed direct lookup (0.3s)
+        fast_res = scrape_student_fast(roll)
+        if fast_res:
+            res = fast_res
+        else:
+            # 2. Resilient fallback via AutoFormScraper
+            res = scraper.scrape(
+                url="https://results.dinajpurboard.gov.bd/search/student",
+                input_fields={"roll_no": roll},
+                captcha_input_name="captcha",
+                button_selector='button[name="submit"]',
+                method="POST",
+                _retry_count=2
+            )
 
         kv = res.get("data", {}).get("key_value_data", {})
         subject_grades = res.get("subject_grades", [])
