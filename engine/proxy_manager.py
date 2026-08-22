@@ -91,26 +91,28 @@ async def fetch_source(session, url):
         pass
     return []
 
-async def check_proxy_node(session, proxy, working_list, sem, needed=180, silent=True):
+async def check_proxy_node(session, proxy, working_list, sem, needed=180, silent=True, max_latency=3.0):
     if len(working_list) >= needed:
         return
     async with sem:
         if len(working_list) >= needed:
             return
         proxy_url = f"http://{proxy}"
+        t_start = time.time()
         try:
-            timeout = aiohttp.ClientTimeout(total=3.5)
+            timeout = aiohttp.ClientTimeout(total=max_latency)
             async with session.get(TARGET_ENDPOINT, proxy=proxy_url, timeout=timeout) as resp:
                 if resp.status == 200:
                     text = await resp.text()
                     if "Student Result" in text:
-                        working_list.append(proxy)
+                        elapsed = time.time() - t_start
+                        working_list.append((proxy, elapsed))
                         if not silent:
-                            print(f"  [+] Active Dinajpur Proxy: {proxy} (Total: {len(working_list)})")
+                            print(f"  [+] ⚡ Fast Proxy ({int(elapsed*1000)}ms): {proxy} (Total: {len(working_list)})")
         except Exception:
             pass
 
-async def harvest_and_verify_proxies(needed=180, max_candidates=15000, silent=True):
+async def harvest_and_verify_proxies(needed=180, max_candidates=15000, silent=True, max_latency=3.0):
     try:
         loop = asyncio.get_running_loop()
         def silence_sock_reset(loop, context):
@@ -135,7 +137,7 @@ async def harvest_and_verify_proxies(needed=180, max_candidates=15000, silent=Tr
             pass
 
     t0 = time.time()
-    connector = aiohttp.TCPConnector(ssl=False, limit=300)
+    connector = aiohttp.TCPConnector(ssl=False, limit=350)
     async with aiohttp.ClientSession(connector=connector) as session:
         tasks = [fetch_source(session, url) for url in PROXY_SOURCES]
         results = await asyncio.gather(*tasks)
@@ -144,15 +146,18 @@ async def harvest_and_verify_proxies(needed=180, max_candidates=15000, silent=Tr
         sem = asyncio.Semaphore(250)
         working_proxies = []
         check_tasks = [
-            check_proxy_node(session, p, working_proxies, sem, needed=needed, silent=silent)
+            check_proxy_node(session, p, working_proxies, sem, needed=needed, silent=silent, max_latency=max_latency)
             for p in all_proxies[:max_candidates]
         ]
         await asyncio.gather(*check_tasks)
-        return working_proxies
+        
+        # Sort by fastest latency first
+        working_proxies.sort(key=lambda x: x[1])
+        return [p for p, _ in working_proxies]
 
 if __name__ == "__main__":
-    live_proxies = asyncio.run(harvest_and_verify_proxies(needed=180, max_candidates=15000, silent=False))
+    live_proxies = asyncio.run(harvest_and_verify_proxies(needed=180, max_candidates=15000, silent=False, max_latency=3.0))
     cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "working_proxies.txt")
     with open(cache_file, "w", encoding="utf-8") as f:
         f.write("\n".join(live_proxies))
-    print(f"Saved {len(live_proxies)} live proxies to working_proxies.txt")
+    print(f"\nSaved {len(live_proxies)} live proxies to working_proxies.txt (sorted fastest-first)")
