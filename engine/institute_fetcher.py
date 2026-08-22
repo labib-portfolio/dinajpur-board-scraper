@@ -21,6 +21,7 @@ class InstituteResultFetcher:
     def reset_session(self):
         """Creates a fresh HTTP session with standard browser headers."""
         self.session = requests.Session()
+        self.current_token = None
         self.session.headers.update({
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -146,19 +147,27 @@ class InstituteResultFetcher:
 
         for attempt in range(1, max_retries + 1):
             try:
-                token = self._unlock_session(status_callback=status_callback)
-                if not token:
-                    if status_callback and attempt < max_retries:
-                        status_callback(f"Retrying session unlock (Attempt {attempt}/{max_retries})...")
-                    self.reset_session()
-                    time.sleep(1.5)
-                    continue
+                if not self.current_token:
+                    self.current_token = self._unlock_session(status_callback=status_callback)
+                    if not self.current_token:
+                        if status_callback and attempt < max_retries:
+                            status_callback(f"Retrying session unlock (Attempt {attempt}/{max_retries})...")
+                        self.reset_session()
+                        time.sleep(1.5)
+                        continue
 
                 post_r = self.session.post(
                     url,
-                    data={'_token': token, 'eiin_no': eiin_clean, 'submit': '1'},
+                    data={'_token': self.current_token, 'eiin_no': eiin_clean, 'submit': '1'},
                     timeout=15
                 )
+
+                # Token expired or invalid, reset and re-unlock
+                if post_r.status_code in [419, 403]:
+                    self.current_token = None
+                    self.reset_session()
+                    time.sleep(1.0)
+                    continue
 
                 # Rate limit handling on POST
                 if post_r.status_code == 429:
