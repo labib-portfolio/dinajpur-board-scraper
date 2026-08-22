@@ -396,10 +396,8 @@ def run_scraper_cli():
                 if not is_cached:
                     def on_retry_status(msg):
                         with print_lock:
-                            print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {YELLOW}🔄 {msg}{RESET}   ", end="", flush=True)
+                            print(f"  [{idx}/{len(eiins)}] EIIN {eiin} ({YELLOW}{msg[:20]}{RESET})", flush=True)
 
-                    with print_lock:
-                        print(f"  [{idx}/{len(eiins)}] Querying EIIN {eiin}...", end="", flush=True)
                     inst_data = fetcher.fetch_by_eiin(eiin, status_callback=on_retry_status)
                     if inst_data and not inst_data.get("error") and inst_data.get("name"):
                         try:
@@ -412,7 +410,7 @@ def run_scraper_cli():
 
                 if not inst_data or "error" in inst_data or not inst_data.get("name"):
                     with print_lock:
-                        print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {RED}Failed (Not found or unreachable){RESET}  ")
+                        print(f"  [{idx}/{len(eiins)}] EIIN {eiin} -> {RED}Not Found{RESET}", flush=True)
                     continue
 
                 inst_name = inst_data.get("name", "Unknown")
@@ -421,10 +419,7 @@ def run_scraper_cli():
                 students = inst_data.get("students", [])
 
                 appeared_students = [s for s in students if s.get("status") != "ABSENT" and "ABS" not in str(s.get("gpa", "")).upper()]
-                abs_count = len(students) - len(appeared_students)
                 rolls = [str(s["roll"]) for s in appeared_students if s.get("roll")]
-                abs_info = f", {abs_count} absent excluded" if abs_count > 0 else ""
-                source_tag = f"{CYAN}⚡ (Cached){RESET}" if is_cached else f"{GREEN}✓{RESET}"
 
                 upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upazila.strip().lower()).strip('_')
                 if upz_slug not in upazilla_summary:
@@ -453,17 +448,14 @@ def run_scraper_cli():
                                 queued_for_inst += 1
 
                 with print_lock:
-                    if is_cached:
-                        print(f"\r  ⚡ Reading Cached Gazettes: [{idx}/{len(eiins)}] {inst_name[:30]} ({len(rolls)} rolls)...   ", end="", flush=True)
-                    else:
-                        queue_info = f" -> {GREEN}+{queued_for_inst} streaming to workers{RESET}" if queued_for_inst > 0 else " (All previously scraped)"
-                        print(f"\r  [{idx}/{len(eiins)}] Harvested EIIN {eiin}... {GREEN}✓{RESET} {inst_name[:30]} ({len(rolls)} rolls{abs_info}){queue_info}  ")
+                    if not is_cached:
+                        print(f"  [{idx}/{len(eiins)}] EIIN {eiin}: {inst_name[:25]} {GREEN}+{queued_for_inst} rolls{RESET}", flush=True)
 
                 if not is_cached:
-                    time.sleep(2.5)
+                    time.sleep(2.0)
 
             with print_lock:
-                print(f"\r  {GREEN}✓ Loaded all {len(eiins)} institutions ({total_appeared_count} appeared rolls, {already_scraped_count} already scraped){RESET}      \n")
+                print(f"  {GREEN}✓ Loaded all {len(eiins)} institutions ({total_appeared_count} rolls queued){RESET}\n", flush=True)
 
             harvest_done.set()
 
