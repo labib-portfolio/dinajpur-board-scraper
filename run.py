@@ -12,6 +12,7 @@ import time
 import subprocess
 import requests
 import logging
+import glob
 from bs4 import BeautifulSoup
 from typing import List, Dict, Any, Optional
 
@@ -167,15 +168,26 @@ def run_cloud_cli():
         print(f"{YELLOW}[!] No student rolls found across the provided EIINs.{RESET}\n")
         return
 
-    # Check already scraped
+    # Check already scraped across Upazilla datasets & master archive
     master_file = os.path.join(BASE_DIR, "scraped_results_all.json")
     already_scraped_map = {}
+
+    for upz_path in glob.glob(os.path.join(output_base, "results_upazilla_*.json")):
+        try:
+            with open(upz_path, 'r', encoding='utf-8') as f:
+                u_data = json.load(f)
+                for r in u_data.get("records", []):
+                    if r.get("roll_no") and r.get("success"):
+                        already_scraped_map[str(r.get("roll_no"))] = r
+        except Exception:
+            pass
+
     if os.path.exists(master_file):
         try:
             with open(master_file, 'r', encoding='utf-8') as f:
                 prev_data = json.load(f)
                 for r in prev_data.get("records", []):
-                    if r.get("roll_no"):
+                    if r.get("roll_no") and r.get("success"):
                         already_scraped_map[str(r.get("roll_no"))] = r
         except Exception:
             pass
