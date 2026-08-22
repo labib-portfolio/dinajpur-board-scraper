@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinajpur Education Board — SSC Result Portal 2026</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="brand">
+                <div class="gov-seal">🎓</div>
+                <div>
+                    <div class="board-title">BISE DINAJPUR</div>
+                    <h1 class="main-title">SSC & Equivalent Result Portal 2026</h1>
+                </div>
+            </div>
+            
+            <!-- Main Navigation Tabs -->
+            <nav class="nav-tabs">
+                <button class="nav-tab-btn active" data-tab="tab-student">
+                    🎓 Student Result
+                </button>
+                <button class="nav-tab-btn" data-tab="tab-board">
+                    🏛️ District & Upazilla Results
+                </button>
+                <button class="nav-tab-btn" data-tab="tab-monitor">
+                    📡 Live Monitor
+                </button>
+                <button class="nav-tab-btn" data-tab="tab-scraper">
+                    ⚙️ Scraper Config
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container main-container">
+        
+        <!-- =================================================================== -->
+        <!-- TAB 1: 🎓 STUDENT RESULT SEARCH (HOME SCREEN)                        -->
+        <!-- =================================================================== -->
+        <section id="tab-student" class="tab-view active">
+            <!-- Search Hero Card -->
+            <div class="card search-hero-card">
+                <div class="hero-header">
+                    <h2>Individual Student Result Search</h2>
+                    <p>Search official marksheet across all Dinajpur Board candidates for SSC 2026</p>
+                </div>
+
+                <form id="student-search-form" class="search-form-grid" onsubmit="return false;">
+                    <div class="form-group">
+                        <label>Examination</label>
+                        <select class="form-select" disabled>
+                            <option selected>SSC / DAKHIL / EQUIVALENT</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Year</label>
+                        <select class="form-select" disabled>
+                            <option selected>2026</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Education Board</label>
+                        <select class="form-select" disabled>
+                            <option selected>DINAJPUR</option>
+                        </select>
+                    </div>
+                    <div class="form-group flex-2">
+                        <label for="student-roll-input">Roll Number <span class="required">*</span></label>
+                        <div class="input-with-button">
+                            <input type="text" id="student-roll-input" placeholder="e.g. 217305 or 479413" maxlength="10" autocomplete="off" required>
+                            <button type="submit" id="btn-search-student" class="btn btn-primary">
+                                <span class="btn-spinner hidden" id="student-spinner"></span>
+                                🔍 Search Result
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Quick Roll Samples -->
+                <div class="sample-chips">
+                    <span class="chips-label">Quick Samples:</span>
+                    <button class="chip-btn" data-roll="217305">217305 (GPA 5.00)</button>
+                    <button class="chip-btn" data-roll="479413">479413 (Jaldhaka)</button>
+                    <button class="chip-btn" data-roll="216994">216994 (Domar)</button>
+                    <button class="chip-btn" data-roll="831860">831860 (Dimla)</button>
+                    <button class="chip-btn" data-roll="765585">765585 (Nilphamari Sadar)</button>
+                </div>
+            </div>
+
+            <!-- Student Result Container -->
+            <div id="student-result-container" class="mt-4">
+                <!-- Placeholder / Initial State -->
+                <div id="student-placeholder" class="card placeholder-card">
+                    <div class="placeholder-icon">📋</div>
+                    <h3>Ready to Search</h3>
+                    <p>Enter any 6-digit Roll Number above and click <strong>Search Result</strong> to view official student marksheet and grades.</p>
+                </div>
+
+                <!-- Marksheet Result Card (Rendered dynamically) -->
+                <div id="student-marksheet-card" class="marksheet-card hidden">
+                    <div class="marksheet-header">
+                        <div class="board-emblem">🏛️</div>
+                        <div class="board-heading">
+                            <h2>BOARD OF INTERMEDIATE AND SECONDARY EDUCATION, DINAJPUR</h2>
+                            <h3>SECONDARY SCHOOL CERTIFICATE EXAMINATION, 2026</h3>
+                            <div class="subheading">Official Academic Transcript & Marksheet</div>
+                        </div>
+                        <div class="marksheet-actions no-print">
+                            <button class="btn btn-sm btn-outline" id="btn-print-marksheet">🖨️ Print Marksheet</button>
+                        </div>
+                    </div>
+
+                    <!-- Meta Information Table -->
+                    <div class="meta-table-wrapper">
+                        <table class="marksheet-meta-table">
+                            <tbody>
+                                <tr>
+                                    <td class="meta-label">Roll No</td>
+                                    <td class="meta-value bold" id="ms-roll">--</td>
+                                    <td class="meta-label">Group</td>
+                                    <td class="meta-value" id="ms-group">--</td>
+                                </tr>
+                                <tr>
+                                    <td class="meta-label">Student Name</td>
+                                    <td class="meta-value bold primary" id="ms-name">--</td>
+                                    <td class="meta-label">Type</td>
+                                    <td class="meta-value">REGULAR</td>
+                                </tr>
+                                <tr>
+                                    <td class="meta-label">Father's Name</td>
+                                    <td class="meta-value" id="ms-father">--</td>
+                                    <td class="meta-label">Board</td>
+                                    <td class="meta-value">DINAJPUR</td>
+                                </tr>
+                                <tr>
+                                    <td class="meta-label">Mother's Name</td>
+                                    <td class="meta-value" id="ms-mother">--</td>
+                                    <td class="meta-label">Session</td>
+                                    <td class="meta-value">2024-2025</td>
+                                </tr>
+                                <tr>
+                                    <td class="meta-label">Institute</td>
+                                    <td class="meta-value" colspan="3" id="ms-institute">--</td>
+                                </tr>
+                                <tr class="result-highlight-row">
+                                    <td class="meta-label">RESULT</td>
+                                    <td class="meta-value" id="ms-result-badge">--</td>
+                                    <td class="meta-label">Total Marks</td>
+                                    <td class="meta-value bold" id="ms-total-marks">--</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Subject Grades Table -->
+                    <div class="grades-table-wrapper mt-3">
+                        <h4 class="grades-heading">Subject-Wise Grade Details:</h4>
+                        <table class="grades-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 100px;">Subject Code</th>
+                                    <th>Subject Name</th>
+                                    <th style="width: 120px; text-align: center;">Letter Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ms-grades-tbody">
+                                <!-- Grade rows inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="marksheet-footer">
+                        <span id="ms-source-info">⚡ Retrieved via High-Speed Dinajpur Engine</span>
+                        <span>Official Examination Records</span>
+                    </div>
+                </div>
+
+                <!-- Error Alert Box -->
+                <div id="student-error-box" class="card error-card hidden">
+                    <span class="error-icon">⚠️</span>
+                    <div>
+                        <strong id="student-error-title">Result Not Found</strong>
+                        <p id="student-error-msg">Could not find any student records for the specified roll number.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================== -->
+        <!-- TAB 2: 🏛️ DISTRICT & UPAZILLA BOARD RESULT EXPLORER                 -->
+        <!-- =================================================================== -->
+        <section id="tab-board" class="tab-view hidden">
+            <!-- Board-wide KPI Header -->
+            <div class="stats-grid board-stats-grid">
+                <div class="stat-card stat-primary">
+                    <div class="stat-label">TOTAL STUDENTS SCRAPED</div>
+                    <div class="stat-value" id="board-total-students">--</div>
+                    <div class="stat-sub">Across All Districts</div>
+                </div>
+                <div class="stat-card stat-success">
+                    <div class="stat-label">OVERALL PASS RATE</div>
+                    <div class="stat-value" id="board-pass-rate">--%</div>
+                    <div class="stat-sub" id="board-passed-sub">-- Passed</div>
+                </div>
+                <div class="stat-card stat-danger">
+                    <div class="stat-label">FAILED CANDIDATES</div>
+                    <div class="stat-value" id="board-failed-count">--</div>
+                    <div class="stat-sub" id="board-failed-sub">-- Failed</div>
+                </div>
+                <div class="stat-card stat-warning">
+                    <div class="stat-label">GPA 5.00 ACHIEVERS</div>
+                    <div class="stat-value" id="board-gpa5-count">--</div>
+                    <div class="stat-sub">Top Honors Candidates</div>
+                </div>
+            </div>
+
+            <!-- Upazilla Selection & Controls Card -->
+            <div class="card mt-3">
+                <div class="explorer-controls-grid">
+                    <div class="form-group">
+                        <label for="select-district">District</label>
+                        <select id="select-district" class="form-select">
+                            <option value="">Loading districts...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="select-upazilla">Upazilla</label>
+                        <select id="select-upazilla" class="form-select" disabled>
+                            <option value="">Select a district first</option>
+                        </select>
+                    </div>
+                    <div class="form-group flex-2">
+                        <label for="table-search-input">Filter Current Table</label>
+                        <input type="text" id="table-search-input" placeholder="🔍 Search by Roll, Name, or School in this Upazilla...">
+                    </div>
+                    <div class="form-group">
+                        <label for="filter-status-select">Result Status</label>
+                        <select id="filter-status-select" class="form-select">
+                            <option value="ALL">All Results</option>
+                            <option value="PASSED">Passed (GPA)</option>
+                            <option value="FAILED">Failed</option>
+                            <option value="GPA5">GPA 5.00 Only</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Upazilla Metrics Summary Bar -->
+                <div id="upazilla-summary-bar" class="upazilla-summary-bar mt-3 hidden">
+                    <div class="summary-badge">
+                        📍 <strong id="sum-upazilla-name">--</strong>, <span id="sum-district-name">--</span>
+                    </div>
+                    <div class="summary-badge">
+                        👥 Students: <strong id="sum-total-count">0</strong>
+                    </div>
+                    <div class="summary-badge text-success">
+                        ✅ Passed: <strong id="sum-passed-count">0</strong> (<span id="sum-pass-rate">0%</span>)
+                    </div>
+                    <div class="summary-badge text-danger">
+                        ❌ Failed: <strong id="sum-failed-count">0</strong>
+                    </div>
+                    <div class="summary-badge text-warning">
+                        🌟 GPA 5.00: <strong id="sum-gpa5-count">0</strong>
+                    </div>
+                    <div class="summary-badge">
+                        🏫 Schools: <strong id="sum-schools-count">0</strong>
+                    </div>
+                    <div class="export-actions">
+                        <button class="btn btn-sm btn-secondary" id="btn-download-upazilla-csv">📊 Export CSV</button>
+                        <button class="btn btn-sm btn-outline" id="btn-download-upazilla-json">📥 JSON</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upazilla Students Data Table -->
+            <div class="card mt-3">
+                <div class="table-header-flex">
+                    <h3>Student Roster (<span id="table-record-count">0</span> records)</h3>
+                    <div class="table-pagination-controls">
+                        <button class="btn btn-sm btn-outline" id="btn-prev-page" disabled>◀ Prev</button>
+                        <span id="pagination-info" style="font-size: 13px; font-weight: 600;">Page 1 of 1</span>
+                        <button class="btn btn-sm btn-outline" id="btn-next-page" disabled>Next ▶</button>
+                    </div>
+                </div>
+
+                <div class="table-wrapper mt-2">
+                    <table class="roster-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">#</th>
+                                <th style="width: 90px;">Roll No</th>
+                                <th>Student Name</th>
+                                <th>Father's Name</th>
+                                <th>Institute</th>
+                                <th style="width: 100px;">Group</th>
+                                <th style="width: 120px;">Result</th>
+                                <th style="width: 80px;">Marks</th>
+                                <th style="width: 90px; text-align: center;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="upazilla-roster-tbody">
+                            <tr>
+                                <td colspan="9" class="text-center text-muted" style="padding: 40px;">
+                                    Select a District and Upazilla above to load student records.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================== -->
+        <!-- TAB 3: 📡 LIVE SCRAMPER MONITOR                                     -->
+        <!-- =================================================================== -->
+        <section id="tab-monitor" class="tab-view hidden">
+            <!-- Monitor Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">LIVE BATCH PROGRESS</div>
+                    <div class="stat-value" id="mon-stat-count">0 / 0</div>
+                    <div class="stat-sub" id="mon-stat-percent">0% Completed</div>
+                </div>
+                <div class="stat-card stat-success">
+                    <div class="stat-label">SUCCESSFUL HARVEST</div>
+                    <div class="stat-value" id="mon-stat-success">0</div>
+                    <div class="stat-sub">100% Delivery Rate</div>
+                </div>
+                <div class="stat-card stat-info">
+                    <div class="stat-label">LATEST SCRAPED ROLL</div>
+                    <div class="stat-value" id="mon-stat-latest-roll">--</div>
+                    <div class="stat-sub" id="mon-stat-latest-name">Waiting for stream...</div>
+                </div>
+                <div class="stat-card stat-warning">
+                    <div class="stat-label">ACTIVE PROXY POOL</div>
+                    <div class="stat-value">50+ Nodes</div>
+                    <div class="stat-sub" id="mon-sync-time">Live Sync Active</div>
+                </div>
+            </div>
+
+            <!-- Progress Bar Section -->
+            <div class="card mt-3">
+                <div class="progress-header">
+                    <span class="progress-title">⚡ Real-Time Scraping Progress</span>
+                    <span class="progress-stats" id="mon-progress-percent-label">0%</span>
+                </div>
+                <div class="progress-track mt-1">
+                    <div class="progress-glow" id="mon-progress-bar-fill" style="width: 0%;"></div>
+                </div>
+                <div class="progress-footer mt-1">
+                    <span id="mon-status-msg">🚀 Engine running with auto-recovery and 50+ rotating proxies...</span>
+                    <span id="mon-remaining-text">-- remaining</span>
+                </div>
+            </div>
+
+            <!-- Live Stream Table -->
+            <div class="card mt-3">
+                <div class="table-header-flex">
+                    <h3>🔴 Live Record Stream (<span id="mon-stream-count">0</span>)</h3>
+                    <button id="btn-toggle-monitor-stream" class="btn btn-sm btn-primary">🔴 Live Syncing</button>
+                </div>
+                <div class="table-wrapper mt-2">
+                    <table class="roster-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">#</th>
+                                <th style="width: 90px;">Roll</th>
+                                <th>Student Name</th>
+                                <th>Father's Name</th>
+                                <th>Institute</th>
+                                <th style="width: 120px;">Result</th>
+                                <th style="width: 80px;">Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody id="mon-stream-tbody">
+                            <tr>
+                                <td colspan="7" class="text-center text-muted" style="padding: 30px;">
+                                    Listening for live student records...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- =================================================================== -->
+        <!-- TAB 4: ⚙️ SCRAPER CONFIG & CUSTOM FORM SCRAPING                     -->
+        <!-- =================================================================== -->
+        <section id="tab-scraper" class="tab-view hidden">
+            <div class="main-layout">
+                <!-- Configuration Column -->
+                <div class="card config-card">
+                    <div class="mode-switcher">
+                        <button type="button" class="mode-btn active" id="mode-single">🎯 Single Record</button>
+                        <button type="button" class="mode-btn" id="mode-batch">🚀 Batch / Multi-Record List</button>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label for="target-url">Target URL <span class="required">*</span></label>
+                        <input type="url" id="target-url" value="https://results.dinajpurboard.gov.bd" required>
+                    </div>
+
+                    <div id="single-mode-section">
+                        <div class="form-group">
+                            <div class="section-header">
+                                <label>Form Input Fields</label>
+                                <button type="button" class="btn-link" id="btn-add-field">+ Add Field</button>
+                            </div>
+                            <div class="inputs-container" id="inputs-container"></div>
+                        </div>
+                    </div>
+
+                    <div id="batch-mode-section" class="hidden">
+                        <div class="form-group">
+                            <label for="batch-text-list">Record List (Rolls or JSON):</label>
+                            <textarea id="batch-text-list" rows="5" placeholder="Paste roll numbers or JSON array..."></textarea>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-block mt-3" id="btn-proceed">
+                        <span class="btn-spinner hidden" id="spinner"></span>
+                        <span id="btn-proceed-text">🚀 Execute Form Scrape</span>
+                    </button>
+                </div>
+
+                <!-- Results Column -->
+                <div class="card results-card">
+                    <div class="results-header">
+                        <h3 id="results-title">📊 JSON Output</h3>
+                        <button class="btn btn-sm btn-secondary" id="btn-copy-json" disabled>📋 Copy JSON</button>
+                    </div>
+                    <div class="code-container mt-2">
+                        <pre><code id="json-output">// Scraped JSON output will appear here...</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Student Marksheet Modal Popup -->
+    <div id="marksheet-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <button class="modal-close-btn" id="btn-close-modal">&times;</button>
+            <div id="modal-marksheet-content">
+                <!-- Marksheet clone inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
