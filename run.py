@@ -81,18 +81,16 @@ def dispatch_to_github_cloud(rolls: List[str]) -> bool:
         
         subprocess.run(
             ["git", "add", "rolls.json"],
-            cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True
+            cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
         )
         subprocess.run(
-            ["git", "commit", "-m", f"Dispatch {len(rolls)} rolls to 40 cloud workers"],
-            cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True
+            ["git", "commit", "--allow-empty", "-m", f"Dispatch {len(rolls)} rolls to 40 cloud workers ({int(time.time())})"],
+            cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
         )
         
         print(f"{DIM}Pushing to Node 1 (20 Workers) and Node 2 (20 Workers)...{RESET}")
-        p1 = subprocess.Popen(["git", "push", "origin", "main"], cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        p2 = subprocess.Popen(["git", "push", "node2", "main"], cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        p1.wait()
-        p2.wait()
+        p1 = subprocess.run(["git", "push", "origin", "main"], cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        p2 = subprocess.run(["git", "push", "node2", "main"], cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
         print(f"{GREEN}✓ Dispatched! 40 Cloud Workers are actively scraping in parallel at 600 rolls/min!{RESET}\n")
         return True
