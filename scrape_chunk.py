@@ -128,8 +128,14 @@ if __name__ == "__main__":
     parser.add_argument("--input", type=str, default="rolls.json", help="Path to rolls file")
     parser.add_argument("--output", type=str, default="chunk_result.json", help="Path to output chunk file")
     parser.add_argument("--delay", type=float, default=2.0, help="Delay between requests in seconds")
-    parser.add_argument("--webhook-url", type=str, default="", help="Optional real-time live stream webhook URL")
-    args = parser.parse_args()
+    webhook = args.webhook_url
+    if not webhook and os.path.exists("tunnel_config.json"):
+        try:
+            with open("tunnel_config.json", "r", encoding="utf-8") as tf:
+                cfg = json.load(tf)
+                webhook = cfg.get("webhook_url", "")
+        except Exception:
+            pass
 
     run_chunk(
         chunk_index=args.chunk,
@@ -137,5 +143,5 @@ if __name__ == "__main__":
         rolls_file=args.input,
         output_file=args.output,
         delay=args.delay,
-        webhook_url=args.webhook_url or None
+        webhook_url=webhook or None
     )

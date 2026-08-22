@@ -80,7 +80,7 @@ def dispatch_to_github_cloud(rolls: List[str]) -> bool:
         print(f"{CYAN}[🚀 Cloud Dispatch] Launching 40 Parallel Cloud Workers on GitHub Actions...{RESET}")
         
         subprocess.run(
-            ["git", "add", "rolls.json"],
+            ["git", "add", "rolls.json", "tunnel_config.json"],
             cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
         )
         subprocess.run(
