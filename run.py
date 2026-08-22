@@ -326,14 +326,14 @@ def run_scraper_cli():
                     pass
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-            # 1. Rotate through dedicated proxy slice with 2.0s reliable timeout
+            # 1. Rotate through dedicated proxy slice with 1.2s rapid failover
             if proxy_sessions:
                 num_sessions = len(proxy_sessions)
-                for offset in range(min(4, num_sessions)):
+                for offset in range(min(3, num_sessions)):
                     sess = proxy_sessions[(worker_idx * 3 + offset) % num_sessions]
                     try:
                         url = ENDPOINT.format(roll=roll_str)
-                        r = sess.get(url, timeout=2.0)
+                        r = sess.get(url, timeout=1.2)
                         if r.status_code == 200:
                             parsed = parse_student_html(r.text, roll_str)
                             if parsed:
@@ -341,10 +341,10 @@ def run_scraper_cli():
                     except Exception:
                         pass
 
-            # 2. Fast direct attempt fallback with 2.0s timeout
+            # 2. Fast direct attempt fallback with 1.2s timeout
             try:
                 url = ENDPOINT.format(roll=roll_str)
-                r = direct_session.get(url, timeout=2.0)
+                r = direct_session.get(url, timeout=1.2)
                 if r.status_code == 200:
                     parsed = parse_student_html(r.text, roll_str)
                     if parsed:
