@@ -8,12 +8,6 @@ import logging
 
 logging.getLogger("asyncio").setLevel(logging.CRITICAL)
 
-if sys.platform == "win32":
-    try:
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    except Exception:
-        pass
-
 PROXY_SOURCES = [
     # Fast APIs
     "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http,https&timeout=10000&country=all&ssl=all&anonymity=all",
@@ -107,13 +101,13 @@ async def harvest_and_verify_proxies(needed=85, max_candidates=4000, silent=True
         pass
 
     t0 = time.time()
-    connector = aiohttp.TCPConnector(ssl=False, limit=400)
+    connector = aiohttp.TCPConnector(ssl=False, limit=120)
     async with aiohttp.ClientSession(connector=connector) as session:
         tasks = [fetch_source(session, url) for url in PROXY_SOURCES]
         results = await asyncio.gather(*tasks)
         all_proxies = list(dict.fromkeys(ip for sublist in results for ip in sublist))
 
-        sem = asyncio.Semaphore(300)
+        sem = asyncio.Semaphore(100)
         working_proxies = []
         check_tasks = [
             check_proxy_node(session, p, working_proxies, sem, needed=needed, silent=silent)

@@ -23,13 +23,6 @@ sys.path.insert(0, BASE_DIR)
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding='utf-8')
 
-if sys.platform == "win32":
-    import asyncio
-    try:
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    except Exception:
-        pass
-
 # Completely mute noisy debug/info/connectionpool logs from the terminal
 logging.disable(logging.INFO)
 logging.basicConfig(level=logging.WARNING)
@@ -94,21 +87,19 @@ class FastProxyPool:
         self.proxies: List[str] = []
         self.cache_file = os.path.join(BASE_DIR, "working_proxies.txt")
 
-    def load_and_verify(self, max_candidates: int = 4000, max_valid: int = 90) -> List[str]:
-        # 1. Check local cached proxies if recent (<15 minutes)
+    def load_and_verify(self, max_candidates: int = 1500, max_valid: int = 90) -> List[str]:
+        # 1. Instantly load from local verified proxy cache if available (0.00s startup)
         if os.path.exists(self.cache_file):
             try:
-                mtime = os.path.getmtime(self.cache_file)
-                if time.time() - mtime < 900:
-                    with open(self.cache_file, "r", encoding="utf-8") as f:
-                        cached = [line.strip() for line in f if ":" in line.strip()]
-                    if len(cached) >= 40:
-                        self.proxies = cached[:max_valid]
-                        return self.proxies
+                with open(self.cache_file, "r", encoding="utf-8") as f:
+                    cached = [line.strip() for line in f if ":" in line.strip()]
+                if len(cached) >= 20:
+                    self.proxies = cached[:max_valid]
+                    return self.proxies
             except Exception:
                 pass
 
-        # 2. Run high-concurrency async verification across 35 sources
+        # 2. Run fast async verification across 35 sources
         try:
             import asyncio
             from engine.proxy_manager import harvest_and_verify_proxies
