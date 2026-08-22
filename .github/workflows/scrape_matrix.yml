@@ -12,8 +12,8 @@ on:
         required: false
         default: 'https://dinajpur-scraper-live.loca.lt/api/webhook/stream-record'
   push:
-    paths:
-      - 'rolls.json'
+    branches:
+      - main
 
 jobs:
   scrape_matrix:
