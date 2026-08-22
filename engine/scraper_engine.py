@@ -13,7 +13,6 @@ from bs4 import BeautifulSoup
 from .captcha_solver import NumericalCaptchaSolver
 from .parser_utils import parse_html_to_json
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
 
