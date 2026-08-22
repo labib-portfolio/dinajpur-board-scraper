@@ -243,21 +243,22 @@ def run_scraper_cli():
     seen_rolls = set(already_scraped_map.keys())
 
     def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-        # 1. Try with proxy node
+        # 1. Try rotating through verified proxy nodes
         if proxies:
-            p = proxies[worker_idx % len(proxies)]
-            prox = {"http": f"http://{p}", "https": f"http://{p}"}
-            try:
-                url = ENDPOINT.format(roll=roll_str)
-                r = requests.get(url, proxies=prox, timeout=5)
-                if r.status_code == 200:
-                    parsed = parse_student_html(r.text, roll_str)
-                    if parsed:
-                        return parsed
-            except Exception:
-                pass
+            for offset in range(min(5, len(proxies))):
+                p = proxies[(worker_idx + offset) % len(proxies)]
+                prox = {"http": f"http://{p}", "https": f"http://{p}"}
+                try:
+                    url = ENDPOINT.format(roll=roll_str)
+                    r = requests.get(url, proxies=prox, timeout=4.5)
+                    if r.status_code == 200:
+                        parsed = parse_student_html(r.text, roll_str)
+                        if parsed:
+                            return parsed
+                except Exception:
+                    pass
 
-        # 2. Direct with retry
+        # 2. Fallback to direct request with backoff
         for att in range(1, 4):
             try:
                 url = ENDPOINT.format(roll=roll_str)
@@ -267,9 +268,9 @@ def run_scraper_cli():
                     if parsed:
                         return parsed
                 elif r.status_code == 429:
-                    time.sleep(1.5 * att)
+                    time.sleep(2.0 * att)
             except Exception:
-                time.sleep(0.8)
+                time.sleep(1.0)
         return None
 
     def save_record_to_upazilla(r: Dict[str, Any]):
