@@ -188,12 +188,10 @@ def main():
         print(f"\n{CYAN}{BOLD}⚡ 100 GITHUB ACTIONS CLOUD VMs ARE NOW RUNNING IN PARALLEL!{RESET}")
         print(f"[*] Cloud workers are scraping at ~80-100 rolls/sec...")
 
-        # 3. Live Event-Driven Remote Poller (15s quiet interval, prints only on node completion)
+        # 3. Live Event-Driven Remote Poller (Queries GitHub Actions API every 15s for exact completion)
         print(f"\n[*] Waiting for all 5 cloud repositories to complete scraping (checking every 15s)...")
         start_wait = time.time()
         
-        res = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True)
-        pushed_hash = res.stdout.strip()
         node_status = {name: False for name, _ in REPOS}
 
         while not all(node_status.values()):
@@ -205,17 +203,24 @@ def main():
             for remote_name, repo_path in REPOS:
                 if not node_status[remote_name]:
                     try:
-                        ls_res = subprocess.run(["git", "ls-remote", remote_name, "refs/heads/main"], capture_output=True, text=True, timeout=10)
-                        remote_hash = ls_res.stdout.split()[0] if ls_res.stdout else ""
-                        if remote_hash and remote_hash != pushed_hash:
-                            node_status[remote_name] = True
-                            display_name = "NODE 1 (ORIGIN)" if remote_name == "origin" else remote_name.upper()
-                            print(f"  • [{time_tag}] {display_name:<16} {GREEN}✓ 20 Cloud VMs Finished & Pushed Results!{RESET}")
+                        api_url = f"https://api.github.com/repos/{repo_path}/actions/runs"
+                        r = requests.get(api_url, headers={"User-Agent": "Mozilla/5.0"}, timeout=8)
+                        if r.status_code == 200:
+                            runs = r.json().get("workflow_runs", [])
+                            if runs:
+                                latest_run = runs[0]
+                                run_status = latest_run.get("status")
+                                run_conclusion = latest_run.get("conclusion")
+                                if run_status == "completed":
+                                    node_status[remote_name] = True
+                                    display_name = "NODE 1 (ORIGIN)" if remote_name == "origin" else remote_name.upper()
+                                    col = GREEN if run_conclusion == "success" else YELLOW
+                                    print(f"  • [{time_tag}] {display_name:<16} {col}✓ 20 Cloud VMs Finished! ({run_conclusion}){RESET}")
                     except Exception:
                         pass
 
-            if elapsed_wait >= 600:
-                print(f"  {YELLOW}[!] Reached maximum wait time (10m). Proceeding with completed nodes...{RESET}")
+            if elapsed_wait >= 900:
+                print(f"  {YELLOW}[!] Reached maximum wait time (15m). Proceeding with completed nodes...{RESET}")
                 break
 
         print(f"\n{GREEN}{BOLD}[✓] All active cloud repositories finished! Pulling results into local storage...{RESET}")
