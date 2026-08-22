@@ -284,13 +284,14 @@ def run_cloud_cli():
                             rec["index"] = i
 
                         passed_count = sum(1 for item in all_upz_records if "GPA" in str(item.get("result", "")))
-                        unique_eiins = {item.get("eiin") for item in all_upz_records if item.get("eiin")}
+                        unique_eiins = sorted(list({int(item.get("eiin")) for item in all_upz_records if item.get("eiin")}))
 
                         upz_data["summary"] = {
                             "total_records": len(all_upz_records),
                             "total_passed": passed_count,
                             "total_failed": len(all_upz_records) - passed_count,
                             "institutions_count": len(unique_eiins),
+                            "scraped_eiins": unique_eiins,
                             "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
                         }
                         upz_data["records"] = all_upz_records
