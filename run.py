@@ -208,7 +208,7 @@ def run_scraper_cli():
             spare_proxies = max(0, len(proxies) - num_workers)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
-        # Build persistent Keep-Alive session pool across all verified proxy nodes
+        # Build persistent Keep-Alive session pool with Dynamic Adaptive Latency Scoring
         proxy_sessions = []
         for p in proxies:
             s = requests.Session()
@@ -221,7 +221,13 @@ def run_scraper_cli():
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 "Connection": "keep-alive"
             })
-            proxy_sessions.append(s)
+            proxy_sessions.append({
+                "ip": p,
+                "session": s,
+                "latency": 0.25,
+                "success_count": 0,
+                "fail_count": 0
+            })
 
         direct_session = requests.Session()
         direct_adapter = HTTPAdapter(pool_connections=50, pool_maxsize=50)
@@ -233,9 +239,27 @@ def run_scraper_cli():
             "Connection": "keep-alive"
         })
 
+        pool_lock = threading.Lock()
+
+        def get_top_proxies(count=35):
+            with pool_lock:
+                sorted_pool = sorted(proxy_sessions, key=lambda x: x["latency"])
+                return sorted_pool[:count]
+
+        def update_proxy_metric(proxy_item, latency_val, success=True):
+            with pool_lock:
+                if success:
+                    proxy_item["latency"] = 0.7 * proxy_item["latency"] + 0.3 * latency_val
+                    proxy_item["success_count"] += 1
+                    proxy_item["fail_count"] = 0
+                else:
+                    proxy_item["latency"] += 2.0  # Instantly penalize slow/failed proxy so it sinks
+                    proxy_item["fail_count"] += 1
+
         print(f"\n=======================================================")
         print(f"🚀 {BOLD}ENGINE PIPELINE CONFIGURATION:{RESET}")
         print(f"  • Active Proxy Pool:       {GREEN}{BOLD}{len(proxies)} Verified Nodes{RESET}")
+        print(f"  • Adaptive Fast Routing:   {GREEN}{BOLD}Dynamic Latency Scoring (Fastest-First Queue){RESET}")
         print(f"  • Concurrent Workers:      {CYAN}{BOLD}{num_workers} Parallel Threads{RESET}")
         print(f"  • Standby Failover Spares: {YELLOW}{BOLD}{spare_proxies} Spare Proxies{RESET}")
         print(f"  • Connection Mode:         {GREEN}Persistent Keep-Alive Session Pool (100% Retained){RESET}")
@@ -326,25 +350,31 @@ def run_scraper_cli():
                     pass
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-            # 1. Rotate through up to 4 persistent proxy sessions with 1.8s timeout
-            if proxy_sessions:
-                num_sessions = len(proxy_sessions)
-                for offset in range(min(4, num_sessions)):
-                    sess = proxy_sessions[(worker_idx * 3 + offset) % num_sessions]
+            # 1. Rotate through top fastest proxy sessions with 1.2s rapid timeout
+            top_pool = get_top_proxies(count=min(35, len(proxy_sessions)))
+            if top_pool:
+                num_sessions = len(top_pool)
+                for offset in range(min(3, num_sessions)):
+                    item = top_pool[(worker_idx * 3 + offset) % num_sessions]
+                    sess = item["session"]
+                    t_start = time.time()
                     try:
                         url = ENDPOINT.format(roll=roll_str)
-                        r = sess.get(url, timeout=1.8)
+                        r = sess.get(url, timeout=1.2)
+                        elapsed = time.time() - t_start
                         if r.status_code == 200:
                             parsed = parse_student_html(r.text, roll_str)
                             if parsed:
+                                update_proxy_metric(item, elapsed, success=True)
                                 return parsed
+                        update_proxy_metric(item, elapsed, success=False)
                     except Exception:
-                        pass
+                        update_proxy_metric(item, 1.2, success=False)
 
-            # 2. Fast direct attempt fallback with 2.0s timeout
+            # 2. Fast direct attempt fallback with 1.5s timeout
             try:
                 url = ENDPOINT.format(roll=roll_str)
-                r = direct_session.get(url, timeout=2.0)
+                r = direct_session.get(url, timeout=1.5)
                 if r.status_code == 200:
                     parsed = parse_student_html(r.text, roll_str)
                     if parsed:
