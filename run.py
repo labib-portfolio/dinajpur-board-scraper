@@ -245,41 +245,57 @@ def run_cloud_cli():
 
                         print(f"{CYAN}{p_bar}{RESET} {received_count:4d}/{target_count}  Roll {r_roll}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
 
-                        # Route record to its respective Upazilla JSON
+                        # Incremental Merge: Save/Update record without overwriting previous schools
                         meta = roll_metadata_map.get(r_roll, {})
-                        upz_name = meta.get("upazila") or r.get("upazilla") or "UNKNOWN_UPAZILLA"
+                        upz_name = meta.get("upazila") or r.get("upazila") or r.get("upazilla") or "UNKNOWN_UPAZILLA"
                         upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upz_name.strip().lower()).strip('_')
                         upz_file = os.path.join(output_base, f"results_upazilla_{upz_slug}.json")
 
-                        if upz_slug not in upazilla_records_map:
-                            upazilla_records_map[upz_slug] = []
-                            if os.path.exists(upz_file):
-                                try:
-                                    with open(upz_file, 'r', encoding='utf-8') as uf:
-                                        upazilla_records_map[upz_slug] = json.load(uf).get("records", [])
-                                except Exception:
-                                    pass
-
-                        r["upazila"] = upz_name
-                        r["district"] = meta.get("district", "NILPHAMARI")
-                        r["eiin"] = meta.get("eiin")
-                        upazilla_records_map[upz_slug].append(r)
-
-                        # Save Upazilla file checkpoint
-                        upz_payload = {
+                        # Load current Upazilla data from disk to ensure persistence across all runs
+                        upz_data = {
                             "upazila": upz_name,
                             "district": meta.get("district", "NILPHAMARI"),
-                            "summary": {
-                                "total_records": len(upazilla_records_map[upz_slug]),
-                                "total_passed": sum(1 for item in upazilla_records_map[upz_slug] if "GPA" in str(item.get("result", ""))),
-                                "total_failed": sum(1 for item in upazilla_records_map[upz_slug] if not ("GPA" in str(item.get("result", "")))),
-                                "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
-                            },
-                            "records": upazilla_records_map[upz_slug]
+                            "summary": {"total_records": 0, "total_passed": 0, "total_failed": 0, "institutions_count": 0, "last_updated": ""},
+                            "records": []
                         }
+                        if os.path.exists(upz_file):
+                            try:
+                                with open(upz_file, 'r', encoding='utf-8') as uf:
+                                    upz_data = json.load(uf)
+                            except Exception:
+                                pass
 
-                        with open(upz_file, 'w', encoding='utf-8') as out_f:
-                            json.dump(upz_payload, out_f, indent=2, ensure_ascii=False)
+                        # Index existing records by roll_no to prevent duplicates while appending new
+                        existing_roll_map = {str(item.get("roll_no")): item for item in upz_data.get("records", [])}
+
+                        r["upazila"] = upz_name
+                        r["district"] = meta.get("district", upz_data.get("district", "NILPHAMARI"))
+                        if meta.get("eiin"): r["eiin"] = meta.get("eiin")
+                        if meta.get("institute"): r["institute"] = meta.get("institute")
+
+                        existing_roll_map[r_roll] = r
+
+                        # Recalculate Upazilla statistics
+                        all_upz_records = list(existing_roll_map.values())
+                        for i, rec in enumerate(all_upz_records, 1):
+                            rec["index"] = i
+
+                        passed_count = sum(1 for item in all_upz_records if "GPA" in str(item.get("result", "")))
+                        unique_eiins = {item.get("eiin") for item in all_upz_records if item.get("eiin")}
+
+                        upz_data["summary"] = {
+                            "total_records": len(all_upz_records),
+                            "total_passed": passed_count,
+                            "total_failed": len(all_upz_records) - passed_count,
+                            "institutions_count": len(unique_eiins),
+                            "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
+                        }
+                        upz_data["records"] = all_upz_records
+
+                        temp_upz_file = upz_file + ".tmp"
+                        with open(temp_upz_file, 'w', encoding='utf-8') as out_f:
+                            json.dump(upz_data, out_f, indent=2, ensure_ascii=False)
+                        os.replace(temp_upz_file, upz_file)
             except Exception:
                 pass
 
