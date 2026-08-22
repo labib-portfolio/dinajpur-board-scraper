@@ -84,15 +84,15 @@ class FastProxyPool:
         self.proxies: List[str] = []
         self.cache_file = os.path.join(BASE_DIR, "working_proxies.txt")
 
-    def load_and_verify(self, max_candidates: int = 1000, max_valid: int = 35) -> List[str]:
-        # 1. Check local cached proxies if recent (<5 minutes)
+    def load_and_verify(self, max_candidates: int = 2500, max_valid: int = 50) -> List[str]:
+        # 1. Check local cached proxies if recent (<15 minutes)
         if os.path.exists(self.cache_file):
             try:
                 mtime = os.path.getmtime(self.cache_file)
-                if time.time() - mtime < 300:
+                if time.time() - mtime < 900:
                     with open(self.cache_file, "r", encoding="utf-8") as f:
                         cached = [line.strip() for line in f if ":" in line.strip()]
-                    if len(cached) >= 20:
+                    if len(cached) >= 15:
                         self.proxies = cached[:max_valid]
                         return self.proxies
             except Exception:
@@ -119,7 +119,7 @@ class FastProxyPool:
         def test_p(p):
             try:
                 prox = {"http": f"http://{p}", "https": f"http://{p}"}
-                r = requests.get(test_url, proxies=prox, timeout=3.0)
+                r = requests.get(test_url, proxies=prox, timeout=3.5)
                 if r.status_code == 200 and "Student Result" in r.text:
                     return p
             except Exception:
@@ -127,7 +127,7 @@ class FastProxyPool:
             return None
 
         valid = []
-        with concurrent.futures.ThreadPoolExecutor(max_workers=80) as ex:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=100) as ex:
             for res in ex.map(test_p, candidate_list):
                 if res:
                     valid.append(res)
@@ -329,9 +329,9 @@ def run_scraper_cli():
         # ==========================================
         print(f"\n{CYAN}[Step 2/2] Launching Ultra-Fast Local Engine for {len(pending_rolls)} Rolls...{RESET}")
         
-        if len(proxies) < 10:
+        if len(proxies) < 15:
             print(f"{DIM}Verifying dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
-            proxies = proxy_pool.load_and_verify(max_candidates=1000, max_valid=35)
+            proxies = proxy_pool.load_and_verify(max_candidates=2500, max_valid=50)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
         target_count = len(pending_rolls)
@@ -439,7 +439,7 @@ def run_scraper_cli():
             if pass_num > 1:
                 print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(current_rolls_to_scrape)} unretrieved roll(s) with fresh proxies...{RESET}")
                 # Refresh proxy pool for fresh nodes
-                proxies = proxy_pool.load_and_verify(max_candidates=1000, max_valid=35)
+                proxies = proxy_pool.load_and_verify(max_candidates=2500, max_valid=50)
                 time.sleep(1.0)
 
             max_workers = min(20, len(current_rolls_to_scrape)) if len(current_rolls_to_scrape) > 0 else 1
