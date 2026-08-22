@@ -161,7 +161,11 @@ def run_scraper_cli():
     os.makedirs(results_root, exist_ok=True)
     
     proxy_pool = FastProxyPool()
-    proxies = []
+    print(f"{DIM}Checking dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
+    proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
+    num_workers = min(50, len(proxies)) if len(proxies) > 0 else 20
+    spare_proxies = max(0, len(proxies) - num_workers)
+    print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready! ({num_workers} Workers + {spare_proxies} Standby Spares){RESET}\n")
 
     while True:
         eiins = get_eiin_inputs()
@@ -197,14 +201,13 @@ def run_scraper_cli():
             except Exception:
                 pass
 
-        # Verify proxy pool
+        # Ensure proxy pool is active
         if len(proxies) < 30:
-            print(f"{DIM}Verifying dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
+            print(f"{DIM}Refreshing proxy pool...{RESET}", end="", flush=True)
             proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
+            num_workers = min(50, len(proxies)) if len(proxies) > 0 else 20
+            spare_proxies = max(0, len(proxies) - num_workers)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
-
-        num_workers = min(50, len(proxies)) if len(proxies) > 0 else 20
-        spare_proxies = max(0, len(proxies) - num_workers)
 
         # Build persistent Keep-Alive session pool (1 session per proxy node)
         proxy_sessions = []
@@ -218,7 +221,7 @@ def run_scraper_cli():
             })
             proxy_sessions.append(s)
 
-        print(f"=======================================================")
+        print(f"\n=======================================================")
         print(f"🚀 {BOLD}ENGINE PIPELINE CONFIGURATION:{RESET}")
         print(f"  • Active Proxy Pool:       {GREEN}{BOLD}{len(proxies)} Verified Nodes{RESET}")
         print(f"  • Concurrent Workers:      {CYAN}{BOLD}{num_workers} Parallel Threads{RESET}")
@@ -407,11 +410,17 @@ def run_scraper_cli():
                                 queued_for_inst += 1
 
                 with print_lock:
-                    queue_info = f" -> {GREEN}+{queued_for_inst} streaming to workers{RESET}" if queued_for_inst > 0 else " (All previously scraped)"
-                    print(f"\r  [{idx}/{len(eiins)}] Harvested EIIN {eiin}... {source_tag} {inst_name[:30]} ({len(rolls)} rolls{abs_info}){queue_info}  ")
+                    if is_cached:
+                        print(f"\r  ⚡ Reading Cached Gazettes: [{idx}/{len(eiins)}] {inst_name[:30]} ({len(rolls)} rolls)...   ", end="", flush=True)
+                    else:
+                        queue_info = f" -> {GREEN}+{queued_for_inst} streaming to workers{RESET}" if queued_for_inst > 0 else " (All previously scraped)"
+                        print(f"\r  [{idx}/{len(eiins)}] Harvested EIIN {eiin}... {GREEN}✓{RESET} {inst_name[:30]} ({len(rolls)} rolls{abs_info}){queue_info}  ")
 
                 if not is_cached:
                     time.sleep(2.5)
+
+            with print_lock:
+                print(f"\r  {GREEN}✓ Loaded all {len(eiins)} institutions ({total_appeared_count} appeared rolls, {already_scraped_count} already scraped){RESET}      \n")
 
             harvest_done.set()
 
