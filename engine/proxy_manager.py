@@ -62,7 +62,7 @@ async def fetch_source(session, url):
         pass
     return []
 
-async def check_proxy_node(session, proxy, working_list, sem, needed=30):
+async def check_proxy_node(session, proxy, working_list, sem, needed=50, silent=True):
     if len(working_list) >= needed:
         return
     async with sem:
@@ -76,30 +76,26 @@ async def check_proxy_node(session, proxy, working_list, sem, needed=30):
                     text = await resp.text()
                     if "Student Result" in text:
                         working_list.append(proxy)
-                        print(f"  [+] Active Dinajpur Proxy: {proxy} (Total: {len(working_list)})")
+                        if not silent:
+                            print(f"  [+] Active Dinajpur Proxy: {proxy} (Total: {len(working_list)})")
         except Exception:
             pass
 
-async def harvest_and_verify_proxies(needed=30, max_candidates=250):
+async def harvest_and_verify_proxies(needed=50, max_candidates=2500, silent=True):
     t0 = time.time()
-    connector = aiohttp.TCPConnector(ssl=False, limit=300)
+    connector = aiohttp.TCPConnector(ssl=False, limit=350)
     async with aiohttp.ClientSession(connector=connector) as session:
-        print(f"Harvesting raw proxies from {len(PROXY_SOURCES)} sources...")
         tasks = [fetch_source(session, url) for url in PROXY_SOURCES]
         results = await asyncio.gather(*tasks)
         all_proxies = list(dict.fromkeys(ip for sublist in results for ip in sublist))
-        print(f"Harvested {len(all_proxies)} unique candidate proxies in {time.time()-t0:.2f}s.")
 
-        print(f"Testing responsiveness directly on Dinajpur Board target...")
-        sem = asyncio.Semaphore(150)
+        sem = asyncio.Semaphore(250)
         working_proxies = []
         check_tasks = [
-            check_proxy_node(session, p, working_proxies, sem, needed=needed)
+            check_proxy_node(session, p, working_proxies, sem, needed=needed, silent=silent)
             for p in all_proxies[:max_candidates]
         ]
         await asyncio.gather(*check_tasks)
-        
-        print(f"Verification complete: {len(working_proxies)} live proxies ready in {time.time()-t0:.2f}s!")
         return working_proxies
 
 if __name__ == "__main__":

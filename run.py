@@ -92,55 +92,28 @@ class FastProxyPool:
                 if time.time() - mtime < 900:
                     with open(self.cache_file, "r", encoding="utf-8") as f:
                         cached = [line.strip() for line in f if ":" in line.strip()]
-                    if len(cached) >= 15:
+                    if len(cached) >= 20:
                         self.proxies = cached[:max_valid]
                         return self.proxies
             except Exception:
                 pass
 
-        # 2. Harvest raw proxies from all 35 sources concurrently
-        raw_proxies = set()
-        def fetch_src(src_url):
-            try:
-                r = requests.get(src_url, timeout=3.5)
-                if r.status_code == 200:
-                    return re.findall(r"\b(?:\d{1,3}\.){3}\d{1,3}:\d{2,5}\b", r.text)
-            except Exception:
-                pass
-            return []
+        # 2. Run high-concurrency async verification across 35 sources
+        try:
+            import asyncio
+            from engine.proxy_manager import harvest_and_verify_proxies
+            valid = asyncio.run(harvest_and_verify_proxies(needed=max_valid, max_candidates=max_candidates))
+            if valid:
+                self.proxies = valid[:max_valid]
+                try:
+                    with open(self.cache_file, "w", encoding="utf-8") as f:
+                        f.write("\n".join(self.proxies))
+                except Exception:
+                    pass
+                return self.proxies
+        except Exception:
+            pass
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=35) as ex:
-            for found_ips in ex.map(fetch_src, PROXY_SOURCES):
-                raw_proxies.update(found_ips)
-
-        candidate_list = list(raw_proxies)[:max_candidates]
-        test_url = ENDPOINT.format(roll="217305")
-
-        def test_p(p):
-            try:
-                prox = {"http": f"http://{p}", "https": f"http://{p}"}
-                r = requests.get(test_url, proxies=prox, timeout=3.5)
-                if r.status_code == 200 and "Student Result" in r.text:
-                    return p
-            except Exception:
-                pass
-            return None
-
-        valid = []
-        with concurrent.futures.ThreadPoolExecutor(max_workers=100) as ex:
-            for res in ex.map(test_p, candidate_list):
-                if res:
-                    valid.append(res)
-                    if len(valid) >= max_valid:
-                        break
-
-        self.proxies = valid
-        if valid:
-            try:
-                with open(self.cache_file, "w", encoding="utf-8") as f:
-                    f.write("\n".join(valid))
-            except Exception:
-                pass
         return self.proxies
 
 def print_banner():
