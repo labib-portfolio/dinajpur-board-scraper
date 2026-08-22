@@ -164,6 +164,38 @@ async def harvest_and_verify_proxies(needed=120, max_candidates=35000, silent=Tr
         working_proxies.sort(key=lambda x: x[1])
         return [p for p, _ in working_proxies]
 
+class FastProxyPool:
+    def __init__(self, cache_file: str = "working_proxies.txt"):
+        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        self.cache_file = os.path.join(base_dir, cache_file)
+        self.proxies: list[str] = []
+
+    def load_and_verify(self, max_candidates: int = 4000, max_valid: int = 90) -> list[str]:
+        if os.path.exists(self.cache_file):
+            try:
+                with open(self.cache_file, "r", encoding="utf-8") as f:
+                    cached = [line.strip() for line in f if ":" in line.strip()]
+                    if len(cached) >= 20:
+                        self.proxies = cached
+                        return self.proxies
+            except Exception:
+                pass
+
+        try:
+            valid = asyncio.run(harvest_and_verify_proxies(needed=max_valid, max_candidates=max_candidates))
+            if valid:
+                self.proxies = valid[:max_valid]
+                try:
+                    with open(self.cache_file, "w", encoding="utf-8") as f:
+                        f.write("\n".join(self.proxies))
+                except Exception:
+                    pass
+                return self.proxies
+        except Exception:
+            pass
+
+        return self.proxies
+
 if __name__ == "__main__":
     live_proxies = asyncio.run(harvest_and_verify_proxies(needed=120, max_candidates=35000, silent=False, max_latency=4.0))
     cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "working_proxies.txt")
