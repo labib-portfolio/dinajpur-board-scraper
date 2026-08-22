@@ -10,6 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 from collections import Counter
 from typing import Dict, Any, Optional, List, Callable
+from urllib.parse import urljoin
 
 
 class InstituteResultFetcher:
@@ -26,47 +27,60 @@ class InstituteResultFetcher:
             "Referer": f"{self.base_url}/search/institute"
         })
 
-    def _solve_gateway(self, soup: BeautifulSoup) -> bool:
+    def _solve_gateway(self, soup: BeautifulSoup, current_url: str) -> bool:
         """Solves the symbol challenge (human check) on the gateway."""
         try:
-            token_elem = soup.find('input', {'name': '_token'})
-            challenge_elem = soup.find('input', {'name': 'challenge_token'})
-            if not token_elem or not challenge_elem:
+            form = soup.find('form', class_='challenge-form') or soup.find('form')
+            if not form:
                 return False
 
-            token = token_elem['value']
-            challenge_token = challenge_elem['value']
+            action = form.get('action') or current_url
+            action_url = urljoin(current_url, action)
+
+            # Extract tokens
+            payload = {}
+            for h in form.find_all('input', {'type': 'hidden'}):
+                if h.get('name'):
+                    payload[h.get('name')] = h.get('value', '')
+
+            # Parse symbol choices
             choices = soup.select('.symbol-choice')
             if not choices:
                 return False
 
             symbols = []
             for c in choices:
-                val_input = c.find('input')
-                span = c.find('span', {'aria-hidden': 'true'})
-                if val_input and span:
-                    symbols.append((val_input['value'], span.get_text(strip=True)))
+                inp = c.find('input')
+                sym_el = c.find('span', {'aria-hidden': 'true'}) or c
+                sym = sym_el.get_text(strip=True)
+                if inp:
+                    symbols.append((inp.get('value', '0'), sym))
 
             if not symbols:
                 return False
 
+            # Find the odd one out
             counts = Counter([sym for val, sym in symbols])
             odd_sym = min(counts, key=counts.get)
             ans_val = next(val for val, sym in symbols if sym == odd_sym)
+
+            payload['answer'] = ans_val
+            self.session.headers.update({"Referer": current_url})
+            time.sleep(0.2)
+            resp = self.session.post(action_url, data=payload, timeout=15)
             
-            resp = self.session.post(
-                f"{self.base_url}/result-check",
-                data={'_token': token, 'challenge_token': challenge_token, 'answer': ans_val},
-                timeout=15
-            )
-            time.sleep(0.3)
+            if resp.status_code == 429:
+                retry_after = int(resp.headers.get("Retry-After", 15))
+                time.sleep(min(retry_after + 1, 35))
+                return False
+
             return resp.status_code in [200, 302]
         except Exception:
             return False
 
     def _unlock_session(self, status_callback: Optional[Callable[[str], None]] = None) -> Optional[str]:
         url = f"{self.base_url}/search/institute"
-        for attempt in range(1, 6):
+        for attempt in range(1, 7):
             try:
                 r = self.session.get(url, timeout=15)
                 
@@ -75,7 +89,7 @@ class InstituteResultFetcher:
                     retry_after = int(r.headers.get("Retry-After", 15))
                     cooldown = min(retry_after + 1, 35)
                     if status_callback:
-                        status_callback(f"Rate limited (429). Waiting {cooldown}s cooldown... (Attempt {attempt}/5)")
+                        status_callback(f"Rate limited (429). Waiting {cooldown}s cooldown... (Attempt {attempt}/6)")
                     time.sleep(cooldown)
                     self.reset_session()
                     continue
@@ -83,21 +97,25 @@ class InstituteResultFetcher:
                 soup = BeautifulSoup(r.text, 'html.parser')
                 
                 # Check if gateway challenge is present
-                if soup.find('form', class_='challenge-form'):
+                if soup.find('form', class_='challenge-form') or 'Find the different symbol' in r.text:
                     if status_callback:
-                        status_callback(f"Solving gateway pattern challenge... (Attempt {attempt}/5)")
-                    solved = self._solve_gateway(soup)
+                        status_callback(f"Solving gateway pattern challenge... (Attempt {attempt}/6)")
+                    solved = self._solve_gateway(soup, r.url)
                     if not solved:
                         time.sleep(1.0)
                         self.reset_session()
                         continue
-                    time.sleep(0.4)
-                    continue
+                    time.sleep(0.5)
+                    # Fetch search form after unlock
+                    r_after = self.session.get(url, timeout=15)
+                    soup = BeautifulSoup(r_after.text, 'html.parser')
                 
-                form = soup.find('form')
-                if form and form.find('input', {'name': '_token'}):
-                    return form.find('input', {'name': '_token'})['value']
-            except Exception as e:
+                # Verify search form has eiin_no
+                if soup.find('input', {'name': 'eiin_no'}):
+                    token_el = soup.find('input', {'name': '_token'})
+                    if token_el:
+                        return token_el['value']
+            except Exception:
                 time.sleep(1.0)
         return None
 
