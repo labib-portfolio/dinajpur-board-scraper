@@ -147,12 +147,38 @@ def run_scraper_cli():
         roll_metadata_map = {}
         upazilla_summary = {}
 
-        for idx, eiin in enumerate(eiins, 1):
-            def on_retry_status(msg):
-                print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {YELLOW}🔄 {msg}{RESET}   ", end="", flush=True)
+        cache_dir = os.path.join(BASE_DIR, "cache", "institutions")
+        os.makedirs(cache_dir, exist_ok=True)
 
-            print(f"  [{idx}/{len(eiins)}] Querying EIIN {eiin}...", end="", flush=True)
-            inst_data = fetcher.fetch_by_eiin(eiin, status_callback=on_retry_status)
+        for idx, eiin in enumerate(eiins, 1):
+            cache_file = os.path.join(cache_dir, f"eiin_{eiin}.json")
+            inst_data = None
+
+            # 1. Check local institution cache for instant resume
+            if os.path.exists(cache_file):
+                try:
+                    with open(cache_file, "r", encoding="utf-8") as cf:
+                        inst_data = json.load(cf)
+                except Exception:
+                    inst_data = None
+
+            is_cached = False
+            if inst_data and inst_data.get("name") and "students" in inst_data:
+                is_cached = True
+            else:
+                def on_retry_status(msg):
+                    print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {YELLOW}🔄 {msg}{RESET}   ", end="", flush=True)
+
+                print(f"  [{idx}/{len(eiins)}] Querying EIIN {eiin}...", end="", flush=True)
+                inst_data = fetcher.fetch_by_eiin(eiin, status_callback=on_retry_status)
+                if inst_data and not inst_data.get("error") and inst_data.get("name"):
+                    try:
+                        with open(cache_file, "w", encoding="utf-8") as cf:
+                            json.dump(inst_data, cf, indent=2, ensure_ascii=False)
+                    except Exception:
+                        pass
+                else:
+                    time.sleep(0.3)
 
             if not inst_data or "error" in inst_data or not inst_data.get("name"):
                 print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {RED}Failed (Not found or unreachable){RESET}  ")
@@ -169,7 +195,8 @@ def run_scraper_cli():
             
             rolls = [str(s["roll"]) for s in appeared_students if s.get("roll")]
             abs_info = f", {abs_count} absent excluded" if abs_count > 0 else ""
-            print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {GREEN}✓ {inst_name[:36]} ({len(rolls)} appeared rolls{abs_info}){RESET}  ")
+            source_tag = f"{CYAN}⚡ (Cached){RESET}" if is_cached else f"{GREEN}✓{RESET}"
+            print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {source_tag} {inst_name[:36]} ({len(rolls)} appeared rolls{abs_info})  ")
 
             upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upazila.strip().lower()).strip('_')
             if upz_slug not in upazilla_summary:
@@ -187,7 +214,8 @@ def run_scraper_cli():
                     "group": s.get("group")
                 }
 
-            time.sleep(0.3)
+            if not is_cached:
+                time.sleep(0.3)
 
         all_unique_rolls = list(dict.fromkeys(all_target_rolls))
 
