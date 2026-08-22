@@ -6,7 +6,7 @@ on:
       delay:
         description: 'Delay between requests (seconds)'
         required: false
-        default: '2.0'
+        default: '3.2'
       webhook_url:
         description: 'Optional live stream Webhook / API URL'
         required: false
@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        chunk: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] # 10 parallel VM runners
+        chunk: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19] # 20 parallel VM runners
 
     steps:
       - name: Checkout repository
@@ -36,7 +36,7 @@ jobs:
 
       - name: Run Scraper Chunk ${{ matrix.chunk }}
         run: |
-          python scrape_chunk.py --chunk ${{ matrix.chunk }} --total-chunks 10 --input rolls.json --output chunks_output/chunk_${{ matrix.chunk }}.json --delay ${{ github.event.inputs.delay || '2.0' }} --webhook-url "${{ github.event.inputs.webhook_url || '' }}"
+          python scrape_chunk.py --chunk ${{ matrix.chunk }} --total-chunks 20 --input rolls.json --output chunks_output/chunk_${{ matrix.chunk }}.json --delay ${{ github.event.inputs.delay || '3.2' }} --webhook-url "${{ github.event.inputs.webhook_url || '' }}"
 
       - name: Upload Chunk Artifact
         uses: actions/upload-artifact@v4
