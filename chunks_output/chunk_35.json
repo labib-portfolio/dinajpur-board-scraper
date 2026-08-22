@@ -1,0 +1,30 @@
+{
+  "chunk_index": 35,
+  "total_chunks": 100,
+  "summary": {
+    "total_in_chunk": 1,
+    "scraped_so_far": 1,
+    "total_success": 1,
+    "total_failed": 0,
+    "elapsed_seconds": 7.11,
+    "last_updated": "2026-08-22 16:58:52"
+  },
+  "records": [
+    {
+      "index": 36,
+      "roll_no": "183537",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD. MEHEDI HASAN",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.56",
+      "total_marks": "823",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:58:52"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "chunk_index": 38,
+  "total_chunks": 100,
+  "summary": {
+    "total_in_chunk": 1,
+    "scraped_so_far": 1,
+    "total_success": 1,
+    "total_failed": 0,
+    "elapsed_seconds": 8.21,
+    "last_updated": "2026-08-22 16:59:11"
+  },
+  "records": [
+    {
+      "index": 39,
+      "roll_no": "760047",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MOST. RIFA AKTER",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "FAILED(F3)",
+      "total_marks": "FAILED",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:59:11"
+    }
+  ]
+}

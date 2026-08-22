@@ -1,0 +1,30 @@
+{
+  "chunk_index": 24,
+  "total_chunks": 100,
+  "summary": {
+    "total_in_chunk": 1,
+    "scraped_so_far": 1,
+    "total_success": 1,
+    "total_failed": 0,
+    "elapsed_seconds": 10.62,
+    "last_updated": "2026-08-22 16:59:02"
+  },
+  "records": [
+    {
+      "index": 25,
+      "roll_no": "183526",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD. ASIF ANOWAR",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=3.83",
+      "total_marks": "708",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:59:02"
+    }
+  ]
+}
