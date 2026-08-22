@@ -11,6 +11,8 @@ import time
 import requests
 import logging
 import glob
+import queue
+import threading
 import concurrent.futures
 from typing import List, Dict, Any, Optional
 
@@ -169,101 +171,7 @@ def run_scraper_cli():
 
         batch_start_time = time.time()
 
-        # ==========================================
-        # Step 1: Harvest Candidate Rolls from Gazette
-        # ==========================================
-        print(f"\n{CYAN}[Step 1/2] Harvesting Gazette Records for {len(eiins)} Institution(s)...{RESET}")
-        harvest_start_time = time.time()
-        
-        all_target_rolls = []
-        roll_metadata_map = {}
-        upazilla_summary = {}
-
-        cache_dir = os.path.join(BASE_DIR, "cache", "institutions")
-        os.makedirs(cache_dir, exist_ok=True)
-
-        for idx, eiin in enumerate(eiins, 1):
-            cache_file = os.path.join(cache_dir, f"eiin_{eiin}.json")
-            inst_data = None
-
-            # 1. Check local institution cache for instant resume
-            if os.path.exists(cache_file):
-                try:
-                    with open(cache_file, "r", encoding="utf-8") as cf:
-                        inst_data = json.load(cf)
-                except Exception:
-                    inst_data = None
-
-            is_cached = False
-            if inst_data and inst_data.get("name") and "students" in inst_data:
-                is_cached = True
-            else:
-                def on_retry_status(msg):
-                    print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {YELLOW}🔄 {msg}{RESET}   ", end="", flush=True)
-
-                print(f"  [{idx}/{len(eiins)}] Querying EIIN {eiin}...", end="", flush=True)
-                inst_data = fetcher.fetch_by_eiin(eiin, status_callback=on_retry_status)
-                if inst_data and not inst_data.get("error") and inst_data.get("name"):
-                    try:
-                        with open(cache_file, "w", encoding="utf-8") as cf:
-                            json.dump(inst_data, cf, indent=2, ensure_ascii=False)
-                    except Exception:
-                        pass
-                else:
-                    time.sleep(0.3)
-
-            if not inst_data or "error" in inst_data or not inst_data.get("name"):
-                print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {RED}Failed (Not found or unreachable){RESET}  ")
-                continue
-
-            inst_name = inst_data.get("name", "Unknown")
-            district = inst_data.get("district", "Unknown")
-            upazila = inst_data.get("upazila", "UNKNOWN")
-            students = inst_data.get("students", [])
-            
-            # Exclude absent students who didn't sit for the exam
-            appeared_students = [s for s in students if s.get("status") != "ABSENT" and "ABS" not in str(s.get("gpa", "")).upper()]
-            abs_count = len(students) - len(appeared_students)
-            
-            rolls = [str(s["roll"]) for s in appeared_students if s.get("roll")]
-            abs_info = f", {abs_count} absent excluded" if abs_count > 0 else ""
-            source_tag = f"{CYAN}⚡ (Cached){RESET}" if is_cached else f"{GREEN}✓{RESET}"
-            print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {source_tag} {inst_name[:36]} ({len(rolls)} appeared rolls{abs_info})  ")
-
-            upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upazila.strip().lower()).strip('_')
-            if upz_slug not in upazilla_summary:
-                upazilla_summary[upz_slug] = {"upazila": upazila, "district": district, "rolls_count": 0}
-            upazilla_summary[upz_slug]["rolls_count"] += len(rolls)
-
-            for s in appeared_students:
-                r_str = str(s["roll"])
-                all_target_rolls.append(r_str)
-                roll_metadata_map[r_str] = {
-                    "eiin": int(eiin),
-                    "institute": inst_name,
-                    "upazila": upazila,
-                    "district": district,
-                    "group": s.get("group")
-                }
-
-            if not is_cached:
-                time.sleep(2.5)
-
-        harvest_elapsed = time.time() - harvest_start_time
-        all_unique_rolls = list(dict.fromkeys(all_target_rolls))
-
-        print(f"\n=======================================================")
-        print(f"📊 {BOLD}HARVEST SUMMARY:{RESET}")
-        print(f"  • Institutions Processed: {len(eiins)}")
-        print(f"  • Total Upazillas:        {len(upazilla_summary)}")
-        print(f"  • Total Candidate Rolls:  {len(all_unique_rolls)}")
-        print(f"=======================================================\n")
-
-        if not all_unique_rolls:
-            print(f"{YELLOW}[!] No candidate rolls discovered for this batch.{RESET}\n")
-            continue
-
-        # Check already scraped rolls across all district folders & datasets
+        # Pre-load already scraped records map so we don't duplicate work
         already_scraped_map = {}
         all_existing_files = (
             glob.glob(os.path.join(results_root, "**", "results_upazilla_*.json"), recursive=True) +
@@ -289,28 +197,32 @@ def run_scraper_cli():
             except Exception:
                 pass
 
-        pending_rolls = [r for r in all_unique_rolls if r not in already_scraped_map]
-        print(f"[*] Already Scraped: {len(all_unique_rolls) - len(pending_rolls)} | Remaining: {len(pending_rolls)}")
-
-        if not pending_rolls:
-            print(f"{GREEN}🎉 All {len(all_unique_rolls)} rolls across these EIINs are already 100% scraped!{RESET}\n")
-            print(f"{CYAN}───────────────────────────────────────────────────────────{RESET}\n")
-            continue
-
-        # ==========================================
-        # Step 2: High-Speed Concurrent Scrape
-        # ==========================================
-        print(f"\n{CYAN}[Step 2/2] Launching Ultra-Fast Local Engine for {len(pending_rolls)} Rolls...{RESET}")
-        
+        # Verify proxy pool
         if len(proxies) < 15:
             print(f"{DIM}Verifying dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
             proxies = proxy_pool.load_and_verify(max_candidates=2500, max_valid=50)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
-        target_count = len(pending_rolls)
-        received_count = 0
-        start_time = time.time()
+        print(f"\n{CYAN}🚀 Launching Pipelined Stream Engine for {len(eiins)} Institution(s)...{RESET}")
+        print(f"{DIM}Institutions and Student Results scrape simultaneously in real time!{RESET}\n")
+
+        rolls_queue = queue.Queue()
+        pending_rolls = []
+        roll_metadata_map = {}
+        upazilla_summary = {}
         seen_rolls = set(already_scraped_map.keys())
+        batch_received_count = 0
+        total_appeared_count = 0
+        already_scraped_count = 0
+
+        harvest_done = threading.Event()
+        stop_event = threading.Event()
+        stats_lock = threading.Lock()
+        file_lock = threading.Lock()
+        print_lock = threading.Lock()
+
+        cache_dir = os.path.join(BASE_DIR, "cache", "institutions")
+        os.makedirs(cache_dir, exist_ok=True)
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
             # 1. Try rotating through verified proxy nodes
@@ -343,11 +255,8 @@ def run_scraper_cli():
                     time.sleep(1.0)
             return None
 
-        def save_record_to_upazilla(r: Dict[str, Any]):
+        def save_record_to_upazilla(r: Dict[str, Any], meta: Dict[str, Any]):
             r_roll = str(r.get("roll_no"))
-            meta = roll_metadata_map.get(r_roll, {})
-            
-            # District-wise folder routing
             district_name = meta.get("district") or r.get("district") or "UNKNOWN_DISTRICT"
             district_slug = re.sub(r'[^a-zA-Z0-9]+', '_', district_name.strip().upper()).strip('_')
             district_folder = os.path.join(results_root, district_slug)
@@ -401,83 +310,201 @@ def run_scraper_cli():
                 json.dump(upz_data, out_f, indent=2, ensure_ascii=False)
             os.replace(temp_upz_file, upz_file)
 
-        # Step 2: High-Speed Concurrent Scrape with Automatic Multi-Pass Recovery Sweep
-        current_rolls_to_scrape = pending_rolls
-        max_recovery_passes = 3
+        def harvest_producer():
+            nonlocal total_appeared_count, already_scraped_count
+            for idx, eiin in enumerate(eiins, 1):
+                if stop_event.is_set():
+                    break
 
-        for pass_num in range(1, max_recovery_passes + 1):
-            if not current_rolls_to_scrape:
-                break
+                cache_file = os.path.join(cache_dir, f"eiin_{eiin}.json")
+                inst_data = None
 
-            if pass_num > 1:
-                print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(current_rolls_to_scrape)} unretrieved roll(s) with fresh proxies...{RESET}")
-                # Refresh proxy pool for fresh nodes
+                if os.path.exists(cache_file):
+                    try:
+                        with open(cache_file, "r", encoding="utf-8") as cf:
+                            inst_data = json.load(cf)
+                    except Exception:
+                        inst_data = None
+
+                is_cached = bool(inst_data and inst_data.get("name") and "students" in inst_data)
+                if not is_cached:
+                    def on_retry_status(msg):
+                        with print_lock:
+                            print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {YELLOW}🔄 {msg}{RESET}   ", end="", flush=True)
+
+                    with print_lock:
+                        print(f"  [{idx}/{len(eiins)}] Querying EIIN {eiin}...", end="", flush=True)
+                    inst_data = fetcher.fetch_by_eiin(eiin, status_callback=on_retry_status)
+                    if inst_data and not inst_data.get("error") and inst_data.get("name"):
+                        try:
+                            with open(cache_file, "w", encoding="utf-8") as cf:
+                                json.dump(inst_data, cf, indent=2, ensure_ascii=False)
+                        except Exception:
+                            pass
+                    else:
+                        time.sleep(0.3)
+
+                if not inst_data or "error" in inst_data or not inst_data.get("name"):
+                    with print_lock:
+                        print(f"\r  [{idx}/{len(eiins)}] Querying EIIN {eiin}... {RED}Failed (Not found or unreachable){RESET}  ")
+                    continue
+
+                inst_name = inst_data.get("name", "Unknown")
+                district = inst_data.get("district", "Unknown")
+                upazila = inst_data.get("upazila", "UNKNOWN")
+                students = inst_data.get("students", [])
+
+                appeared_students = [s for s in students if s.get("status") != "ABSENT" and "ABS" not in str(s.get("gpa", "")).upper()]
+                abs_count = len(students) - len(appeared_students)
+                rolls = [str(s["roll"]) for s in appeared_students if s.get("roll")]
+                abs_info = f", {abs_count} absent excluded" if abs_count > 0 else ""
+                source_tag = f"{CYAN}⚡ (Cached){RESET}" if is_cached else f"{GREEN}✓{RESET}"
+
+                upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upazila.strip().lower()).strip('_')
+                if upz_slug not in upazilla_summary:
+                    upazilla_summary[upz_slug] = {"upazila": upazila, "district": district, "rolls_count": 0}
+                upazilla_summary[upz_slug]["rolls_count"] += len(rolls)
+
+                queued_for_inst = 0
+                for s in appeared_students:
+                    r_str = str(s["roll"])
+                    meta = {
+                        "eiin": int(eiin),
+                        "institute": inst_name,
+                        "upazila": upazila,
+                        "district": district,
+                        "group": s.get("group")
+                    }
+                    with stats_lock:
+                        total_appeared_count += 1
+                        roll_metadata_map[r_str] = meta
+                        if r_str in already_scraped_map:
+                            already_scraped_count += 1
+                        else:
+                            if r_str not in seen_rolls:
+                                pending_rolls.append(r_str)
+                                rolls_queue.put((r_str, meta))
+                                queued_for_inst += 1
+
+                with print_lock:
+                    queue_info = f" -> {GREEN}+{queued_for_inst} streaming to workers{RESET}" if queued_for_inst > 0 else " (All previously scraped)"
+                    print(f"\r  [{idx}/{len(eiins)}] Harvested EIIN {eiin}... {source_tag} {inst_name[:30]} ({len(rolls)} rolls{abs_info}){queue_info}  ")
+
+                if not is_cached:
+                    time.sleep(2.5)
+
+            harvest_done.set()
+
+        def student_consumer(worker_idx: int):
+            nonlocal batch_received_count
+            while not stop_event.is_set():
+                try:
+                    item = rolls_queue.get(timeout=0.3)
+                except queue.Empty:
+                    if harvest_done.is_set() and rolls_queue.empty():
+                        break
+                    continue
+
+                roll_str, meta = item
+                res = fetch_worker(roll_str, worker_idx)
+                if res and res.get("success"):
+                    with file_lock:
+                        save_record_to_upazilla(res, meta)
+                    
+                    with stats_lock:
+                        batch_received_count += 1
+                        seen_rolls.add(roll_str)
+                        cur_rec = batch_received_count
+                        cur_target = len(pending_rolls)
+
+                    s_name = res.get("student_name", "STUDENT")
+                    gpa_res = res.get("result", "N/A")
+                    is_pass = "GPA" in str(gpa_res)
+                    status_color = GREEN if is_pass else RED
+                    status_label = "PASSED" if is_pass else "FAILED"
+                    p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=18)
+
+                    with print_lock:
+                        print(f"{CYAN}{p_bar}{RESET} {cur_rec:4d}/{cur_target}  Roll {roll_str:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+
+                rolls_queue.task_done()
+
+        # Launch Producer and Consumer threads concurrently
+        num_workers = min(20, 20)
+        producer_thread = threading.Thread(target=harvest_producer, daemon=True)
+        consumer_threads = [
+            threading.Thread(target=student_consumer, args=(i,), daemon=True)
+            for i in range(num_workers)
+        ]
+
+        producer_thread.start()
+        for t in consumer_threads:
+            t.start()
+
+        try:
+            producer_thread.join()
+            for t in consumer_threads:
+                t.join()
+        except KeyboardInterrupt:
+            stop_event.set()
+            print(f"\n\n{YELLOW}{BOLD}[!] Pipeline stopped by user (Ctrl+C). All {batch_received_count} scraped records are safely preserved!{RESET}")
+
+        # Auto-Recovery Passes on Missing Rolls (if any)
+        if not stop_event.is_set():
+            unretrieved = [r for r in pending_rolls if r not in seen_rolls]
+            max_recovery_passes = 3
+            for pass_num in range(1, max_recovery_passes + 1):
+                if not unretrieved:
+                    break
+                print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(unretrieved)} unretrieved roll(s) with fresh proxies...{RESET}")
                 proxies = proxy_pool.load_and_verify(max_candidates=2500, max_valid=50)
                 time.sleep(1.0)
 
-            max_workers = min(20, len(current_rolls_to_scrape)) if len(current_rolls_to_scrape) > 0 else 1
-            executor = concurrent.futures.ThreadPoolExecutor(max_workers=max_workers)
-            batch_interrupted = False
-            try:
-                future_to_roll = {
-                    executor.submit(fetch_worker, roll, idx): roll
-                    for idx, roll in enumerate(current_rolls_to_scrape)
-                }
+                rec_workers = min(15, len(unretrieved))
+                with concurrent.futures.ThreadPoolExecutor(max_workers=rec_workers) as rec_exec:
+                    future_to_roll = {
+                        rec_exec.submit(fetch_worker, roll, idx): roll
+                        for idx, roll in enumerate(unretrieved)
+                    }
+                    for future in concurrent.futures.as_completed(future_to_roll):
+                        roll = future_to_roll[future]
+                        res = future.result()
+                        if res and res.get("success"):
+                            meta = roll_metadata_map.get(roll, {})
+                            with file_lock:
+                                save_record_to_upazilla(res, meta)
+                            batch_received_count += 1
+                            seen_rolls.add(roll)
+                            s_name = res.get("student_name", "STUDENT")
+                            gpa_res = res.get("result", "N/A")
+                            is_pass = "GPA" in str(gpa_res)
+                            status_color = GREEN if is_pass else RED
+                            status_label = "PASSED" if is_pass else "FAILED"
+                            p_bar = format_progress_bar(batch_received_count, len(pending_rolls), width=18)
+                            print(f"{CYAN}{p_bar}{RESET} {batch_received_count:4d}/{len(pending_rolls)}  Roll {roll:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
 
-                for future in concurrent.futures.as_completed(future_to_roll):
-                    roll = future_to_roll[future]
-                    res = future.result()
-                    
-                    if res and res.get("success"):
-                        received_count += 1
-                        seen_rolls.add(roll)
-                        save_record_to_upazilla(res)
-
-                        s_name = res.get("student_name", "STUDENT")
-                        gpa_res = res.get("result", "N/A")
-                        is_pass = "GPA" in str(gpa_res)
-                        status_color = GREEN if is_pass else RED
-                        status_label = "PASSED" if is_pass else "FAILED"
-                        p_bar = format_progress_bar(received_count, target_count, width=20)
-
-                        print(f"{CYAN}{p_bar}{RESET} {received_count:4d}/{target_count}  Roll {roll:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
-
-            except KeyboardInterrupt:
-                batch_interrupted = True
-                executor.shutdown(wait=False, cancel_futures=True)
-                print(f"\n\n{YELLOW}{BOLD}[!] Batch cancelled by user (Ctrl+C). All {received_count} records safely preserved on disk!{RESET}")
-                break
-            finally:
-                executor.shutdown(wait=False, cancel_futures=True)
-
-            if batch_interrupted:
-                break
-
-            # Check if any rolls are still missing for the next pass
-            current_rolls_to_scrape = [r for r in pending_rolls if r not in seen_rolls]
+                unretrieved = [r for r in pending_rolls if r not in seen_rolls]
 
         total_elapsed = time.time() - batch_start_time
-        scrape_elapsed = time.time() - start_time
-        
         mins, secs = divmod(total_elapsed, 60)
         time_str = f"{int(mins)}m {secs:.2f}s" if mins > 0 else f"{secs:.2f}s"
-        
-        speed = (received_count / max(0.001, scrape_elapsed))
+        speed = (batch_received_count / max(0.001, total_elapsed))
         speed_rpm = int(speed * 60)
+        final_target = len(pending_rolls)
 
         print(f"\n=======================================================")
-        print(f"⏱️ {BOLD}PROCESS EXECUTION TIME & PERFORMANCE:{RESET}")
-        print(f"  • Total Time Taken:     {CYAN}{BOLD}{time_str}{RESET}")
-        print(f"  • Gazette Harvest Time: {harvest_elapsed:.2f}s")
-        print(f"  • Roll Scraping Time:   {scrape_elapsed:.2f}s")
+        print(f"⏱️ {BOLD}PIPELINED PROCESS EXECUTION TIME & PERFORMANCE:{RESET}")
+        print(f"  • Total Time Taken:       {CYAN}{BOLD}{time_str}{RESET}")
+        print(f"  • Institutions Processed: {len(eiins)}")
+        print(f"  • Total Candidate Rolls:  {total_appeared_count} ({already_scraped_count} skipped - already done)")
+        print(f"  • Live Scraped in Batch:  {batch_received_count}/{final_target} ({100.0 * batch_received_count / max(1, final_target):.1f}%)")
         print(f"  • Average Scraping Speed: {GREEN}{speed:.1f} rolls/sec ({speed_rpm} rolls/min){RESET}")
-        print(f"  • Records Completed:    {received_count}/{target_count} ({100.0 * received_count / max(1, target_count):.1f}%)")
         print(f"=======================================================")
 
-        if len(current_rolls_to_scrape) == 0:
-            print(f"\n{GREEN}{BOLD}🎉 Finished Batch! All {received_count}/{target_count} (100%) student results saved across Upazilla files in {time_str}!{RESET}")
+        if len([r for r in pending_rolls if r not in seen_rolls]) == 0:
+            print(f"\n{GREEN}{BOLD}🎉 Finished Batch! All results saved across Upazilla files in {time_str}!{RESET}")
         else:
-            print(f"\n{YELLOW}{BOLD}⚠️ Finished Batch! {received_count}/{target_count} student results saved ({len(current_rolls_to_scrape)} unretrieved) in {time_str}!{RESET}")
+            print(f"\n{YELLOW}{BOLD}⚠️ Finished Batch! {batch_received_count}/{final_target} results saved in {time_str}!{RESET}")
         print(f"{CYAN}───────────────────────────────────────────────────────────{RESET}\n")
 
 if __name__ == "__main__":
