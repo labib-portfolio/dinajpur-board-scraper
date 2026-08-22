@@ -149,17 +149,20 @@ def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file:
 
         completed_records.append(structured_entry)
 
-        # Non-blocking real-time webhook push (0ms overhead)
+        # Reliable real-time webhook push with retries
         if webhook_url:
-            try:
-                requests.post(
-                    webhook_url,
-                    json=structured_entry,
-                    headers={"Bypass-Tunnel-Reminder": "true", "User-Agent": "Mozilla/5.0"},
-                    timeout=2.0
-                )
-            except Exception as e:
-                pass
+            for post_att in range(3):
+                try:
+                    resp = requests.post(
+                        webhook_url,
+                        json=structured_entry,
+                        headers={"Bypass-Tunnel-Reminder": "true", "User-Agent": "Mozilla/5.0"},
+                        timeout=8.0
+                    )
+                    if resp.status_code == 200:
+                        break
+                except Exception:
+                    time.sleep(0.5)
 
         # Checkpoint save
         payload = {
@@ -183,23 +186,26 @@ def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file:
         if delay > 0:
             time.sleep(delay)
 
-    # Signal chunk completion to master CLI
+    # Signal chunk completion & batch sync any missed records to master CLI
     if webhook_url:
-        try:
-            requests.post(
-                webhook_url,
-                json={
-                    "event": "chunk_completed",
-                    "chunk_index": chunk_index,
-                    "total_chunks": total_chunks,
-                    "total_in_chunk": len(my_rolls),
-                    "total_success": success_count
-                },
-                headers={"Bypass-Tunnel-Reminder": "true", "User-Agent": "Mozilla/5.0"},
-                timeout=3.0
-            )
-        except Exception:
-            pass
+        for end_att in range(3):
+            try:
+                requests.post(
+                    webhook_url,
+                    json={
+                        "event": "chunk_completed",
+                        "chunk_index": chunk_index,
+                        "total_chunks": total_chunks,
+                        "total_in_chunk": len(my_rolls),
+                        "total_success": success_count,
+                        "records": completed_records
+                    },
+                    headers={"Bypass-Tunnel-Reminder": "true", "User-Agent": "Mozilla/5.0"},
+                    timeout=10.0
+                )
+                break
+            except Exception:
+                time.sleep(1.0)
 
     print(f"\n🎉 Node {chunk_index + 1} finished {len(my_rolls)} rolls! Saved to {output_file}")
 

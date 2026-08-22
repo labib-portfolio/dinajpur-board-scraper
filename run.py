@@ -251,6 +251,80 @@ def run_cloud_cli():
                     lines = jf.readlines()
                     read_pos = jf.tell()
 
+                def process_record(rec_dict):
+                    nonlocal received_count, last_recv_time, boot_announced
+                    rec_roll = str(rec_dict.get("roll_no"))
+                    if rec_roll not in pending_rolls or rec_roll in seen_rolls:
+                        return
+
+                    if not boot_announced:
+                        boot_announced = True
+                        print(f"\r{GREEN}⚡ Connected! Receiving live stream from 40 cloud workers:{RESET}\n")
+
+                    seen_rolls.add(rec_roll)
+                    received_count += 1
+                    last_recv_time = time.time()
+                    
+                    s_name = rec_dict.get("student_name") or "STUDENT"
+                    gpa_res = rec_dict.get("result", "N/A")
+                    is_pass = "GPA" in str(gpa_res)
+                    status_color = GREEN if is_pass else RED
+                    status_label = "PASSED" if is_pass else "FAILED"
+                    p_bar = format_progress_bar(received_count, target_count, width=20)
+
+                    print(f"{CYAN}{p_bar}{RESET} {received_count:4d}/{target_count}  Roll {rec_roll}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+
+                    # Incremental Merge: Save/Update record without overwriting previous schools
+                    meta = roll_metadata_map.get(rec_roll, {})
+                    upz_name = meta.get("upazila") or rec_dict.get("upazila") or rec_dict.get("upazilla") or "UNKNOWN_UPAZILLA"
+                    upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upz_name.strip().lower()).strip('_')
+                    upz_file = os.path.join(output_base, f"results_upazilla_{upz_slug}.json")
+
+                    upz_data = {
+                        "upazila": upz_name,
+                        "district": meta.get("district", "NILPHAMARI"),
+                        "summary": {"total_records": 0, "total_passed": 0, "total_failed": 0, "institutions_count": 0, "last_updated": ""},
+                        "records": []
+                    }
+                    if os.path.exists(upz_file):
+                        try:
+                            with open(upz_file, 'r', encoding='utf-8') as uf:
+                                upz_data = json.load(uf)
+                        except Exception:
+                            pass
+
+                    existing_roll_map = {str(item.get("roll_no")): item for item in upz_data.get("records", [])}
+
+                    rec_dict["upazila"] = upz_name
+                    rec_dict["district"] = meta.get("district", upz_data.get("district", "NILPHAMARI"))
+                    if meta.get("eiin"): rec_dict["eiin"] = meta.get("eiin")
+                    if meta.get("institute"): rec_dict["institute"] = meta.get("institute")
+
+                    existing_roll_map[rec_roll] = rec_dict
+
+                    # Recalculate Upazilla statistics
+                    all_upz_records = list(existing_roll_map.values())
+                    for i, rec in enumerate(all_upz_records, 1):
+                        rec["index"] = i
+
+                    passed_count = sum(1 for item in all_upz_records if "GPA" in str(item.get("result", "")))
+                    unique_eiins = sorted(list({int(item.get("eiin")) for item in all_upz_records if item.get("eiin")}))
+
+                    upz_data["summary"] = {
+                        "total_records": len(all_upz_records),
+                        "total_passed": passed_count,
+                        "total_failed": len(all_upz_records) - passed_count,
+                        "institutions_count": len(unique_eiins),
+                        "scraped_eiins": unique_eiins,
+                        "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
+                    }
+                    upz_data["records"] = all_upz_records
+
+                    temp_upz_file = upz_file + ".tmp"
+                    with open(temp_upz_file, 'w', encoding='utf-8') as out_f:
+                        json.dump(upz_data, out_f, indent=2, ensure_ascii=False)
+                    os.replace(temp_upz_file, upz_file)
+
                 for line in lines:
                     line = line.strip()
                     if not line:
@@ -260,80 +334,12 @@ def run_cloud_cli():
                     if r.get("event") == "chunk_completed":
                         completed_chunks.add(r.get("chunk_index"))
                         last_recv_time = time.time()
+                        # Recover any records attached to the chunk summary that were dropped during live streaming
+                        for chunk_rec in r.get("records", []):
+                            process_record(chunk_rec)
                         continue
 
-                    r_roll = str(r.get("roll_no"))
-
-                    if r_roll in pending_rolls and r_roll not in seen_rolls:
-                        if not boot_announced:
-                            boot_announced = True
-                            print(f"\r{GREEN}⚡ Connected! Receiving live stream from 40 cloud workers:{RESET}\n")
-
-                        seen_rolls.add(r_roll)
-                        received_count += 1
-                        last_recv_time = time.time()
-                        
-                        s_name = r.get("student_name") or "STUDENT"
-                        gpa_res = r.get("result", "N/A")
-                        is_pass = "GPA" in str(gpa_res)
-                        status_color = GREEN if is_pass else RED
-                        status_label = "PASSED" if is_pass else "FAILED"
-                        p_bar = format_progress_bar(received_count, target_count, width=20)
-
-                        print(f"{CYAN}{p_bar}{RESET} {received_count:4d}/{target_count}  Roll {r_roll}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
-
-                        # Incremental Merge: Save/Update record without overwriting previous schools
-                        meta = roll_metadata_map.get(r_roll, {})
-                        upz_name = meta.get("upazila") or r.get("upazila") or r.get("upazilla") or "UNKNOWN_UPAZILLA"
-                        upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upz_name.strip().lower()).strip('_')
-                        upz_file = os.path.join(output_base, f"results_upazilla_{upz_slug}.json")
-
-                        # Load current Upazilla data from disk to ensure persistence across all runs
-                        upz_data = {
-                            "upazila": upz_name,
-                            "district": meta.get("district", "NILPHAMARI"),
-                            "summary": {"total_records": 0, "total_passed": 0, "total_failed": 0, "institutions_count": 0, "last_updated": ""},
-                            "records": []
-                        }
-                        if os.path.exists(upz_file):
-                            try:
-                                with open(upz_file, 'r', encoding='utf-8') as uf:
-                                    upz_data = json.load(uf)
-                            except Exception:
-                                pass
-
-                        # Index existing records by roll_no to prevent duplicates while appending new
-                        existing_roll_map = {str(item.get("roll_no")): item for item in upz_data.get("records", [])}
-
-                        r["upazila"] = upz_name
-                        r["district"] = meta.get("district", upz_data.get("district", "NILPHAMARI"))
-                        if meta.get("eiin"): r["eiin"] = meta.get("eiin")
-                        if meta.get("institute"): r["institute"] = meta.get("institute")
-
-                        existing_roll_map[r_roll] = r
-
-                        # Recalculate Upazilla statistics
-                        all_upz_records = list(existing_roll_map.values())
-                        for i, rec in enumerate(all_upz_records, 1):
-                            rec["index"] = i
-
-                        passed_count = sum(1 for item in all_upz_records if "GPA" in str(item.get("result", "")))
-                        unique_eiins = sorted(list({int(item.get("eiin")) for item in all_upz_records if item.get("eiin")}))
-
-                        upz_data["summary"] = {
-                            "total_records": len(all_upz_records),
-                            "total_passed": passed_count,
-                            "total_failed": len(all_upz_records) - passed_count,
-                            "institutions_count": len(unique_eiins),
-                            "scraped_eiins": unique_eiins,
-                            "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
-                        }
-                        upz_data["records"] = all_upz_records
-
-                        temp_upz_file = upz_file + ".tmp"
-                        with open(temp_upz_file, 'w', encoding='utf-8') as out_f:
-                            json.dump(upz_data, out_f, indent=2, ensure_ascii=False)
-                        os.replace(temp_upz_file, upz_file)
+                    process_record(r)
             except Exception:
                 pass
 
