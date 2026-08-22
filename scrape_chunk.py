@@ -1,5 +1,8 @@
 """
-Chunk Scraper Runner for GitHub Actions Matrix or Distributed Node
+Official Zero-Captcha Fast Chunk Scraper for GitHub Actions Matrix (100 Cloud Workers)
+Uses the direct student token endpoint:
+https://results.dinajpurboard.gov.bd/fast/student?roll=...
+Zero CAPTCHA solvers, zero image downloads, maximum wire speed.
 """
 
 import sys
@@ -8,17 +11,16 @@ import time
 import json
 import argparse
 import logging
-from typing import Optional, List, Dict, Any
 import requests
-from bs4 import BeautifulSoup
+from typing import Optional, List, Dict, Any
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.stdout.reconfigure(encoding='utf-8')
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
-from engine.scraper_engine import AutoFormScraper
+from engine.fast_student_scraper import ENDPOINT, parse_student_html
 
-def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file: str, delay: float = 3.2, webhook_url: Optional[str] = None):
+def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file: str, delay: float = 0.2, webhook_url: Optional[str] = None):
     with open(rolls_file, 'r', encoding='utf-8') as f:
         rolls_data = json.load(f)
 
@@ -27,7 +29,7 @@ def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file:
     else:
         rolls = rolls_data
 
-    # Standardize list
+    # Standardize roll list
     roll_list = []
     for item in rolls:
         if isinstance(item, (int, str)):
@@ -43,200 +45,130 @@ def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file:
     end_idx = min(start_idx + chunk_size, total_rolls)
 
     my_rolls = roll_list[start_idx:end_idx]
-    print(f"[*] Node {chunk_index + 1}/{total_chunks}: Processing {len(my_rolls)} rolls (index {start_idx} to {end_idx - 1})...\n")
+    print(f"[*] Cloud Worker {chunk_index + 1}/{total_chunks}: Processing {len(my_rolls)} rolls (index {start_idx} to {end_idx - 1})...\n")
 
-    scraper = AutoFormScraper()
     completed_records = []
     success_count = 0
     start_time = time.time()
 
-    def scrape_student_fast(roll: str, max_retries: int = 3) -> Optional[dict]:
-        url = f"https://results.dinajpurboard.gov.bd/fast/student?roll={roll}&exam=1&exp=1787224774&t=769debce061f8471859fb4cd1069e0454aae3b18294e70c8454edd2fc416320a"
+    session = requests.Session()
+    session.headers.update({
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Connection": "keep-alive"
+    })
+
+    def scrape_student_direct(roll: str, max_retries: int = 4) -> Optional[dict]:
+        url = ENDPOINT.format(roll=roll)
         for attempt in range(1, max_retries + 1):
             try:
-                r = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}, timeout=8)
+                r = session.get(url, timeout=6.0)
                 if r.status_code == 429:
-                    cooldown = min(int(r.headers.get("Retry-After", 3)), 8)
+                    cooldown = min(int(r.headers.get("Retry-After", 2)), 6)
                     time.sleep(cooldown)
                     continue
-
                 if r.status_code == 200:
-                    soup = BeautifulSoup(r.text, 'html.parser')
-                    name, father, mother, inst, result, marks, group = "", "", "", "", "", "", ""
-                    for tr in soup.find_all('tr'):
-                        tds = [td.get_text(strip=True) for td in tr.find_all(['td', 'th'])]
-                        if len(tds) >= 2:
-                            k = tds[0].lower()
-                            if 'name of student' in k: name = tds[1]
-                            elif 'father' in k: father = tds[1]
-                            elif 'mother' in k: mother = tds[1]
-                            elif 'institute' in k: inst = tds[1]
-                            elif 'result' in k: result = tds[1]
-                            elif 'total mark' in k: marks = tds[1]
-                            elif 'group' in k: group = tds[1]
-
-                    grades = []
-                    for tr in soup.find_all('tr'):
-                        tds = tr.find_all('td')
-                        if len(tds) >= 3 and tds[0].get_text(strip=True).isdigit():
-                            code = tds[0].get_text(strip=True)
-                            subj = tds[1].get_text(strip=True)
-                            grade = tds[2].get_text(strip=True)
-                            grades.append({"sub_code": code, "subject_name": subj, "grade": grade})
-
-                    if name:
-                        return {
-                            "success": True,
-                            "status_code": 200,
-                            "student_name": name,
-                            "father_name": father,
-                            "mother_name": mother,
-                            "institute": inst,
-                            "board": "DINAJPUR",
-                            "group": group or "GENERAL",
-                            "result": result or "N/A",
-                            "total_marks": marks or "N/A",
-                            "subject_grades": grades
-                        }
+                    parsed = parse_student_html(r.text, roll)
+                    if parsed:
+                        return parsed
             except Exception:
-                time.sleep(1.0)
+                time.sleep(0.5)
         return None
 
     for idx, roll in enumerate(my_rolls, 1):
-        print(f"[{idx}/{len(my_rolls)}] Node {chunk_index + 1} -> Scraping Roll {roll}...")
-        
-        # 1. Primary high-speed direct lookup with 429 auto-backoff
-        fast_res = scrape_student_fast(roll)
-        if fast_res:
-            res = fast_res
-        else:
-            # 2. Resilient fallback via AutoFormScraper
-            res = scraper.scrape(
-                url="https://results.dinajpurboard.gov.bd/search/student",
-                input_fields={"roll_no": roll},
-                captcha_input_name="captcha",
-                button_selector='button[name="submit"]',
-                method="POST",
-                _retry_count=2
-            )
+        print(f"[{idx}/{len(my_rolls)}] Worker {chunk_index + 1} -> Roll {roll}...", end="", flush=True)
 
-        kv = res.get("data", {}).get("key_value_data", {})
-        subject_grades = res.get("subject_grades", [])
+        res = scrape_student_direct(roll)
 
-        structured_entry = {
-            "index": start_idx + idx,
-            "roll_no": roll,
-            "success": res.get("success", False),
-            "status_code": res.get("status_code"),
-            "student_name": res.get("student_name") or kv.get("Name of Student") or kv.get("Student Name"),
-            "father_name": res.get("father_name") or kv.get("Father's Name"),
-            "mother_name": res.get("mother_name") or kv.get("Mother's Name"),
-            "institute": res.get("institute") or kv.get("Name of Institute"),
-            "board": res.get("board", "DINAJPUR"),
-            "group": res.get("group") or kv.get("Group"),
-            "result": res.get("result") or kv.get("Result"),
-            "total_marks": res.get("total_marks") or kv.get("TOTAL MARK"),
-            "subject_grades": subject_grades,
-            "full_data": res.get("full_data") or res.get("data"),
-            "scraped_at": time.strftime("%Y-%m-%d %H:%M:%S")
-        }
-
-        if res.get("success"):
+        if res and res.get("success"):
             success_count += 1
-            print(f"    ✅ Success: {structured_entry.get('student_name', 'Unknown')} | Result: {structured_entry.get('result', 'N/A')}")
+            name = res.get("student_name", "UNKNOWN")
+            gpa = res.get("result", "N/A")
+            print(f" ✅ {name} | {gpa}")
+            structured_entry = {
+                "index": start_idx + idx,
+                "roll_no": roll,
+                "success": True,
+                "status_code": 200,
+                "student_name": res.get("student_name"),
+                "father_name": res.get("father_name", ""),
+                "mother_name": res.get("mother_name", ""),
+                "institute": res.get("institute", ""),
+                "board": res.get("board", "DINAJPUR"),
+                "group": res.get("group", ""),
+                "result": res.get("result", ""),
+                "total_marks": res.get("total_marks", ""),
+                "subject_grades": res.get("subject_grades", []),
+                "scraped_at": time.strftime("%Y-%m-%d %H:%M:%S")
+            }
         else:
-            print(f"    ❌ Result Not Found (Status {res.get('status_code')})")
+            print(f" ❌ Not Found")
+            structured_entry = {
+                "index": start_idx + idx,
+                "roll_no": roll,
+                "success": False,
+                "status_code": 404,
+                "scraped_at": time.strftime("%Y-%m-%d %H:%M:%S")
+            }
 
         completed_records.append(structured_entry)
 
-        # Reliable real-time webhook push with retries
+        # Webhook stream (if configured)
         if webhook_url:
-            for post_att in range(3):
-                try:
-                    resp = requests.post(
-                        webhook_url,
-                        json=structured_entry,
-                        headers={"Bypass-Tunnel-Reminder": "true", "User-Agent": "Mozilla/5.0"},
-                        timeout=8.0
-                    )
-                    if resp.status_code == 200:
-                        break
-                except Exception:
-                    time.sleep(0.5)
+            try:
+                requests.post(
+                    webhook_url,
+                    json=structured_entry,
+                    headers={"Bypass-Tunnel-Reminder": "true", "User-Agent": "Mozilla/5.0"},
+                    timeout=5.0
+                )
+            except Exception:
+                pass
 
         # Checkpoint save
-        payload = {
-            "chunk_index": chunk_index,
-            "total_chunks": total_chunks,
-            "summary": {
-                "total_in_chunk": len(my_rolls),
-                "scraped_so_far": len(completed_records),
-                "total_success": success_count,
-                "total_failed": len(completed_records) - success_count,
-                "elapsed_seconds": round(time.time() - start_time, 2),
-                "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
-            },
-            "records": completed_records
-        }
-
-        os.makedirs(os.path.dirname(os.path.abspath(output_file)), exist_ok=True)
-        with open(output_file, 'w', encoding='utf-8') as out_f:
-            json.dump(payload, out_f, indent=2, ensure_ascii=False)
+        if idx % 10 == 0 or idx == len(my_rolls):
+            payload = {
+                "chunk_index": chunk_index,
+                "total_chunks": total_chunks,
+                "summary": {
+                    "total_in_chunk": len(my_rolls),
+                    "scraped_so_far": len(completed_records),
+                    "total_success": success_count,
+                    "total_failed": len(completed_records) - success_count,
+                    "elapsed_seconds": round(time.time() - start_time, 2),
+                    "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
+                },
+                "records": completed_records
+            }
+            os.makedirs(os.path.dirname(os.path.abspath(output_file)), exist_ok=True)
+            temp_out = output_file + ".tmp"
+            with open(temp_out, 'w', encoding='utf-8') as out_f:
+                json.dump(payload, out_f, indent=2, ensure_ascii=False)
+            os.replace(temp_out, output_file)
 
         if delay > 0:
             time.sleep(delay)
 
-    # Signal chunk completion & batch sync any missed records to master CLI
-    if webhook_url:
-        for end_att in range(3):
-            try:
-                requests.post(
-                    webhook_url,
-                    json={
-                        "event": "chunk_completed",
-                        "chunk_index": chunk_index,
-                        "total_chunks": total_chunks,
-                        "total_in_chunk": len(my_rolls),
-                        "total_success": success_count,
-                        "records": completed_records
-                    },
-                    headers={"Bypass-Tunnel-Reminder": "true", "User-Agent": "Mozilla/5.0"},
-                    timeout=10.0
-                )
-                break
-            except Exception:
-                time.sleep(1.0)
+    print(f"\n[✓] Cloud Worker {chunk_index + 1} Finished: {success_count}/{len(my_rolls)} records scraped successfully in {round(time.time()-start_time, 2)}s!")
 
-    print(f"\n🎉 Node {chunk_index + 1} finished {len(my_rolls)} rolls! Saved to {output_file}")
+def main():
+    parser = argparse.ArgumentParser(description="Distributed Zero-Captcha Chunk Scraper Runner")
+    parser.add_argument("--chunk", type=int, required=True, help="0-based index of this chunk")
+    parser.add_argument("--total-chunks", type=int, default=100, help="Total number of chunks")
+    parser.add_argument("--input", type=str, default="rolls.json", help="Path to input JSON file containing student rolls")
+    parser.add_argument("--output", type=str, default="chunk_results.json", help="Path to write output results JSON")
+    parser.add_argument("--delay", type=float, default=0.2, help="Delay between requests in seconds")
+    parser.add_argument("--webhook", type=str, default=None, help="Optional live stream Webhook URL")
 
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--chunk", type=int, default=0, help="Chunk index (0-based)")
-    parser.add_argument("--total-chunks", type=int, default=10, help="Total number of chunks")
-    parser.add_argument("--input", type=str, default="rolls.json", help="Path to rolls file")
-    parser.add_argument("--output", type=str, default="chunk_result.json", help="Path to output chunk file")
-    parser.add_argument("--delay", type=float, default=2.0, help="Delay between requests in seconds")
-    parser.add_argument("--webhook-url", type=str, default="", help="Optional real-time live stream webhook URL")
     args = parser.parse_args()
-
-    webhook = None
-    if os.path.exists("tunnel_config.json"):
-        try:
-            with open("tunnel_config.json", "r", encoding="utf-8") as tf:
-                cfg = json.load(tf)
-                webhook = cfg.get("webhook_url", "").strip()
-        except Exception:
-            pass
-
-    if not webhook:
-        webhook = args.webhook_url.strip()
-
     run_chunk(
         chunk_index=args.chunk,
         total_chunks=args.total_chunks,
         rolls_file=args.input,
         output_file=args.output,
         delay=args.delay,
-        webhook_url=webhook or None
+        webhook_url=args.webhook
     )
+
+if __name__ == "__main__":
+    main()
