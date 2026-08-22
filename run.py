@@ -475,12 +475,15 @@ def run_scraper_cli():
                         print(f"  [{idx}/{len(eiins)}] EIIN {eiin}: {inst_name[:25]} {GREEN}+{queued_for_inst} rolls{RESET}", flush=True)
 
                 if not is_cached:
-                    time.sleep(2.0)
+                    time.sleep(0.3)
 
             with print_lock:
                 print(f"  {GREEN}✓ Loaded all {len(eiins)} institutions ({total_appeared_count} rolls queued){RESET}\n", flush=True)
 
             harvest_done.set()
+
+        first_roll_time = [None]
+        last_roll_time = [None]
 
         def student_consumer(worker_idx: int):
             nonlocal batch_received_count
@@ -503,6 +506,9 @@ def run_scraper_cli():
                     save_record_to_upazilla(res, meta)
                     
                     with stats_lock:
+                        if first_roll_time[0] is None:
+                            first_roll_time[0] = time.time()
+                        last_roll_time[0] = time.time()
                         batch_received_count += 1
                         seen_rolls.add(roll_str)
                         cur_rec = batch_received_count
@@ -523,7 +529,7 @@ def run_scraper_cli():
 
                 rolls_queue.task_done()
 
-        # Launch Producer and Consumer threads concurrently (35 parallel workers with 33+ standby spares)
+        # Launch Producer and Consumer threads concurrently (35 parallel workers with 51+ standby spares)
         num_workers = min(35, max(15, len(proxies) - 20)) if len(proxies) > 0 else 20
         producer_thread = threading.Thread(target=harvest_producer, daemon=True)
         consumer_threads = [
@@ -553,7 +559,7 @@ def run_scraper_cli():
                 if not unretrieved:
                     break
                 print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(unretrieved)} unretrieved roll(s) across all proxy nodes...{RESET}")
-                time.sleep(1.0)
+                time.sleep(0.5)
 
                 rec_workers = min(30, len(unretrieved))
                 with concurrent.futures.ThreadPoolExecutor(max_workers=rec_workers) as rec_exec:
@@ -586,17 +592,25 @@ def run_scraper_cli():
         total_elapsed = time.time() - batch_start_time
         mins, secs = divmod(total_elapsed, 60)
         time_str = f"{int(mins)}m {secs:.2f}s" if mins > 0 else f"{secs:.2f}s"
-        speed = (batch_received_count / max(0.001, total_elapsed))
-        speed_rpm = int(speed * 60)
+        
+        # Pure Scraping Duration
+        if first_roll_time[0] and last_roll_time[0]:
+            scrape_duration = max(0.1, last_roll_time[0] - first_roll_time[0])
+            pure_speed = batch_received_count / scrape_duration
+            pure_rpm = int(pure_speed * 60)
+            pure_speed_str = f"{pure_speed:.1f} rolls/sec ({pure_rpm} rolls/min)"
+        else:
+            pure_speed_str = "N/A"
+
         final_target = len(pending_rolls)
 
         print(f"\n=======================================================")
         print(f"⏱️ {BOLD}PIPELINED PROCESS EXECUTION TIME & PERFORMANCE:{RESET}")
-        print(f"  • Total Time Taken:       {CYAN}{BOLD}{time_str}{RESET}")
+        print(f"  • Total Pipeline Time:    {CYAN}{BOLD}{time_str}{RESET}")
         print(f"  • Institutions Processed: {len(eiins)}")
         print(f"  • Total Candidate Rolls:  {total_appeared_count} ({already_scraped_count} skipped - already done)")
         print(f"  • Live Scraped in Batch:  {batch_received_count}/{final_target} ({100.0 * batch_received_count / max(1, final_target):.1f}%)")
-        print(f"  • Average Scraping Speed: {GREEN}{speed:.1f} rolls/sec ({speed_rpm} rolls/min){RESET}")
+        print(f"  • Active Scraping Speed:  {GREEN}{BOLD}{pure_speed_str}{RESET}")
         print(f"=======================================================")
 
         if len([r for r in pending_rolls if r not in seen_rolls]) == 0:
