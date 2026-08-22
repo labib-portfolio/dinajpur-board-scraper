@@ -8,6 +8,8 @@ import time
 import json
 import argparse
 import logging
+from typing import Optional, List, Dict, Any
+import requests
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.stdout.reconfigure(encoding='utf-8')
@@ -15,7 +17,7 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 
 from engine.scraper_engine import AutoFormScraper
 
-def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file: str, delay: float = 2.0):
+def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file: str, delay: float = 3.2, webhook_url: Optional[str] = None):
     with open(rolls_file, 'r', encoding='utf-8') as f:
         rolls = json.load(f)
 
