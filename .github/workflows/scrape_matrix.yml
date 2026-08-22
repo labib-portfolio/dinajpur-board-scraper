@@ -50,7 +50,7 @@ jobs:
 
       - name: Run Scraper Chunk (Worker ${{ env.ACTUAL_CHUNK }}/40)
         run: |
-          python scrape_chunk.py --chunk ${{ env.ACTUAL_CHUNK }} --total-chunks 40 --input rolls.json --output chunks_output/chunk_${{ env.ACTUAL_CHUNK }}.json --delay ${{ github.event.inputs.delay || '3.2' }} --webhook-url "${{ github.event.inputs.webhook_url || 'https://dinajpur-scraper-live.loca.lt/api/webhook/stream-record' }}"
+          python scrape_chunk.py --chunk ${{ env.ACTUAL_CHUNK }} --total-chunks 40 --input rolls.json --output chunks_output/chunk_${{ env.ACTUAL_CHUNK }}.json --delay 0.2
 
       - name: Upload Chunk Artifact
         uses: actions/upload-artifact@v4

@@ -208,14 +208,17 @@ if __name__ == "__main__":
     parser.add_argument("--webhook-url", type=str, default="", help="Optional real-time live stream webhook URL")
     args = parser.parse_args()
 
-    webhook = args.webhook_url
-    if not webhook and os.path.exists("tunnel_config.json"):
+    webhook = None
+    if os.path.exists("tunnel_config.json"):
         try:
             with open("tunnel_config.json", "r", encoding="utf-8") as tf:
                 cfg = json.load(tf)
-                webhook = cfg.get("webhook_url", "")
+                webhook = cfg.get("webhook_url", "").strip()
         except Exception:
             pass
+
+    if not webhook:
+        webhook = args.webhook_url.strip()
 
     run_chunk(
         chunk_index=args.chunk,
