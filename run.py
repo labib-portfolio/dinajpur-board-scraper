@@ -416,7 +416,9 @@ def run_scraper_cli():
                 time.sleep(1.0)
 
             max_workers = min(20, len(current_rolls_to_scrape)) if len(current_rolls_to_scrape) > 0 else 1
-            with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            executor = concurrent.futures.ThreadPoolExecutor(max_workers=max_workers)
+            batch_interrupted = False
+            try:
                 future_to_roll = {
                     executor.submit(fetch_worker, roll, idx): roll
                     for idx, roll in enumerate(current_rolls_to_scrape)
@@ -439,6 +441,17 @@ def run_scraper_cli():
                         p_bar = format_progress_bar(received_count, target_count, width=20)
 
                         print(f"{CYAN}{p_bar}{RESET} {received_count:4d}/{target_count}  Roll {roll:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+
+            except KeyboardInterrupt:
+                batch_interrupted = True
+                executor.shutdown(wait=False, cancel_futures=True)
+                print(f"\n\n{YELLOW}{BOLD}[!] Batch cancelled by user (Ctrl+C). All {received_count} records safely preserved on disk!{RESET}")
+                break
+            finally:
+                executor.shutdown(wait=False, cancel_futures=True)
+
+            if batch_interrupted:
+                break
 
             # Check if any rolls are still missing for the next pass
             current_rolls_to_scrape = [r for r in pending_rolls if r not in seen_rolls]
