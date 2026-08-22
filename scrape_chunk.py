@@ -74,33 +74,37 @@ def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file:
         "Connection": "keep-alive"
     })
 
-    def fetch_roll(roll: str, max_attempts: int = 6) -> Optional[dict]:
+    def fetch_roll(roll: str, max_attempts: int = 5) -> Optional[dict]:
         url = ENDPOINT.format(roll=roll)
 
-        # 1. Try Direct
-        try:
-            r = direct_session.get(url, timeout=3.5)
-            if r.status_code == 200:
-                parsed = parse_student_html(r.text, roll)
-                if parsed: return parsed
-        except Exception:
-            pass
+        for attempt in range(1, max_attempts + 1):
+            # 1. Direct request
+            try:
+                r = direct_session.get(url, timeout=4.0)
+                if r.status_code == 200:
+                    parsed = parse_student_html(r.text, roll)
+                    if parsed:
+                        return parsed
+                elif r.status_code == 429:
+                    time.sleep(1.2 * attempt)
+            except Exception:
+                time.sleep(0.5)
 
-        # 2. Try with Proxies on 429 or failure
-        if proxies:
-            shuffled = list(proxies)
-            random.seed(int(roll) + chunk_index)
-            random.shuffle(shuffled)
+            # 2. Fast Proxy fallback
+            if proxies:
+                candidate_proxies = random.sample(proxies, min(4, len(proxies)))
+                for p in candidate_proxies:
+                    try:
+                        p_dict = {"http": f"http://{p}", "https": f"http://{p}"}
+                        r = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, proxies=p_dict, timeout=2.5)
+                        if r.status_code == 200:
+                            parsed = parse_student_html(r.text, roll)
+                            if parsed:
+                                return parsed
+                    except Exception:
+                        continue
 
-            for p in shuffled[:max_attempts]:
-                try:
-                    p_dict = {"http": f"http://{p}", "https": f"http://{p}"}
-                    r = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, proxies=p_dict, timeout=3.5)
-                    if r.status_code == 200:
-                        parsed = parse_student_html(r.text, roll)
-                        if parsed: return parsed
-                except Exception:
-                    continue
+            time.sleep(0.8)
 
         return None
 
