@@ -173,7 +173,8 @@ def run_interactive_cli():
 
         for s_idx, st in enumerate(students, 1):
             roll_str = str(st["roll"])
-            p_bar = format_progress_bar(s_idx, total_rolls, width=20)
+            count_str = f"[{s_idx:3d}/{total_rolls}]"
+            pct_str = f"({(s_idx/total_rolls)*100:4.1f}%)"
             
             # Check if already scraped
             if roll_str in existing_rolls_map:
@@ -184,7 +185,7 @@ def run_interactive_cli():
                 status_color = GREEN if is_pass else RED
                 status_label = "PASSED" if is_pass else "FAILED"
 
-                print(f"{CYAN}{p_bar}{RESET} {s_idx:3d}/{total_rolls}  Roll {roll_str}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+                print(f"{CYAN}{count_str}{RESET} {DIM}{pct_str}{RESET}  Roll {BOLD}{roll_str}{RESET}  {s_name:<30}  {BOLD}{gpa_res:<10}{RESET} {status_color}{status_label}{RESET}")
                 continue
 
             # Scrape student details
@@ -204,7 +205,7 @@ def run_interactive_cli():
             status_color = GREEN if is_pass else RED
             status_label = "PASSED" if is_pass else "FAILED"
 
-            print(f"{CYAN}{p_bar}{RESET} {s_idx:3d}/{total_rolls}  Roll {roll_str}  {student_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+            print(f"{CYAN}{count_str}{RESET} {DIM}{pct_str}{RESET}  Roll {BOLD}{roll_str}{RESET}  {student_name:<30}  {BOLD}{gpa_res:<10}{RESET} {status_color}{status_label}{RESET}")
 
             # Structured Entry
             record_entry = {
