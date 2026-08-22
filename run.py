@@ -9,6 +9,7 @@ import re
 import json
 import time
 import requests
+from requests.adapters import HTTPAdapter
 import logging
 import glob
 import queue
@@ -22,11 +23,11 @@ sys.path.insert(0, BASE_DIR)
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding='utf-8')
 
-# Completely mute noisy debug/info logs from the terminal
+# Completely mute noisy debug/info/connectionpool logs from the terminal
 logging.disable(logging.INFO)
 logging.basicConfig(level=logging.WARNING)
-for log_name in ["engine.scraper_engine", "engine.institute_fetcher", "urllib3", "root"]:
-    logging.getLogger(log_name).setLevel(logging.WARNING)
+for log_name in ["engine.scraper_engine", "engine.institute_fetcher", "urllib3", "urllib3.connectionpool", "root"]:
+    logging.getLogger(log_name).setLevel(logging.ERROR)
 
 from engine.institute_fetcher import InstituteResultFetcher
 from engine.fast_student_scraper import fetch_single_student, parse_student_html, ENDPOINT
@@ -209,11 +210,14 @@ def run_scraper_cli():
             spare_proxies = max(0, len(proxies) - num_workers)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
-        # Build persistent Keep-Alive session pool with Self-Healing Circuit Breaker
+        # Build persistent Keep-Alive session pool with Self-Healing Circuit Breaker & 100-connection pool
         proxy_failure_counts = {p: 0 for p in proxies}
         healthy_sessions = []
         for p in proxies:
             s = requests.Session()
+            adapter = HTTPAdapter(pool_connections=100, pool_maxsize=100)
+            s.mount("http://", adapter)
+            s.mount("https://", adapter)
             s.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
             s.headers.update({
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -221,6 +225,16 @@ def run_scraper_cli():
                 "Connection": "keep-alive"
             })
             healthy_sessions.append((p, s))
+
+        direct_session = requests.Session()
+        direct_adapter = HTTPAdapter(pool_connections=100, pool_maxsize=100)
+        direct_session.mount("http://", direct_adapter)
+        direct_session.mount("https://", direct_adapter)
+        direct_session.headers.update({
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Connection": "keep-alive"
+        })
 
         proxy_lock = threading.Lock()
 
@@ -242,7 +256,7 @@ def run_scraper_cli():
         print(f"  • Active Proxy Pool:       {GREEN}{BOLD}{len(proxies)} Verified Nodes{RESET}")
         print(f"  • Concurrent Workers:      {CYAN}{BOLD}{num_workers} Parallel Threads{RESET}")
         print(f"  • Standby Failover Spares: {YELLOW}{BOLD}{spare_proxies} Spare Proxies{RESET}")
-        print(f"  • Connection Mode:         {GREEN}Persistent Keep-Alive Session Pool{RESET}")
+        print(f"  • Connection Mode:         {GREEN}Persistent Keep-Alive Session Pool (100 Max Pool){RESET}")
         print(f"  • Self-Healing Engine:     {GREEN}Active Circuit Breaker (Auto-Prunes Dead Nodes){RESET}")
         print(f"  • Target Institutions:     {len(eiins)} Schools")
         print(f"=======================================================\n")
@@ -289,7 +303,7 @@ def run_scraper_cli():
             # 2. Fast single direct attempt with 2.5s timeout (non-blocking, zero sleep)
             try:
                 url = ENDPOINT.format(roll=roll_str)
-                r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=2.5)
+                r = direct_session.get(url, timeout=2.5)
                 if r.status_code == 200:
                     parsed = parse_student_html(r.text, roll_str)
                     if parsed:
@@ -510,6 +524,9 @@ def run_scraper_cli():
                     healthy_sessions = []
                     for p in proxies:
                         s = requests.Session()
+                        adapter = HTTPAdapter(pool_connections=100, pool_maxsize=100)
+                        s.mount("http://", adapter)
+                        s.mount("https://", adapter)
                         s.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
                         s.headers.update({
                             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
