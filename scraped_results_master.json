@@ -1,10 +1,5 @@
 {
-  "summary": {
-    "total_unique_records": 20,
-    "total_success": 16,
-    "total_failed": 4,
-    "total_chunks_merged": 20
-  },
+  "total_records": 39,
   "records": [
     {
       "index": 1,
@@ -39,7 +34,7 @@
       "scraped_at": "2026-08-22 16:59:07"
     },
     {
-      "index": 3,
+      "index": 11,
       "roll_no": "183511",
       "success": true,
       "status_code": 200,
@@ -55,7 +50,7 @@
       "scraped_at": "2026-08-22 16:59:44"
     },
     {
-      "index": 4,
+      "index": 12,
       "roll_no": "183512",
       "success": true,
       "status_code": 200,
@@ -71,7 +66,7 @@
       "scraped_at": "2026-08-22 16:58:42"
     },
     {
-      "index": 5,
+      "index": 13,
       "roll_no": "183513",
       "success": true,
       "status_code": 200,
@@ -87,14 +82,14 @@
       "scraped_at": "2026-08-22 16:59:17"
     },
     {
-      "index": 6,
+      "index": 14,
       "roll_no": "183514",
       "success": false,
       "status_code": 404,
       "scraped_at": "2026-08-22 16:59:46"
     },
     {
-      "index": 7,
+      "index": 15,
       "roll_no": "183515",
       "success": true,
       "status_code": 200,
@@ -110,7 +105,7 @@
       "scraped_at": "2026-08-22 16:59:19"
     },
     {
-      "index": 8,
+      "index": 16,
       "roll_no": "183516",
       "success": true,
       "status_code": 200,
@@ -126,7 +121,7 @@
       "scraped_at": "2026-08-22 16:58:54"
     },
     {
-      "index": 9,
+      "index": 17,
       "roll_no": "183517",
       "success": true,
       "status_code": 200,
@@ -142,7 +137,7 @@
       "scraped_at": "2026-08-22 16:58:46"
     },
     {
-      "index": 10,
+      "index": 18,
       "roll_no": "183518",
       "success": true,
       "status_code": 200,
@@ -158,7 +153,7 @@
       "scraped_at": "2026-08-22 16:59:28"
     },
     {
-      "index": 11,
+      "index": 19,
       "roll_no": "183519",
       "success": true,
       "status_code": 200,
@@ -174,14 +169,14 @@
       "scraped_at": "2026-08-22 16:59:29"
     },
     {
-      "index": 12,
+      "index": 20,
       "roll_no": "183521",
       "success": false,
       "status_code": 404,
       "scraped_at": "2026-08-22 16:58:49"
     },
     {
-      "index": 13,
+      "index": 3,
       "roll_no": "820205",
       "success": true,
       "status_code": 200,
@@ -197,14 +192,282 @@
       "scraped_at": "2026-08-22 16:59:37"
     },
     {
-      "index": 14,
+      "index": 21,
+      "roll_no": "183522",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD ATIK HASAN",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=3.56",
+      "total_marks": "658",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:58:07"
+    },
+    {
+      "index": 22,
+      "roll_no": "183523",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD. BAIZID HASAN BADHON",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.33",
+      "total_marks": "771",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:58:39"
+    },
+    {
+      "index": 23,
+      "roll_no": "183524",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD ALMAHIN ISLAM SHISHIR",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.44",
+      "total_marks": "828",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:58:35"
+    },
+    {
+      "index": 24,
+      "roll_no": "183525",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD. ASADUZZAMAN ASAD",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.28",
+      "total_marks": "776",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:58:41"
+    },
+    {
+      "index": 25,
+      "roll_no": "183526",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD. ASIF ANOWAR",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=3.83",
+      "total_marks": "708",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:59:02"
+    },
+    {
+      "index": 26,
+      "roll_no": "183527",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD. MAHAMUDUL",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=3.94",
+      "total_marks": "724",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:58:10"
+    },
+    {
+      "index": 27,
+      "roll_no": "183528",
+      "success": false,
+      "status_code": 404,
+      "scraped_at": "2026-08-22 16:59:33"
+    },
+    {
+      "index": 28,
+      "roll_no": "183529",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD. FAHIM FAYSAL",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.17",
+      "total_marks": "737",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:59:01"
+    },
+    {
+      "index": 29,
+      "roll_no": "183530",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD SAAD ISLAM",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.28",
+      "total_marks": "794",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:58:13"
+    },
+    {
+      "index": 30,
+      "roll_no": "183531",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD SEYAM TAFSIR",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.17",
+      "total_marks": "725",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:58:48"
+    },
+    {
+      "index": 4,
       "roll_no": "183504",
       "success": false,
       "status_code": 404,
       "scraped_at": "2026-08-22 16:58:57"
     },
     {
-      "index": 15,
+      "index": 31,
+      "roll_no": "183532",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD AL MIDUL ISLAM",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.50",
+      "total_marks": "792",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:58:40"
+    },
+    {
+      "index": 32,
+      "roll_no": "183533",
+      "success": false,
+      "status_code": 404,
+      "scraped_at": "2026-08-22 16:59:30"
+    },
+    {
+      "index": 33,
+      "roll_no": "183534",
+      "success": false,
+      "status_code": 404,
+      "scraped_at": "2026-08-22 16:59:12"
+    },
+    {
+      "index": 34,
+      "roll_no": "183535",
+      "success": false,
+      "status_code": 404,
+      "scraped_at": "2026-08-22 16:59:14"
+    },
+    {
+      "index": 35,
+      "roll_no": "183536",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD. SIFAT SARKER PAPPU",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.44",
+      "total_marks": "800",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:58:45"
+    },
+    {
+      "index": 36,
+      "roll_no": "183537",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD. MEHEDI HASAN",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.56",
+      "total_marks": "823",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:58:52"
+    },
+    {
+      "index": 37,
+      "roll_no": "760048",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MD SHAHRIYAR SHAWON SIYAM",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "GPA=4.06",
+      "total_marks": "786",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:59:22"
+    },
+    {
+      "index": 38,
+      "roll_no": "183520",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MST. FARIHA SAYEED LAMMI",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "FAILED(F1)",
+      "total_marks": "FAILED",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:59:18"
+    },
+    {
+      "index": 39,
+      "roll_no": "760047",
+      "success": true,
+      "status_code": 200,
+      "student_name": "MOST. RIFA AKTER",
+      "father_name": "",
+      "mother_name": "",
+      "institute": "FAIYAZ SCHOOL AND COLLEGE, RANGPUR",
+      "board": "DINAJPUR",
+      "group": "SCIENCE",
+      "result": "FAILED(F3)",
+      "total_marks": "FAILED",
+      "subject_grades": [],
+      "scraped_at": "2026-08-22 16:59:11"
+    },
+    {
+      "index": 5,
       "roll_no": "183505",
       "success": true,
       "status_code": 200,
@@ -220,7 +483,7 @@
       "scraped_at": "2026-08-22 16:59:44"
     },
     {
-      "index": 16,
+      "index": 6,
       "roll_no": "183506",
       "success": true,
       "status_code": 200,
@@ -236,7 +499,7 @@
       "scraped_at": "2026-08-22 16:59:40"
     },
     {
-      "index": 17,
+      "index": 7,
       "roll_no": "183507",
       "success": true,
       "status_code": 200,
@@ -252,7 +515,7 @@
       "scraped_at": "2026-08-22 16:59:26"
     },
     {
-      "index": 18,
+      "index": 8,
       "roll_no": "183508",
       "success": true,
       "status_code": 200,
@@ -268,14 +531,14 @@
       "scraped_at": "2026-08-22 16:59:49"
     },
     {
-      "index": 19,
+      "index": 9,
       "roll_no": "183509",
       "success": false,
       "status_code": 404,
       "scraped_at": "2026-08-22 16:58:08"
     },
     {
-      "index": 20,
+      "index": 10,
       "roll_no": "183510",
       "success": true,
       "status_code": 200,
