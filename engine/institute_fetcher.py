@@ -24,9 +24,16 @@ class InstituteResultFetcher:
 
     def _unlock_session(self) -> Optional[str]:
         url = f"{self.base_url}/search/institute"
-        for _ in range(3):
+        for attempt in range(5):
             try:
                 r = self.session.get(url, timeout=15)
+                
+                # If rate limited, wait out the cooldown automatically
+                if r.status_code == 429:
+                    retry_after = int(r.headers.get("Retry-After", 15))
+                    time.sleep(min(retry_after + 1, 30))
+                    continue
+
                 soup = BeautifulSoup(r.text, 'html.parser')
                 
                 # Check if gateway challenge is present
@@ -44,42 +51,52 @@ class InstituteResultFetcher:
                         data={'_token': token, 'challenge_token': challenge_token, 'answer': ans_val},
                         timeout=15
                     )
-                    time.sleep(0.3)
+                    time.sleep(0.4)
                     continue
                 
                 form = soup.find('form')
                 if form and form.find('input', {'name': '_token'}):
                     return form.find('input', {'name': '_token'})['value']
             except Exception:
-                time.sleep(0.5)
+                time.sleep(1.0)
         return None
 
     def fetch_by_eiin(self, eiin: Any, exam_year: str = "2026", board: str = "DINAJPUR") -> Dict[str, Any]:
-        token = self._unlock_session()
-        if not token:
-            return {"error": "Could not get CSRF token", "success": False, "name": None, "students": []}
+        for attempt in range(3):
+            token = self._unlock_session()
+            if not token:
+                time.sleep(1.0)
+                continue
 
-        post_r = self.session.post(
-            f"{self.base_url}/search/institute",
-            data={'_token': token, 'eiin_no': str(eiin).strip(), 'submit': '1'},
-            timeout=15
-        )
+            post_r = self.session.post(
+                f"{self.base_url}/search/institute",
+                data={'_token': token, 'eiin_no': str(eiin).strip(), 'submit': '1'},
+                timeout=15
+            )
 
-        if post_r.status_code == 200:
-            soup = BeautifulSoup(post_r.text, 'html.parser')
-            # Check if challenge intercepted the POST
-            if soup.find('form', class_='challenge-form'):
-                token = self._unlock_session()
-                post_r = self.session.post(
-                    f"{self.base_url}/search/institute",
-                    data={'_token': token, 'eiin_no': str(eiin).strip(), 'submit': '1'},
-                    timeout=15
-                )
+            if post_r.status_code == 429:
+                retry_after = int(post_r.headers.get("Retry-After", 15))
+                time.sleep(min(retry_after + 1, 30))
+                continue
+
+            if post_r.status_code == 200:
                 soup = BeautifulSoup(post_r.text, 'html.parser')
+                # Check if challenge intercepted the POST
+                if soup.find('form', class_='challenge-form'):
+                    token = self._unlock_session()
+                    post_r = self.session.post(
+                        f"{self.base_url}/search/institute",
+                        data={'_token': token, 'eiin_no': str(eiin).strip(), 'submit': '1'},
+                        timeout=15
+                    )
+                    soup = BeautifulSoup(post_r.text, 'html.parser')
 
-            info_table = soup.find('table', class_='inst-info-table')
-            if not info_table:
-                return {"error": "Institute not found", "success": False, "name": None, "students": []}
+                info_table = soup.find('table', class_='inst-info-table')
+                if not info_table:
+                    if attempt < 2:
+                        time.sleep(1.0)
+                        continue
+                    return {"error": "Institute not found", "success": False, "name": None, "students": []}
 
             # Parse info
             name, upazila, district = "", "", ""
