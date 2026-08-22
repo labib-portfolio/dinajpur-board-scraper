@@ -156,6 +156,39 @@ class InstituteResultFetcher:
 
         return result
 
+    def _unlock_session(self) -> Optional[str]:
+        """Resolves gateway check and returns a fresh CSRF token."""
+        url = f"{self.base_url}/search/institute"
+        for _ in range(3):
+            try:
+                r = self.session.get(url, timeout=15)
+                soup = BeautifulSoup(r.text, 'html.parser')
+                
+                # Check if gateway challenge is present
+                if soup.find('form', class_='challenge-form'):
+                    token = soup.find('input', {'name': '_token'})['value']
+                    challenge_token = soup.find('input', {'name': 'challenge_token'})['value']
+                    choices = soup.select('.symbol-choice')
+                    symbols = [(c.find('input')['value'], c.find('span', {'aria-hidden': 'true'}).get_text(strip=True)) for c in choices]
+                    counts = Counter([sym for val, sym in symbols])
+                    odd_sym = min(counts, key=counts.get)
+                    ans_val = next(val for val, sym in symbols if sym == odd_sym)
+                    
+                    self.session.post(
+                        f"{self.base_url}/result-check",
+                        data={'_token': token, 'challenge_token': challenge_token, 'answer': ans_val},
+                        timeout=15
+                    )
+                    time.sleep(0.3)
+                    continue
+                
+                form = soup.find('form')
+                if form and form.find('input', {'name': '_token'}):
+                    return form.find('input', {'name': '_token'})['value']
+            except Exception:
+                time.sleep(1)
+        return None
+
     def fetch_by_eiin(self, eiin: Any, exam_year: str = "2026", board: str = "DINAJPUR", retry_count: int = 2) -> Optional[Dict[str, Any]]:
         """Queries the official Dinajpur Board portal for a given 6-digit EIIN with rate-limit recovery."""
         eiin_str = str(eiin).strip()
@@ -166,31 +199,14 @@ class InstituteResultFetcher:
 
         for attempt in range(retry_count + 1):
             try:
-                # 1. Fetch form to acquire fresh CSRF token and unlock session
-                r = self.session.get(search_url, timeout=15)
-                soup = BeautifulSoup(r.text, 'html.parser')
-
-                if self._solve_gateway_if_needed(soup):
-                    r = self.session.get(search_url, timeout=15)
-                    soup = BeautifulSoup(r.text, 'html.parser')
-
-                form = soup.find('form')
-                if not form or not form.find('input', {'name': 'eiin_no'}):
-                    # Check again if gateway is present
-                    if self._solve_gateway_if_needed(soup):
-                        r = self.session.get(search_url, timeout=15)
-                        soup = BeautifulSoup(r.text, 'html.parser')
-                        form = soup.find('form')
-
-                if not form or not form.find('input', {'name': '_token'}):
+                token_val = self._unlock_session()
+                if not token_val:
                     if attempt < retry_count:
-                        time.sleep(1.5)
+                        time.sleep(1)
                         continue
-                    return {"error": "Search form not available", "status": 500}
+                    return {"error": "Could not unlock session", "status": 500}
 
-                token_val = form.find('input', {'name': '_token'})['value']
-
-                # 2. Submit EIIN
+                # Submit EIIN
                 post_r = self.session.post(
                     search_url,
                     data={'_token': token_val, 'eiin_no': eiin_str, 'submit': '1'},
@@ -203,8 +219,17 @@ class InstituteResultFetcher:
                     continue
 
                 if post_r.status_code == 200:
+                    soup = BeautifulSoup(post_r.text, 'html.parser')
+                    if soup.find('form', class_='challenge-form'):
+                        token_val = self._unlock_session()
+                        post_r = self.session.post(
+                            search_url,
+                            data={'_token': token_val, 'eiin_no': eiin_str, 'submit': '1'},
+                            timeout=15
+                        )
+                    
                     parsed = self.parse_institution_html(post_r.text, int(eiin_str), exam_year, board)
-                    if parsed["name"] or parsed["students"]:
+                    if parsed.get("name") or parsed.get("students"):
                         return parsed
                     elif "No result found" in post_r.text or "Invalid" in post_r.text:
                         return {"error": "EIIN not found", "status": 404, "eiin": int(eiin_str)}
@@ -212,7 +237,7 @@ class InstituteResultFetcher:
 
             except Exception as e:
                 if attempt < retry_count:
-                    time.sleep(1.5)
+                    time.sleep(1)
                     continue
                 return {"error": str(e), "status": 500, "eiin": int(eiin_str)}
 
