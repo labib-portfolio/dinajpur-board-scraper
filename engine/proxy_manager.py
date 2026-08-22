@@ -3,6 +3,16 @@ import aiohttp
 import re
 import time
 import os
+import sys
+import logging
+
+logging.getLogger("asyncio").setLevel(logging.CRITICAL)
+
+if sys.platform == "win32":
+    try:
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    except Exception:
+        pass
 
 PROXY_SOURCES = [
     # Fast APIs
@@ -82,6 +92,20 @@ async def check_proxy_node(session, proxy, working_list, sem, needed=85, silent=
             pass
 
 async def harvest_and_verify_proxies(needed=85, max_candidates=4000, silent=True):
+    try:
+        loop = asyncio.get_running_loop()
+        def silence_sock_reset(loop, context):
+            exc = context.get("exception")
+            if isinstance(exc, (ConnectionResetError, OSError, ConnectionAbortedError)):
+                return
+            try:
+                loop.default_exception_handler(context)
+            except Exception:
+                pass
+        loop.set_exception_handler(silence_sock_reset)
+    except Exception:
+        pass
+
     t0 = time.time()
     connector = aiohttp.TCPConnector(ssl=False, limit=400)
     async with aiohttp.ClientSession(connector=connector) as session:

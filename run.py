@@ -23,11 +23,18 @@ sys.path.insert(0, BASE_DIR)
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding='utf-8')
 
+if sys.platform == "win32":
+    import asyncio
+    try:
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    except Exception:
+        pass
+
 # Completely mute noisy debug/info/connectionpool logs from the terminal
 logging.disable(logging.INFO)
 logging.basicConfig(level=logging.WARNING)
-for log_name in ["engine.scraper_engine", "engine.institute_fetcher", "urllib3", "urllib3.connectionpool", "root"]:
-    logging.getLogger(log_name).setLevel(logging.ERROR)
+for log_name in ["engine.scraper_engine", "engine.institute_fetcher", "urllib3", "urllib3.connectionpool", "asyncio", "root"]:
+    logging.getLogger(log_name).setLevel(logging.CRITICAL)
 
 from engine.institute_fetcher import InstituteResultFetcher
 from engine.fast_student_scraper import fetch_single_student, parse_student_html, ENDPOINT
