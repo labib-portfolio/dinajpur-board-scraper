@@ -50,56 +50,62 @@ def run_chunk(chunk_index: int, total_chunks: int, rolls_file: str, output_file:
     success_count = 0
     start_time = time.time()
 
-    def scrape_student_fast(roll: str) -> Optional[dict]:
-        try:
-            url = f"https://results.dinajpurboard.gov.bd/fast/student?roll={roll}&exam=1&exp=1787224774&t=769debce061f8471859fb4cd1069e0454aae3b18294e70c8454edd2fc416320a"
-            r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=6)
-            if r.status_code == 200:
-                soup = BeautifulSoup(r.text, 'html.parser')
-                name, father, mother, inst, result, marks, group = "", "", "", "", "", "", ""
-                for tr in soup.find_all('tr'):
-                    tds = [td.get_text(strip=True) for td in tr.find_all(['td', 'th'])]
-                    if len(tds) >= 2:
-                        k = tds[0].lower()
-                        if 'name of student' in k: name = tds[1]
-                        elif 'father' in k: father = tds[1]
-                        elif 'mother' in k: mother = tds[1]
-                        elif 'institute' in k: inst = tds[1]
-                        elif 'result' in k: result = tds[1]
-                        elif 'total mark' in k: marks = tds[1]
-                        elif 'group' in k: group = tds[1]
+    def scrape_student_fast(roll: str, max_retries: int = 3) -> Optional[dict]:
+        url = f"https://results.dinajpurboard.gov.bd/fast/student?roll={roll}&exam=1&exp=1787224774&t=769debce061f8471859fb4cd1069e0454aae3b18294e70c8454edd2fc416320a"
+        for attempt in range(1, max_retries + 1):
+            try:
+                r = requests.get(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}, timeout=8)
+                if r.status_code == 429:
+                    cooldown = min(int(r.headers.get("Retry-After", 3)), 8)
+                    time.sleep(cooldown)
+                    continue
 
-                grades = []
-                for tr in soup.find_all('tr'):
-                    tds = tr.find_all('td')
-                    if len(tds) >= 3 and tds[0].get_text(strip=True).isdigit():
-                        code = tds[0].get_text(strip=True)
-                        subj = tds[1].get_text(strip=True)
-                        grade = tds[2].get_text(strip=True)
-                        grades.append({"sub_code": code, "subject_name": subj, "grade": grade})
+                if r.status_code == 200:
+                    soup = BeautifulSoup(r.text, 'html.parser')
+                    name, father, mother, inst, result, marks, group = "", "", "", "", "", "", ""
+                    for tr in soup.find_all('tr'):
+                        tds = [td.get_text(strip=True) for td in tr.find_all(['td', 'th'])]
+                        if len(tds) >= 2:
+                            k = tds[0].lower()
+                            if 'name of student' in k: name = tds[1]
+                            elif 'father' in k: father = tds[1]
+                            elif 'mother' in k: mother = tds[1]
+                            elif 'institute' in k: inst = tds[1]
+                            elif 'result' in k: result = tds[1]
+                            elif 'total mark' in k: marks = tds[1]
+                            elif 'group' in k: group = tds[1]
 
-                if name:
-                    return {
-                        "success": True,
-                        "status_code": 200,
-                        "student_name": name,
-                        "father_name": father,
-                        "mother_name": mother,
-                        "institute": inst,
-                        "board": "DINAJPUR",
-                        "group": group or "GENERAL",
-                        "result": result or "N/A",
-                        "total_marks": marks or "N/A",
-                        "subject_grades": grades
-                    }
-        except Exception:
-            pass
+                    grades = []
+                    for tr in soup.find_all('tr'):
+                        tds = tr.find_all('td')
+                        if len(tds) >= 3 and tds[0].get_text(strip=True).isdigit():
+                            code = tds[0].get_text(strip=True)
+                            subj = tds[1].get_text(strip=True)
+                            grade = tds[2].get_text(strip=True)
+                            grades.append({"sub_code": code, "subject_name": subj, "grade": grade})
+
+                    if name:
+                        return {
+                            "success": True,
+                            "status_code": 200,
+                            "student_name": name,
+                            "father_name": father,
+                            "mother_name": mother,
+                            "institute": inst,
+                            "board": "DINAJPUR",
+                            "group": group or "GENERAL",
+                            "result": result or "N/A",
+                            "total_marks": marks or "N/A",
+                            "subject_grades": grades
+                        }
+            except Exception:
+                time.sleep(1.0)
         return None
 
     for idx, roll in enumerate(my_rolls, 1):
         print(f"[{idx}/{len(my_rolls)}] Node {chunk_index + 1} -> Scraping Roll {roll}...")
         
-        # 1. Primary high-speed direct lookup (0.3s)
+        # 1. Primary high-speed direct lookup with 429 auto-backoff
         fast_res = scrape_student_fast(roll)
         if fast_res:
             res = fast_res

@@ -50,7 +50,7 @@ jobs:
 
       - name: Run Scraper Chunk (Worker ${{ env.ACTUAL_CHUNK }}/40)
         run: |
-          python scrape_chunk.py --chunk ${{ env.ACTUAL_CHUNK }} --total-chunks 40 --input rolls.json --output chunks_output/chunk_${{ env.ACTUAL_CHUNK }}.json --delay 0.2
+          python scrape_chunk.py --chunk ${{ env.ACTUAL_CHUNK }} --total-chunks 40 --input rolls.json --output chunks_output/chunk_${{ env.ACTUAL_CHUNK }}.json --delay 1.0
 
       - name: Upload Chunk Artifact
         uses: actions/upload-artifact@v4
