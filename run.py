@@ -254,7 +254,7 @@ def run_scraper_cli():
         harvest_done = threading.Event()
         stop_event = threading.Event()
         stats_lock = threading.Lock()
-        file_lock = threading.Lock()
+        file_lock = threading.RLock()
         print_lock = threading.Lock()
 
         cache_dir = os.path.join(BASE_DIR, "cache", "institutions")
@@ -480,8 +480,7 @@ def run_scraper_cli():
                 roll_str, meta = item
                 res = fetch_worker(roll_str, worker_idx)
                 if res and res.get("success"):
-                    with file_lock:
-                        save_record_to_upazilla(res, meta)
+                    save_record_to_upazilla(res, meta)
                     
                     with stats_lock:
                         batch_received_count += 1
@@ -544,8 +543,7 @@ def run_scraper_cli():
                         res = future.result()
                         if res and res.get("success"):
                             meta = roll_metadata_map.get(roll, {})
-                            with file_lock:
-                                save_record_to_upazilla(res, meta)
+                            save_record_to_upazilla(res, meta)
                             with stats_lock:
                                 batch_received_count += 1
                                 seen_rolls.add(roll)
