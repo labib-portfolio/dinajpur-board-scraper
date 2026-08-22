@@ -1,6 +1,6 @@
 """
 Interactive Terminal CLI for Dinajpur Board Result Scraper 2026
-Ultra-Fast Concurrent Scraping Engine (with Automatic Proxy Pool & 100% Roll Delivery)
+Ultra-Fast Asyncio & Aiohttp Scraping Engine (with Dynamic Proxy Pool & 100% Guaranteed Roll Extraction)
 """
 
 import sys
@@ -8,10 +8,11 @@ import os
 import re
 import json
 import time
-import requests
-import logging
 import glob
-import concurrent.futures
+import logging
+import asyncio
+import aiohttp
+import requests
 from typing import List, Dict, Any, Optional
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -20,14 +21,14 @@ sys.path.insert(0, BASE_DIR)
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding='utf-8')
 
-# Completely mute noisy debug/info logs from the terminal
+# Mute noisy logs
 logging.disable(logging.INFO)
 logging.basicConfig(level=logging.WARNING)
-for log_name in ["engine.scraper_engine", "engine.institute_fetcher", "urllib3", "root"]:
+for log_name in ["engine.scraper_engine", "engine.institute_fetcher", "urllib3", "root", "aiohttp"]:
     logging.getLogger(log_name).setLevel(logging.WARNING)
 
 from engine.institute_fetcher import InstituteResultFetcher
-from engine.fast_student_scraper import fetch_single_student, parse_student_html, ENDPOINT
+from engine.fast_student_scraper import parse_student_html, ENDPOINT
 
 # ANSI Color Codes
 CYAN = "\033[96m"
@@ -48,9 +49,9 @@ PROXY_SOURCES = [
 
 def print_banner():
     print(f"\n{CYAN}┌───────────────────────────────────────────────────────────┐{RESET}")
-    print(f"{CYAN}│{RESET}  {BOLD}Dinajpur Board Result Scraper 2026 — High-Speed Engine{RESET}   {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {BOLD}Dinajpur Board Result Scraper 2026 — Asyncio Engine{RESET}       {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}100% Guaranteed Roll Extraction • Dynamic Multi-Node Proxies{RESET} {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}Ultra-Fast aiohttp Concurrency • Dynamic Multi-Node Proxies{RESET} {CYAN}│{RESET}")
     print(f"{CYAN}│{RESET}  {DIM}Zero Webhook Drops • Real-time Upazilla JSON Persistence{RESET}   {CYAN}│{RESET}")
     print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n")
 
@@ -80,48 +81,86 @@ def format_progress_bar(current: int, total: int, width: int = 20) -> str:
     filled = int(width * current // total)
     return f"[{'█' * filled}{'░' * (width - filled)}]"
 
-class FastProxyPool:
+class AsyncProxyPool:
     def __init__(self):
         self.proxies: List[str] = []
 
-    def load_and_verify(self, max_candidates: int = 120, max_valid: int = 25) -> List[str]:
+    async def _verify_proxy(self, session: aiohttp.ClientSession, proxy_str: str, test_url: str) -> Optional[str]:
+        try:
+            prox_url = f"http://{proxy_str}"
+            async with session.get(test_url, proxy=prox_url, timeout=aiohttp.ClientTimeout(total=3.5)) as resp:
+                if resp.status == 200:
+                    text = await resp.text()
+                    if "Student Result" in text:
+                        return proxy_str
+        except Exception:
+            pass
+        return None
+
+    async def load_and_verify(self, max_candidates: int = 150, max_valid: int = 25) -> List[str]:
         raw_proxies = set()
-        for src in PROXY_SOURCES:
-            try:
-                r = requests.get(src, timeout=3)
-                if r.status_code == 200:
-                    for line in r.text.splitlines():
-                        p = line.strip()
-                        if ":" in p and not p.startswith("#"):
-                            raw_proxies.add(p)
-            except Exception:
-                pass
+        async with aiohttp.ClientSession() as s:
+            for src in PROXY_SOURCES:
+                try:
+                    async with s.get(src, timeout=aiohttp.ClientTimeout(total=3.0)) as r:
+                        if r.status == 200:
+                            text = await r.text()
+                            for line in text.splitlines():
+                                p = line.strip()
+                                if ":" in p and not p.startswith("#"):
+                                    raw_proxies.add(p)
+                except Exception:
+                    pass
 
-        candidate_list = list(raw_proxies)[:max_candidates]
-        test_url = ENDPOINT.format(roll="217305")
-
-        def test_p(p):
-            try:
-                prox = {"http": f"http://{p}", "https": f"http://{p}"}
-                r = requests.get(test_url, proxies=prox, timeout=3.5)
-                if r.status_code == 200 and "Student Result" in r.text:
-                    return p
-            except Exception:
-                pass
-            return None
-
-        valid = []
-        with concurrent.futures.ThreadPoolExecutor(max_workers=35) as ex:
-            for res in ex.map(test_p, candidate_list):
+            candidate_list = list(raw_proxies)[:max_candidates]
+            test_url = ENDPOINT.format(roll="217305")
+            tasks = [self._verify_proxy(s, p, test_url) for p in candidate_list]
+            
+            valid = []
+            for completed in asyncio.as_completed(tasks):
+                res = await completed
                 if res:
                     valid.append(res)
                     if len(valid) >= max_valid:
                         break
 
-        self.proxies = valid
-        return self.proxies
+            self.proxies = valid
+            return self.proxies
 
-def run_scraper_cli():
+async def fetch_worker_async(session: aiohttp.ClientSession, roll_str: str, worker_idx: int, proxies: List[str]) -> Optional[Dict[str, Any]]:
+    # 1. Rotate through verified proxy nodes
+    if proxies:
+        for offset in range(min(5, len(proxies))):
+            p = proxies[(worker_idx + offset) % len(proxies)]
+            prox_url = f"http://{p}"
+            try:
+                url = ENDPOINT.format(roll=roll_str)
+                async with session.get(url, proxy=prox_url, timeout=aiohttp.ClientTimeout(total=4.5)) as resp:
+                    if resp.status == 200:
+                        text = await resp.text()
+                        parsed = parse_student_html(text, roll_str)
+                        if parsed:
+                            return parsed
+            except Exception:
+                pass
+
+    # 2. Fallback to direct request with backoff
+    for att in range(1, 4):
+        try:
+            url = ENDPOINT.format(roll=roll_str)
+            async with session.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=aiohttp.ClientTimeout(total=6.0)) as resp:
+                if resp.status == 200:
+                    text = await resp.text()
+                    parsed = parse_student_html(text, roll_str)
+                    if parsed:
+                        return parsed
+                elif resp.status == 429:
+                    await asyncio.sleep(2.0 * att)
+        except Exception:
+            await asyncio.sleep(1.0)
+    return None
+
+async def run_scraper_cli_async():
     print_banner()
 
     fetcher = InstituteResultFetcher()
@@ -129,8 +168,8 @@ def run_scraper_cli():
     master_file = os.path.join(BASE_DIR, "scraped_results_all.json")
     os.makedirs(results_root, exist_ok=True)
     
-    proxy_pool = FastProxyPool()
-    proxies = []
+    proxy_pool = AsyncProxyPool()
+    proxies: List[str] = []
 
     while True:
         eiins = get_eiin_inputs()
@@ -269,50 +308,19 @@ def run_scraper_cli():
             continue
 
         # ==========================================
-        # Step 2: High-Speed Concurrent Scrape
+        # Step 2: High-Speed Asyncio Concurrent Scrape
         # ==========================================
-        print(f"\n{CYAN}[Step 2/2] Launching Ultra-Fast Local Engine for {len(pending_rolls)} Rolls...{RESET}")
+        print(f"\n{CYAN}[Step 2/2] Launching Ultra-Fast Async Engine for {len(pending_rolls)} Rolls...{RESET}")
         
         if len(proxies) < 5:
-            print(f"{DIM}Verifying dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
-            proxies = proxy_pool.load_and_verify(max_valid=15)
+            print(f"{DIM}Verifying dynamic async proxy pool for zero rate limits...{RESET}", end="", flush=True)
+            proxies = await proxy_pool.load_and_verify(max_valid=25)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
         target_count = len(pending_rolls)
         received_count = 0
         start_time = time.time()
         seen_rolls = set(already_scraped_map.keys())
-
-        def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-            # 1. Try rotating through verified proxy nodes
-            if proxies:
-                for offset in range(min(5, len(proxies))):
-                    p = proxies[(worker_idx + offset) % len(proxies)]
-                    prox = {"http": f"http://{p}", "https": f"http://{p}"}
-                    try:
-                        url = ENDPOINT.format(roll=roll_str)
-                        r = requests.get(url, proxies=prox, timeout=4.5)
-                        if r.status_code == 200:
-                            parsed = parse_student_html(r.text, roll_str)
-                            if parsed:
-                                return parsed
-                    except Exception:
-                        pass
-
-            # 2. Fallback to direct request with backoff
-            for att in range(1, 4):
-                try:
-                    url = ENDPOINT.format(roll=roll_str)
-                    r = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=6)
-                    if r.status_code == 200:
-                        parsed = parse_student_html(r.text, roll_str)
-                        if parsed:
-                            return parsed
-                    elif r.status_code == 429:
-                        time.sleep(2.0 * att)
-                except Exception:
-                    time.sleep(1.0)
-            return None
 
         def save_record_to_upazilla(r: Dict[str, Any]):
             r_roll = str(r.get("roll_no"))
@@ -372,31 +380,28 @@ def run_scraper_cli():
                 json.dump(upz_data, out_f, indent=2, ensure_ascii=False)
             os.replace(temp_upz_file, upz_file)
 
-        # Step 2: High-Speed Concurrent Scrape with Automatic Multi-Pass Recovery Sweep
+        # Step 2: High-Speed Asyncio Concurrent Scrape with Multi-Pass Recovery
         current_rolls_to_scrape = pending_rolls
         max_recovery_passes = 3
 
-        for pass_num in range(1, max_recovery_passes + 1):
-            if not current_rolls_to_scrape:
-                break
+        connector = aiohttp.TCPConnector(limit=60, ssl=False)
+        async with aiohttp.ClientSession(connector=connector) as aio_session:
+            for pass_num in range(1, max_recovery_passes + 1):
+                if not current_rolls_to_scrape:
+                    break
 
-            if pass_num > 1:
-                print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(current_rolls_to_scrape)} unretrieved roll(s) with fresh proxies...{RESET}")
-                # Refresh proxy pool for fresh nodes
-                proxies = proxy_pool.load_and_verify(max_valid=20)
-                time.sleep(1.0)
+                if pass_num > 1:
+                    print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(current_rolls_to_scrape)} unretrieved roll(s) with fresh async proxies...{RESET}")
+                    proxies = await proxy_pool.load_and_verify(max_valid=25)
+                    await asyncio.sleep(0.5)
 
-            max_workers = min(15, len(current_rolls_to_scrape)) if len(current_rolls_to_scrape) > 0 else 1
-            with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-                future_to_roll = {
-                    executor.submit(fetch_worker, roll, idx): roll
-                    for idx, roll in enumerate(current_rolls_to_scrape)
-                }
+                async def wrapped_fetch(roll, idx):
+                    res = await fetch_worker_async(aio_session, roll, idx, proxies)
+                    return roll, res
 
-                for future in concurrent.futures.as_completed(future_to_roll):
-                    roll = future_to_roll[future]
-                    res = future.result()
-                    
+                tasks = [wrapped_fetch(roll, idx) for idx, roll in enumerate(current_rolls_to_scrape)]
+                for completed in asyncio.as_completed(tasks):
+                    roll, res = await completed
                     if res and res.get("success"):
                         received_count += 1
                         seen_rolls.add(roll)
@@ -411,8 +416,8 @@ def run_scraper_cli():
 
                         print(f"{CYAN}{p_bar}{RESET} {received_count:4d}/{target_count}  Roll {roll:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
 
-            # Check if any rolls are still missing for the next pass
-            current_rolls_to_scrape = [r for r in pending_rolls if r not in seen_rolls]
+                # Check if any rolls are still missing
+                current_rolls_to_scrape = [r for r in pending_rolls if r not in seen_rolls]
 
         total_elapsed = time.time() - batch_start_time
         scrape_elapsed = time.time() - start_time
@@ -438,9 +443,12 @@ def run_scraper_cli():
             print(f"\n{YELLOW}{BOLD}⚠️ Finished Batch! {received_count}/{target_count} student results saved ({len(current_rolls_to_scrape)} unretrieved) in {time_str}!{RESET}")
         print(f"{CYAN}───────────────────────────────────────────────────────────{RESET}\n")
 
-if __name__ == "__main__":
+def run_scraper_cli():
     try:
-        run_scraper_cli()
+        asyncio.run(run_scraper_cli_async())
     except KeyboardInterrupt:
         print(f"\n{YELLOW}[!] Scraper terminated by user. All scraped records are safely preserved!{RESET}")
         sys.exit(0)
+
+if __name__ == "__main__":
+    run_scraper_cli()
