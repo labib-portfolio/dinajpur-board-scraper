@@ -484,16 +484,26 @@ def run_scraper_cli():
 
         first_roll_time = [None]
         last_roll_time = [None]
+        active_count = [0]
+        active_lock = threading.Lock()
 
         def student_consumer(worker_idx: int):
             nonlocal batch_received_count
             while not stop_event.is_set():
                 try:
-                    item = rolls_queue.get(timeout=0.3)
+                    item = rolls_queue.get(timeout=0.2)
                 except queue.Empty:
-                    if harvest_done.is_set() and rolls_queue.empty():
-                        break
+                    with active_lock:
+                        if harvest_done.is_set() and rolls_queue.empty() and active_count[0] == 0:
+                            break
                     continue
+
+                if item is None:  # Clean sentinel exit
+                    rolls_queue.task_done()
+                    break
+
+                with active_lock:
+                    active_count[0] += 1
 
                 if len(item) == 3:
                     roll_str, meta, attempts = item
@@ -527,6 +537,8 @@ def run_scraper_cli():
                     if attempts < 3 and not stop_event.is_set():
                         rolls_queue.put((roll_str, meta, attempts + 1))
 
+                with active_lock:
+                    active_count[0] -= 1
                 rolls_queue.task_done()
 
         # Launch Producer and Consumer threads concurrently (35 parallel workers with 51+ standby spares)
@@ -543,6 +555,9 @@ def run_scraper_cli():
 
         try:
             producer_thread.join()
+            rolls_queue.join()  # Guarantee all queued rolls & in-flight retries are 100% completed
+            for _ in range(num_workers):
+                rolls_queue.put(None)  # Signal all workers to shut down cleanly
             for t in consumer_threads:
                 t.join()
         except KeyboardInterrupt:
