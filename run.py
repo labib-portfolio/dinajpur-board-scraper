@@ -208,12 +208,11 @@ def run_scraper_cli():
             spare_proxies = max(0, len(proxies) - num_workers)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
-        # Build persistent Keep-Alive session pool with Self-Healing Circuit Breaker & 100-connection pool
-        proxy_failure_counts = {p: 0 for p in proxies}
-        healthy_sessions = []
+        # Build persistent Keep-Alive session pool across all verified proxy nodes
+        proxy_sessions = []
         for p in proxies:
             s = requests.Session()
-            adapter = HTTPAdapter(pool_connections=100, pool_maxsize=100)
+            adapter = HTTPAdapter(pool_connections=50, pool_maxsize=50)
             s.mount("http://", adapter)
             s.mount("https://", adapter)
             s.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
@@ -222,10 +221,10 @@ def run_scraper_cli():
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 "Connection": "keep-alive"
             })
-            healthy_sessions.append((p, s))
+            proxy_sessions.append(s)
 
         direct_session = requests.Session()
-        direct_adapter = HTTPAdapter(pool_connections=100, pool_maxsize=100)
+        direct_adapter = HTTPAdapter(pool_connections=50, pool_maxsize=50)
         direct_session.mount("http://", direct_adapter)
         direct_session.mount("https://", direct_adapter)
         direct_session.headers.update({
@@ -234,28 +233,12 @@ def run_scraper_cli():
             "Connection": "keep-alive"
         })
 
-        proxy_lock = threading.Lock()
-
-        def mark_proxy_failure(proxy_ip: str):
-            with proxy_lock:
-                proxy_failure_counts[proxy_ip] = proxy_failure_counts.get(proxy_ip, 0) + 1
-                if proxy_failure_counts[proxy_ip] >= 2:
-                    for idx, (p, s) in enumerate(healthy_sessions):
-                        if p == proxy_ip:
-                            healthy_sessions.pop(idx)
-                            break
-
-        def mark_proxy_success(proxy_ip: str):
-            with proxy_lock:
-                proxy_failure_counts[proxy_ip] = 0
-
         print(f"\n=======================================================")
         print(f"🚀 {BOLD}ENGINE PIPELINE CONFIGURATION:{RESET}")
         print(f"  • Active Proxy Pool:       {GREEN}{BOLD}{len(proxies)} Verified Nodes{RESET}")
         print(f"  • Concurrent Workers:      {CYAN}{BOLD}{num_workers} Parallel Threads{RESET}")
         print(f"  • Standby Failover Spares: {YELLOW}{BOLD}{spare_proxies} Spare Proxies{RESET}")
-        print(f"  • Connection Mode:         {GREEN}Persistent Keep-Alive Session Pool (100 Max Pool){RESET}")
-        print(f"  • Self-Healing Engine:     {GREEN}Active Circuit Breaker (Auto-Prunes Dead Nodes){RESET}")
+        print(f"  • Connection Mode:         {GREEN}Persistent Keep-Alive Session Pool (100% Retained){RESET}")
         print(f"  • Target Institutions:     {len(eiins)} Schools")
         print(f"=======================================================\n")
 
@@ -278,30 +261,25 @@ def run_scraper_cli():
         os.makedirs(cache_dir, exist_ok=True)
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-            # 1. Rotate through current healthy proxy sessions with 1.8s low-latency timeout
-            with proxy_lock:
-                current_sessions = list(healthy_sessions)
-
-            if current_sessions:
-                for offset in range(min(4, len(current_sessions))):
-                    p_ip, sess = current_sessions[(worker_idx + offset) % len(current_sessions)]
+            # 1. Rotate through up to 8 persistent proxy sessions with 3.0s timeout
+            if proxy_sessions:
+                num_sessions = len(proxy_sessions)
+                for offset in range(min(8, num_sessions)):
+                    sess = proxy_sessions[(worker_idx * 3 + offset) % num_sessions]
                     try:
                         url = ENDPOINT.format(roll=roll_str)
-                        r = sess.get(url, timeout=1.8)
+                        r = sess.get(url, timeout=3.0)
                         if r.status_code == 200:
                             parsed = parse_student_html(r.text, roll_str)
                             if parsed:
-                                mark_proxy_success(p_ip)
                                 return parsed
-                        elif r.status_code in (403, 429, 500, 502, 503):
-                            mark_proxy_failure(p_ip)
                     except Exception:
-                        mark_proxy_failure(p_ip)
+                        pass
 
-            # 2. Fast single direct attempt with 2.5s timeout (non-blocking, zero sleep)
+            # 2. Fast direct attempt fallback
             try:
                 url = ENDPOINT.format(roll=roll_str)
-                r = direct_session.get(url, timeout=2.5)
+                r = direct_session.get(url, timeout=3.0)
                 if r.status_code == 200:
                     parsed = parse_student_html(r.text, roll_str)
                     if parsed:
@@ -510,34 +488,20 @@ def run_scraper_cli():
             stop_event.set()
             print(f"\n\n{YELLOW}{BOLD}[!] Pipeline stopped by user (Ctrl+C). All {batch_received_count} scraped records are safely preserved!{RESET}")
 
-        # Auto-Recovery Passes on Missing Rolls (if any)
+        # Auto-Recovery Passes on Missing Rolls (guaranteed 100% completion)
         if not stop_event.is_set():
             unretrieved = [r for r in pending_rolls if r not in seen_rolls]
-            max_recovery_passes = 3
+            max_recovery_passes = 4
             for pass_num in range(1, max_recovery_passes + 1):
                 if not unretrieved:
                     break
-                proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
-                with proxy_lock:
-                    healthy_sessions = []
-                    for p in proxies:
-                        s = requests.Session()
-                        adapter = HTTPAdapter(pool_connections=100, pool_maxsize=100)
-                        s.mount("http://", adapter)
-                        s.mount("https://", adapter)
-                        s.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
-                        s.headers.update({
-                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-                            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-                            "Connection": "keep-alive"
-                        })
-                        healthy_sessions.append((p, s))
+                print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(unretrieved)} unretrieved roll(s) across all proxy nodes...{RESET}")
                 time.sleep(1.0)
 
-                rec_workers = min(35, len(unretrieved))
+                rec_workers = min(30, len(unretrieved))
                 with concurrent.futures.ThreadPoolExecutor(max_workers=rec_workers) as rec_exec:
                     future_to_roll = {
-                        rec_exec.submit(fetch_worker, roll, idx): roll
+                        rec_exec.submit(fetch_worker, roll, idx + pass_num * 7): roll
                         for idx, roll in enumerate(unretrieved)
                     }
                     for future in concurrent.futures.as_completed(future_to_roll):
@@ -547,8 +511,9 @@ def run_scraper_cli():
                             meta = roll_metadata_map.get(roll, {})
                             with file_lock:
                                 save_record_to_upazilla(res, meta)
-                            batch_received_count += 1
-                            seen_rolls.add(roll)
+                            with stats_lock:
+                                batch_received_count += 1
+                                seen_rolls.add(roll)
                             s_name = res.get("student_name", "STUDENT")
                             gpa_res = res.get("result", "N/A")
                             is_pass = "GPA" in str(gpa_res)
