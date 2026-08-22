@@ -37,15 +37,24 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Run Scraper Chunk ${{ matrix.chunk }}
+      - name: Calculate 40-Worker Chunk Partition
         run: |
-          python scrape_chunk.py --chunk ${{ matrix.chunk }} --total-chunks 20 --input rolls.json --output chunks_output/chunk_${{ matrix.chunk }}.json --delay ${{ github.event.inputs.delay || '3.2' }} --webhook-url "${{ github.event.inputs.webhook_url || 'https://dinajpur-scraper-live.loca.lt/api/webhook/stream-record' }}"
+          if [[ "${{ github.repository }}" == *"node2"* ]]; then
+            ACTUAL_CHUNK=$(( ${{ matrix.chunk }} + 20 ))
+          else
+            ACTUAL_CHUNK=${{ matrix.chunk }}
+          fi
+          echo "ACTUAL_CHUNK=$ACTUAL_CHUNK" >> $GITHUB_ENV
+
+      - name: Run Scraper Chunk (Worker ${{ env.ACTUAL_CHUNK }}/40)
+        run: |
+          python scrape_chunk.py --chunk ${{ env.ACTUAL_CHUNK }} --total-chunks 40 --input rolls.json --output chunks_output/chunk_${{ env.ACTUAL_CHUNK }}.json --delay ${{ github.event.inputs.delay || '3.2' }} --webhook-url "${{ github.event.inputs.webhook_url || 'https://dinajpur-scraper-live.loca.lt/api/webhook/stream-record' }}"
 
       - name: Upload Chunk Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: chunk-result-${{ matrix.chunk }}
-          path: chunks_output/chunk_${{ matrix.chunk }}.json
+          name: chunk-result-${{ env.ACTUAL_CHUNK }}
+          path: chunks_output/chunk_${{ env.ACTUAL_CHUNK }}.json
 
   merge_and_publish:
     name: Merge All Chunks & Publish Master JSON
