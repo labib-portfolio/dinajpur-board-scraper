@@ -152,11 +152,19 @@ def format_progress_bar(current: int, total: int, width: int = 20) -> str:
     return f"[{'█' * filled}{'░' * (width - filled)}]"
 
 def run_scraper_cli():
-    print_banner()
+    # Storage Root Directory: Auto-detect Android Phone Storage or Local PC
+    if os.path.exists("/storage/emulated/0"):
+        results_root = "/storage/emulated/0/Result Scraper"
+    elif os.path.exists("/sdcard"):
+        results_root = "/sdcard/Result Scraper"
+    elif os.path.exists("/storage/emulated"):
+        results_root = "/storage/emulated/Result Scraper"
+    else:
+        results_root = os.path.join(BASE_DIR, "results")
 
-    results_root = os.path.join(BASE_DIR, "results")
-    master_file = os.path.join(BASE_DIR, "scraped_results_all.json")
     os.makedirs(results_root, exist_ok=True)
+    master_file = os.path.join(results_root, "scraped_results_all.json")
+    print(f"{DIM}Storage Destination: {results_root}{RESET}")
     
     proxy_pool = FastProxyPool()
     print(f"{DIM}Checking dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
