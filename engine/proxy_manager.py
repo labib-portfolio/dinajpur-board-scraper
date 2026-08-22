@@ -62,7 +62,7 @@ async def fetch_source(session, url):
         pass
     return []
 
-async def check_proxy_node(session, proxy, working_list, sem, needed=50, silent=True):
+async def check_proxy_node(session, proxy, working_list, sem, needed=85, silent=True):
     if len(working_list) >= needed:
         return
     async with sem:
@@ -81,15 +81,15 @@ async def check_proxy_node(session, proxy, working_list, sem, needed=50, silent=
         except Exception:
             pass
 
-async def harvest_and_verify_proxies(needed=50, max_candidates=2500, silent=True):
+async def harvest_and_verify_proxies(needed=85, max_candidates=4000, silent=True):
     t0 = time.time()
-    connector = aiohttp.TCPConnector(ssl=False, limit=350)
+    connector = aiohttp.TCPConnector(ssl=False, limit=400)
     async with aiohttp.ClientSession(connector=connector) as session:
         tasks = [fetch_source(session, url) for url in PROXY_SOURCES]
         results = await asyncio.gather(*tasks)
         all_proxies = list(dict.fromkeys(ip for sublist in results for ip in sublist))
 
-        sem = asyncio.Semaphore(250)
+        sem = asyncio.Semaphore(300)
         working_proxies = []
         check_tasks = [
             check_proxy_node(session, p, working_proxies, sem, needed=needed, silent=silent)
@@ -99,7 +99,7 @@ async def harvest_and_verify_proxies(needed=50, max_candidates=2500, silent=True
         return working_proxies
 
 if __name__ == "__main__":
-    live_proxies = asyncio.run(harvest_and_verify_proxies(needed=25))
+    live_proxies = asyncio.run(harvest_and_verify_proxies(needed=85, max_candidates=4000, silent=False))
     with open("working_proxies.txt", "w", encoding="utf-8") as f:
         f.write("\n".join(live_proxies))
-    print("Saved to working_proxies.txt")
+    print(f"Saved {len(live_proxies)} live proxies to working_proxies.txt")

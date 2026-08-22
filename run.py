@@ -86,7 +86,7 @@ class FastProxyPool:
         self.proxies: List[str] = []
         self.cache_file = os.path.join(BASE_DIR, "working_proxies.txt")
 
-    def load_and_verify(self, max_candidates: int = 2500, max_valid: int = 50) -> List[str]:
+    def load_and_verify(self, max_candidates: int = 4000, max_valid: int = 90) -> List[str]:
         # 1. Check local cached proxies if recent (<15 minutes)
         if os.path.exists(self.cache_file):
             try:
@@ -94,7 +94,7 @@ class FastProxyPool:
                 if time.time() - mtime < 900:
                     with open(self.cache_file, "r", encoding="utf-8") as f:
                         cached = [line.strip() for line in f if ":" in line.strip()]
-                    if len(cached) >= 20:
+                    if len(cached) >= 40:
                         self.proxies = cached[:max_valid]
                         return self.proxies
             except Exception:
@@ -198,10 +198,22 @@ def run_scraper_cli():
                 pass
 
         # Verify proxy pool
-        if len(proxies) < 15:
+        if len(proxies) < 30:
             print(f"{DIM}Verifying dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
-            proxies = proxy_pool.load_and_verify(max_candidates=2500, max_valid=50)
+            proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
+
+        # Build persistent Keep-Alive session pool (1 session per proxy node)
+        proxy_sessions = []
+        for p in proxies:
+            s = requests.Session()
+            s.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
+            s.headers.update({
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Connection": "keep-alive"
+            })
+            proxy_sessions.append(s)
 
         print(f"\n{CYAN}🚀 Launching Pipelined Stream Engine for {len(eiins)} Institution(s)...{RESET}")
         print(f"{DIM}Institutions and Student Results scrape simultaneously in real time!{RESET}\n")
@@ -225,14 +237,13 @@ def run_scraper_cli():
         os.makedirs(cache_dir, exist_ok=True)
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-            # 1. Try rotating through verified proxy nodes
-            if proxies:
-                for offset in range(min(5, len(proxies))):
-                    p = proxies[(worker_idx + offset) % len(proxies)]
-                    prox = {"http": f"http://{p}", "https": f"http://{p}"}
+            # 1. Try rotating through persistent proxy sessions with Keep-Alive connection reuse
+            if proxy_sessions:
+                for offset in range(min(6, len(proxy_sessions))):
+                    sess = proxy_sessions[(worker_idx + offset) % len(proxy_sessions)]
                     try:
                         url = ENDPOINT.format(roll=roll_str)
-                        r = requests.get(url, proxies=prox, timeout=4.5)
+                        r = sess.get(url, timeout=3.5)
                         if r.status_code == 200:
                             parsed = parse_student_html(r.text, roll_str)
                             if parsed:
@@ -429,8 +440,8 @@ def run_scraper_cli():
 
                 rolls_queue.task_done()
 
-        # Launch Producer and Consumer threads concurrently
-        num_workers = min(20, 20)
+        # Launch Producer and Consumer threads concurrently (50 parallel workers)
+        num_workers = min(50, len(proxies)) if len(proxies) > 0 else 20
         producer_thread = threading.Thread(target=harvest_producer, daemon=True)
         consumer_threads = [
             threading.Thread(target=student_consumer, args=(i,), daemon=True)
@@ -457,10 +468,20 @@ def run_scraper_cli():
                 if not unretrieved:
                     break
                 print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(unretrieved)} unretrieved roll(s) with fresh proxies...{RESET}")
-                proxies = proxy_pool.load_and_verify(max_candidates=2500, max_valid=50)
+                proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
+                proxy_sessions = []
+                for p in proxies:
+                    s = requests.Session()
+                    s.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
+                    s.headers.update({
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+                        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                        "Connection": "keep-alive"
+                    })
+                    proxy_sessions.append(s)
                 time.sleep(1.0)
 
-                rec_workers = min(15, len(unretrieved))
+                rec_workers = min(35, len(unretrieved))
                 with concurrent.futures.ThreadPoolExecutor(max_workers=rec_workers) as rec_exec:
                     future_to_roll = {
                         rec_exec.submit(fetch_worker, roll, idx): roll
