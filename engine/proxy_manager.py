@@ -18,6 +18,8 @@ PROXY_SOURCES = [
     
     # Active GitHub Repositories (HTTP / HTTPS)
     "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt",
+    "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/http.txt",
+    "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies_anonymous/https.txt",
     "https://raw.githubusercontent.com/prxchk/proxy-list/main/http.txt",
     "https://raw.githubusercontent.com/prxchk/proxy-list/main/https.txt",
     "https://raw.githubusercontent.com/mertguvencli/http-proxy-list/main/proxy-list/data.txt",
@@ -46,7 +48,30 @@ PROXY_SOURCES = [
     "https://raw.githubusercontent.com/andigwandi/free-proxy/main/proxy_list.txt",
     "https://raw.githubusercontent.com/hookzof/socks5_list/master/proxy.txt",
     "https://raw.githubusercontent.com/SevenworksDev/proxy-list/main/proxies/http.txt",
-    "https://raw.githubusercontent.com/SevenworksDev/proxy-list/main/proxies/https.txt"
+    "https://raw.githubusercontent.com/SevenworksDev/proxy-list/main/proxies/https.txt",
+    "https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt",
+    "https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies-http.txt",
+    "https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies-https.txt",
+    "https://raw.githubusercontent.com/casals-ar/proxy-list/main/http.txt",
+    "https://raw.githubusercontent.com/casals-ar/proxy-list/main/https.txt",
+    "https://raw.githubusercontent.com/ObcbO/getproxy/master/http.txt",
+    "https://raw.githubusercontent.com/ObcbO/getproxy/master/https.txt",
+    "https://raw.githubusercontent.com/B4RC0D3-UA/proxy-list/main/HTTP.txt",
+    "https://raw.githubusercontent.com/B4RC0D3-UA/proxy-list/main/HTTPS.txt",
+    "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/http.txt",
+    "https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/https.txt",
+    "https://raw.githubusercontent.com/zevtyardt/proxy-list/main/http.txt",
+    "https://raw.githubusercontent.com/zevtyardt/proxy-list/main/https.txt",
+    "https://raw.githubusercontent.com/yemix-is/proxy-list/main/proxies/http.txt",
+    "https://raw.githubusercontent.com/yemix-is/proxy-list/main/proxies/https.txt",
+    "https://raw.githubusercontent.com/ALIILAPRO/Proxy/main/http.txt",
+    "https://raw.githubusercontent.com/ALIILAPRO/Proxy/main/https.txt",
+    "https://raw.githubusercontent.com/saisuiu/Lion-proxies/main/http.txt",
+    "https://raw.githubusercontent.com/saisuiu/Lion-proxies/main/https.txt",
+    "https://raw.githubusercontent.com/proxy4parsing/proxy-list/main/http.txt",
+    "https://raw.githubusercontent.com/almroot/proxylist/master/list.txt",
+    "https://raw.githubusercontent.com/mmpx12/proxy-list/master/http.txt",
+    "https://raw.githubusercontent.com/mmpx12/proxy-list/master/https.txt"
 ]
 
 TARGET_ENDPOINT = (
@@ -66,7 +91,7 @@ async def fetch_source(session, url):
         pass
     return []
 
-async def check_proxy_node(session, proxy, working_list, sem, needed=85, silent=True):
+async def check_proxy_node(session, proxy, working_list, sem, needed=180, silent=True):
     if len(working_list) >= needed:
         return
     async with sem:
@@ -85,7 +110,7 @@ async def check_proxy_node(session, proxy, working_list, sem, needed=85, silent=
         except Exception:
             pass
 
-async def harvest_and_verify_proxies(needed=85, max_candidates=4000, silent=True):
+async def harvest_and_verify_proxies(needed=180, max_candidates=15000, silent=True):
     try:
         loop = asyncio.get_running_loop()
         def silence_sock_reset(loop, context):
@@ -100,14 +125,23 @@ async def harvest_and_verify_proxies(needed=85, max_candidates=4000, silent=True
     except Exception:
         pass
 
+    existing_proxies = []
+    cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "working_proxies.txt")
+    if os.path.exists(cache_file):
+        try:
+            with open(cache_file, "r", encoding="utf-8") as f:
+                existing_proxies = [line.strip() for line in f if ":" in line.strip()]
+        except Exception:
+            pass
+
     t0 = time.time()
-    connector = aiohttp.TCPConnector(ssl=False, limit=120)
+    connector = aiohttp.TCPConnector(ssl=False, limit=300)
     async with aiohttp.ClientSession(connector=connector) as session:
         tasks = [fetch_source(session, url) for url in PROXY_SOURCES]
         results = await asyncio.gather(*tasks)
-        all_proxies = list(dict.fromkeys(ip for sublist in results for ip in sublist))
+        all_proxies = list(dict.fromkeys(existing_proxies + [ip for sublist in results for ip in sublist]))
 
-        sem = asyncio.Semaphore(100)
+        sem = asyncio.Semaphore(250)
         working_proxies = []
         check_tasks = [
             check_proxy_node(session, p, working_proxies, sem, needed=needed, silent=silent)
@@ -117,7 +151,8 @@ async def harvest_and_verify_proxies(needed=85, max_candidates=4000, silent=True
         return working_proxies
 
 if __name__ == "__main__":
-    live_proxies = asyncio.run(harvest_and_verify_proxies(needed=85, max_candidates=4000, silent=False))
-    with open("working_proxies.txt", "w", encoding="utf-8") as f:
+    live_proxies = asyncio.run(harvest_and_verify_proxies(needed=180, max_candidates=15000, silent=False))
+    cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "working_proxies.txt")
+    with open(cache_file, "w", encoding="utf-8") as f:
         f.write("\n".join(live_proxies))
     print(f"Saved {len(live_proxies)} live proxies to working_proxies.txt")
