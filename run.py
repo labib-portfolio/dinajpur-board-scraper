@@ -215,7 +215,7 @@ def run_scraper_cli():
                 }
 
             if not is_cached:
-                time.sleep(0.3)
+                time.sleep(2.5)
 
         all_unique_rolls = list(dict.fromkeys(all_target_rolls))
 
