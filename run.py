@@ -41,6 +41,7 @@ RESET = "\033[0m"
 
 PROXY_SOURCES = [
     "https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http,https&timeout=5000&country=all&ssl=all&anonymity=all",
+    "https://raw.githubusercontent.com/MuRongPIG/Proxy-Master-List/main/http.txt",
     "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt",
     "https://www.proxy-list.download/api/v1/get?type=http",
     "https://raw.githubusercontent.com/prxchk/proxy-list/main/http.txt",
