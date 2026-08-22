@@ -6,8 +6,8 @@
     "scraped_so_far": 1,
     "total_success": 1,
     "total_failed": 0,
-    "elapsed_seconds": 0.4,
-    "last_updated": "2026-08-22 16:59:29"
+    "elapsed_seconds": 5.61,
+    "last_updated": "2026-08-22 17:03:12"
   },
   "records": [
     {
@@ -24,7 +24,7 @@
       "result": "GPA=3.72",
       "total_marks": "671",
       "subject_grades": [],
-      "scraped_at": "2026-08-22 16:59:29"
+      "scraped_at": "2026-08-22 17:03:12"
     }
   ]
 }
