@@ -1,6 +1,7 @@
 """
 Interactive Terminal CLI for Dinajpur Board Result Scraper
 100% Cloud-Powered Mode using 40 Parallel GitHub Actions Cloud Runners
+Optimized for Massive Multi-EIIN and District-Wide Batches
 """
 
 import sys
@@ -12,7 +13,6 @@ import subprocess
 import requests
 import logging
 from bs4 import BeautifulSoup
-from collections import Counter
 from typing import List, Dict, Any, Optional
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -36,18 +36,17 @@ BOLD = "\033[1m"
 DIM = "\033[2m"
 RESET = "\033[0m"
 
-COOKIE_FILE = os.path.join(BASE_DIR, ".session_cache.json")
-
 def print_banner():
     print(f"\n{CYAN}┌───────────────────────────────────────────────────────────┐{RESET}")
     print(f"{CYAN}│{RESET}  {BOLD}Dinajpur Board Result Scraper 2026 — 40 Cloud Workers{RESET}    {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}100% Cloud Parallel Scraping on GitHub Actions Matrix{RESET}     {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}100% Cloud Parallel Scraping for Massive Multi-EIIN Lists{RESET} {CYAN}│{RESET}")
     print(f"{CYAN}│{RESET}  {DIM}2 Repositories • 40 Unique IP Addresses • 600 rolls/min{RESET}   {CYAN}│{RESET}")
     print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n")
 
 def get_eiin_inputs() -> List[str]:
     print(f"{BOLD}Enter EIIN number(s) (space, comma, or newline separated).{RESET}")
+    print(f"{DIM}You can paste single EIINs or massive lists of 100+ EIINs.{RESET}")
     print(f"{DIM}Press Enter on an empty line when done:{RESET}")
     
     lines = []
@@ -74,14 +73,12 @@ def format_progress_bar(current: int, total: int, width: int = 20) -> str:
 def dispatch_to_github_cloud(rolls: List[str]) -> bool:
     """Partitions rolls across Repo 1 and Repo 2 and triggers GitHub Actions."""
     try:
-        # Write rolls.json for Repo 1 (Node 1)
         rolls_file = os.path.join(BASE_DIR, "rolls.json")
         with open(rolls_file, 'w', encoding='utf-8') as f:
             json.dump(rolls, f, indent=2)
 
         print(f"{CYAN}[🚀 Cloud Dispatch] Launching 40 Parallel Cloud Workers on GitHub Actions...{RESET}")
         
-        # Git push triggers the GitHub Actions matrix on both repositories automatically
         subprocess.run(
             ["git", "add", "rolls.json"],
             cwd=BASE_DIR, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True
@@ -97,7 +94,7 @@ def dispatch_to_github_cloud(rolls: List[str]) -> bool:
         p1.wait()
         p2.wait()
 
-        print(f"{GREEN}✓ Dispatched! 40 Cloud Workers are actively scraping in parallel!{RESET}\n")
+        print(f"{GREEN}✓ Dispatched! 40 Cloud Workers are actively scraping in parallel at 600 rolls/min!{RESET}\n")
         return True
     except Exception as e:
         print(f"{RED}[!] Error dispatching to GitHub: {e}{RESET}")
@@ -115,125 +112,161 @@ def run_cloud_cli():
     output_base = os.path.join(BASE_DIR, "upazilla_results")
     os.makedirs(output_base, exist_ok=True)
 
-    total_eiins = len(eiins)
+    print(f"\n{CYAN}[Step 1/2] Harvesting Gazette Records for {len(eiins)} Institution(s)...{RESET}")
+
+    # Map roll_no -> {eiin, institute_name, upazila, district}
+    roll_metadata_map = {}
+    all_target_rolls = []
+    upazilla_summary = {}
 
     for idx, eiin in enumerate(eiins, 1):
-        box_text = f" EIIN {eiin}  ({idx}/{total_eiins}) "
-        padding = max(0, 48 - len(box_text))
-        print(f"\n{CYAN}┌{'─' * 52}┐{RESET}")
-        print(f"{CYAN}│{RESET}  {BOLD}{box_text}{RESET}{' ' * padding}{CYAN}│{RESET}")
-        print(f"{CYAN}└{'─' * 52}┘{RESET}\n")
-
-        # Step 1: Fetch Institute Result from Gazette
-        print(f"{CYAN}[1/2] Fetching institute result for EIIN {eiin}...{RESET}")
+        print(f"  [{idx}/{len(eiins)}] Querying EIIN {eiin}...", end=" ", flush=True)
         inst_data = fetcher.fetch_by_eiin(eiin)
 
         if not inst_data or "error" in inst_data or not inst_data.get("name"):
-            print(f"{RED}[!] Error: Could not retrieve institute data for EIIN {eiin}.{RESET}\n")
+            print(f"{RED}Failed (Not found){RESET}")
             continue
 
         inst_name = inst_data.get("name", "Unknown")
         district = inst_data.get("district", "Unknown")
         upazila = inst_data.get("upazila", "UNKNOWN")
         students = inst_data.get("students", [])
-        rolls_to_scrape = [str(s["roll"]) for s in students if s.get("roll")]
-        total_rolls = len(rolls_to_scrape)
-
-        print(f"\n{BOLD}Institute:{RESET} {inst_name}")
-        print(f"{BOLD}District:{RESET}  {district}")
-        print(f"{BOLD}Upazilla:{RESET}  {upazila}")
-        print(f"{GREEN}{BOLD}Total rolls found:{RESET} {total_rolls}\n")
-
-        if total_rolls == 0:
-            print(f"{YELLOW}[!] No student rolls found for this institute.{RESET}\n")
-            continue
-
-        # Prepare Upazilla Output File
-        upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upazila.strip().lower()).strip('_')
-        upazilla_file = os.path.join(output_base, f"results_upazilla_{upz_slug}.json")
         
-        upz_records = []
-        if os.path.exists(upazilla_file):
+        rolls = [str(s["roll"]) for s in students if s.get("roll")]
+        print(f"{GREEN}✓ {inst_name[:32]} ({len(rolls)} rolls){RESET}")
+
+        upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upazila.strip().lower()).strip('_')
+        if upz_slug not in upazilla_summary:
+            upazilla_summary[upz_slug] = {"upazila": upazila, "district": district, "rolls_count": 0}
+        upazilla_summary[upz_slug]["rolls_count"] += len(rolls)
+
+        for s in students:
+            r_str = str(s["roll"])
+            all_target_rolls.append(r_str)
+            roll_metadata_map[r_str] = {
+                "eiin": int(eiin),
+                "institute": inst_name,
+                "upazila": upazila,
+                "district": district,
+                "group": s.get("group")
+            }
+
+        time.sleep(0.5)
+
+    all_unique_rolls = list(dict.fromkeys(all_target_rolls))
+
+    print(f"\n=======================================================")
+    print(f"📊 {BOLD}HARVEST SUMMARY:{RESET}")
+    print(f"  • Institutions Processed: {len(eiins)}")
+    print(f"  • Total Upazillas:        {len(upazilla_summary)}")
+    print(f"  • Total Candidate Rolls:  {len(all_unique_rolls)}")
+    print(f"=======================================================\n")
+
+    if not all_unique_rolls:
+        print(f"{YELLOW}[!] No student rolls found across the provided EIINs.{RESET}\n")
+        return
+
+    # Check already scraped
+    master_file = os.path.join(BASE_DIR, "scraped_results_all.json")
+    already_scraped_map = {}
+    if os.path.exists(master_file):
+        try:
+            with open(master_file, 'r', encoding='utf-8') as f:
+                prev_data = json.load(f)
+                for r in prev_data.get("records", []):
+                    if r.get("roll_no"):
+                        already_scraped_map[str(r.get("roll_no"))] = r
+        except Exception:
+            pass
+
+    pending_rolls = [r for r in all_unique_rolls if r not in already_scraped_map]
+    print(f"[*] Already Scraped: {len(all_unique_rolls) - len(pending_rolls)} | Remaining: {len(pending_rolls)}")
+
+    if not pending_rolls:
+        print(f"{GREEN}🎉 All {len(all_unique_rolls)} rolls across all EIINs are already 100% scraped!{RESET}\n")
+        return
+
+    # Step 2: Dispatch Entire Pool to 40 Cloud Workers
+    print(f"\n{CYAN}[Step 2/2] Launching 40 Cloud Workers for {len(pending_rolls)} Rolls...{RESET}")
+    dispatch_to_github_cloud(pending_rolls)
+
+    print(f"{BOLD}Streaming results live from 40 GitHub Cloud Workers into Upazilla files...{RESET}\n")
+
+    received_count = 0
+    target_count = len(pending_rolls)
+    seen_rolls = set(already_scraped_map.keys())
+    timeout_start = time.time()
+
+    # Track Upazilla file records
+    upazilla_records_map = {}
+
+    while received_count < target_count:
+        if os.path.exists(master_file):
             try:
-                with open(upazilla_file, 'r', encoding='utf-8') as f:
-                    prev = json.load(f)
-                    upz_records = prev.get("records", [])
+                with open(master_file, 'r', encoding='utf-8') as f:
+                    m_data = json.load(f)
+                    records = m_data.get("records", [])
+                    
+                    for r in records:
+                        r_roll = str(r.get("roll_no"))
+                        if r_roll in pending_rolls and r_roll not in seen_rolls:
+                            seen_rolls.add(r_roll)
+                            received_count += 1
+                            
+                            s_name = r.get("student_name") or "STUDENT"
+                            gpa_res = r.get("result", "N/A")
+                            is_pass = "GPA" in str(gpa_res)
+                            status_color = GREEN if is_pass else RED
+                            status_label = "PASSED" if is_pass else "FAILED"
+                            p_bar = format_progress_bar(received_count, target_count, width=20)
+
+                            print(f"{CYAN}{p_bar}{RESET} {received_count:4d}/{target_count}  Roll {r_roll}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+
+                            # Route record to its respective Upazilla JSON
+                            meta = roll_metadata_map.get(r_roll, {})
+                            upz_name = meta.get("upazila") or r.get("upazilla") or "UNKNOWN_UPAZILLA"
+                            upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upz_name.strip().lower()).strip('_')
+                            upz_file = os.path.join(output_base, f"results_upazilla_{upz_slug}.json")
+
+                            if upz_slug not in upazilla_records_map:
+                                upazilla_records_map[upz_slug] = []
+                                if os.path.exists(upz_file):
+                                    try:
+                                        with open(upz_file, 'r', encoding='utf-8') as uf:
+                                            upazilla_records_map[upz_slug] = json.load(uf).get("records", [])
+                                    except Exception:
+                                        pass
+
+                            r["upazila"] = upz_name
+                            r["district"] = meta.get("district", "NILPHAMARI")
+                            r["eiin"] = meta.get("eiin")
+                            upazilla_records_map[upz_slug].append(r)
+
+                            # Save Upazilla file checkpoint
+                            upz_payload = {
+                                "upazila": upz_name,
+                                "district": meta.get("district", "NILPHAMARI"),
+                                "summary": {
+                                    "total_records": len(upazilla_records_map[upz_slug]),
+                                    "total_passed": sum(1 for item in upazilla_records_map[upz_slug] if "GPA" in str(item.get("result", ""))),
+                                    "total_failed": sum(1 for item in upazilla_records_map[upz_slug] if not ("GPA" in str(item.get("result", "")))),
+                                    "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
+                                },
+                                "records": upazilla_records_map[upz_slug]
+                            }
+
+                            with open(upz_file, 'w', encoding='utf-8') as out_f:
+                                json.dump(upz_payload, out_f, indent=2, ensure_ascii=False)
+
             except Exception:
                 pass
 
-        existing_rolls_map = {str(r.get("roll_no")): r for r in upz_records}
-        pending_rolls = [r for r in rolls_to_scrape if r not in existing_rolls_map]
+        time.sleep(1.0)
+        # Timeout safety (e.g. 30 mins)
+        if time.time() - timeout_start > 1800:
+            break
 
-        if not pending_rolls:
-            print(f"{GREEN}✓ All {total_rolls} rolls are already scraped and saved!{RESET}\n")
-            continue
-
-        print(f"{CYAN}[2/2] Launching 40 Cloud Workers for {len(pending_rolls)} rolls...{RESET}")
-        
-        # Dispatch to 40 GitHub Cloud Workers
-        dispatch_to_github_cloud(pending_rolls)
-
-        print(f"{BOLD}Streaming results live from GitHub Cloud Workers into your file...{RESET}")
-
-        # Monitor live incoming records
-        received_count = 0
-        target_count = len(pending_rolls)
-        master_file = os.path.join(BASE_DIR, "scraped_results_all.json")
-        seen_rolls = set(existing_rolls_map.keys())
-
-        last_check_len = 0
-        timeout_start = time.time()
-
-        while received_count < target_count:
-            if os.path.exists(master_file):
-                try:
-                    with open(master_file, 'r', encoding='utf-8') as f:
-                        m_data = json.load(f)
-                        records = m_data.get("records", [])
-                        
-                        for r in records:
-                            r_roll = str(r.get("roll_no"))
-                            if r_roll in pending_rolls and r_roll not in seen_rolls:
-                                seen_rolls.add(r_roll)
-                                received_count += 1
-                                
-                                s_name = r.get("student_name") or "STUDENT"
-                                gpa_res = r.get("result", "N/A")
-                                is_pass = "GPA" in str(gpa_res)
-                                status_color = GREEN if is_pass else RED
-                                status_label = "PASSED" if is_pass else "FAILED"
-                                p_bar = format_progress_bar(received_count, target_count, width=20)
-
-                                print(f"{CYAN}{p_bar}{RESET} {received_count:3d}/{target_count}  Roll {r_roll}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
-
-                                # Append to Upazilla records
-                                upz_records.append(r)
-                                payload = {
-                                    "upazila": upazila,
-                                    "district": district,
-                                    "summary": {
-                                        "total_records": len(upz_records),
-                                        "total_passed": sum(1 for item in upz_records if "GPA" in str(item.get("result", ""))),
-                                        "total_failed": sum(1 for item in upz_records if not ("GPA" in str(item.get("result", "")))),
-                                        "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
-                                    },
-                                    "records": upz_records
-                                }
-                                with open(upazilla_file, 'w', encoding='utf-8') as out_f:
-                                    json.dump(payload, out_f, indent=2, ensure_ascii=False)
-
-                except Exception:
-                    pass
-
-            time.sleep(1.0)
-            # Timeout guard if runners finish
-            if time.time() - timeout_start > 900: # 15 mins max
-                break
-
-        print(f"\n{GREEN}✓ Completed EIIN {eiin} ({inst_name}) via 40 Cloud Workers!{RESET}")
-        print(f"{DIM}Saved to: {upazilla_file}{RESET}\n")
-
-    print(f"{GREEN}{BOLD}🎉 All Cloud Scraping tasks completed successfully!{RESET}\n")
+    print(f"\n{GREEN}{BOLD}🎉 Finished Massive Batch! All {received_count} student results saved across Upazilla files!{RESET}\n")
 
 
 if __name__ == "__main__":
