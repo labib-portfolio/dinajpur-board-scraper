@@ -178,13 +178,13 @@ def run_interactive_cli():
             # Check if already scraped
             if roll_str in existing_rolls_map:
                 r_item = existing_rolls_map[roll_str]
-                s_name = (r_item.get("student_name") or "STUDENT")[:20]
+                s_name = r_item.get("student_name") or "STUDENT"
                 gpa_res = r_item.get("result", "N/A")
-                is_pass = "GPA" in gpa_res
+                is_pass = "GPA" in str(gpa_res)
                 status_color = GREEN if is_pass else RED
                 status_label = "PASSED" if is_pass else "FAILED"
 
-                print(f"{CYAN}{p_bar}{RESET} {s_idx:3d}/{total_rolls}  Roll {roll_str}  {s_name:<20}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+                print(f"{CYAN}{p_bar}{RESET} {s_idx:3d}/{total_rolls}  Roll {roll_str}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
                 continue
 
             # Scrape student details
@@ -204,8 +204,7 @@ def run_interactive_cli():
             status_color = GREEN if is_pass else RED
             status_label = "PASSED" if is_pass else "FAILED"
 
-            s_name_display = student_name[:20]
-            print(f"{CYAN}{p_bar}{RESET} {s_idx:3d}/{total_rolls}  Roll {roll_str}  {s_name_display:<20}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+            print(f"{CYAN}{p_bar}{RESET} {s_idx:3d}/{total_rolls}  Roll {roll_str}  {student_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
 
             # Structured Entry
             record_entry = {
