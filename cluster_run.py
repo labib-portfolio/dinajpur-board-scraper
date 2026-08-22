@@ -372,6 +372,44 @@ def main():
 
         flush_dirty_upazillas(force=True)
 
+        # 6. Auto-Recovery Catch-Up Passes for 100% Guaranteed Completion
+        if not stop_event.is_set():
+            import concurrent.futures
+            unretrieved = [r for r in pending_rolls if r not in seen_rolls]
+            max_recovery_passes = 8
+            for pass_num in range(1, max_recovery_passes + 1):
+                if not unretrieved:
+                    break
+                print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(unretrieved)} unretrieved roll(s) across all proxy nodes...{RESET}")
+                time.sleep(1.0)
+
+                rec_workers = min(20, len(unretrieved))
+                with concurrent.futures.ThreadPoolExecutor(max_workers=rec_workers) as rec_exec:
+                    future_to_roll = {
+                        rec_exec.submit(fetch_worker, roll, idx + pass_num * 17): roll
+                        for idx, roll in enumerate(unretrieved)
+                    }
+                    for future in concurrent.futures.as_completed(future_to_roll):
+                        roll = future_to_roll[future]
+                        res = future.result()
+                        if res and res.get("success"):
+                            save_record_to_upazilla(res, {})
+                            with stats_lock:
+                                batch_received_count += 1
+                                seen_rolls.add(roll)
+                            s_name = res.get("student_name", "STUDENT")
+                            gpa_res = res.get("result", "N/A")
+                            is_pass = "GPA" in str(gpa_res)
+                            status_color = GREEN if is_pass else RED
+                            status_label = "PASSED" if is_pass else "FAILED"
+                            p_bar = format_progress_bar(batch_received_count, len(pending_rolls), width=18)
+                            print(f"{CYAN}{p_bar}{RESET} {batch_received_count:4d}/{len(pending_rolls)}  Roll {roll:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}")
+
+                flush_dirty_upazillas(force=True)
+                unretrieved = [r for r in pending_rolls if r not in seen_rolls]
+
+        flush_dirty_upazillas(force=True)
+
         total_elapsed = time.time() - start_time
         mins, secs = divmod(total_elapsed, 60)
         time_str = f"{int(mins)}m {secs:.2f}s" if mins > 0 else f"{secs:.2f}s"

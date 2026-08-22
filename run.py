@@ -569,17 +569,17 @@ def run_scraper_cli():
         # Auto-Recovery Passes on Missing Rolls (guaranteed 100% completion)
         if not stop_event.is_set():
             unretrieved = [r for r in pending_rolls if r not in seen_rolls]
-            max_recovery_passes = 4
+            max_recovery_passes = 8
             for pass_num in range(1, max_recovery_passes + 1):
                 if not unretrieved:
                     break
                 print(f"\n{YELLOW}🔄 [Auto Catch-Up Pass {pass_num}/{max_recovery_passes}] Re-attempting {len(unretrieved)} unretrieved roll(s) across all proxy nodes...{RESET}")
-                time.sleep(0.5)
+                time.sleep(1.0)
 
-                rec_workers = min(30, len(unretrieved))
+                rec_workers = min(20, len(unretrieved))
                 with concurrent.futures.ThreadPoolExecutor(max_workers=rec_workers) as rec_exec:
                     future_to_roll = {
-                        rec_exec.submit(fetch_worker, roll, idx + pass_num * 7): roll
+                        rec_exec.submit(fetch_worker, roll, idx + pass_num * 17): roll
                         for idx, roll in enumerate(unretrieved)
                     }
                     for future in concurrent.futures.as_completed(future_to_roll):
