@@ -102,7 +102,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add chunks_output/*.json scraped_results_master.json || true
-          git commit -m "Auto-save scraped chunk results from Cloud Matrix [skip ci]" || true
+          git add -f chunks_output/*.json scraped_results_master.json
+          git commit -m "Auto-save scraped chunk results from Cloud Matrix [skip ci]" || echo "No changes to commit"
           git pull --rebase origin main || true
-          git push origin main || true
+          git push origin main

@@ -182,28 +182,38 @@ def main():
         print(f"\n{CYAN}{BOLD}⚡ 100 GITHUB ACTIONS CLOUD VMs ARE NOW RUNNING IN PARALLEL!{RESET}")
         print(f"[*] Cloud workers are scraping at ~80-100 rolls/sec...")
 
-        # 3. Dynamic Cloud Status Polling Loop
-        print(f"\n[*] Waiting for cloud execution to complete across all 100 VMs...")
-        expected_duration = max(60, int(len(pending_rolls) / 70) + 30)
+        # 3. Live Event-Driven Remote Poller (Waits until cloud workflows actually finish & push!)
+        print(f"\n[*] Waiting for all 5 cloud repositories to complete scraping...")
         start_wait = time.time()
+        
+        res = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True)
+        pushed_hash = res.stdout.strip()
+        node_status = {name: False for name, _ in REPOS}
 
-        while True:
+        while not all(node_status.values()):
             elapsed_wait = int(time.time() - start_wait)
-            remaining = max(0, expected_duration - elapsed_wait)
-            print(f"\r  ⏳ 100 Cloud VMs Scraping in Progress... Elapsed: {elapsed_wait}s (Est. remaining: {remaining}s)   ", end="", flush=True)
 
-            if elapsed_wait >= expected_duration:
-                # Check for updates from remotes
-                updated = False
-                for remote_name, _ in REPOS:
-                    res = subprocess.run(["git", "fetch", remote_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            for remote_name, _ in REPOS:
+                if not node_status[remote_name]:
+                    try:
+                        ls_res = subprocess.run(["git", "ls-remote", remote_name, "refs/heads/main"], capture_output=True, text=True, timeout=8)
+                        remote_hash = ls_res.stdout.split()[0] if ls_res.stdout else ""
+                        if remote_hash and remote_hash != pushed_hash:
+                            node_status[remote_name] = True
+                    except Exception:
+                        pass
+
+            status_str = " | ".join([f"{name.upper()}: {GREEN}✓ DONE{RESET}" if done else f"{name.upper()}: {YELLOW}⏳ Running{RESET}" for name, done in node_status.items()])
+            print(f"\r  [{elapsed_wait}s] {status_str}   ", end="", flush=True)
+
+            if all(node_status.values()) or elapsed_wait >= 600:
                 break
 
-            time.sleep(5)
-        print("\n")
+            time.sleep(6)
 
-        # 4. Auto-pull latest updates from git
-        print(f"[*] Pulling latest scraped updates from cloud repositories...")
+        print("\n\n[✓] Cloud scraping workflows finished! Pulling results from all 5 repositories...")
+
+        # 4. Auto-pull latest updates from all 5 cloud repositories
         for remote_name, _ in REPOS:
             subprocess.run(["git", "pull", remote_name, "main", "--no-rebase"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
