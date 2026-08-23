@@ -85,7 +85,7 @@ PROXY_SOURCES = [
 class FastProxyPool:
     SOURCES = [
         'https://api.proxyscrape.com/v4/free-proxy-list/get?request=display_proxies&proxy_format=protocolipport&format=text',
-        'https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http,https&timeout=3000&ssl=all&anonymity=all',
+        'https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http,https&timeout=4000&country=all&ssl=all&anonymity=all',
         'https://raw.githubusercontent.com/roosterkid/openproxylist/main/HTTPS_RAW.txt',
         'https://raw.githubusercontent.com/prxchk/proxy-list/main/https.txt',
         'https://raw.githubusercontent.com/prxchk/proxy-list/main/http.txt',
@@ -104,7 +104,19 @@ class FastProxyPool:
         'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt',
         'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/https.txt',
         'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/http.txt',
-        'https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/generated/http_proxies.txt'
+        'https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/generated/http_proxies.txt',
+        'https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies-http.txt',
+        'https://raw.githubusercontent.com/jetkai/proxy-list/main/online-proxies/txt/proxies-https.txt',
+        'https://raw.githubusercontent.com/clarketm/proxy-list/master/proxy-list-raw.txt',
+        'https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/http/http.txt',
+        'https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/https/https.txt',
+        'https://raw.githubusercontent.com/zevtyardt/proxy-list/main/http.txt',
+        'https://raw.githubusercontent.com/zevtyardt/proxy-list/main/https.txt',
+        'https://raw.githubusercontent.com/B4iance/proxylist/main/http.txt',
+        'https://raw.githubusercontent.com/B4iance/proxylist/main/https.txt',
+        'https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/http.txt',
+        'https://raw.githubusercontent.com/rdavydov/proxy-list/main/proxies/https.txt',
+        'https://raw.githubusercontent.com/ALIILAPRO/Proxy/main/http.txt'
     ]
 
     def __init__(self):
@@ -212,10 +224,10 @@ class FastProxyPool:
         verified.sort(key=lambda x: x[1])
         return verified
 
-    def refresh_pool_background(self, target_working: int = 45, max_valid: int = 250) -> List[str]:
+    def refresh_pool_background(self, target_working: int = 35, max_valid: int = 250) -> List[str]:
         """Runs silently in the background every 5 minutes:
-        tests current nodes, purges dead/429/slow proxies, harvests fresh high-speed 200 OK nodes,
-        and saves them to disk and returns the fresh list.
+        benchmarks public nodes, purges dead/429/slow ones, harvests fresh 200 OK nodes,
+        and seamlessly updates the live in-memory pool while scraping continues.
         """
         import concurrent.futures
         from engine.fast_student_scraper import ENDPOINT
@@ -230,51 +242,47 @@ class FastProxyPool:
             except Exception:
                 pass
 
-        existing_all = list(dict.fromkeys(webshare + cached))
-        verified_existing = []
-
-        if existing_all:
+        verified_public = []
+        if cached:
             with concurrent.futures.ThreadPoolExecutor(max_workers=50) as ex:
-                results = list(ex.map(lambda p: self._test_proxy_strict(p, test_url, 2.2), existing_all))
-            verified_existing = [r for r in results if r is not None]
-            verified_existing.sort(key=lambda x: x[1])
+                results = list(ex.map(lambda p: self._test_proxy_strict(p, test_url, 2.5), cached))
+            verified_public = [r for r in results if r is not None]
+            verified_public.sort(key=lambda x: x[1])
 
-        # If live count dropped below target, harvest fresh ultra-fast nodes silently
-        if len(verified_existing) < target_working:
-            needed = target_working - len(verified_existing) + 15
+        if len(verified_public) < target_working:
+            needed = target_working - len(verified_public) + 10
             fresh_verified = self._harvest_fresh_silent(test_url, needed=needed)
             seen_ips = set()
-            all_verified = []
-            for p, lat in verified_existing + fresh_verified:
+            merged = []
+            for p, lat in verified_public + fresh_verified:
                 ip = p.split(":")[0]
                 if ip not in seen_ips:
                     seen_ips.add(ip)
-                    all_verified.append((p, lat))
-            all_verified.sort(key=lambda x: x[1])
-        else:
-            all_verified = verified_existing
+                    merged.append((p, lat))
+            merged.sort(key=lambda x: x[1])
+            verified_public = merged
 
-        # Update disk cache
-        public_to_save = [p for p, _ in all_verified if p not in webshare]
         try:
             with open(self.cache_file, "w", encoding="utf-8") as f:
-                for p in public_to_save[:max_valid]:
+                for p, _ in verified_public[:max_valid]:
                     f.write(p + "\n")
         except Exception:
             pass
 
-        self.proxies = [p for p, _ in all_verified[:max_valid]]
+        combined_pool = list(dict.fromkeys(webshare + [p for p, _ in verified_public]))
+        self.proxies = combined_pool[:max_valid]
         return self.proxies
 
-    def load_and_verify(self, max_valid: int = 250, target_working: int = 40) -> List[str]:
-        """Runs on EVERY startup: tests existing proxies strictly for 200 OK,
-        discards dead/429/slow proxies, and harvests fresh high-speed ones to guarantee max speed.
+    def load_and_verify(self, max_valid: int = 250, target_working: int = 35) -> List[str]:
+        """Runs on EVERY startup:
+        retains all dedicated proxies, benchmarks existing public proxies strictly for 200 OK,
+        harvests fresh high-speed public proxies, and builds a massive pool of 140+ nodes.
         """
         import concurrent.futures
         from engine.fast_student_scraper import ENDPOINT
         test_url = ENDPOINT.format(roll='183509')
 
-        # 1. Load Webshare dedicated + cached public proxies
+        # 1. Load Webshare + ProxyScrape dedicated proxies (permanent)
         webshare = self._load_webshare()
         cached = []
         if os.path.exists(self.cache_file):
@@ -284,47 +292,44 @@ class FastProxyPool:
             except Exception:
                 pass
 
-        existing_all = list(dict.fromkeys(webshare + cached))
-        verified_existing = []
-
-        if existing_all:
-            sys.stdout.write(f"\r{DIM}  Benchmarking {len(existing_all)} existing nodes on Dinajpur Board...{RESET}")
+        # 2. Benchmark public cached proxies
+        verified_public = []
+        if cached:
+            sys.stdout.write(f"\r{DIM}  Benchmarking {len(cached)} cached public nodes on Dinajpur Board...{RESET}")
             sys.stdout.flush()
             with concurrent.futures.ThreadPoolExecutor(max_workers=50) as ex:
-                results = list(ex.map(lambda p: self._test_proxy_strict(p, test_url, 2.2), existing_all))
-            verified_existing = [r for r in results if r is not None]
-            verified_existing.sort(key=lambda x: x[1])
+                results = list(ex.map(lambda p: self._test_proxy_strict(p, test_url, 2.5), cached))
+            verified_public = [r for r in results if r is not None]
+            verified_public.sort(key=lambda x: x[1])
 
-        # 2. If we don't have enough ultra-fast 200 OK proxies, harvest fresh ones immediately
-        if len(verified_existing) < target_working:
-            needed = target_working - len(verified_existing) + 15
-            sys.stdout.write(f"\r{YELLOW}  {len(verified_existing)} active nodes — harvesting {needed} fresh high-speed proxies...{RESET}\n")
+        # 3. If needed, harvest fresh ultra-fast 200 OK public proxies
+        if len(verified_public) < target_working:
+            needed = target_working - len(verified_public) + 10
+            sys.stdout.write(f"\r{YELLOW}  {len(verified_public)} active public nodes — harvesting {needed} fresh high-speed proxies...{RESET}\n")
             sys.stdout.flush()
             fresh_verified = self._harvest_fresh(test_url, needed=needed)
-            # Combine and deduplicate
             seen_ips = set()
-            all_verified = []
-            for p, lat in verified_existing + fresh_verified:
+            merged = []
+            for p, lat in verified_public + fresh_verified:
                 ip = p.split(":")[0]
                 if ip not in seen_ips:
                     seen_ips.add(ip)
-                    all_verified.append((p, lat))
-            all_verified.sort(key=lambda x: x[1])
-        else:
-            all_verified = verified_existing
+                    merged.append((p, lat))
+            merged.sort(key=lambda x: x[1])
+            verified_public = merged
 
-        # 3. Save sorted high-speed public proxies back to cache file (replacing slow/dead ones)
-        public_to_save = [p for p, _ in all_verified if p not in webshare]
+        # 4. Save updated public proxies to disk
         try:
             with open(self.cache_file, "w", encoding="utf-8") as f:
-                for p in public_to_save[:max_valid]:
+                for p, _ in verified_public[:max_valid]:
                     f.write(p + "\n")
         except Exception:
             pass
 
-        self.proxies = [p for p, _ in all_verified[:max_valid]]
-        avg_lat = sum(lat for _, lat in all_verified[:len(self.proxies)]) / max(1, len(self.proxies))
-        sys.stdout.write(f"\r{GREEN}✓ Proxy Engine Ready: {len(self.proxies)} Verified 200 OK Nodes (Avg Latency: {avg_lat:.2f}s)!{RESET}\n\n")
+        # 5. Combined Master Pool: Dedicated + Fresh Public
+        combined_pool = list(dict.fromkeys(webshare + [p for p, _ in verified_public]))
+        self.proxies = combined_pool[:max_valid]
+        sys.stdout.write(f"\r{GREEN}✓ Proxy Engine Ready: {len(self.proxies)} Total Active Nodes ({len(webshare)} Dedicated + {len(verified_public)} Fresh 200 OK Public)!{RESET}\n\n")
         sys.stdout.flush()
         return self.proxies
 
