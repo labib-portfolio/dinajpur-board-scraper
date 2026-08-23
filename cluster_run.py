@@ -184,6 +184,88 @@ class FastProxyPool:
         verified.sort(key=lambda x: x[1])
         return verified
 
+    def _harvest_fresh_silent(self, test_url: str, needed: int = 40) -> List[tuple]:
+        """Silent version of _harvest_fresh for background threads (zero terminal output)."""
+        import re, concurrent.futures
+        candidates = set()
+        for s in self.SOURCES:
+            try:
+                r = requests.get(s, timeout=3.0)
+                if r.status_code == 200:
+                    found = re.findall(r'[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}:[0-9]{2,5}', r.text)
+                    candidates.update(found)
+            except Exception:
+                pass
+
+        verified = []
+        with concurrent.futures.ThreadPoolExecutor(max_workers=250) as ex:
+            futs = [ex.submit(self._test_proxy_strict, p, test_url, 2.5) for p in list(candidates)[:25000]]
+            for f in concurrent.futures.as_completed(futs):
+                res = f.result()
+                if res:
+                    verified.append(res)
+                    if len(verified) >= needed:
+                        for fut in futs:
+                            fut.cancel()
+                        break
+
+        verified.sort(key=lambda x: x[1])
+        return verified
+
+    def refresh_pool_background(self, target_working: int = 45, max_valid: int = 250) -> List[str]:
+        """Runs silently in the background every 5 minutes:
+        tests current nodes, purges dead/429/slow proxies, harvests fresh high-speed 200 OK nodes,
+        and saves them to disk and returns the fresh list.
+        """
+        import concurrent.futures
+        from engine.fast_student_scraper import ENDPOINT
+        test_url = ENDPOINT.format(roll='183509')
+
+        webshare = self._load_webshare()
+        cached = []
+        if os.path.exists(self.cache_file):
+            try:
+                with open(self.cache_file, "r", encoding="utf-8") as f:
+                    cached = [l.strip() for l in f if ":" in l.strip()]
+            except Exception:
+                pass
+
+        existing_all = list(dict.fromkeys(webshare + cached))
+        verified_existing = []
+
+        if existing_all:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=50) as ex:
+                results = list(ex.map(lambda p: self._test_proxy_strict(p, test_url, 2.2), existing_all))
+            verified_existing = [r for r in results if r is not None]
+            verified_existing.sort(key=lambda x: x[1])
+
+        # If live count dropped below target, harvest fresh ultra-fast nodes silently
+        if len(verified_existing) < target_working:
+            needed = target_working - len(verified_existing) + 15
+            fresh_verified = self._harvest_fresh_silent(test_url, needed=needed)
+            seen_ips = set()
+            all_verified = []
+            for p, lat in verified_existing + fresh_verified:
+                ip = p.split(":")[0]
+                if ip not in seen_ips:
+                    seen_ips.add(ip)
+                    all_verified.append((p, lat))
+            all_verified.sort(key=lambda x: x[1])
+        else:
+            all_verified = verified_existing
+
+        # Update disk cache
+        public_to_save = [p for p, _ in all_verified if p not in webshare]
+        try:
+            with open(self.cache_file, "w", encoding="utf-8") as f:
+                for p in public_to_save[:max_valid]:
+                    f.write(p + "\n")
+        except Exception:
+            pass
+
+        self.proxies = [p for p, _ in all_verified[:max_valid]]
+        return self.proxies
+
     def load_and_verify(self, max_valid: int = 250, target_working: int = 40) -> List[str]:
         """Runs on EVERY startup: tests existing proxies strictly for 200 OK,
         discards dead/429/slow proxies, and harvests fresh high-speed ones to guarantee max speed.
@@ -603,7 +685,8 @@ def run_scraper_cli():
         active_count = [0]
         active_lock = threading.Lock()
 
-        # Dynamic Proxy Circuit Breaker with 429 Cooldown
+        # Dynamic Proxy Circuit Breaker with 429 Cooldown & 5-Min Auto-Refresher
+        proxy_list_lock = threading.Lock()
         proxy_cooldowns = {}
         cooldown_lock = threading.Lock()
 
@@ -612,15 +695,41 @@ def run_scraper_cli():
                 proxy_cooldowns[p] = time.time() + seconds
 
         def get_best_proxy(worker_idx: int, offset: int = 0) -> Optional[str]:
-            if not proxies:
+            with proxy_list_lock:
+                current_pool = list(proxies)
+            if not current_pool:
                 return None
             now = time.time()
             with cooldown_lock:
-                avail = [p for p in proxies if proxy_cooldowns.get(p, 0) < now]
+                avail = [p for p in current_pool if proxy_cooldowns.get(p, 0) < now]
             if not avail:
                 # If all are in cooldown, take the one closest to expiry
-                avail = proxies
+                avail = current_pool
             return avail[(worker_idx + offset * 13) % len(avail)]
+
+        def background_proxy_refresher():
+            """Runs silently in the background every 5 minutes:
+            periodically purges dead/429/slow proxies, harvests fresh 200 OK nodes,
+            and seamlessly updates the live in-memory pool while scraping continues.
+            """
+            while not stop_event.is_set():
+                # Sleep for 5 minutes (300 seconds) in 1-second increments for clean exit
+                for _ in range(300):
+                    if stop_event.is_set():
+                        return
+                    time.sleep(1)
+
+                if stop_event.is_set():
+                    break
+
+                try:
+                    fresh_pool = proxy_pool.refresh_pool_background(target_working=45, max_valid=250)
+                    if fresh_pool:
+                        with proxy_list_lock:
+                            proxies.clear()
+                            proxies.extend(fresh_pool)
+                except Exception:
+                    pass
 
         def student_consumer(worker_idx: int):
             nonlocal batch_received_count
@@ -749,15 +858,17 @@ def run_scraper_cli():
                     active_count[0] -= 1
                 rolls_queue.task_done()
 
-        # Launch Producer and Consumer threads concurrently (50 parallel workers [35 base + 15 speed addon])
+        # Launch Producer, Consumer, and 5-Minute Proxy Refresher threads concurrently
         num_workers = min(50, len(proxies)) if len(proxies) >= 35 else max(25, len(proxies))
         producer_thread = threading.Thread(target=harvest_producer, daemon=True)
+        refresher_thread = threading.Thread(target=background_proxy_refresher, daemon=True)
         consumer_threads = [
             threading.Thread(target=student_consumer, args=(i,), daemon=True)
             for i in range(num_workers)
         ]
 
         producer_thread.start()
+        refresher_thread.start()
         for t in consumer_threads:
             t.start()
 
