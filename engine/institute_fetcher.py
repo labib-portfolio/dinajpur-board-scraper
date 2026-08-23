@@ -31,7 +31,13 @@ class InstituteResultFetcher:
         })
         if self.proxies:
             p = self.proxies[self.proxy_idx % len(self.proxies)]
-            self.session.proxies.update({"http": f"http://{p}", "https": f"http://{p}"})
+            parts = p.split(":")
+            if len(parts) == 4:
+                ip, port, user, pwd = parts
+                proxy_url = f"http://{user}:{pwd}@{ip}:{port}"
+            else:
+                proxy_url = f"http://{p}"
+            self.session.proxies.update({"http": proxy_url, "https": proxy_url})
             self.proxy_idx += 1
 
     def _solve_gateway(self, soup: BeautifulSoup, current_url: str) -> bool:
