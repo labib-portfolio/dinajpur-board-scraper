@@ -217,70 +217,20 @@ def run_scraper_cli():
             spare_proxies = max(0, len(proxies) - num_workers)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
-        # Build persistent Keep-Alive session pool with Auto-Recycle (Zero Stale Sockets)
-        def create_proxy_session(ip_str: str) -> requests.Session:
+        # Thread-Isolated Dedicated Session Factory (100% Lock-Free & Thread-Safe)
+        def create_isolated_session(proxy_ip: Optional[str] = None) -> requests.Session:
             s = requests.Session()
-            adapter = HTTPAdapter(pool_connections=20, pool_maxsize=20)
+            adapter = HTTPAdapter(pool_connections=5, pool_maxsize=5, max_retries=0)
             s.mount("http://", adapter)
             s.mount("https://", adapter)
-            s.proxies.update({"http": f"http://{ip_str}", "https": f"http://{ip_str}"})
+            if proxy_ip:
+                s.proxies.update({"http": f"http://{proxy_ip}", "https": f"http://{proxy_ip}"})
             s.headers.update({
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 "Connection": "keep-alive"
             })
             return s
-
-        proxy_session_wrappers = []
-        for p in proxies:
-            proxy_session_wrappers.append({
-                "ip": p,
-                "session": create_proxy_session(p),
-                "uses": 0,
-                "fails": 0,
-                "healthy": True
-            })
-
-        wrapper_lock = threading.Lock()
-
-        def get_healthy_session(worker_idx: int, offset: int = 0):
-            with wrapper_lock:
-                healthy = [w for w in proxy_session_wrappers if w["healthy"]]
-                if not healthy:
-                    for w in proxy_session_wrappers:
-                        w["healthy"] = True
-                        w["fails"] = 0
-                    healthy = proxy_session_wrappers
-
-                item = healthy[(worker_idx + offset) % len(healthy)]
-                item["uses"] += 1
-                if item["uses"] >= 30:
-                    try:
-                        item["session"].close()
-                    except Exception:
-                        pass
-                    item["session"] = create_proxy_session(item["ip"])
-                    item["uses"] = 0
-                return item
-
-        def report_proxy_result(wrapper, success: bool):
-            with wrapper_lock:
-                if success:
-                    wrapper["fails"] = 0
-                else:
-                    wrapper["fails"] += 1
-                    if wrapper["fails"] >= 3:
-                        wrapper["healthy"] = False  # Evict slow/dead node
-
-        direct_session = requests.Session()
-        direct_adapter = HTTPAdapter(pool_connections=50, pool_maxsize=50)
-        direct_session.mount("http://", direct_adapter)
-        direct_session.mount("https://", direct_adapter)
-        direct_session.headers.update({
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Connection": "keep-alive"
-        })
 
         print(f"\n=======================================================")
         print(f"🚀 {BOLD}ENGINE PIPELINE CONFIGURATION:{RESET}")
@@ -376,30 +326,48 @@ def run_scraper_cli():
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
             url = ENDPOINT.format(roll=roll_str)
-            # 1. Rotate through healthy proxies with 0.9s ultra-fast timeout & auto-eviction
-            if proxy_session_wrappers:
-                for offset in range(2):
-                    w = get_healthy_session(worker_idx, offset)
-                    try:
-                        r = w["session"].get(url, timeout=0.9)
-                        if r.status_code == 200:
-                            parsed = parse_student_html(r.text, roll_str)
-                            if parsed:
-                                report_proxy_result(w, True)
-                                return parsed
-                        report_proxy_result(w, False)
-                    except Exception:
-                        report_proxy_result(w, False)
+            # 1. Try dedicated assigned proxy
+            if proxies:
+                p_ip = proxies[worker_idx % len(proxies)]
+                try:
+                    s = create_isolated_session(p_ip)
+                    r = s.get(url, timeout=1.8)
+                    if r.status_code == 200:
+                        parsed = parse_student_html(r.text, roll_str)
+                        s.close()
+                        if parsed:
+                            return parsed
+                    s.close()
+                except Exception:
+                    pass
 
-            # 2. Fast direct attempt fallback (0.9s timeout)
+            # 2. Fast direct attempt fallback
             try:
-                r = direct_session.get(url, timeout=0.9)
+                s = create_isolated_session(None)
+                r = s.get(url, timeout=1.5)
                 if r.status_code == 200:
                     parsed = parse_student_html(r.text, roll_str)
+                    s.close()
                     if parsed:
                         return parsed
+                s.close()
             except Exception:
                 pass
+
+            # 3. Failover spare proxy
+            if proxies and len(proxies) > 1:
+                spare_ip = proxies[(worker_idx * 7 + 13) % len(proxies)]
+                try:
+                    s = create_isolated_session(spare_ip)
+                    r = s.get(url, timeout=1.8)
+                    if r.status_code == 200:
+                        parsed = parse_student_html(r.text, roll_str)
+                        s.close()
+                        if parsed:
+                            return parsed
+                    s.close()
+                except Exception:
+                    pass
             return None
 
         def save_record_to_upazilla(r: Dict[str, Any], meta: Dict[str, Any]):
@@ -518,12 +486,16 @@ def run_scraper_cli():
 
         first_roll_time = [None]
         last_roll_time = [None]
-        hud_rendered = [False]
         active_count = [0]
         active_lock = threading.Lock()
 
         def student_consumer(worker_idx: int):
             nonlocal batch_received_count
+            assigned_proxy = proxies[worker_idx % len(proxies)] if proxies else None
+            worker_sess = create_isolated_session(assigned_proxy)
+            direct_sess = create_isolated_session(None)
+            req_count = 0
+
             while not stop_event.is_set():
                 try:
                     item = rolls_queue.get(timeout=0.2)
@@ -546,7 +518,50 @@ def run_scraper_cli():
                     roll_str, meta = item
                     attempts = 0
 
-                res = fetch_worker(roll_str, worker_idx + attempts * 13)
+                req_count += 1
+                if req_count >= 30:
+                    try:
+                        worker_sess.close()
+                    except Exception:
+                        pass
+                    if attempts > 0 and proxies:
+                        assigned_proxy = proxies[(worker_idx + attempts * 7) % len(proxies)]
+                    worker_sess = create_isolated_session(assigned_proxy)
+                    req_count = 0
+
+                url = ENDPOINT.format(roll=roll_str)
+                res = None
+
+                # 1. Try assigned proxy (1.8s timeout)
+                if assigned_proxy:
+                    try:
+                        r = worker_sess.get(url, timeout=1.8)
+                        if r.status_code == 200:
+                            res = parse_student_html(r.text, roll_str)
+                    except Exception:
+                        pass
+
+                # 2. Fast direct attempt fallback (1.5s timeout)
+                if not res:
+                    try:
+                        r = direct_sess.get(url, timeout=1.5)
+                        if r.status_code == 200:
+                            res = parse_student_html(r.text, roll_str)
+                    except Exception:
+                        pass
+
+                # 3. Failover spare proxy
+                if not res and proxies and len(proxies) > 1:
+                    spare_ip = proxies[(worker_idx + attempts * 11 + 3) % len(proxies)]
+                    try:
+                        temp_s = create_isolated_session(spare_ip)
+                        r = temp_s.get(url, timeout=1.8)
+                        if r.status_code == 200:
+                            res = parse_student_html(r.text, roll_str)
+                        temp_s.close()
+                    except Exception:
+                        pass
+
                 if res and res.get("success"):
                     save_record_to_upazilla(res, meta)
                     
