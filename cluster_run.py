@@ -407,6 +407,29 @@ def run_scraper_cli():
 
             flush_dirty_upazillas()
 
+        inst_harvested_count = [0]
+        total_inst_count = len(eiins)
+
+        def render_bottom_hud():
+            cur_rec = batch_received_count
+            cur_target = max(1, len(pending_rolls))
+            pct_stud = (cur_rec / cur_target) * 100
+            p_bar_stud = format_progress_bar(cur_rec, cur_target, width=30)
+
+            if not harvest_done.is_set():
+                h_done = inst_harvested_count[0]
+                pct_inst = (h_done / max(1, total_inst_count)) * 100
+                p_bar_inst = format_progress_bar(h_done, total_inst_count, width=20)
+                
+                line_inst = f"\r\033[K{YELLOW}🏫 Schools: {RESET} {p_bar_inst} {h_done}/{total_inst_count} ({pct_inst:.0f}%)\n"
+                line_stud = f"\r\033[K{CYAN}👨‍🎓 Students:{RESET} {p_bar_stud} {cur_rec}/{cur_target} ({pct_stud:.1f}%)"
+                sys.stdout.write(line_inst + line_stud)
+                sys.stdout.write("\033[1A\r")
+            else:
+                line_stud = f"\r\033[K{CYAN}{p_bar_stud}{RESET}  {cur_rec}/{cur_target} ({pct_stud:.1f}%)"
+                sys.stdout.write(line_stud)
+            sys.stdout.flush()
+
         def harvest_producer():
             nonlocal total_appeared_count, already_scraped_count
             for idx, eiin in enumerate(eiins, 1):
@@ -427,7 +450,11 @@ def run_scraper_cli():
                 if not is_cached:
                     def on_retry_status(msg):
                         with print_lock:
-                            print(f"  [{idx}/{len(eiins)}] EIIN {eiin} ({YELLOW}{msg[:20]}{RESET})", flush=True)
+                            sys.stdout.write("\r\033[K")
+                            if not harvest_done.is_set():
+                                sys.stdout.write("\033[1A\r\033[K")
+                            sys.stdout.write(f"  [{idx}/{len(eiins)}] EIIN {eiin} ({YELLOW}{msg[:20]}{RESET})\n")
+                            render_bottom_hud()
 
                     inst_data = fetcher.fetch_by_eiin(eiin, status_callback=on_retry_status)
                     if inst_data and not inst_data.get("error") and inst_data.get("name"):
@@ -440,8 +467,13 @@ def run_scraper_cli():
                         time.sleep(0.3)
 
                 if not inst_data or "error" in inst_data or not inst_data.get("name"):
+                    inst_harvested_count[0] = idx
                     with print_lock:
-                        print(f"  [{idx}/{len(eiins)}] EIIN {eiin} -> {RED}Not Found{RESET}", flush=True)
+                        sys.stdout.write("\r\033[K")
+                        if not harvest_done.is_set():
+                            sys.stdout.write("\033[1A\r\033[K")
+                        sys.stdout.write(f"  [{idx}/{len(eiins)}] EIIN {eiin} -> {RED}Not Found{RESET}\n")
+                        render_bottom_hud()
                     continue
 
                 inst_name = inst_data.get("name", "Unknown")
@@ -478,17 +510,23 @@ def run_scraper_cli():
                                 rolls_queue.put((r_str, meta))
                                 queued_for_inst += 1
 
+                inst_harvested_count[0] = idx
                 with print_lock:
+                    sys.stdout.write("\r\033[K")
+                    if not harvest_done.is_set():
+                        sys.stdout.write("\033[1A\r\033[K")
                     if not is_cached:
-                        print(f"  [{idx}/{len(eiins)}] EIIN {eiin}: {inst_name[:25]} {GREEN}+{queued_for_inst} rolls{RESET}", flush=True)
+                        sys.stdout.write(f"  [{idx}/{len(eiins)}] EIIN {eiin}: {inst_name[:25]} {GREEN}+{queued_for_inst} rolls{RESET}\n")
+                    render_bottom_hud()
 
                 if not is_cached:
                     time.sleep(1.2)
 
-            with print_lock:
-                print(f"  {GREEN}✓ Loaded all {len(eiins)} institutions ({total_appeared_count} rolls queued){RESET}\n", flush=True)
-
             harvest_done.set()
+            with print_lock:
+                sys.stdout.write("\r\033[K\n\r\033[K")
+                sys.stdout.write(f"\033[1A\r\033[K  {GREEN}✓ Loaded all {len(eiins)} institutions ({total_appeared_count} rolls queued){RESET}\n\n")
+                render_bottom_hud()
 
         first_roll_time = [None]
         last_roll_time = [None]
@@ -537,16 +575,14 @@ def run_scraper_cli():
                     is_pass = "GPA" in str(gpa_res)
                     status_color = GREEN if is_pass else RED
                     status_label = "PASSED" if is_pass else "FAILED"
-                    p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=35)
-                    pct = (cur_rec / max(1, cur_target)) * 100
 
                     with print_lock:
                         sys.stdout.write("\r\033[K")
+                        if not harvest_done.is_set():
+                            sys.stdout.write("\033[1A\r\033[K")
                         student_line = f" {cur_rec:4d}/{cur_target}  Roll {roll_str:<7}  {s_name:<30}  {gpa_res:<10} {status_color}{status_label}{RESET}\n"
                         sys.stdout.write(student_line)
-                        p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec}/{cur_target} ({pct:.1f}%)"
-                        sys.stdout.write(p_bar_line)
-                        sys.stdout.flush()
+                        render_bottom_hud()
                 else:
                     if attempts < 3 and not stop_event.is_set():
                         rolls_queue.put((roll_str, meta, attempts + 1))
@@ -624,9 +660,7 @@ def run_scraper_cli():
                                 sys.stdout.write("\r\033[K")
                                 student_line = f" {cur_rec:4d}/{cur_target}  Roll {roll:<7}  {s_name:<30}  {gpa_res:<10} {status_color}{status_label}{RESET}\n"
                                 sys.stdout.write(student_line)
-                                p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec}/{cur_target} ({pct:.1f}%)"
-                                sys.stdout.write(p_bar_line)
-                                sys.stdout.flush()
+                                render_bottom_hud()
 
                 flush_dirty_upazillas(force=True)
                 unretrieved = [r for r in pending_rolls if r not in seen_rolls]
