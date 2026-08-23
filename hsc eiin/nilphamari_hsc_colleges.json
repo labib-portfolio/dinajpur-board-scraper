@@ -1,812 +1,1087 @@
 {
   "district": "Nilphamari",
-  "total_institutions": 115,
+  "total_institutions": 120,
   "board": "DINAJPUR",
   "colleges": [
     {
-      "eiin": "124893",
-      "name": "Chilahati Govt. College",
+      "eiin": "124778",
+      "name": "Adabari School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "124989",
+      "name": "Kalikapur School And College",
+      "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "135443",
+      "name": "Nilsagor College",
+      "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "124932",
+      "name": "Rashidpur Girls School And College",
+      "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "124988",
+      "name": "Sharifabad School And College",
+      "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "124893",
+      "name": "Chilahati Government College",
+      "district": "Nilphamari",
+      "address": "Nilphamari Domar",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124892",
-      "name": "Domar Govt College",
+      "name": "Domar Government College",
       "district": "Nilphamari",
+      "address": "Nilphamari Domar",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125189",
-      "name": "Nilphamari Govt College",
+      "name": "Nilphamari Govt. College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125188",
-      "name": "Nilphamari Govt. Womens College",
+      "name": "Nilphamari Govt. Women S College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125242",
-      "name": "Govt.saidpur Intermediate Technical College",
+      "name": "Saidpur Govt. Technical College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "132223",
       "name": "Nilphamari Gov Tecnical School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "125088",
-      "name": "Jadur Hat School And College",
+      "name": "Jadurhat School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Local Government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125193",
       "name": "Adarsha College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125055",
-      "name": "Anor Mari College",
+      "name": "Anormari College",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135402",
       "name": "Bahagili Model College",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "138086",
-      "name": "Bhabunchurhat College",
+      "name": "Bhabunchur Hat College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125187",
-      "name": "Chander Hat Degree College",
+      "name": "Chander Hat College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135536",
       "name": "Chandkhana Model College",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "134357",
       "name": "Chhatnai College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124824",
-      "name": "Dimla Islamia Degree College",
+      "name": "Dimla Islamia College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124827",
-      "name": "Dimla Mahila College",
+      "name": "Dimla Women S College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "136736",
-      "name": "Domar Upzila  Adrsho College",
+      "name": "Domar Upzila Adrsho College",
       "district": "Nilphamari",
+      "address": "Nilphamari Domar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124896",
-      "name": "Domar Womens Degree College",
+      "name": "Domar Women S College Nilphamari",
       "district": "Nilphamari",
+      "address": "Nilphamari Domar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135397",
-      "name": "Dr. Saifur Rahaman Women College",
+      "name": "Dr. Saifur Rahaman Women S College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "137737",
-      "name": "Gayakharibari Women College",
+      "name": "Gaya Khari Bari Women S College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "136905",
       "name": "Golmunda Adarsha College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124980",
       "name": "Golna Shahid Smrity College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124894",
-      "name": "Gomnati Mohabiddaloy",
+      "name": "Gomnati College",
       "district": "Nilphamari",
+      "address": "Nilphamari Domar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124981",
-      "name": "Ideal Coollege",
+      "name": "Ideal College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124977",
-      "name": "Jaldhaka Degree College",
+      "name": "Jaldhaka College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135404",
-      "name": "Jaldhaka Women College",
+      "name": "Jaldhaka Women S College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124825",
-      "name": "Janata  Degree College",
+      "name": "Janata College Dimla",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125245",
-      "name": "Kamar Pukur Degree College",
+      "name": "Kamarpukur College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "133751",
       "name": "Kishoregonj Mohila College",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125053",
-      "name": "Kishorganj Degree College",
+      "name": "Kishoriganj College",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125052",
       "name": "Magura College",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124979",
-      "name": "Mirgonj Hat College",
+      "name": "Mirganj Hat College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124895",
-      "name": "Mirzagonj College",
+      "name": "Mirjoyganj College Nilphamari",
       "district": "Nilphamari",
+      "address": "Nilphamari Domar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125190",
-      "name": "Moshiur Rahman Degree College",
+      "name": "Moshiur Rahman College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135420",
       "name": "Nilphamari Model College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135453",
       "name": "Nilsagor College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "125192",
       "name": "Palashbari College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135251",
-      "name": "Paschim Chhathai Womens College",
+      "name": "Paschim Chhatnai Women S College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124976",
-      "name": "Rabeya Chowdhury Womens College",
+      "name": "Rabeya Chowdhury Women S College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125054",
-      "name": "Radharani Women College",
+      "name": "Radharani Women S College Nilphamari",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125194",
       "name": "Ramganj College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125243",
       "name": "Saidpur College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125244",
-      "name": "Saidpur Womens College",
+      "name": "Saidpur Women S College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "133764",
-      "name": "Shahid Zia-ur Rahman Mohabiddalay",
+      "name": "Shahid Ziaur Rahman College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "134508",
-      "name": "Sheikh Fazilatun Nessa Mujib Womens College",
+      "name": "Sheikh Fazilatun Nessa Mujib Women S College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124978",
-      "name": "Shimul Bari Bangabandhu Degree College",
+      "name": "Shimulbari Banga Bandhu College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125191",
-      "name": "Sonarai Sangalshi Degree College",
+      "name": "Sona Roy Sangalshi College Nilphamari",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135340",
-      "name": "Tengonamari Degree College",
+      "name": "Tengonmari Degree College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124826",
       "name": "Tista College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125115",
-      "name": "Kachua Chowrangi Sheba High School And College",
+      "name": "Kachua Chowrangi Sheba School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government School",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "136507",
       "name": "Zila Parishad School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government School",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "124847",
-      "name": "Bagdokra Nimojkhana School And College",
+      "name": "Bagdokra Nimozkhana High School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Domar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124912",
-      "name": "Bagulagari High School And College",
+      "name": "Bagulagari School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125056",
-      "name": "Barabhita School & College",
+      "name": "Baravita High School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125018",
-      "name": "Beguem Khaleda Zia Model School And College",
+      "name": "Begum Khaleda Zia (B.K.Z) Model School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "125003",
-      "name": "Bharbhari Majapara School And College",
-      "district": "Nilphamari",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "125248",
-      "name": "Cantonment Public School And College Saidpur",
-      "district": "Nilphamari",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125196",
-      "name": "Charaikhola School & College",
+      "name": "Charaikhola High School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124909",
-      "name": "Chawradangi    School And College",
+      "name": "Chawradangi High School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124844",
       "name": "Chilahati Girls High School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Domar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125195",
-      "name": "Collectorate Public School  & College Nilphamari",
+      "name": "Collectorate Public College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124792",
-      "name": "Dohol Para  Adarsha High School And College",
+      "name": "Dohol Para Adarsha School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124828",
-      "name": "Gayabari School And College",
+      "name": "Gayabari High School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125067",
-      "name": "Goregram  School And College",
+      "name": "Gore Gram School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124876",
-      "name": "Gosaiganj School And College",
+      "name": "Goshaiganj School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Domar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124908",
-      "name": "Harish Chandra Path  High  School And College",
+      "name": "Harish Chandra Path School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125247",
-      "name": "Hazarihat School & College",
+      "name": "Hazarihat High School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "124983",
-      "name": "Kaimari School And College",
-      "district": "Nilphamari",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "125250",
-      "name": "Kaya Golahat High School & College",
-      "district": "Nilphamari",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125211",
-      "name": "Khalisha Belpukur  School & College",
+      "name": "Khalisha Belpukur School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "124983",
+      "name": "Koimari School And College",
+      "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "125250",
+      "name": "Koyagola Hat School And College",
+      "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125212",
-      "name": "Lakshmanpur  High School  And College",
+      "name": "Lakshmanpur School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125204",
       "name": "Lions School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124838",
-      "name": "Matukpur School And College",
+      "name": "Motukpur School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Domar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125081",
-      "name": "Nagar Darwani  School And College",
+      "name": "Nagor Daroani School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124770",
       "name": "Nautara Girls School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124991",
-      "name": "Nayan Khal  School And College",
+      "name": "Nayan Khal School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125068",
-      "name": "Panchapukur  School And College",
+      "name": "Panchapukur School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125057",
-      "name": "Rana Chandi High School And College",
+      "name": "Ranochandi High School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125252",
-      "name": "Saidpur Adarsha Girls School & College",
+      "name": "Saidpur Adarsha Girls School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
-      "eiin": "125201",
-      "name": "Saidpur Pilot Girls School And College",
+      "eiin": "125248",
+      "name": "Saidpur Cantonment Public School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125060",
       "name": "Samir Uddin School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125213",
       "name": "Satpai High School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124836",
-      "name": "Shalmara Bochironessa  School And College",
+      "name": "Shal Mara Bachiran Nesa School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Domar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124998",
-      "name": "Sheshu Niketan  School And College",
+      "name": "Shisu Nikatan School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124927",
       "name": "Shoulmari Girls School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Jaldhaka",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "124771",
       "name": "Sundar Khata School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Dimla",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125251",
-      "name": "Sunflowar School & College",
+      "name": "Sunflower School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "125201",
+      "name": "Syedpur Pilot Girls High School And College",
+      "district": "Nilphamari",
+      "address": "Nilphamari Saidpur",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125087",
-      "name": "Tarani Bari B L High School And College",
+      "name": "Taranibari School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "125197",
       "name": "Uttar Chowra Baragachha School And College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "125003",
+      "name": "Ververy Majhapara School And College",
+      "district": "Nilphamari",
+      "address": "Nilphamari Kishoreganj",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "133568",
       "name": "Al-haj Mijanur Rahma Chow. Krishi College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "135157",
       "name": "Balarpukur Mohila Technical School & B.m College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132826",
       "name": "Chanderhat Agriculture College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132999",
       "name": "Dakshinpara Tec  And B M College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "134370",
       "name": "Dewanganj Shokherhbazar Huzurpara Mohila B.m College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "136963",
       "name": "Dimla Computer Science And Polytechnic College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "135355",
       "name": "Dimla Mohila Bussiness Managment College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132940",
       "name": "Gomnati Technical And Business Management College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132138",
       "name": "Gouharpur Technical And Business Management College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "135964",
-      "name": "Kachua Chowrongi Mohila Bm College",
+      "name": "Kachua Chowrangi Mohela Technical And B. M. College",
       "district": "Nilphamari",
+      "address": "Nilphamari Nilphamari Sadar",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "133123",
       "name": "Kalikapur Agriculture And Technical College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132201",
       "name": "Kanchanpara Ideal Technical And B.m College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132757",
       "name": "Kellabari Technical And Business Management College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "136964",
       "name": "Khalisha Chapani Bm College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "135161",
       "name": "Kishoregonj Technical Girls College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132605",
       "name": "Kishorganj B.m. College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132379",
       "name": "Kukra Danga B.m. College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133216",
       "name": "Mokbul Hossain Technical And Business Management College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132366",
       "name": "Nilphamri  Technical  &  B . M College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132284",
       "name": "Paschim  Chapra  Tachnical  And  Business  Mangement  College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "134369",
       "name": "Poschim Horinchora Women B. M College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132211",
       "name": "Pourosova Technical  And Business Management College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133080",
       "name": "Ramgong Technical And B M College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132948",
       "name": "Taltoli Technical And Business Mangement College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "137269",
       "name": "Tengonmari Technical And Bm College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132875",
       "name": "Vadur Dorga Aual-najia Bm College",
       "district": "Nilphamari",
+      "address": "Nilphamari Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     }
   ]
 }

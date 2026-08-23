@@ -1,1029 +1,1375 @@
 {
   "district": "Rangpur",
-  "total_institutions": 146,
+  "total_institutions": 152,
   "board": "DINAJPUR",
   "colleges": [
     {
       "eiin": "127377",
       "name": "Bir Uttam Shaheed Samad School & College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Autonomous School",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "127483",
       "name": "Rangpur Cadet College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Autonomous School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "131017",
       "name": "Siddique Memorial School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Autonomous School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
-      "eiin": "127485",
-      "name": "Govt. Begum Rokeya College, Rangpur",
+      "eiin": "127702",
+      "name": "Chowdhurani Girl S School And College",
       "district": "Rangpur",
-      "type": "Government College",
-      "board": "DINAJPUR"
+      "address": "Rangpur Pirgachha",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127399",
+      "name": "Jafar Gang School And College",
+      "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127249",
+      "name": "Khaleya Ganjipur School And College",
+      "district": "Rangpur",
+      "address": "Rangpur Gangachara",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127545",
+      "name": "Khoragach M/L High School And College",
+      "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127423",
+      "name": "Nish Bethgong Jarimun Nessa School And College",
+      "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127251",
+      "name": "Thakuradaha School And College",
+      "district": "Rangpur",
+      "address": "Rangpur Gangachara",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127489",
-      "name": "Govt. Charmicheal College Rangpur",
+      "name": "Carmichael College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127485",
+      "name": "Govt. Begum Rokeya College Rangpur",
+      "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
+      "type": "Government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "133547",
       "name": "Rangpur Govt. City College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127484",
-      "name": "Rangpur Govt. College, Rangpur",
+      "name": "Rangpur Govt. College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "133215",
       "name": "Rangpur Technical School And College ,rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "127667",
       "name": "Akhira Hat College",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127946",
       "name": "Amadpur College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127491",
-      "name": "Anandaloke Degree Mahabidyaloya",
+      "name": "Anandalok Bidyapith And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127775",
-      "name": "Annodanagar College",
+      "name": "Annoda Nagar College",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135304",
       "name": "Arcadia International College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127233",
-      "name": "Badar Ganj Degree College",
+      "name": "Badarganj College",
       "district": "Rangpur",
+      "address": "Rangpur Badarganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127234",
-      "name": "Badarganj Mohila College",
+      "name": "Badarganj Women S College",
       "district": "Rangpur",
+      "address": "Rangpur Badarganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127663",
-      "name": "Bairati Degree College",
+      "name": "Bairati College",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127236",
-      "name": "Bakshiganj Degree College",
+      "name": "Bakshiganj College",
       "district": "Rangpur",
+      "address": "Rangpur Badarganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127671",
-      "name": "Balarhat Adarsha Degree College",
+      "name": "Balar Hat Adarsha College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127669",
-      "name": "Balarhat College",
+      "name": "Balar Hat College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "131973",
-      "name": "Baraibari  College",
-      "district": "Rangpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127941",
-      "name": "Bhendabari Degree College",
+      "name": "Bhendabari College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "131973",
+      "name": "Boraibari College",
+      "district": "Rangpur",
+      "address": "Rangpur Gangachara",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127488",
-      "name": "Chak Isabpur Degree College",
+      "name": "Chak Ishabpur College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127943",
-      "name": "Chatra Degree College",
+      "name": "Chatra College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "133821",
-      "name": "Chatra Mohila College",
-      "district": "Rangpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127670",
       "name": "Chharan College",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "133821",
+      "name": "Chotra Women S College",
+      "district": "Rangpur",
+      "address": "Rangpur Pirganj",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127768",
-      "name": "Devi Chowdhurani Degree College",
+      "name": "Devi Chowdhurani College Pirgachha",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127940",
-      "name": "Dhaperhat Monidrishna Sen Degree College",
+      "name": "Dhaperhat Monikrishna Sen College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "127978",
-      "name": "Ekarchali Digrre College",
-      "district": "Rangpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127298",
-      "name": "Ganga Chara Degree College",
+      "name": "Gangachara College",
       "district": "Rangpur",
+      "address": "Rangpur Gangachara",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127299",
-      "name": "Ganga Chara Womens Degree College",
+      "name": "Gangachara Women S College",
       "district": "Rangpur",
+      "address": "Rangpur Gangachara",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127945",
-      "name": "Gurzipara College",
+      "name": "Gurjipara College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "127360",
-      "name": "Haragach Model College",
-      "district": "Rangpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127356",
-      "name": "Hargachh College",
+      "name": "Haragachh College",
       "district": "Rangpur",
+      "address": "Rangpur Kaunia",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127360",
+      "name": "Haragachh Model College",
+      "district": "Rangpur",
+      "address": "Rangpur Kaunia",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127661",
-      "name": "Hena Memorial Mohila Mahabiddalaya",
+      "name": "Hena Memorial Women S College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
-      "eiin": "137723",
-      "name": "Islarhat Uttarbanga Model College",
+      "eiin": "127978",
+      "name": "Ikarchali Degree College",
       "district": "Rangpur",
+      "address": "Rangpur Taraganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127773",
       "name": "Itakumari Shibchandra Roy College",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "137723",
+      "name": "Itchlarhat Uttor Bonga Model College",
+      "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135384",
-      "name": "Kadirabad Women College",
+      "name": "Kadirabad Women S College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127357",
-      "name": "Kaunia  College",
+      "name": "Kaunia College",
       "district": "Rangpur",
+      "address": "Rangpur Kaunia",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127358",
-      "name": "Kaunia Womens Degree College",
+      "name": "Kaunia Women S College",
       "district": "Rangpur",
+      "address": "Rangpur Kaunia",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135349",
       "name": "Khadija Abedin Chowdhurani College",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127944",
-      "name": "Khalashpir Bangabandhu College",
+      "name": "Khalashpir Bangobandhu College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127235",
-      "name": "Kutubpur Degree College",
+      "name": "Kutubpur College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Badarganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127237",
-      "name": "Laldighi Pirpal College",
+      "name": "Lal Dighi Pirpal College",
       "district": "Rangpur",
+      "address": "Rangpur Badarganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127939",
       "name": "Madarganj College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127482",
-      "name": "Mahigonj College Ranguur",
+      "name": "Mahiganj College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "132038",
+      "name": "Mahiyasi Begum Rokeya College",
+      "district": "Rangpur",
+      "address": "Rangpur Pirganj",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127493",
+      "name": "Majida Khatun Mohila College",
+      "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127359",
-      "name": "Mirbagh Degree College",
+      "name": "Mirbagh College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Kaunia",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127668",
-      "name": "Mirzapur Basir Uddin Degree College",
+      "name": "Mirzapur Basir Uddin College",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127664",
       "name": "Mithapukur College",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "132038",
-      "name": "Mohioshi Begum Rokeya Womens College",
-      "district": "Rangpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127487",
       "name": "Moulana Keramat Ali College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "127493",
-      "name": "Nayapukur Majida Khatun Womens College",
-      "district": "Rangpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135385",
       "name": "Oxbridge College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "127666",
-      "name": "Pairanand Begum Rokeya Smrity  Degree College",
-      "district": "Rangpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "132045",
       "name": "Pakuria Sharif College",
       "district": "Rangpur",
+      "address": "Rangpur Gangachara",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127774",
       "name": "Paotana Hat College",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127666",
+      "name": "Payrabanda Begum Rokeya Memorial College",
+      "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127769",
       "name": "Pirgachha College",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135398",
       "name": "Pirgachha Residential Model College",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127770",
-      "name": "Pirgachha Womens College",
+      "name": "Pirgachha Women S College",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "131935",
-      "name": "Pirganj Mohabiddaloy",
+      "name": "Pirganj College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127942",
-      "name": "Pirganj Mohilla Degree College",
+      "name": "Pirganj Women S College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127492",
-      "name": "Radha Krisnapur Degree College",
+      "name": "Radha Krishnapur College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127771",
-      "name": "Rahim Uddin Bharasa Womens College",
+      "name": "Rahimuddin Bharasa Women S College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135403",
       "name": "Ramjan Ali Munshi College",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127495",
-      "name": "Rangpur City College, Rangpur",
+      "name": "Rangpur City College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127486",
       "name": "Rangpur Model College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127776",
-      "name": "Satdargah College",
+      "name": "Satdorga College",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "127665",
-      "name": "Sathibari College",
-      "district": "Rangpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127938",
-      "name": "Shah Abdur Rouf College",
+      "name": "Shah Abdur Rouf College Pirganj",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127665",
+      "name": "Shathibari College",
+      "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127662",
-      "name": "Shukurerhat  Degree College",
+      "name": "Shukurer Hat College",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127490",
-      "name": "Shyampur Degree Mahabiddalaya",
+      "name": "Shyampur College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "131964",
       "name": "Tambulpur College",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127977",
-      "name": "Taragonj Wake Estate Degree College",
+      "name": "Taraganj College",
       "district": "Rangpur",
+      "address": "Rangpur Taraganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "131965",
       "name": "Tarok Brommosanskrit College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "135274",
-      "name": "V I P Shahadat Hossain College",
+      "name": "V.I.P Shahadat Hossain College",
       "district": "Rangpur",
+      "address": "Rangpur Badarganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "132040",
-      "name": "Vendabari Women,s College",
+      "name": "Vendabari Women S College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127494",
-      "name": "Womens College Lahirirhat",
+      "name": "Women S College Lahiri Hat",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "134937",
       "name": "Brighton School & College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government School",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "127420",
       "name": "Medical College Public High School, Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government School",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "127368",
-      "name": "Begum Jobeda Azizon Girls School And College",
+      "name": "Begum Jobeda Azizon Girls High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "132068",
-      "name": "Biam Model School And College Rangpur",
+      "name": "Biam Model School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127378",
-      "name": "Border Guard Bangladesh Public School And College, Rangpur",
+      "name": "Border Guard Public School And College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127500",
-      "name": "Cantonment Public School And College",
+      "name": "Cantonment Public School And College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127510",
-      "name": "Carmichael Collegiate School And College",
+      "name": "Carmichael Collegiate High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127503",
       "name": "Collectorate School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127979",
-      "name": "Dangir  Hat School And College",
+      "name": "Dangirhat High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Taraganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127508",
-      "name": "Darshana Basiron Nessa High School  And College",
+      "name": "Darshana Basiron Nessa High School And College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127777",
-      "name": "Deuty High School And  College",
+      "name": "Deuti High School And College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127302",
-      "name": "Dhantala  R U  School And College",
+      "name": "Dhontola R. U. School And College",
       "district": "Rangpur",
+      "address": "Rangpur Gangachara",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127300",
-      "name": "Gajaghanta High School And College",
+      "name": "Gajoghanta High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Gangachara",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127523",
-      "name": "Gopal Pur  B L  High  School And College",
+      "name": "Gopalpur Bl High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127313",
-      "name": "Imamgang  School And College",
+      "name": "Imamgonj School And College",
       "district": "Rangpur",
+      "address": "Rangpur Kaunia",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127367",
+      "name": "Jaheda Khatun Girls School And College",
+      "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127673",
-      "name": "Jaigir High School & College",
+      "name": "Jaigir High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127851",
-      "name": "K. J. Islam Girls School And College",
+      "name": "K.J. Islam Girls School And College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127688",
       "name": "Kandirhat School And College",
       "district": "Rangpur",
+      "address": "Rangpur Pirgachha",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127950",
-      "name": "Kashia Bari School And College",
+      "name": "Kashiabari School And College",
       "district": "Rangpur",
+      "address": "Rangpur Taraganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127509",
-      "name": "Keranirhat High School And College",
+      "name": "Kerani Hat High School And College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127301",
       "name": "Khaleya Khapri Khal School And College",
       "district": "Rangpur",
+      "address": "Rangpur Gangachara",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "127240",
-      "name": "Kutubpur Bl High School And College",
-      "district": "Rangpur",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127238",
-      "name": "Kutubpur Orunnesa High School & College",
+      "name": "Kutubpur Arunnesa High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Badarganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127240",
+      "name": "Kutubpur B. L. High School And College",
+      "district": "Rangpur",
+      "address": "Rangpur Badarganj",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127504",
       "name": "Lalkuthi Girls High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127496",
-      "name": "Lions School And College Rangpur",
+      "name": "Lions School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127502",
-      "name": "Mahiganj Girls High School And College",
+      "name": "Mahiganj Girls High School And College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127674",
-      "name": "Mirzapur Adarsha School And College",
+      "name": "Mirjapur Adarsha School And College",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127390",
-      "name": "Mominpur High School And College",
+      "name": "Mominpur School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127676",
-      "name": "Padagonj High School & College",
+      "name": "Padaganj High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127506",
-      "name": "Paglapir School And College",
+      "name": "Pagla Pir School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127501",
-      "name": "Police Line School And College Rangpur",
+      "name": "Police Lines School And College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "136959",
-      "name": "Rangpur Public School And College",
+      "name": "Rangpur Public College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127678",
       "name": "Ranipukur High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127799",
-      "name": "Rasulpur Mahtabia B.l School And College",
+      "name": "Rasulpur Mahtabia Dimukhi School And College",
       "district": "Rangpur",
+      "address": "Rangpur Pirganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "127379",
-      "name": "Robertson Ganj High School And College",
-      "district": "Rangpur",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127505",
-      "name": "Robertson Gonj Girls High School And College",
+      "name": "Robertsonganj Girls High School And College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127379",
+      "name": "Robertsongonj High School And College",
+      "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127498",
-      "name": "Samaj Kalayan Bidya Bithi Girls School & College",
+      "name": "Samaj Kalyan Bidyabithi Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
-      "eiin": "127981",
-      "name": "Sayer Kazi Para School & College",
+      "eiin": "127677",
+      "name": "Serudanga High School And College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Mitha Pukur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127315",
       "name": "Shahidbag School And College",
       "district": "Rangpur",
+      "address": "Rangpur Kaunia",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "127677",
-      "name": "Sherudanga School And College",
-      "district": "Rangpur",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127507",
-      "name": "Shyampur Girls High School And College",
+      "name": "Shayampur Girls High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "127981",
+      "name": "Syarkazipara School And College",
+      "district": "Rangpur",
+      "address": "Rangpur Taraganj",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127980",
-      "name": "Taragonj O.a Girls School And College",
+      "name": "Taraganj O. A. Girls School And College",
       "district": "Rangpur",
+      "address": "Rangpur Taraganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127361",
-      "name": "Tepa Madupur Girls High School & College",
+      "name": "Tepa Madhupur Girls High School And College",
       "district": "Rangpur",
+      "address": "Rangpur Kaunia",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "134127",
-      "name": "The Millennium Stars School & College",
+      "name": "The Millennium Stars School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "127375",
-      "name": "Uttam School And College",
+      "name": "Uttam School And College Rangpur",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "127367",
-      "name": "Zaheda Khatun Girls School And College",
-      "district": "Rangpur",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135367",
       "name": "Advocate Rokeya Begum Vocational School And College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133853",
       "name": "Baruahat Technical And Business Managment College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132534",
       "name": "Chand Kuthir Danga Technical School & Bm College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132965",
       "name": "Chatra Science And Technical College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "136159",
       "name": "Dr. M.r. Mohila Technical And Bm College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "134027",
       "name": "Gangachara Technical And Business Management College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "134708",
       "name": "Giraihat Technical And Business Management College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "136158",
       "name": "Gopalpur Technical College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132832",
       "name": "Kazi Para Ideal Women Technical College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "135116",
       "name": "Keshabpur Technical And Business Management College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132781",
       "name": "Khalashpur Technical And Business Managemant College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133881",
       "name": "Khandakar Abdul Karim Miah Bm College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132391",
       "name": "Laldighi Pirpal College(b.m)",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133009",
       "name": "Maderhat Technical And B.m. College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133033",
       "name": "Pirgonj  Biggan  And  Karigori   College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "137693",
       "name": "Pirgonj Women Technical And Bm College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132720",
       "name": "Rangpur B. M College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132849",
       "name": "Rangpur City Technical And Business Management College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132945",
       "name": "Shahebgonj Technical And Business Management College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "138042",
       "name": "Sirajuddin Technical And Business Management College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133863",
       "name": "Taluk Habu Technical And Business Managment College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132269",
       "name": "Taragonj Karigori & Business Management College",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132319",
       "name": "Taragonj Technical And B M College O Ssc Voc School",
       "district": "Rangpur",
+      "address": "Rangpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "127497",
-      "name": "Rcci Public  School  And College",
+      "name": "R.C.C.I. Public School And College",
       "district": "Rangpur",
+      "address": "Rangpur Rangpur Sadar",
       "type": "Others School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     }
   ]
 }

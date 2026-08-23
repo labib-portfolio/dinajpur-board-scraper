@@ -1,1148 +1,1501 @@
 {
   "district": "Dinajpur",
-  "total_institutions": 163,
+  "total_institutions": 166,
   "board": "DINAJPUR",
   "colleges": [
     {
-      "eiin": "120818",
-      "name": "Dinajpur  Govt. College",
+      "eiin": "120019",
+      "name": "Beparitola Adarsha College",
       "district": "Dinajpur",
-      "type": "Government College",
-      "board": "DINAJPUR"
+      "address": "Dinajpur Birampur",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120620",
+      "name": "Chhatiangorh School And College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Khansama",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "138122",
+      "name": "Mount Everest College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "133785",
       "name": "Dinajpur Govt. City College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120818",
+      "name": "Dinajpur Govt. College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
+      "type": "Government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120822",
-      "name": "Dinajpur Govt. Women College",
+      "name": "Dinajpur Govt. Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120451",
-      "name": "Phulbari Govt. College",
+      "name": "Fulbari Govt. College",
       "district": "Dinajpur",
+      "address": "Dinajpur Fulbari",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "132271",
       "name": "Dinajpur Technical School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132461",
       "name": "Parbatipur Technical School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "120131",
       "name": "Dalua High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Birganj",
       "type": "Local Government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120398",
-      "name": "Khochna S.c.school & Collge",
+      "name": "Khochna S.C. High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Local Government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120820",
-      "name": "Adarsha Mahabiddalaya, Dinajpur",
-      "district": "Dinajpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120939",
-      "name": "Aftabganj Mohila College",
-      "district": "Dinajpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120942",
-      "name": "Aftabgonj Degree College",
+      "name": "Aftabganj College",
       "district": "Dinajpur",
+      "address": "Dinajpur Nawabganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120939",
+      "name": "Aftabganj Women S College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Nawabganj",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120701",
-      "name": "Alok Dihi Ideal College",
+      "name": "Alokdihi Ideal College",
       "district": "Dinajpur",
+      "address": "Dinajpur Khansama",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121060",
-      "name": "Ambari Degree College",
+      "name": "Ambari College",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120390",
-      "name": "Ambari Mohila College",
+      "name": "Ambari Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120449",
       "name": "Bangabandhu College",
       "district": "Dinajpur",
+      "address": "Dinajpur Fulbari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120698",
-      "name": "Bangla Bhasa College",
+      "name": "Banglavasha College M.P. Bazar",
       "district": "Dinajpur",
+      "address": "Dinajpur Khansama",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121061",
-      "name": "Bhowanipur Degree College",
+      "name": "Bhawanipur College",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120397",
-      "name": "Binnakury College",
+      "name": "Binnya Kuri College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120197",
-      "name": "Biral Degree College",
-      "district": "Dinajpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120021",
-      "name": "Birampur  College",
+      "name": "Birampur College",
       "district": "Dinajpur",
+      "address": "Dinajpur Birampur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120022",
-      "name": "Birampur Mohila College",
+      "name": "Birampur Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Birampur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120125",
-      "name": "Birganj Mohila Degree College",
-      "district": "Dinajpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120126",
-      "name": "Birganj Technical And B M College",
-      "district": "Dinajpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120127",
-      "name": "Birgonj Degree College",
+      "name": "Birganj College",
       "district": "Dinajpur",
+      "address": "Dinajpur Birganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120125",
+      "name": "Birganj Women S College Dinajpur",
+      "district": "Dinajpur",
+      "address": "Dinajpur Birganj",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120126",
+      "name": "Birgonj T. B. M. College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Birganj",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120197",
+      "name": "Birol College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Biral",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120201",
-      "name": "Birol Mohila  College",
+      "name": "Birol Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Biral",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120198",
-      "name": "Boardhat  College",
+      "name": "Board Hat College",
       "district": "Dinajpur",
+      "address": "Dinajpur Biral",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120603",
       "name": "Bulia Bazar College",
       "district": "Dinajpur",
+      "address": "Dinajpur Kaharole",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120824",
-      "name": "Chandganj Degree College",
+      "name": "Chandganj College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120944",
       "name": "Chararhat Shahid Smriti College",
       "district": "Dinajpur",
+      "address": "Dinajpur Nawabganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120825",
       "name": "Chehel Gazi College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120391",
-      "name": "Chirir Bandar Degree College",
+      "name": "Chirir Bandar College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120392",
-      "name": "Chirir Bandar Mohila College",
+      "name": "Chirirbandar Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120938",
-      "name": "Daudpur Degree College",
+      "name": "Daudpur College",
       "district": "Dinajpur",
+      "address": "Dinajpur Nawabganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120817",
-      "name": "Daxmin Kotwali College",
+      "name": "Daxmin Kotoali College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120268",
-      "name": "Deogaon Bokul Tala College",
+      "name": "Deogaon Bokultala College",
       "district": "Dinajpur",
+      "address": "Dinajpur Bochaganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120200",
       "name": "Dhukurjhari College",
       "district": "Dinajpur",
+      "address": "Dinajpur Biral",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120820",
+      "name": "Dinajpur Adarsha College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120819",
-      "name": "Dinajpur Islamia Womens College",
+      "name": "Dinajpur Islamia Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120816",
+      "name": "Dinajpur K. B. M. College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120821",
-      "name": "Dinajpur Sangeet Degree College Dinagepur",
+      "name": "Dinajpur Sangeet College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120502",
-      "name": "Dugdugi Hat College",
+      "name": "Dugdugihat College",
       "district": "Dinajpur",
+      "address": "Dinajpur Ghoraghat",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120827",
-      "name": "Fashila Danga College",
+      "name": "Fashiladanga College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120395",
-      "name": "Fatejang Pur College",
+      "name": "Fatejangpur College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120452",
+      "name": "Fulbari Women S College Dinajpur",
+      "district": "Dinajpur",
+      "address": "Dinajpur Fulbari",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120828",
-      "name": "Gausul Azam Gollage",
+      "name": "Gawshul Azam College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120501",
-      "name": "Ghora Ghat Womens Degree College",
-      "district": "Dinajpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120498",
-      "name": "Ghoraghat Adarsa Mohabiddalay",
+      "name": "Ghoraghat Adarsha College",
       "district": "Dinajpur",
+      "address": "Dinajpur Ghoraghat",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120499",
-      "name": "Ghoraghat Degree College",
+      "name": "Ghoraghat College",
       "district": "Dinajpur",
+      "address": "Dinajpur Ghoraghat",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120501",
+      "name": "Ghoraghat Women S College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Ghoraghat",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120128",
-      "name": "Golapgonj Degree College",
+      "name": "Golapganj College",
       "district": "Dinajpur",
+      "address": "Dinajpur Birganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120272",
+      "name": "Haji Danesh College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Bochaganj",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120538",
-      "name": "Hakimpur Degree College",
+      "name": "Hakimpur College",
       "district": "Dinajpur",
+      "address": "Dinajpur Hakimpur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120539",
-      "name": "Hakimpur Wohmenss Degree College",
+      "name": "Hakimpur Women S College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Hakimpur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135435",
       "name": "Hasan Ali Chowdhury College",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120269",
       "name": "Hat Rampur College",
       "district": "Dinajpur",
+      "address": "Dinajpur Bochaganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120272",
-      "name": "Hazi Danesh College",
-      "district": "Dinajpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135372",
       "name": "Holy Land College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120700",
-      "name": "Hosenpur Degree College",
+      "name": "Hosenpur High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Khansama",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120393",
-      "name": "Ichhamati Mahavidalaya",
+      "name": "Ichhamati College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120388",
-      "name": "Ichhamoti Womens Degree College",
+      "name": "Ichhamoti Women S College Chirirbandar Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120202",
-      "name": "Jagatpur College",
+      "name": "Jagatpur College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Biral",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120129",
-      "name": "Jharbari College",
+      "name": "Jharbari College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Birganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120601",
-      "name": "Jouynanda Degree College",
+      "name": "Joynanda College",
       "district": "Dinajpur",
+      "address": "Dinajpur Kaharole",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120816",
-      "name": "K. B. M. Collge, Dinajpur",
-      "district": "Dinajpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135416",
-      "name": "Kabirajhat College",
+      "name": "Kabiraj Hat College",
       "district": "Dinajpur",
+      "address": "Dinajpur Birganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "136522",
-      "name": "Kachinia Adarsho Women College",
+      "name": "Kachinia Adarsho Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Khansama",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120600",
-      "name": "Kaharol Degree College",
+      "name": "Kaharol College",
       "district": "Dinajpur",
+      "address": "Dinajpur Kaharole",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120602",
-      "name": "Kaharole Womens Degree College",
+      "name": "Kaharole Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Kaharole",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120203",
       "name": "Kanchan New Model College",
       "district": "Dinajpur",
+      "address": "Dinajpur Biral",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120394",
-      "name": "Karent Hat Degree  College",
+      "name": "Karent Hat College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120023",
-      "name": "Katla Degre College",
+      "name": "Katla College",
       "district": "Dinajpur",
+      "address": "Dinajpur Birampur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120020",
       "name": "Ketrahat College",
       "district": "Dinajpur",
+      "address": "Dinajpur Birampur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120697",
-      "name": "Khansama  Degree College",
+      "name": "Khansama College",
       "district": "Dinajpur",
+      "address": "Dinajpur Khansama",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120699",
-      "name": "Khansama Womens College",
+      "name": "Khansama Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Khansama",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121056",
-      "name": "Kholahati Degree College",
+      "name": "Kholahati College",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121063",
       "name": "Madhya Para College",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120453",
-      "name": "Madila Hat College",
+      "name": "Madilahat College",
       "district": "Dinajpur",
+      "address": "Dinajpur Fulbari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120271",
-      "name": "Maher Pur College",
+      "name": "Maherpur College",
       "district": "Dinajpur",
+      "address": "Dinajpur Bochaganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120199",
-      "name": "Mainul Hassan Mahabiddalay",
+      "name": "Mainul Hasan College",
       "district": "Dinajpur",
+      "address": "Dinajpur Biral",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120940",
-      "name": "Mogar Para Degree College",
+      "name": "Mogarpara College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Nawabganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121057",
-      "name": "Monmathpur Ideal Degree College",
+      "name": "Monmathpur Ideal College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "131991",
       "name": "Munshipara Adarsha College",
       "district": "Dinajpur",
+      "address": "Dinajpur Biral",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120943",
-      "name": "Nabab Gong Mahila Degree College",
-      "district": "Dinajpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120941",
-      "name": "Nawabgonj Degree College",
+      "name": "Nawabganj College",
       "district": "Dinajpur",
+      "address": "Dinajpur Nawabganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120943",
+      "name": "Nawabganj Women S College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Nawabganj",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120696",
-      "name": "Paker Hat Degree College",
+      "name": "Pakerhat College",
       "district": "Dinajpur",
+      "address": "Dinajpur Khansama",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135294",
-      "name": "Palashbari M.s Gopal Model College",
+      "name": "Palash Bari M.S.Gopal Model College",
       "district": "Dinajpur",
+      "address": "Dinajpur Birganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120823",
-      "name": "Panchbari Mohabidyaloy",
+      "name": "Panchbari College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "121058",
-      "name": "Parbatipur Adarsha Degree College",
-      "district": "Dinajpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121059",
-      "name": "Parbatipur Degree College",
+      "name": "Parbatipur Adarsha College",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "121058",
+      "name": "Parbatipur College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121062",
-      "name": "Parbatipur Womens Degree College",
+      "name": "Parbatipur Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120452",
-      "name": "Phulbari Mohila Degree College",
-      "district": "Dinajpur",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "133787",
-      "name": "Purba Mallik Pur H.s. College",
+      "name": "Purba Mallikpur H.S. College",
       "district": "Dinajpur",
+      "address": "Dinajpur Kaharole",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120604",
-      "name": "Purba Mallikpur Womens College",
+      "name": "Purba Mallikpur Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Kaharole",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120945",
-      "name": "Rahgunathpur College",
+      "name": "Raghunathpur College",
       "district": "Dinajpur",
+      "address": "Dinajpur Nawabganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120500",
-      "name": "Rani Gang Mohila Degree College",
+      "name": "Raniganj Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Ghoraghat",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120396",
-      "name": "Ranir Bamdar Womens College",
+      "name": "Ranirbandar Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120267",
-      "name": "Setab Ganj Degree College",
+      "name": "Setabganj College",
       "district": "Dinajpur",
+      "address": "Dinajpur Bochaganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120270",
-      "name": "Setab Ganj Women College",
+      "name": "Setabgonj Women S College",
       "district": "Dinajpur",
+      "address": "Dinajpur Bochaganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120450",
-      "name": "Shaheed Smriti Adarsha Degree College",
+      "name": "Shahid Smrity Adarsha College Fulbari",
       "district": "Dinajpur",
+      "address": "Dinajpur Fulbari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120826",
       "name": "Shankarpur College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "134097",
       "name": "Shonapukur Shurovi College",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "137807",
-      "name": "Sonka Ideal College",
+      "name": "Sonka Adarsha College",
       "district": "Dinajpur",
+      "address": "Dinajpur Birganj",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "131910",
-      "name": "Sukhipir  College",
+      "name": "Sukhipir College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135323",
       "name": "Dinajpur Collectorate School & College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government School",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "137042",
       "name": "H.r. Residential Model School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government School",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "120950",
-      "name": "Amena Baki  Resdential Model School And College",
+      "name": "Amena-Baki- Residential Model School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120504",
       "name": "Bangla Hili Pilot School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Hakimpur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121069",
-      "name": "Bara   Pukuria   School  And  College",
+      "name": "Bara Pukuria High School And College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121068",
-      "name": "Barnamala Niketon High School And College",
+      "name": "Barnamala Niketon High School And College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120136",
-      "name": "Bejora School School And College",
+      "name": "Bejora School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Biral",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121067",
       "name": "Belaichandi High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120947",
-      "name": "Bhaduria School And College",
+      "name": "Bhaduria High School And College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Nawabganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120508",
-      "name": "Boalder Bilateral High School And College",
+      "name": "Boalder School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Hakimpur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121064",
-      "name": "Cantt.public School & College",
+      "name": "Cant. Public School And College Sahid Mahbub Senanibash",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120733",
-      "name": "Chandganj A.s.m. Bl  School And College",
+      "name": "Chandgonj A.S.M Bl High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120711",
-      "name": "Chehel Gazi Shiksha Niketan School And College",
+      "name": "Chehelgazi Shiksha Niketan School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120830",
-      "name": "Collegiate Girls High School& College",
+      "name": "Collegiate Girls High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120948",
-      "name": "Daudpur Girls High School & College",
+      "name": "Daudpur Girls High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Nawabganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120142",
-      "name": "Farakkabad N.i School And College",
+      "name": "Farakkabad N.I. School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Biral",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120459",
-      "name": "Ghoraghat K C Pilot School And College",
+      "name": "Ghoraghat K.C Pilot School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Ghoraghat",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120727",
-      "name": "Ghughudanga High School And College",
+      "name": "Ghughu Danga School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120704",
-      "name": "Jamir Uddin Shah Girls High School And College",
+      "name": "Jamiruddin Shah Girls High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Khansama",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120702",
-      "name": "Kachinia High School & College",
+      "name": "Kachinia High School And College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Khansama",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "119963",
       "name": "Katla Bilateral  School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "120399",
-      "name": "Kutub Danga High School & College",
+      "name": "Kutubdanga Dwimukhi High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Chirirbandar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120829",
-      "name": "Nashipur High School And College",
-      "district": "Dinajpur",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120130",
-      "name": "Nawpara School And College",
+      "name": "Naopara School And College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Birganj",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120829",
+      "name": "Nashipur Dwimukhi High School And College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120505",
-      "name": "Paush Gara High School And College",
+      "name": "Paushgara High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Hakimpur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120454",
-      "name": "Pukhuri  School & College",
+      "name": "Pukhuri High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Fulbari",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121065",
-      "name": "Rajabashor School And College",
+      "name": "Rajabasar High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120708",
-      "name": "Ramdubi Hat Bl High School And College",
+      "name": "Ramdubi Hat B.L High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "120460",
-      "name": "Rani Ganj 2nd B.l High School And College",
-      "district": "Dinajpur",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120831",
-      "name": "Raniganj Ehia Hossain School & College",
+      "name": "Raniganj Ehia Hossain High School And College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "120460",
+      "name": "Raniganj Second B.L. High School And College",
+      "district": "Dinajpur",
+      "address": "Dinajpur Ghoraghat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120723",
-      "name": "Saint Philips High School And College",
+      "name": "Saint Philip S High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120769",
-      "name": "Shaheed Jamir Uddin Girls  School And College",
+      "name": "Shahid Jamir Uddin Girls School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Dinajpur Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120705",
       "name": "Shapla Girls School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Khansama",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "120456",
-      "name": "Uttar Laxshmipur High School And College",
+      "name": "Uttar Laxmipur High School And College",
       "district": "Dinajpur",
+      "address": "Dinajpur Fulbari",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "121070",
-      "name": "Uttar Salondar High School And College",
+      "name": "Uttar Salandar High School And College Dinajpur",
       "district": "Dinajpur",
+      "address": "Dinajpur Parbatipur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "133069",
       "name": "Ajitpur Technical And Busienss Manangement College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132985",
       "name": "Birampur Technical And Business Management College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132952",
       "name": "Boikantapur Technical And Business Management College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "137989",
       "name": "Chirirbandar Womens Technical And Bm College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133816",
       "name": "Chowdhury Hat Technical And Business Management College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133176",
       "name": "Dakhin Rangaon Technical And Bm College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132423",
       "name": "Daudpur Technical College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133074",
       "name": "Ghoraghat Technical College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132443",
       "name": "Goaldihi Technical And Business Management College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "136970",
       "name": "Gobindopur Girls Bm College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133869",
       "name": "Jalalpur Technical & Business Managment College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133129",
       "name": "Kanchan Techcal And Business Managment College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133029",
       "name": "Khamardigha H.r. Technical And Buisness Management College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132635",
       "name": "Khansama Tecnical And Business Managment College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133149",
       "name": "Mojid Nagar Technical & Business Management College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133062",
       "name": "Nafa Nagar Technical And Business Management College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133139",
       "name": "Nawab Gonj Technical College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132488",
       "name": "Pakerhat Science And Technical College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133170",
       "name": "Parbati Pur Technical And Agriculture College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "135121",
       "name": "Parbatipur Karigory And Banijjic College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "136735",
       "name": "Parbatipur Model Mohila Bm College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133126",
       "name": "Phulbari  Technical And Business Management College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "137760",
       "name": "Phulbari Women B.m College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "136142",
       "name": "Punarbhaba Technical And Bm College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133086",
       "name": "Puroil Dugdugihat Technical & Business Management College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133180",
       "name": "S K Technical And Business Management College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "136333",
       "name": "Sundarbon Technical And Bm College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "136155",
       "name": "Trust College Of Medical Technology",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132795",
       "name": "Uttar Ververy Shapla Technicalvoc School And Bm College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "135985",
       "name": "Velarpar Women Technical And Bm College",
       "district": "Dinajpur",
+      "address": "Dinajpur Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     }
   ]
 }

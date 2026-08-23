@@ -1,728 +1,961 @@
 {
   "district": "Kurigram",
-  "total_institutions": 103,
+  "total_institutions": 106,
   "board": "DINAJPUR",
   "colleges": [
     {
-      "eiin": "122331",
-      "name": "Kurigram Govt College",
+      "eiin": "122164",
+      "name": "Dakhin Khuria School And College",
       "district": "Kurigram",
+      "address": "Kurigram Chilmari",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "122551",
+      "name": "Shoulmari M R School And College",
+      "district": "Kurigram",
+      "address": "Kurigram Raumari",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "122595",
+      "name": "Umananda School And College",
+      "district": "Kurigram",
+      "address": "Kurigram Ulipur",
+      "type": "General College (HSC)",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "122331",
+      "name": "Kurigram Government College",
+      "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122330",
-      "name": "Kurigram Govt.mohila College",
+      "name": "Kurigram Government Women S College",
       "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122707",
-      "name": "Ulipur Govt.degree College",
+      "name": "Ulipur Government College",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "133042",
       "name": "Technical School And College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "122535",
-      "name": "Rajarhat Adarsha Mohila College",
+      "name": "Rajar Hat Adarsha Mohila College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Rajarhat",
       "type": "Local Government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "122711",
+      "name": "Bajra College Kurigram",
+      "district": "Kurigram",
+      "address": "Kurigram Ulipur",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "137757",
       "name": "Baldia College",
       "district": "Kurigram",
+      "address": "Kurigram Bhurungamari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122241",
       "name": "Bara Bhita College",
       "district": "Kurigram",
+      "address": "Kurigram Phulbari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122454",
-      "name": "Bhitar  Banda    Drgree   College",
+      "name": "Bhitarband College",
       "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135266",
-      "name": "Bhitarbanda Women College",
+      "name": "Bhitarbanda Women S College",
       "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122335",
       "name": "Bhogdanga Model College",
       "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "122123",
-      "name": "Bhurunga  Mari    Mohila   College",
-      "district": "Kurigram",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122122",
-      "name": "Bhurungamari Degree College",
+      "name": "Bhurungamari College",
       "district": "Kurigram",
+      "address": "Kurigram Bhurungamari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "122123",
+      "name": "Bhurungamari Women S College",
+      "district": "Kurigram",
+      "address": "Kurigram Bhurungamari",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "134349",
-      "name": "Biddanando Mahabiddloy",
+      "name": "Biddanando Mahabiddaloy",
       "district": "Kurigram",
+      "address": "Kurigram Rajarhat",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "137747",
       "name": "Boraikandi College",
       "district": "Kurigram",
+      "address": "Kurigram Raumari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "137002",
       "name": "Bozra  L.k. Amin Degree College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "122711",
-      "name": "Bozra College,",
-      "district": "Kurigram",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "122581",
-      "name": "Char Shoul Mari College",
+      "name": "Char Shoilmari College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Raumari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "137746",
-      "name": "Char Shoulamari Adorsho Mohila College",
-      "district": "Kurigram",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122460",
-      "name": "Chillakhana Model College",
+      "name": "Chila Khana Model College",
       "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122177",
-      "name": "Chilmari Degree College",
+      "name": "Chilmari College",
       "district": "Kurigram",
+      "address": "Kurigram Chilmari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122179",
-      "name": "Chilmari Mohila Degree College",
+      "name": "Chilmari Women S College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Chilmari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "137746",
+      "name": "Chor Soulmary Adarsha Mohila College",
+      "district": "Kurigram",
+      "address": "Kurigram Raumari",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "137994",
       "name": "Dant Bhanga Model College",
       "district": "Kurigram",
+      "address": "Kurigram Raumari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122238",
-      "name": "Fulbari Degree College",
+      "name": "Fulbari College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Phulbari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122240",
-      "name": "Fulbari Mohila Degree College",
+      "name": "Fulbari Women S College",
       "district": "Kurigram",
+      "address": "Kurigram Phulbari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122178",
-      "name": "Golam Habib Mohila Degree College",
+      "name": "Golam Habib Women S College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Chilmari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122710",
-      "name": "Gunai Gachh College",
+      "name": "Gunaigachh College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "136930",
       "name": "Habibur Rahman Model College",
       "district": "Kurigram",
+      "address": "Kurigram Rajarhat",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122583",
       "name": "Jadur Char College",
       "district": "Kurigram",
+      "address": "Kurigram Raumari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122582",
       "name": "Jadur Char Model College",
       "district": "Kurigram",
+      "address": "Kurigram Raumari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122329",
       "name": "Jatrapur Adarsha College",
       "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122459",
-      "name": "Kaligonj  College",
+      "name": "Kaliganj College",
       "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122333",
-      "name": "Kanthal Bari Degree College",
+      "name": "Kanthal Bari College",
       "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122239",
       "name": "Kashipur College",
       "district": "Kurigram",
+      "address": "Kurigram Phulbari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "137041",
       "name": "Kedar Mohila College",
       "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "136292",
-      "name": "Kholerhat College",
+      "name": "Kholer Hat College",
       "district": "Kurigram",
+      "address": "Kurigram Phulbari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122455",
-      "name": "Kochakat Degree College",
+      "name": "Kochakata College",
       "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "135337",
       "name": "Kurigram City College",
       "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122125",
       "name": "Maidam College",
       "district": "Kurigram",
+      "address": "Kurigram Bhurungamari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122332",
-      "name": "Majida Adarsha Degree College",
+      "name": "Majida Adarsha College",
       "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122534",
-      "name": "Mir Ismail Hossian Degree College",
+      "name": "Mir Ismail Hossain College Rajarhat",
       "district": "Kurigram",
+      "address": "Kurigram Rajarhat",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122706",
-      "name": "Mondolerhat  College",
+      "name": "Mondolerhat College",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122457",
-      "name": "Nageswari  Model College",
+      "name": "Nageshawri Model College",
       "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122452",
-      "name": "Nageswari Degree College",
+      "name": "Nageshwari College",
       "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122453",
-      "name": "Nageswari Mohila College",
+      "name": "Nageshwari Women S College",
       "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122533",
-      "name": "Nakkati Hat Adarsha College",
+      "name": "Nak Kati Hat Adarsha College",
       "district": "Kurigram",
+      "address": "Kurigram Rajarhat",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "136492",
       "name": "Namazer Char College",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122458",
       "name": "Newashi College",
       "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "122334",
-      "name": "Panchgachhi  College",
-      "district": "Kurigram",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122709",
-      "name": "Panchpir Degree College",
+      "name": "Panch Pir College",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "122334",
+      "name": "Panchgachhi College",
+      "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122536",
-      "name": "Rajarhat Mohila Degree College",
+      "name": "Rajar Hat Women S College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Rajarhat",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "122147",
-      "name": "Rajib Pur Womens College",
-      "district": "Kurigram",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122146",
-      "name": "Rajibpur Degree College",
+      "name": "Rajibpur College",
       "district": "Kurigram",
+      "address": "Kurigram Char Rajibpur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
-      "eiin": "122456",
-      "name": "Rayganj Degree College",
+      "eiin": "122147",
+      "name": "Rajibpur Women S College",
       "district": "Kurigram",
+      "address": "Kurigram Char Rajibpur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122579",
-      "name": "Rowmari Degree College",
+      "name": "Roumari College",
       "district": "Kurigram",
+      "address": "Kurigram Raumari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122580",
-      "name": "Rowmari Womens Degree College",
+      "name": "Roumari Women S College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Raumari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "122456",
+      "name": "Royganj College Kurigram",
+      "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122242",
       "name": "Saifur Rahman College",
       "district": "Kurigram",
+      "address": "Kurigram Phulbari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "122461",
-      "name": "Samaj Kalyen Womens Collge",
-      "district": "Kurigram",
-      "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "136920",
       "name": "Shaheed Mukti Jodha College",
       "district": "Kurigram",
+      "address": "Kurigram Raumari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122124",
       "name": "Shonahat College",
       "district": "Kurigram",
+      "address": "Kurigram Bhurungamari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122537",
-      "name": "Singer Dabri Hat College",
+      "name": "Singar Dabrihat College",
       "district": "Kurigram",
+      "address": "Kurigram Rajarhat",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "122461",
+      "name": "Somaj Kallayan Women S College",
+      "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
+      "type": "Non-government College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "137922",
-      "name": "Sukhaty College",
+      "name": "Sukhati College",
       "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "137727",
-      "name": "Thetrai A J College",
+      "name": "Thatrai A.J College",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "136925",
-      "name": "Ulipur Adarshaw College",
+      "name": "Ulipur Adarsha College",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122708",
-      "name": "Ullipur Womens Degree Collee",
+      "name": "Ulipur Women S College",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Non-government College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "130823",
-      "name": "Bagua Anantapur School & College",
+      "name": "Bagua Anantapur School And College",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "122715",
+      "name": "Bajra L.K. Amin College Kurigram",
+      "district": "Kurigram",
+      "address": "Kurigram Ulipur",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122191",
-      "name": "Balarhat Adarsha  School  And College",
+      "name": "Balarhat Adarsha School And College",
       "district": "Kurigram",
+      "address": "Kurigram Phulbari",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122126",
       "name": "Baldia Multileteral High School",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "122715",
-      "name": "Bozra L.k Amin High School And College",
-      "district": "Kurigram",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
-    },
-    {
-      "eiin": "122462",
-      "name": "Dakhein Bapari Hat School & College",
-      "district": "Kurigram",
-      "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "122584",
-      "name": "Datbhanga School And College",
+      "name": "Dantbhanga High School And College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Raumari",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
+    },
+    {
+      "eiin": "122462",
+      "name": "Daxmin Beparihat Bahimukhi High School And College",
+      "district": "Kurigram",
+      "address": "Kurigram Nageshwari",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122127",
-      "name": "Dhol Danga B.l High School  And College",
+      "name": "Dhol Danga School And College",
       "district": "Kurigram",
+      "address": "Kurigram Bhurungamari",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122716",
-      "name": "Hazrat Fatema (r) Pourao  Girls School & College",
+      "name": "Hazrat Fatima (Rh.) Puoro Girls School And College",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122336",
-      "name": "Khalilganj High School & College",
+      "name": "Khalilganj High School And College",
       "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122714",
-      "name": "Krishna Mangal School And College",
+      "name": "Krishna Mangal School And College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122245",
       "name": "Kurigram Collectorate School And College",
       "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122558",
       "name": "Kutir Char School And College",
       "district": "Kurigram",
+      "address": "Kurigram Raumari",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122272",
-      "name": "Madhya Kumar Pur Girls School And College",
+      "name": "Madhyakumarpur Girls School And College",
       "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122243",
       "name": "Naodanga High School And College",
       "district": "Kurigram",
+      "address": "Kurigram Phulbari",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122539",
-      "name": "Nazim Khan High School & College",
+      "name": "Nazim Khan High School And College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Rajarhat",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122337",
-      "name": "Nilaram High School & College",
+      "name": "Nilaram High School And College",
       "district": "Kurigram",
+      "address": "Kurigram Kurigram Sadar",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122464",
-      "name": "Panga Rani Lakshmi Priya Multi Lateral School And College",
+      "name": "Pangarani Laxmipriya School And College",
       "district": "Kurigram",
+      "address": "Kurigram Rajarhat",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122244",
-      "name": "Rabaitari Adarshah Girls Ml High School &college",
+      "name": "Rabaitari Adarsha Girls High School And College Kurigram",
       "district": "Kurigram",
+      "address": "Kurigram Phulbari",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122338",
-      "name": "Singer Dabri Hat Ml High School & College",
+      "name": "Singar Dabrir Hat B. L. High School And College",
       "district": "Kurigram",
+      "address": "Kurigram Rajarhat",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122540",
       "name": "Tapurchar School And College",
       "district": "Kurigram",
+      "address": "Kurigram Raumari",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "122712",
-      "name": "Ulipur M.s. School & College",
+      "name": "Ulipur Maharani Sarnamoyi High School And College",
       "district": "Kurigram",
+      "address": "Kurigram Ulipur",
       "type": "Non-government School And College",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "eShikhon & BANBEIS"
     },
     {
       "eiin": "132626",
       "name": "Amirabad Technical And Business Managament College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "137658",
       "name": "Bhurungamari Model Technical School And Bm College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132753",
       "name": "Boailbhir Technical & Business  Management  College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132584",
       "name": "Char Rajibpur Technical And Business Management College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132001",
       "name": "Chilmari Tecnical And Business Managmentcollege",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132390",
       "name": "Diadanga Ideal Tecnical School And College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "135114",
       "name": "Kachakata Model Women Technical School And College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132598",
       "name": "Khalilgonj Technical And Business Management College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132477",
       "name": "M  A   Matin    Tecnical  And   Agriculture     College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132498",
       "name": "Medha Bikash Technical And B M College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "136203",
       "name": "Mondoler Bazar Technical School And College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "135911",
       "name": "Raigonj J.r. Technical School And College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132619",
       "name": "Rajarhat Karigori Banijjik College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "133867",
       "name": "Rajarhat Model Mohila Baybosay Bebosthapona & Krishe Diploma College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132611",
       "name": "Rajibpur Technical And B.m. College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "132438",
       "name": "Rowmari Technical And Business Management College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "135113",
       "name": "Shimulbari Girls Technical And Bm College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     },
     {
       "eiin": "134378",
       "name": "Sundurgram Putikata Technical And B.m. College",
       "district": "Kurigram",
+      "address": "Kurigram Sadar / Upazila",
       "type": "Non-government Technical And Vocational",
-      "board": "DINAJPUR"
+      "board": "DINAJPUR",
+      "source": "EduportalBD"
     }
   ]
 }

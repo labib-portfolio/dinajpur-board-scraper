@@ -1,146 +1,149 @@
 ===================================================================================
        DINAJPUR EDUCATION BOARD — COMPLETE HSC COLLEGE & EIIN MASTER LIST
-       Total Verified HSC Institutions: 844 across 8 Districts
+       Total Verified HSC Institutions: 875 across 8 Districts
 ===================================================================================
 
 
-############################# DINAJPUR DISTRICT (163 Institutions) #############################
+############################# DINAJPUR DISTRICT (166 Institutions) #############################
 
-EIIN       | TYPE                                | INSTITUTION NAME
------------------------------------------------------------------------------------------------
-120818     | Government College                  | Dinajpur  Govt. College
-133785     | Government College                  | Dinajpur Govt. City College
-120822     | Government College                  | Dinajpur Govt. Women College
-120451     | Government College                  | Phulbari Govt. College
-132271     | Government Technical And Vocational | Dinajpur Technical School And College
-132461     | Government Technical And Vocational | Parbatipur Technical School And College
-120131     | Local Government School And College | Dalua High School And College
-120398     | Local Government School And College | Khochna S.c.school & Collge
-120820     | Non-government College              | Adarsha Mahabiddalaya, Dinajpur
-120939     | Non-government College              | Aftabganj Mohila College
-120942     | Non-government College              | Aftabgonj Degree College
-120701     | Non-government College              | Alok Dihi Ideal College
-121060     | Non-government College              | Ambari Degree College
-120390     | Non-government College              | Ambari Mohila College
-120449     | Non-government College              | Bangabandhu College
-120698     | Non-government College              | Bangla Bhasa College
-121061     | Non-government College              | Bhowanipur Degree College
-120397     | Non-government College              | Binnakury College
-120197     | Non-government College              | Biral Degree College
-120021     | Non-government College              | Birampur  College
-120022     | Non-government College              | Birampur Mohila College
-120125     | Non-government College              | Birganj Mohila Degree College
-120126     | Non-government College              | Birganj Technical And B M College
-120127     | Non-government College              | Birgonj Degree College
-120201     | Non-government College              | Birol Mohila  College
-120198     | Non-government College              | Boardhat  College
-120603     | Non-government College              | Bulia Bazar College
-120824     | Non-government College              | Chandganj Degree College
-120944     | Non-government College              | Chararhat Shahid Smriti College
-120825     | Non-government College              | Chehel Gazi College
-120391     | Non-government College              | Chirir Bandar Degree College
-120392     | Non-government College              | Chirir Bandar Mohila College
-120938     | Non-government College              | Daudpur Degree College
-120817     | Non-government College              | Daxmin Kotwali College
-120268     | Non-government College              | Deogaon Bokul Tala College
-120200     | Non-government College              | Dhukurjhari College
-120819     | Non-government College              | Dinajpur Islamia Womens College
-120821     | Non-government College              | Dinajpur Sangeet Degree College Dinagepur
-120502     | Non-government College              | Dugdugi Hat College
-120827     | Non-government College              | Fashila Danga College
-120395     | Non-government College              | Fatejang Pur College
-120828     | Non-government College              | Gausul Azam Gollage
-120501     | Non-government College              | Ghora Ghat Womens Degree College
-120498     | Non-government College              | Ghoraghat Adarsa Mohabiddalay
-120499     | Non-government College              | Ghoraghat Degree College
-120128     | Non-government College              | Golapgonj Degree College
-120538     | Non-government College              | Hakimpur Degree College
-120539     | Non-government College              | Hakimpur Wohmenss Degree College
-135435     | Non-government College              | Hasan Ali Chowdhury College
-120269     | Non-government College              | Hat Rampur College
-120272     | Non-government College              | Hazi Danesh College
-135372     | Non-government College              | Holy Land College
-120700     | Non-government College              | Hosenpur Degree College
-120393     | Non-government College              | Ichhamati Mahavidalaya
-120388     | Non-government College              | Ichhamoti Womens Degree College
-120202     | Non-government College              | Jagatpur College
-120129     | Non-government College              | Jharbari College
-120601     | Non-government College              | Jouynanda Degree College
-120816     | Non-government College              | K. B. M. Collge, Dinajpur
-135416     | Non-government College              | Kabirajhat College
-136522     | Non-government College              | Kachinia Adarsho Women College
-120600     | Non-government College              | Kaharol Degree College
-120602     | Non-government College              | Kaharole Womens Degree College
-120203     | Non-government College              | Kanchan New Model College
-120394     | Non-government College              | Karent Hat Degree  College
-120023     | Non-government College              | Katla Degre College
-120020     | Non-government College              | Ketrahat College
-120697     | Non-government College              | Khansama  Degree College
-120699     | Non-government College              | Khansama Womens College
-121056     | Non-government College              | Kholahati Degree College
-121063     | Non-government College              | Madhya Para College
-120453     | Non-government College              | Madila Hat College
-120271     | Non-government College              | Maher Pur College
-120199     | Non-government College              | Mainul Hassan Mahabiddalay
-120940     | Non-government College              | Mogar Para Degree College
-121057     | Non-government College              | Monmathpur Ideal Degree College
-131991     | Non-government College              | Munshipara Adarsha College
-120943     | Non-government College              | Nabab Gong Mahila Degree College
-120941     | Non-government College              | Nawabgonj Degree College
-120696     | Non-government College              | Paker Hat Degree College
-135294     | Non-government College              | Palashbari M.s Gopal Model College
-120823     | Non-government College              | Panchbari Mohabidyaloy
-121058     | Non-government College              | Parbatipur Adarsha Degree College
-121059     | Non-government College              | Parbatipur Degree College
-121062     | Non-government College              | Parbatipur Womens Degree College
-120452     | Non-government College              | Phulbari Mohila Degree College
-133787     | Non-government College              | Purba Mallik Pur H.s. College
-120604     | Non-government College              | Purba Mallikpur Womens College
-120945     | Non-government College              | Rahgunathpur College
-120500     | Non-government College              | Rani Gang Mohila Degree College
-120396     | Non-government College              | Ranir Bamdar Womens College
-120267     | Non-government College              | Setab Ganj Degree College
-120270     | Non-government College              | Setab Ganj Women College
-120450     | Non-government College              | Shaheed Smriti Adarsha Degree College
-120826     | Non-government College              | Shankarpur College
-134097     | Non-government College              | Shonapukur Shurovi College
-137807     | Non-government College              | Sonka Ideal College
-131910     | Non-government College              | Sukhipir  College
-135323     | Non-government School               | Dinajpur Collectorate School & College
-137042     | Non-government School               | H.r. Residential Model School And College
-120950     | Non-government School And College   | Amena Baki  Resdential Model School And College
-120504     | Non-government School And College   | Bangla Hili Pilot School And College
-121069     | Non-government School And College   | Bara   Pukuria   School  And  College
-121068     | Non-government School And College   | Barnamala Niketon High School And College
-120136     | Non-government School And College   | Bejora School School And College
-121067     | Non-government School And College   | Belaichandi High School And College
-120947     | Non-government School And College   | Bhaduria School And College
-120508     | Non-government School And College   | Boalder Bilateral High School And College
-121064     | Non-government School And College   | Cantt.public School & College
-120733     | Non-government School And College   | Chandganj A.s.m. Bl  School And College
-120711     | Non-government School And College   | Chehel Gazi Shiksha Niketan School And College
-120830     | Non-government School And College   | Collegiate Girls High School& College
-120948     | Non-government School And College   | Daudpur Girls High School & College
-120142     | Non-government School And College   | Farakkabad N.i School And College
-120459     | Non-government School And College   | Ghoraghat K C Pilot School And College
-120727     | Non-government School And College   | Ghughudanga High School And College
-120704     | Non-government School And College   | Jamir Uddin Shah Girls High School And College
-120702     | Non-government School And College   | Kachinia High School & College
-119963     | Non-government School And College   | Katla Bilateral  School And College
-120399     | Non-government School And College   | Kutub Danga High School & College
-120829     | Non-government School And College   | Nashipur High School And College
-120130     | Non-government School And College   | Nawpara School And College
-120505     | Non-government School And College   | Paush Gara High School And College
-120454     | Non-government School And College   | Pukhuri  School & College
-121065     | Non-government School And College   | Rajabashor School And College
-120708     | Non-government School And College   | Ramdubi Hat Bl High School And College
-120460     | Non-government School And College   | Rani Ganj 2nd B.l High School And College
-120831     | Non-government School And College   | Raniganj Ehia Hossain School & College
-120723     | Non-government School And College   | Saint Philips High School And College
-120769     | Non-government School And College   | Shaheed Jamir Uddin Girls  School And College
-120705     | Non-government School And College   | Shapla Girls School And College
-120456     | Non-government School And College   | Uttar Laxshmipur High School And College
-121070     | Non-government School And College   | Uttar Salondar High School And College
+EIIN       | TYPE                                 | INSTITUTION NAME
+------------------------------------------------------------------------------------------------
+120019     | General College (HSC)                | Beparitola Adarsha College
+120620     | General College (HSC)                | Chhatiangorh School And College
+138122     | General College (HSC)                | Mount Everest College
+133785     | Government College                   | Dinajpur Govt. City College
+120818     | Government College                   | Dinajpur Govt. College
+120822     | Government College                   | Dinajpur Govt. Women S College
+120451     | Government College                   | Fulbari Govt. College
+132271     | Government Technical And Vocational  | Dinajpur Technical School And College
+132461     | Government Technical And Vocational  | Parbatipur Technical School And College
+120131     | Local Government School And College  | Dalua High School And College
+120398     | Local Government School And College  | Khochna S.C. High School And College
+120942     | Non-government College               | Aftabganj College
+120939     | Non-government College               | Aftabganj Women S College
+120701     | Non-government College               | Alokdihi Ideal College
+121060     | Non-government College               | Ambari College
+120390     | Non-government College               | Ambari Women S College
+120449     | Non-government College               | Bangabandhu College
+120698     | Non-government College               | Banglavasha College M.P. Bazar
+121061     | Non-government College               | Bhawanipur College
+120397     | Non-government College               | Binnya Kuri College
+120021     | Non-government College               | Birampur College
+120022     | Non-government College               | Birampur Women S College
+120127     | Non-government College               | Birganj College
+120125     | Non-government College               | Birganj Women S College Dinajpur
+120126     | Non-government College               | Birgonj T. B. M. College
+120197     | Non-government College               | Birol College
+120201     | Non-government College               | Birol Women S College
+120198     | Non-government College               | Board Hat College
+120603     | Non-government College               | Bulia Bazar College
+120824     | Non-government College               | Chandganj College
+120944     | Non-government College               | Chararhat Shahid Smriti College
+120825     | Non-government College               | Chehel Gazi College
+120391     | Non-government College               | Chirir Bandar College
+120392     | Non-government College               | Chirirbandar Women S College
+120938     | Non-government College               | Daudpur College
+120817     | Non-government College               | Daxmin Kotoali College
+120268     | Non-government College               | Deogaon Bokultala College
+120200     | Non-government College               | Dhukurjhari College
+120820     | Non-government College               | Dinajpur Adarsha College
+120819     | Non-government College               | Dinajpur Islamia Women S College
+120816     | Non-government College               | Dinajpur K. B. M. College
+120821     | Non-government College               | Dinajpur Sangeet College
+120502     | Non-government College               | Dugdugihat College
+120827     | Non-government College               | Fashiladanga College
+120395     | Non-government College               | Fatejangpur College
+120452     | Non-government College               | Fulbari Women S College Dinajpur
+120828     | Non-government College               | Gawshul Azam College
+120498     | Non-government College               | Ghoraghat Adarsha College
+120499     | Non-government College               | Ghoraghat College
+120501     | Non-government College               | Ghoraghat Women S College
+120128     | Non-government College               | Golapganj College
+120272     | Non-government College               | Haji Danesh College
+120538     | Non-government College               | Hakimpur College
+120539     | Non-government College               | Hakimpur Women S College Dinajpur
+135435     | Non-government College               | Hasan Ali Chowdhury College
+120269     | Non-government College               | Hat Rampur College
+135372     | Non-government College               | Holy Land College
+120700     | Non-government College               | Hosenpur High School And College
+120393     | Non-government College               | Ichhamati College
+120388     | Non-government College               | Ichhamoti Women S College Chirirbandar Dinajpur
+120202     | Non-government College               | Jagatpur College Dinajpur
+120129     | Non-government College               | Jharbari College Dinajpur
+120601     | Non-government College               | Joynanda College
+135416     | Non-government College               | Kabiraj Hat College
+136522     | Non-government College               | Kachinia Adarsho Women S College
+120600     | Non-government College               | Kaharol College
+120602     | Non-government College               | Kaharole Women S College
+120203     | Non-government College               | Kanchan New Model College
+120394     | Non-government College               | Karent Hat College
+120023     | Non-government College               | Katla College
+120020     | Non-government College               | Ketrahat College
+120697     | Non-government College               | Khansama College
+120699     | Non-government College               | Khansama Women S College
+121056     | Non-government College               | Kholahati College
+121063     | Non-government College               | Madhya Para College
+120453     | Non-government College               | Madilahat College
+120271     | Non-government College               | Maherpur College
+120199     | Non-government College               | Mainul Hasan College
+120940     | Non-government College               | Mogarpara College Dinajpur
+121057     | Non-government College               | Monmathpur Ideal College Dinajpur
+131991     | Non-government College               | Munshipara Adarsha College
+120941     | Non-government College               | Nawabganj College
+120943     | Non-government College               | Nawabganj Women S College
+120696     | Non-government College               | Pakerhat College
+135294     | Non-government College               | Palash Bari M.S.Gopal Model College
+120823     | Non-government College               | Panchbari College
+121059     | Non-government College               | Parbatipur Adarsha College
+121058     | Non-government College               | Parbatipur College
+121062     | Non-government College               | Parbatipur Women S College
+133787     | Non-government College               | Purba Mallikpur H.S. College
+120604     | Non-government College               | Purba Mallikpur Women S College
+120945     | Non-government College               | Raghunathpur College
+120500     | Non-government College               | Raniganj Women S College
+120396     | Non-government College               | Ranirbandar Women S College
+120267     | Non-government College               | Setabganj College
+120270     | Non-government College               | Setabgonj Women S College
+120450     | Non-government College               | Shahid Smrity Adarsha College Fulbari
+120826     | Non-government College               | Shankarpur College
+134097     | Non-government College               | Shonapukur Shurovi College
+137807     | Non-government College               | Sonka Adarsha College
+131910     | Non-government College               | Sukhipir College
+135323     | Non-government School                | Dinajpur Collectorate School & College
+137042     | Non-government School                | H.r. Residential Model School And College
+120950     | Non-government School And College    | Amena-Baki- Residential Model School And College
+120504     | Non-government School And College    | Bangla Hili Pilot School And College
+121069     | Non-government School And College    | Bara Pukuria High School And College Dinajpur
+121068     | Non-government School And College    | Barnamala Niketon High School And College Dinajpur
+120136     | Non-government School And College    | Bejora School And College
+121067     | Non-government School And College    | Belaichandi High School And College
+120947     | Non-government School And College    | Bhaduria High School And College Dinajpur
+120508     | Non-government School And College    | Boalder School And College
+121064     | Non-government School And College    | Cant. Public School And College Sahid Mahbub Senanibash
+120733     | Non-government School And College    | Chandgonj A.S.M Bl High School And College
+120711     | Non-government School And College    | Chehelgazi Shiksha Niketan School And College
+120830     | Non-government School And College    | Collegiate Girls High School And College
+120948     | Non-government School And College    | Daudpur Girls High School And College
+120142     | Non-government School And College    | Farakkabad N.I. School And College
+120459     | Non-government School And College    | Ghoraghat K.C Pilot School And College
+120727     | Non-government School And College    | Ghughu Danga School And College
+120704     | Non-government School And College    | Jamiruddin Shah Girls High School And College
+120702     | Non-government School And College    | Kachinia High School And College Dinajpur
+119963     | Non-government School And College    | Katla Bilateral  School And College
+120399     | Non-government School And College    | Kutubdanga Dwimukhi High School And College
+120130     | Non-government School And College    | Naopara School And College Dinajpur
+120829     | Non-government School And College    | Nashipur Dwimukhi High School And College
+120505     | Non-government School And College    | Paushgara High School And College
+120454     | Non-government School And College    | Pukhuri High School And College
+121065     | Non-government School And College    | Rajabasar High School And College
+120708     | Non-government School And College    | Ramdubi Hat B.L High School And College
+120831     | Non-government School And College    | Raniganj Ehia Hossain High School And College Dinajpur
+120460     | Non-government School And College    | Raniganj Second B.L. High School And College
+120723     | Non-government School And College    | Saint Philip S High School And College
+120769     | Non-government School And College    | Shahid Jamir Uddin Girls School And College
+120705     | Non-government School And College    | Shapla Girls School And College
+120456     | Non-government School And College    | Uttar Laxmipur High School And College
+121070     | Non-government School And College    | Uttar Salandar High School And College Dinajpur
 133069     | Non-government Technical And Vocational | Ajitpur Technical And Busienss Manangement College
 132985     | Non-government Technical And Vocational | Birampur Technical And Business Management College
 132952     | Non-government Technical And Vocational | Boikantapur Technical And Business Management College
@@ -172,132 +175,138 @@ EIIN       | TYPE                                | INSTITUTION NAME
 132795     | Non-government Technical And Vocational | Uttar Ververy Shapla Technicalvoc School And Bm College
 135985     | Non-government Technical And Vocational | Velarpar Women Technical And Bm College
 
-############################# RANGPUR DISTRICT (146 Institutions) #############################
+############################# RANGPUR DISTRICT (152 Institutions) #############################
 
-EIIN       | TYPE                                | INSTITUTION NAME
------------------------------------------------------------------------------------------------
-127377     | Autonomous School                   | Bir Uttam Shaheed Samad School & College
-127483     | Autonomous School And College       | Rangpur Cadet College
-131017     | Autonomous School And College       | Siddique Memorial School And College
-127485     | Government College                  | Govt. Begum Rokeya College, Rangpur
-127489     | Government College                  | Govt. Charmicheal College Rangpur
-133547     | Government College                  | Rangpur Govt. City College
-127484     | Government College                  | Rangpur Govt. College, Rangpur
-133215     | Government Technical And Vocational | Rangpur Technical School And College ,rangpur
-127667     | Non-government College              | Akhira Hat College
-127946     | Non-government College              | Amadpur College
-127491     | Non-government College              | Anandaloke Degree Mahabidyaloya
-127775     | Non-government College              | Annodanagar College
-135304     | Non-government College              | Arcadia International College
-127233     | Non-government College              | Badar Ganj Degree College
-127234     | Non-government College              | Badarganj Mohila College
-127663     | Non-government College              | Bairati Degree College
-127236     | Non-government College              | Bakshiganj Degree College
-127671     | Non-government College              | Balarhat Adarsha Degree College
-127669     | Non-government College              | Balarhat College
-131973     | Non-government College              | Baraibari  College
-127941     | Non-government College              | Bhendabari Degree College
-127488     | Non-government College              | Chak Isabpur Degree College
-127943     | Non-government College              | Chatra Degree College
-133821     | Non-government College              | Chatra Mohila College
-127670     | Non-government College              | Chharan College
-127768     | Non-government College              | Devi Chowdhurani Degree College
-127940     | Non-government College              | Dhaperhat Monidrishna Sen Degree College
-127978     | Non-government College              | Ekarchali Digrre College
-127298     | Non-government College              | Ganga Chara Degree College
-127299     | Non-government College              | Ganga Chara Womens Degree College
-127945     | Non-government College              | Gurzipara College
-127360     | Non-government College              | Haragach Model College
-127356     | Non-government College              | Hargachh College
-127661     | Non-government College              | Hena Memorial Mohila Mahabiddalaya
-137723     | Non-government College              | Islarhat Uttarbanga Model College
-127773     | Non-government College              | Itakumari Shibchandra Roy College
-135384     | Non-government College              | Kadirabad Women College
-127357     | Non-government College              | Kaunia  College
-127358     | Non-government College              | Kaunia Womens Degree College
-135349     | Non-government College              | Khadija Abedin Chowdhurani College
-127944     | Non-government College              | Khalashpir Bangabandhu College
-127235     | Non-government College              | Kutubpur Degree College
-127237     | Non-government College              | Laldighi Pirpal College
-127939     | Non-government College              | Madarganj College
-127482     | Non-government College              | Mahigonj College Ranguur
-127359     | Non-government College              | Mirbagh Degree College
-127668     | Non-government College              | Mirzapur Basir Uddin Degree College
-127664     | Non-government College              | Mithapukur College
-132038     | Non-government College              | Mohioshi Begum Rokeya Womens College
-127487     | Non-government College              | Moulana Keramat Ali College
-127493     | Non-government College              | Nayapukur Majida Khatun Womens College
-135385     | Non-government College              | Oxbridge College
-127666     | Non-government College              | Pairanand Begum Rokeya Smrity  Degree College
-132045     | Non-government College              | Pakuria Sharif College
-127774     | Non-government College              | Paotana Hat College
-127769     | Non-government College              | Pirgachha College
-135398     | Non-government College              | Pirgachha Residential Model College
-127770     | Non-government College              | Pirgachha Womens College
-131935     | Non-government College              | Pirganj Mohabiddaloy
-127942     | Non-government College              | Pirganj Mohilla Degree College
-127492     | Non-government College              | Radha Krisnapur Degree College
-127771     | Non-government College              | Rahim Uddin Bharasa Womens College
-135403     | Non-government College              | Ramjan Ali Munshi College
-127495     | Non-government College              | Rangpur City College, Rangpur
-127486     | Non-government College              | Rangpur Model College
-127776     | Non-government College              | Satdargah College
-127665     | Non-government College              | Sathibari College
-127938     | Non-government College              | Shah Abdur Rouf College
-127662     | Non-government College              | Shukurerhat  Degree College
-127490     | Non-government College              | Shyampur Degree Mahabiddalaya
-131964     | Non-government College              | Tambulpur College
-127977     | Non-government College              | Taragonj Wake Estate Degree College
-131965     | Non-government College              | Tarok Brommosanskrit College
-135274     | Non-government College              | V I P Shahadat Hossain College
-132040     | Non-government College              | Vendabari Women,s College
-127494     | Non-government College              | Womens College Lahirirhat
-134937     | Non-government School               | Brighton School & College Rangpur
-127420     | Non-government School               | Medical College Public High School, Rangpur
-127368     | Non-government School And College   | Begum Jobeda Azizon Girls School And College
-132068     | Non-government School And College   | Biam Model School And College Rangpur
-127378     | Non-government School And College   | Border Guard Bangladesh Public School And College, Rangpur
-127500     | Non-government School And College   | Cantonment Public School And College
-127510     | Non-government School And College   | Carmichael Collegiate School And College
-127503     | Non-government School And College   | Collectorate School And College
-127979     | Non-government School And College   | Dangir  Hat School And College
-127508     | Non-government School And College   | Darshana Basiron Nessa High School  And College
-127777     | Non-government School And College   | Deuty High School And  College
-127302     | Non-government School And College   | Dhantala  R U  School And College
-127300     | Non-government School And College   | Gajaghanta High School And College
-127523     | Non-government School And College   | Gopal Pur  B L  High  School And College
-127313     | Non-government School And College   | Imamgang  School And College
-127673     | Non-government School And College   | Jaigir High School & College
-127851     | Non-government School And College   | K. J. Islam Girls School And College
-127688     | Non-government School And College   | Kandirhat School And College
-127950     | Non-government School And College   | Kashia Bari School And College
-127509     | Non-government School And College   | Keranirhat High School And College
-127301     | Non-government School And College   | Khaleya Khapri Khal School And College
-127240     | Non-government School And College   | Kutubpur Bl High School And College
-127238     | Non-government School And College   | Kutubpur Orunnesa High School & College
-127504     | Non-government School And College   | Lalkuthi Girls High School And College
-127496     | Non-government School And College   | Lions School And College Rangpur
-127502     | Non-government School And College   | Mahiganj Girls High School And College
-127674     | Non-government School And College   | Mirzapur Adarsha School And College
-127390     | Non-government School And College   | Mominpur High School And College
-127676     | Non-government School And College   | Padagonj High School & College
-127506     | Non-government School And College   | Paglapir School And College
-127501     | Non-government School And College   | Police Line School And College Rangpur
-136959     | Non-government School And College   | Rangpur Public School And College
-127678     | Non-government School And College   | Ranipukur High School And College
-127799     | Non-government School And College   | Rasulpur Mahtabia B.l School And College
-127379     | Non-government School And College   | Robertson Ganj High School And College
-127505     | Non-government School And College   | Robertson Gonj Girls High School And College
-127498     | Non-government School And College   | Samaj Kalayan Bidya Bithi Girls School & College
-127981     | Non-government School And College   | Sayer Kazi Para School & College
-127315     | Non-government School And College   | Shahidbag School And College
-127677     | Non-government School And College   | Sherudanga School And College
-127507     | Non-government School And College   | Shyampur Girls High School And College
-127980     | Non-government School And College   | Taragonj O.a Girls School And College
-127361     | Non-government School And College   | Tepa Madupur Girls High School & College
-134127     | Non-government School And College   | The Millennium Stars School & College
-127375     | Non-government School And College   | Uttam School And College
-127367     | Non-government School And College   | Zaheda Khatun Girls School And College
+EIIN       | TYPE                                 | INSTITUTION NAME
+------------------------------------------------------------------------------------------------
+127377     | Autonomous School                    | Bir Uttam Shaheed Samad School & College
+127483     | Autonomous School And College        | Rangpur Cadet College
+131017     | Autonomous School And College        | Siddique Memorial School And College
+127702     | General College (HSC)                | Chowdhurani Girl S School And College
+127399     | General College (HSC)                | Jafar Gang School And College
+127249     | General College (HSC)                | Khaleya Ganjipur School And College
+127545     | General College (HSC)                | Khoragach M/L High School And College
+127423     | General College (HSC)                | Nish Bethgong Jarimun Nessa School And College
+127251     | General College (HSC)                | Thakuradaha School And College
+127489     | Government College                   | Carmichael College
+127485     | Government College                   | Govt. Begum Rokeya College Rangpur
+133547     | Government College                   | Rangpur Govt. City College
+127484     | Government College                   | Rangpur Govt. College
+133215     | Government Technical And Vocational  | Rangpur Technical School And College ,rangpur
+127667     | Non-government College               | Akhira Hat College
+127946     | Non-government College               | Amadpur College
+127491     | Non-government College               | Anandalok Bidyapith And College
+127775     | Non-government College               | Annoda Nagar College
+135304     | Non-government College               | Arcadia International College
+127233     | Non-government College               | Badarganj College
+127234     | Non-government College               | Badarganj Women S College
+127663     | Non-government College               | Bairati College
+127236     | Non-government College               | Bakshiganj College
+127671     | Non-government College               | Balar Hat Adarsha College Rangpur
+127669     | Non-government College               | Balar Hat College Rangpur
+127941     | Non-government College               | Bhendabari College
+131973     | Non-government College               | Boraibari College
+127488     | Non-government College               | Chak Ishabpur College
+127943     | Non-government College               | Chatra College Rangpur
+127670     | Non-government College               | Chharan College
+133821     | Non-government College               | Chotra Women S College
+127768     | Non-government College               | Devi Chowdhurani College Pirgachha
+127940     | Non-government College               | Dhaperhat Monikrishna Sen College
+127298     | Non-government College               | Gangachara College
+127299     | Non-government College               | Gangachara Women S College
+127945     | Non-government College               | Gurjipara College
+127356     | Non-government College               | Haragachh College
+127360     | Non-government College               | Haragachh Model College
+127661     | Non-government College               | Hena Memorial Women S College Rangpur
+127978     | Non-government College               | Ikarchali Degree College
+127773     | Non-government College               | Itakumari Shibchandra Roy College
+137723     | Non-government College               | Itchlarhat Uttor Bonga Model College
+135384     | Non-government College               | Kadirabad Women S College
+127357     | Non-government College               | Kaunia College
+127358     | Non-government College               | Kaunia Women S College
+135349     | Non-government College               | Khadija Abedin Chowdhurani College
+127944     | Non-government College               | Khalashpir Bangobandhu College
+127235     | Non-government College               | Kutubpur College Rangpur
+127237     | Non-government College               | Lal Dighi Pirpal College
+127939     | Non-government College               | Madarganj College
+127482     | Non-government College               | Mahiganj College
+132038     | Non-government College               | Mahiyasi Begum Rokeya College
+127493     | Non-government College               | Majida Khatun Mohila College
+127359     | Non-government College               | Mirbagh College Rangpur
+127668     | Non-government College               | Mirzapur Basir Uddin College
+127664     | Non-government College               | Mithapukur College
+127487     | Non-government College               | Moulana Keramat Ali College
+135385     | Non-government College               | Oxbridge College
+132045     | Non-government College               | Pakuria Sharif College
+127774     | Non-government College               | Paotana Hat College
+127666     | Non-government College               | Payrabanda Begum Rokeya Memorial College
+127769     | Non-government College               | Pirgachha College
+135398     | Non-government College               | Pirgachha Residential Model College
+127770     | Non-government College               | Pirgachha Women S College
+131935     | Non-government College               | Pirganj College
+127942     | Non-government College               | Pirganj Women S College
+127492     | Non-government College               | Radha Krishnapur College
+127771     | Non-government College               | Rahimuddin Bharasa Women S College Rangpur
+135403     | Non-government College               | Ramjan Ali Munshi College
+127495     | Non-government College               | Rangpur City College
+127486     | Non-government College               | Rangpur Model College
+127776     | Non-government College               | Satdorga College
+127938     | Non-government College               | Shah Abdur Rouf College Pirganj
+127665     | Non-government College               | Shathibari College
+127662     | Non-government College               | Shukurer Hat College
+127490     | Non-government College               | Shyampur College
+131964     | Non-government College               | Tambulpur College
+127977     | Non-government College               | Taraganj College
+131965     | Non-government College               | Tarok Brommosanskrit College
+135274     | Non-government College               | V.I.P Shahadat Hossain College
+132040     | Non-government College               | Vendabari Women S College
+127494     | Non-government College               | Women S College Lahiri Hat
+134937     | Non-government School                | Brighton School & College Rangpur
+127420     | Non-government School                | Medical College Public High School, Rangpur
+127368     | Non-government School And College    | Begum Jobeda Azizon Girls High School And College
+132068     | Non-government School And College    | Biam Model School And College
+127378     | Non-government School And College    | Border Guard Public School And College Rangpur
+127500     | Non-government School And College    | Cantonment Public School And College Rangpur
+127510     | Non-government School And College    | Carmichael Collegiate High School And College
+127503     | Non-government School And College    | Collectorate School And College
+127979     | Non-government School And College    | Dangirhat High School And College
+127508     | Non-government School And College    | Darshana Basiron Nessa High School And College Rangpur
+127777     | Non-government School And College    | Deuti High School And College Rangpur
+127302     | Non-government School And College    | Dhontola R. U. School And College
+127300     | Non-government School And College    | Gajoghanta High School And College
+127523     | Non-government School And College    | Gopalpur Bl High School And College
+127313     | Non-government School And College    | Imamgonj School And College
+127367     | Non-government School And College    | Jaheda Khatun Girls School And College
+127673     | Non-government School And College    | Jaigir High School And College
+127851     | Non-government School And College    | K.J. Islam Girls School And College
+127688     | Non-government School And College    | Kandirhat School And College
+127950     | Non-government School And College    | Kashiabari School And College
+127509     | Non-government School And College    | Kerani Hat High School And College Rangpur
+127301     | Non-government School And College    | Khaleya Khapri Khal School And College
+127238     | Non-government School And College    | Kutubpur Arunnesa High School And College
+127240     | Non-government School And College    | Kutubpur B. L. High School And College
+127504     | Non-government School And College    | Lalkuthi Girls High School And College
+127496     | Non-government School And College    | Lions School And College
+127502     | Non-government School And College    | Mahiganj Girls High School And College Rangpur
+127674     | Non-government School And College    | Mirjapur Adarsha School And College
+127390     | Non-government School And College    | Mominpur School And College
+127676     | Non-government School And College    | Padaganj High School And College
+127506     | Non-government School And College    | Pagla Pir School And College
+127501     | Non-government School And College    | Police Lines School And College Rangpur
+136959     | Non-government School And College    | Rangpur Public College
+127678     | Non-government School And College    | Ranipukur High School And College
+127799     | Non-government School And College    | Rasulpur Mahtabia Dimukhi School And College
+127505     | Non-government School And College    | Robertsonganj Girls High School And College Rangpur
+127379     | Non-government School And College    | Robertsongonj High School And College
+127498     | Non-government School And College    | Samaj Kalyan Bidyabithi Rangpur
+127677     | Non-government School And College    | Serudanga High School And College Rangpur
+127315     | Non-government School And College    | Shahidbag School And College
+127507     | Non-government School And College    | Shayampur Girls High School And College
+127981     | Non-government School And College    | Syarkazipara School And College
+127980     | Non-government School And College    | Taraganj O. A. Girls School And College
+127361     | Non-government School And College    | Tepa Madhupur Girls High School And College
+134127     | Non-government School And College    | The Millennium Stars School And College
+127375     | Non-government School And College    | Uttam School And College Rangpur
 135367     | Non-government Technical And Vocational | Advocate Rokeya Begum Vocational School And College
 133853     | Non-government Technical And Vocational | Baruahat Technical And Business Managment College
 132534     | Non-government Technical And Vocational | Chand Kuthir Danga Technical School & Bm College
@@ -321,95 +330,96 @@ EIIN       | TYPE                                | INSTITUTION NAME
 133863     | Non-government Technical And Vocational | Taluk Habu Technical And Business Managment College
 132269     | Non-government Technical And Vocational | Taragonj Karigori & Business Management College
 132319     | Non-government Technical And Vocational | Taragonj Technical And B M College O Ssc Voc School
-127497     | Others School And College           | Rcci Public  School  And College
+127497     | Others School And College            | R.C.C.I. Public School And College
 
-############################# GAIBANDHA DISTRICT (106 Institutions) #############################
+############################# GAIBANDHA DISTRICT (107 Institutions) #############################
 
-EIIN       | TYPE                                | INSTITUTION NAME
------------------------------------------------------------------------------------------------
-121190     | Autonomous School And College       | Ahammad Uddin Shah Shishu Niketan School And College
-121184     | Government College                  | Gaibandha Govt. College
-121183     | Government College                  | Gaibandha Govt. Mohila College,gaibandha
-121426     | Government College                  | Palashbari Govt.college Gaibandha
-132422     | Government Technical And Vocational | Gaibandha Tecnical School And College
-121756     | Non-government College              | Bamandanga Abdul Haque College
-121762     | Non-government College              | Bazarpara College
-121759     | Non-government College              | Belka Degree College
-121610     | Non-government College              | Bonarpara Degree College
-121754     | Non-government College              | Dharmapur Abdul Jabbar Degree College
-131930     | Non-government College              | Dharmapur Womens College
-121760     | Non-government College              | Dhubni Kanchibari College
-121761     | Non-government College              | Dubni Mohila College
-121354     | Non-government College              | Ekramul Haque Ideal And Computer Biggyan College
-138012     | Non-government College              | Fakirhat Mohila College
-121427     | Non-government College              | Fakirhat Shahid Smriti Degree College
-121099     | Non-government College              | Fulchari Degree College
-121353     | Non-government College              | Fulpukuriya  College
-121185     | Non-government College              | Gaibanda Adarsha College
-121347     | Non-government College              | Gobinda Gonj College
-121349     | Non-government College              | Gobindaganj  Mahila College
-121186     | Non-government College              | Haji Osman Gani College
-121429     | Non-government College              | Harinabari College
-121543     | Non-government College              | Joyen Pur Adarsha College
-121611     | Non-government College              | Jumarbari Adarsha College
-136909     | Non-government College              | Jumarbari Mohila College
-121612     | Non-government College              | Kamaler Para College
-121541     | Non-government College              | Kamar Para College
-121351     | Non-government College              | Kamdia Nurul Haque Degree College
-121098     | Non-government College              | Kanchipara Dehree College
-121345     | Non-government College              | Kochasahahar Shilpa Nagori College
-121188     | Non-government College              | Lenga Bazar Ideal College
-121346     | Non-government College              | Mahimaganj Womens College
-121430     | Non-government College              | Marirhat Model College
-121350     | Non-government College              | Mohimaganj  College
-121540     | Non-government College              | Mohipur Bazar College
-121344     | Non-government College              | Nakai Hat College
-121538     | Non-government College              | Naldanga Degree College
-135421     | Non-government College              | Naldanga Womens College
-121428     | Non-government College              | Palash  Bari   Mahila  College
-121425     | Non-government College              | Palash Bari Adarsha Degree College
-121753     | Non-government College              | Ramdeb Shaikh Khabir Uddin College
-135415     | Non-government College              | Sabek Tajpur Mohila College
-121539     | Non-government College              | Sadullapur Degree College
-121542     | Non-government College              | Sadullapur Girls College
-121609     | Non-government College              | Shaghata Degree College
-121537     | Non-government College              | Shah Asgar Ali Degree College
-121352     | Non-government College              | Shahargachhi Adarsa  Degrkee College
-121348     | Non-government College              | Shamim And Shakil Karigori College
-121763     | Non-government College              | Shobhaganj Womens Model College
-121758     | Non-government College              | Sobhaganj Degree College
-121757     | Non-government College              | Sundarfanj Degree Womens College
-121755     | Non-government College              | Sundargaj D.w Degree College
-121182     | Non-government College              | Tulshi Ghat Shamsul Haque Degree College
-121096     | Non-government College              | Udakhali Model College
-121097     | Non-government College              | Udakhali Womens College
-121608     | Non-government College              | Udayan Womens College
-133246     | Non-government School               | Green Field International High School And College
-121365     | Non-government School And College   | Amlagachhi D.u.girls High School And College
-121191     | Non-government School And College   | Asaduzzaman Girls High School & College
-121765     | Non-government School And College   | Banandanga M.m.alhaz Hossain Mohammad Ershad School And College
-121431     | Non-government School And College   | Basudebpur Chandra Kishore High School And College
-121544     | Non-government School And College   | Bhatgram High School And College
-121613     | Non-government School And College   | Bonar Para Girls High School And College
-121355     | Non-government School And College   | Bura Buri Azitulla Sarker High School And College
-121100     | Non-government School And College   | Burail Model School And College
-121095     | Non-government School And College   | Chandia Mohila College
-121766     | Non-government School And College   | Chnadipur Fazlul Hoque School And College
-121546     | Non-government School And College   | Dhaperhat Priobala Girls High School And College
-121547     | Non-government School And College   | Dhol Bhanga High School  And College
-131077     | Non-government School And College   | Gaibandha Sadar Upazila Model School And College
-121638     | Non-government School And College   | Ghagoa High School And College
-121545     | Non-government School And College   | Hingarpara Girls High School And College
-121483     | Non-government School And College   | Hingerpara High School And B M College
-121369     | Non-government School And College   | Kashiabari School And College
-121189     | Non-government School And College   | Lakshmipur School & College
-121226     | Non-government School And College   | Nakai Hat Girls  High School And College
-121386     | Non-government School And College   | Palashbari S.m.b Adarsh M.l High School And College
-121356     | Non-government School And College   | Piarapur I.g.m.school & College
-132089     | Non-government School And College   | R. A. Gani School & College
-121614     | Non-government School And College   | Shaghata Pilot Girls School And College
-121357     | Non-government School And College   | Shahargachi Model M/l Girls School & College
-121764     | Non-government School And College   | Shibram Alhaz Md. Hossain  Smrity School & College
+EIIN       | TYPE                                 | INSTITUTION NAME
+------------------------------------------------------------------------------------------------
+121190     | Autonomous School And College        | Ahmed Uddin Shah Shishu Niketan School And College
+138197     | General College (HSC)                | Pobnapur Women College
+121184     | Government College                   | Gaibandha Govt. College
+121183     | Government College                   | Gaibandha Women S College
+121426     | Government College                   | Palashbari Govt. College
+132422     | Government Technical And Vocational  | Gaibandha Tecnical School And College
+121754     | Non-government College               | Abdul Jabbar College Dharmapur
+121762     | Non-government College               | Bajarpara College
+121756     | Non-government College               | Baman Danga Abdul Haque College
+121759     | Non-government College               | Belka College Gaibandha
+121610     | Non-government College               | Bonarpara College
+131930     | Non-government College               | Dharmapur Women S College
+121761     | Non-government College               | Dhubni Women S College
+121760     | Non-government College               | Dhubnikanchibari College
+121354     | Non-government College               | Ekramul Haq Ideal And Computer Biggan College
+121427     | Non-government College               | Fakir Hat Shahid Smriti College Palashbari Gaibandha
+138012     | Non-government College               | Fakirhat Mohila College
+121099     | Non-government College               | Fulchhari College
+121353     | Non-government College               | Fulpukuria College Gaibandha
+121185     | Non-government College               | Gaibandha Adarsha College
+121347     | Non-government College               | Gobindaganj College
+121349     | Non-government College               | Gobindaganj Women S College
+121186     | Non-government College               | Haji Osman Gani College Dariapur Gaibandha
+121429     | Non-government College               | Horinabari College
+121543     | Non-government College               | Joyenpur Adarsha College Gaibandha
+121611     | Non-government College               | Jumarbari Adarsha College Gaibandha
+136909     | Non-government College               | Jumarbari Mohila College
+121612     | Non-government College               | Kamaler Para College
+121541     | Non-government College               | Kamar Para College Gaibandha
+121351     | Non-government College               | Kamdia Nural Haque College
+121345     | Non-government College               | Kochashahar Shilpa Nagori College And Gobeshona Kendra
+121098     | Non-government College               | Konchipara College Fulchhari
+121188     | Non-government College               | Lengarbazar Ideal College
+121350     | Non-government College               | Mahimaganj College
+121346     | Non-government College               | Mahimaganj Women S College
+121430     | Non-government College               | Merirhat Model College
+121540     | Non-government College               | Mohipur Bazar College Gaibandha
+121344     | Non-government College               | Nakaihat College
+121538     | Non-government College               | Naldanga College
+135421     | Non-government College               | Naldanga Women S College
+121425     | Non-government College               | Palashbari Adarsha College
+121428     | Non-government College               | Palashbari Women S College
+121753     | Non-government College               | Ramdeb Shaikh Khabiruddin College
+121542     | Non-government College               | Sadullahpur Girls College Gaibandha
+121539     | Non-government College               | Sadullapur College
+121609     | Non-government College               | Saghata College
+135415     | Non-government College               | Shabek Tajpur Mohela College
+121537     | Non-government College               | Shah Asgar Ali College Dhaperhat
+121352     | Non-government College               | Shahargachhi Adarsha College
+121348     | Non-government College               | Shamim And Shakil Technical College
+121763     | Non-government College               | Shovaganj Women S Model College
+121758     | Non-government College               | Sobhaganj College Gaibandha
+121755     | Non-government College               | Sundarganj D. W. College
+121757     | Non-government College               | Sundarganj Women S College Gaibandha
+121182     | Non-government College               | Tulshighat Shamsul Haque College
+121096     | Non-government College               | Udakhali Model College
+121097     | Non-government College               | Udakhali Women S College
+121608     | Non-government College               | Udayan Women S College
+133246     | Non-government School                | Green Field International High School And College
+121365     | Non-government School And College    | Amlagachhi D.U Girls High School And College
+121191     | Non-government School And College    | Asaduzzaman Girls High School And College
+121765     | Non-government School And College    | Bamandanga M.M. Alhaj Hossain Mohammad Ershad School And College
+121431     | Non-government School And College    | Basudebpur Chandra Kishore High School And College Gaibandha
+121544     | Non-government School And College    | Bhatgram High School And College Gaibandha
+121613     | Non-government School And College    | Bonarpara Girls High School And College
+121355     | Non-government School And College    | Bura Buri Azitulla Sarker High School And College
+121100     | Non-government School And College    | Burail Model School And College
+121766     | Non-government School And College    | Chandipur Fazlul Hoque High School And College
+121095     | Non-government School And College    | Chandria Women S College
+121546     | Non-government School And College    | Dhaperhat Priyabala Girls High School And College
+121547     | Non-government School And College    | Dholbhanga High School And College Gaibandha
+131077     | Non-government School And College    | Gaibandha Sadar Upazila Model School And College
+121638     | Non-government School And College    | Ghagoa High School And College
+121545     | Non-government School And College    | Hingar Para Girls High School And College
+121483     | Non-government School And College    | Hingerpara High School And B M College
+121369     | Non-government School And College    | Kashiabari School And College
+121189     | Non-government School And College    | Laxmipur High School And College Gaibandha
+121226     | Non-government School And College    | Nakai Hat Girls School And College
+121386     | Non-government School And College    | Palashbari S.M.B Adarsha M.L High School And College
+121356     | Non-government School And College    | Piarapur I.G.M. School And College
+132089     | Non-government School And College    | R. A. Gani School And College
+121614     | Non-government School And College    | Saghata Pilot Girls High School And College
+121357     | Non-government School And College    | Shahargachhi High School & College
+121764     | Non-government School And College    | Shibram Alhaj Md. Hossain Smriti High School And College Gaibandha
 133528     | Non-government Technical And Vocational | Abdul Quddus Sarker Krishi College And Research Centre
 132377     | Non-government Technical And Vocational | Abu Hossian Sarker Mohila College
 133118     | Non-government Technical And Vocational | Al-haj Selima Secondary And Technical College
@@ -434,95 +444,98 @@ EIIN       | TYPE                                | INSTITUTION NAME
 132800     | Non-government Technical And Vocational | Sundarganj Technical College
 132463     | Non-government Technical And Vocational | Sundarganj Technical Commercial College
 
-############################# KURIGRAM DISTRICT (103 Institutions) #############################
+############################# KURIGRAM DISTRICT (106 Institutions) #############################
 
-EIIN       | TYPE                                | INSTITUTION NAME
------------------------------------------------------------------------------------------------
-122331     | Government College                  | Kurigram Govt College
-122330     | Government College                  | Kurigram Govt.mohila College
-122707     | Government College                  | Ulipur Govt.degree College
-133042     | Government Technical And Vocational | Technical School And College
-122535     | Local Government College            | Rajarhat Adarsha Mohila College
-137757     | Non-government College              | Baldia College
-122241     | Non-government College              | Bara Bhita College
-122454     | Non-government College              | Bhitar  Banda    Drgree   College
-135266     | Non-government College              | Bhitarbanda Women College
-122335     | Non-government College              | Bhogdanga Model College
-122123     | Non-government College              | Bhurunga  Mari    Mohila   College
-122122     | Non-government College              | Bhurungamari Degree College
-134349     | Non-government College              | Biddanando Mahabiddloy
-137747     | Non-government College              | Boraikandi College
-137002     | Non-government College              | Bozra  L.k. Amin Degree College
-122711     | Non-government College              | Bozra College,
-122581     | Non-government College              | Char Shoul Mari College
-137746     | Non-government College              | Char Shoulamari Adorsho Mohila College
-122460     | Non-government College              | Chillakhana Model College
-122177     | Non-government College              | Chilmari Degree College
-122179     | Non-government College              | Chilmari Mohila Degree College
-137994     | Non-government College              | Dant Bhanga Model College
-122238     | Non-government College              | Fulbari Degree College
-122240     | Non-government College              | Fulbari Mohila Degree College
-122178     | Non-government College              | Golam Habib Mohila Degree College
-122710     | Non-government College              | Gunai Gachh College
-136930     | Non-government College              | Habibur Rahman Model College
-122583     | Non-government College              | Jadur Char College
-122582     | Non-government College              | Jadur Char Model College
-122329     | Non-government College              | Jatrapur Adarsha College
-122459     | Non-government College              | Kaligonj  College
-122333     | Non-government College              | Kanthal Bari Degree College
-122239     | Non-government College              | Kashipur College
-137041     | Non-government College              | Kedar Mohila College
-136292     | Non-government College              | Kholerhat College
-122455     | Non-government College              | Kochakat Degree College
-135337     | Non-government College              | Kurigram City College
-122125     | Non-government College              | Maidam College
-122332     | Non-government College              | Majida Adarsha Degree College
-122534     | Non-government College              | Mir Ismail Hossian Degree College
-122706     | Non-government College              | Mondolerhat  College
-122457     | Non-government College              | Nageswari  Model College
-122452     | Non-government College              | Nageswari Degree College
-122453     | Non-government College              | Nageswari Mohila College
-122533     | Non-government College              | Nakkati Hat Adarsha College
-136492     | Non-government College              | Namazer Char College
-122458     | Non-government College              | Newashi College
-122334     | Non-government College              | Panchgachhi  College
-122709     | Non-government College              | Panchpir Degree College
-122536     | Non-government College              | Rajarhat Mohila Degree College
-122147     | Non-government College              | Rajib Pur Womens College
-122146     | Non-government College              | Rajibpur Degree College
-122456     | Non-government College              | Rayganj Degree College
-122579     | Non-government College              | Rowmari Degree College
-122580     | Non-government College              | Rowmari Womens Degree College
-122242     | Non-government College              | Saifur Rahman College
-122461     | Non-government College              | Samaj Kalyen Womens Collge
-136920     | Non-government College              | Shaheed Mukti Jodha College
-122124     | Non-government College              | Shonahat College
-122537     | Non-government College              | Singer Dabri Hat College
-137922     | Non-government College              | Sukhaty College
-137727     | Non-government College              | Thetrai A J College
-136925     | Non-government College              | Ulipur Adarshaw College
-122708     | Non-government College              | Ullipur Womens Degree Collee
-130823     | Non-government School And College   | Bagua Anantapur School & College
-122191     | Non-government School And College   | Balarhat Adarsha  School  And College
-122126     | Non-government School And College   | Baldia Multileteral High School
-122715     | Non-government School And College   | Bozra L.k Amin High School And College
-122462     | Non-government School And College   | Dakhein Bapari Hat School & College
-122584     | Non-government School And College   | Datbhanga School And College
-122127     | Non-government School And College   | Dhol Danga B.l High School  And College
-122716     | Non-government School And College   | Hazrat Fatema (r) Pourao  Girls School & College
-122336     | Non-government School And College   | Khalilganj High School & College
-122714     | Non-government School And College   | Krishna Mangal School And College
-122245     | Non-government School And College   | Kurigram Collectorate School And College
-122558     | Non-government School And College   | Kutir Char School And College
-122272     | Non-government School And College   | Madhya Kumar Pur Girls School And College
-122243     | Non-government School And College   | Naodanga High School And College
-122539     | Non-government School And College   | Nazim Khan High School & College
-122337     | Non-government School And College   | Nilaram High School & College
-122464     | Non-government School And College   | Panga Rani Lakshmi Priya Multi Lateral School And College
-122244     | Non-government School And College   | Rabaitari Adarshah Girls Ml High School &college
-122338     | Non-government School And College   | Singer Dabri Hat Ml High School & College
-122540     | Non-government School And College   | Tapurchar School And College
-122712     | Non-government School And College   | Ulipur M.s. School & College
+EIIN       | TYPE                                 | INSTITUTION NAME
+------------------------------------------------------------------------------------------------
+122164     | General College (HSC)                | Dakhin Khuria School And College
+122551     | General College (HSC)                | Shoulmari M R School And College
+122595     | General College (HSC)                | Umananda School And College
+122331     | Government College                   | Kurigram Government College
+122330     | Government College                   | Kurigram Government Women S College
+122707     | Government College                   | Ulipur Government College
+133042     | Government Technical And Vocational  | Technical School And College
+122535     | Local Government College             | Rajar Hat Adarsha Mohila College Kurigram
+122711     | Non-government College               | Bajra College Kurigram
+137757     | Non-government College               | Baldia College
+122241     | Non-government College               | Bara Bhita College
+122454     | Non-government College               | Bhitarband College
+135266     | Non-government College               | Bhitarbanda Women S College
+122335     | Non-government College               | Bhogdanga Model College
+122122     | Non-government College               | Bhurungamari College
+122123     | Non-government College               | Bhurungamari Women S College
+134349     | Non-government College               | Biddanando Mahabiddaloy
+137747     | Non-government College               | Boraikandi College
+137002     | Non-government College               | Bozra  L.k. Amin Degree College
+122581     | Non-government College               | Char Shoilmari College Kurigram
+122460     | Non-government College               | Chila Khana Model College
+122177     | Non-government College               | Chilmari College
+122179     | Non-government College               | Chilmari Women S College Kurigram
+137746     | Non-government College               | Chor Soulmary Adarsha Mohila College
+137994     | Non-government College               | Dant Bhanga Model College
+122238     | Non-government College               | Fulbari College Kurigram
+122240     | Non-government College               | Fulbari Women S College
+122178     | Non-government College               | Golam Habib Women S College Kurigram
+122710     | Non-government College               | Gunaigachh College Kurigram
+136930     | Non-government College               | Habibur Rahman Model College
+122583     | Non-government College               | Jadur Char College
+122582     | Non-government College               | Jadur Char Model College
+122329     | Non-government College               | Jatrapur Adarsha College
+122459     | Non-government College               | Kaliganj College
+122333     | Non-government College               | Kanthal Bari College
+122239     | Non-government College               | Kashipur College
+137041     | Non-government College               | Kedar Mohila College
+136292     | Non-government College               | Kholer Hat College
+122455     | Non-government College               | Kochakata College
+135337     | Non-government College               | Kurigram City College
+122125     | Non-government College               | Maidam College
+122332     | Non-government College               | Majida Adarsha College
+122534     | Non-government College               | Mir Ismail Hossain College Rajarhat
+122706     | Non-government College               | Mondolerhat College
+122457     | Non-government College               | Nageshawri Model College
+122452     | Non-government College               | Nageshwari College
+122453     | Non-government College               | Nageshwari Women S College
+122533     | Non-government College               | Nak Kati Hat Adarsha College
+136492     | Non-government College               | Namazer Char College
+122458     | Non-government College               | Newashi College
+122709     | Non-government College               | Panch Pir College
+122334     | Non-government College               | Panchgachhi College
+122536     | Non-government College               | Rajar Hat Women S College Kurigram
+122146     | Non-government College               | Rajibpur College
+122147     | Non-government College               | Rajibpur Women S College
+122579     | Non-government College               | Roumari College
+122580     | Non-government College               | Roumari Women S College Kurigram
+122456     | Non-government College               | Royganj College Kurigram
+122242     | Non-government College               | Saifur Rahman College
+136920     | Non-government College               | Shaheed Mukti Jodha College
+122124     | Non-government College               | Shonahat College
+122537     | Non-government College               | Singar Dabrihat College
+122461     | Non-government College               | Somaj Kallayan Women S College
+137922     | Non-government College               | Sukhati College
+137727     | Non-government College               | Thatrai A.J College
+136925     | Non-government College               | Ulipur Adarsha College
+122708     | Non-government College               | Ulipur Women S College
+130823     | Non-government School And College    | Bagua Anantapur School And College
+122715     | Non-government School And College    | Bajra L.K. Amin College Kurigram
+122191     | Non-government School And College    | Balarhat Adarsha School And College
+122126     | Non-government School And College    | Baldia Multileteral High School
+122584     | Non-government School And College    | Dantbhanga High School And College Kurigram
+122462     | Non-government School And College    | Daxmin Beparihat Bahimukhi High School And College
+122127     | Non-government School And College    | Dhol Danga School And College
+122716     | Non-government School And College    | Hazrat Fatima (Rh.) Puoro Girls School And College
+122336     | Non-government School And College    | Khalilganj High School And College
+122714     | Non-government School And College    | Krishna Mangal School And College Kurigram
+122245     | Non-government School And College    | Kurigram Collectorate School And College
+122558     | Non-government School And College    | Kutir Char School And College
+122272     | Non-government School And College    | Madhyakumarpur Girls School And College
+122243     | Non-government School And College    | Naodanga High School And College
+122539     | Non-government School And College    | Nazim Khan High School And College Kurigram
+122337     | Non-government School And College    | Nilaram High School And College
+122464     | Non-government School And College    | Pangarani Laxmipriya School And College
+122244     | Non-government School And College    | Rabaitari Adarsha Girls High School And College Kurigram
+122338     | Non-government School And College    | Singar Dabrir Hat B. L. High School And College
+122540     | Non-government School And College    | Tapurchar School And College
+122712     | Non-government School And College    | Ulipur Maharani Sarnamoyi High School And College
 132626     | Non-government Technical And Vocational | Amirabad Technical And Business Managament College
 137658     | Non-government Technical And Vocational | Bhurungamari Model Technical School And Bm College
 132753     | Non-government Technical And Vocational | Boailbhir Technical & Business  Management  College
@@ -542,99 +555,104 @@ EIIN       | TYPE                                | INSTITUTION NAME
 135113     | Non-government Technical And Vocational | Shimulbari Girls Technical And Bm College
 134378     | Non-government Technical And Vocational | Sundurgram Putikata Technical And B.m. College
 
-############################# NILPHAMARI DISTRICT (115 Institutions) #############################
+############################# NILPHAMARI DISTRICT (120 Institutions) #############################
 
-EIIN       | TYPE                                | INSTITUTION NAME
------------------------------------------------------------------------------------------------
-124893     | Government College                  | Chilahati Govt. College
-124892     | Government College                  | Domar Govt College
-125189     | Government College                  | Nilphamari Govt College
-125188     | Government College                  | Nilphamari Govt. Womens College
-125242     | Government School And College       | Govt.saidpur Intermediate Technical College
-132223     | Government Technical And Vocational | Nilphamari Gov Tecnical School And College
-125088     | Local Government School And College | Jadur Hat School And College
-125193     | Non-government College              | Adarsha College
-125055     | Non-government College              | Anor Mari College
-135402     | Non-government College              | Bahagili Model College
-138086     | Non-government College              | Bhabunchurhat College
-125187     | Non-government College              | Chander Hat Degree College
-135536     | Non-government College              | Chandkhana Model College
-134357     | Non-government College              | Chhatnai College
-124824     | Non-government College              | Dimla Islamia Degree College
-124827     | Non-government College              | Dimla Mahila College
-136736     | Non-government College              | Domar Upzila  Adrsho College
-124896     | Non-government College              | Domar Womens Degree College
-135397     | Non-government College              | Dr. Saifur Rahaman Women College
-137737     | Non-government College              | Gayakharibari Women College
-136905     | Non-government College              | Golmunda Adarsha College
-124980     | Non-government College              | Golna Shahid Smrity College
-124894     | Non-government College              | Gomnati Mohabiddaloy
-124981     | Non-government College              | Ideal Coollege
-124977     | Non-government College              | Jaldhaka Degree College
-135404     | Non-government College              | Jaldhaka Women College
-124825     | Non-government College              | Janata  Degree College
-125245     | Non-government College              | Kamar Pukur Degree College
-133751     | Non-government College              | Kishoregonj Mohila College
-125053     | Non-government College              | Kishorganj Degree College
-125052     | Non-government College              | Magura College
-124979     | Non-government College              | Mirgonj Hat College
-124895     | Non-government College              | Mirzagonj College
-125190     | Non-government College              | Moshiur Rahman Degree College
-135420     | Non-government College              | Nilphamari Model College
-135453     | Non-government College              | Nilsagor College
-125192     | Non-government College              | Palashbari College
-135251     | Non-government College              | Paschim Chhathai Womens College
-124976     | Non-government College              | Rabeya Chowdhury Womens College
-125054     | Non-government College              | Radharani Women College
-125194     | Non-government College              | Ramganj College
-125243     | Non-government College              | Saidpur College
-125244     | Non-government College              | Saidpur Womens College
-133764     | Non-government College              | Shahid Zia-ur Rahman Mohabiddalay
-134508     | Non-government College              | Sheikh Fazilatun Nessa Mujib Womens College
-124978     | Non-government College              | Shimul Bari Bangabandhu Degree College
-125191     | Non-government College              | Sonarai Sangalshi Degree College
-135340     | Non-government College              | Tengonamari Degree College
-124826     | Non-government College              | Tista College
-125115     | Non-government School               | Kachua Chowrangi Sheba High School And College
-136507     | Non-government School               | Zila Parishad School And College
-124847     | Non-government School And College   | Bagdokra Nimojkhana School And College
-124912     | Non-government School And College   | Bagulagari High School And College
-125056     | Non-government School And College   | Barabhita School & College
-125018     | Non-government School And College   | Beguem Khaleda Zia Model School And College
-125003     | Non-government School And College   | Bharbhari Majapara School And College
-125248     | Non-government School And College   | Cantonment Public School And College Saidpur
-125196     | Non-government School And College   | Charaikhola School & College
-124909     | Non-government School And College   | Chawradangi    School And College
-124844     | Non-government School And College   | Chilahati Girls High School And College
-125195     | Non-government School And College   | Collectorate Public School  & College Nilphamari
-124792     | Non-government School And College   | Dohol Para  Adarsha High School And College
-124828     | Non-government School And College   | Gayabari School And College
-125067     | Non-government School And College   | Goregram  School And College
-124876     | Non-government School And College   | Gosaiganj School And College
-124908     | Non-government School And College   | Harish Chandra Path  High  School And College
-125247     | Non-government School And College   | Hazarihat School & College
-124983     | Non-government School And College   | Kaimari School And College
-125250     | Non-government School And College   | Kaya Golahat High School & College
-125211     | Non-government School And College   | Khalisha Belpukur  School & College
-125212     | Non-government School And College   | Lakshmanpur  High School  And College
-125204     | Non-government School And College   | Lions School And College
-124838     | Non-government School And College   | Matukpur School And College
-125081     | Non-government School And College   | Nagar Darwani  School And College
-124770     | Non-government School And College   | Nautara Girls School And College
-124991     | Non-government School And College   | Nayan Khal  School And College
-125068     | Non-government School And College   | Panchapukur  School And College
-125057     | Non-government School And College   | Rana Chandi High School And College
-125252     | Non-government School And College   | Saidpur Adarsha Girls School & College
-125201     | Non-government School And College   | Saidpur Pilot Girls School And College
-125060     | Non-government School And College   | Samir Uddin School And College
-125213     | Non-government School And College   | Satpai High School And College
-124836     | Non-government School And College   | Shalmara Bochironessa  School And College
-124998     | Non-government School And College   | Sheshu Niketan  School And College
-124927     | Non-government School And College   | Shoulmari Girls School And College
-124771     | Non-government School And College   | Sundar Khata School And College
-125251     | Non-government School And College   | Sunflowar School & College
-125087     | Non-government School And College   | Tarani Bari B L High School And College
-125197     | Non-government School And College   | Uttar Chowra Baragachha School And College
+EIIN       | TYPE                                 | INSTITUTION NAME
+------------------------------------------------------------------------------------------------
+124778     | General College (HSC)                | Adabari School And College
+124989     | General College (HSC)                | Kalikapur School And College
+135443     | General College (HSC)                | Nilsagor College
+124932     | General College (HSC)                | Rashidpur Girls School And College
+124988     | General College (HSC)                | Sharifabad School And College
+124893     | Government College                   | Chilahati Government College
+124892     | Government College                   | Domar Government College
+125189     | Government College                   | Nilphamari Govt. College
+125188     | Government College                   | Nilphamari Govt. Women S College
+125242     | Government School And College        | Saidpur Govt. Technical College
+132223     | Government Technical And Vocational  | Nilphamari Gov Tecnical School And College
+125088     | Local Government School And College  | Jadurhat School And College
+125193     | Non-government College               | Adarsha College
+125055     | Non-government College               | Anormari College
+135402     | Non-government College               | Bahagili Model College
+138086     | Non-government College               | Bhabunchur Hat College
+125187     | Non-government College               | Chander Hat College
+135536     | Non-government College               | Chandkhana Model College
+134357     | Non-government College               | Chhatnai College
+124824     | Non-government College               | Dimla Islamia College
+124827     | Non-government College               | Dimla Women S College
+136736     | Non-government College               | Domar Upzila Adrsho College
+124896     | Non-government College               | Domar Women S College Nilphamari
+135397     | Non-government College               | Dr. Saifur Rahaman Women S College
+137737     | Non-government College               | Gaya Khari Bari Women S College
+136905     | Non-government College               | Golmunda Adarsha College
+124980     | Non-government College               | Golna Shahid Smrity College
+124894     | Non-government College               | Gomnati College
+124981     | Non-government College               | Ideal College
+124977     | Non-government College               | Jaldhaka College
+135404     | Non-government College               | Jaldhaka Women S College
+124825     | Non-government College               | Janata College Dimla
+125245     | Non-government College               | Kamarpukur College
+133751     | Non-government College               | Kishoregonj Mohila College
+125053     | Non-government College               | Kishoriganj College
+125052     | Non-government College               | Magura College
+124979     | Non-government College               | Mirganj Hat College
+124895     | Non-government College               | Mirjoyganj College Nilphamari
+125190     | Non-government College               | Moshiur Rahman College
+135420     | Non-government College               | Nilphamari Model College
+135453     | Non-government College               | Nilsagor College
+125192     | Non-government College               | Palashbari College
+135251     | Non-government College               | Paschim Chhatnai Women S College
+124976     | Non-government College               | Rabeya Chowdhury Women S College
+125054     | Non-government College               | Radharani Women S College Nilphamari
+125194     | Non-government College               | Ramganj College
+125243     | Non-government College               | Saidpur College
+125244     | Non-government College               | Saidpur Women S College
+133764     | Non-government College               | Shahid Ziaur Rahman College
+134508     | Non-government College               | Sheikh Fazilatun Nessa Mujib Women S College
+124978     | Non-government College               | Shimulbari Banga Bandhu College
+125191     | Non-government College               | Sona Roy Sangalshi College Nilphamari
+135340     | Non-government College               | Tengonmari Degree College
+124826     | Non-government College               | Tista College
+125115     | Non-government School                | Kachua Chowrangi Sheba School And College
+136507     | Non-government School                | Zila Parishad School And College
+124847     | Non-government School And College    | Bagdokra Nimozkhana High School And College
+124912     | Non-government School And College    | Bagulagari School And College
+125056     | Non-government School And College    | Baravita High School And College
+125018     | Non-government School And College    | Begum Khaleda Zia (B.K.Z) Model School And College
+125196     | Non-government School And College    | Charaikhola High School And College
+124909     | Non-government School And College    | Chawradangi High School And College
+124844     | Non-government School And College    | Chilahati Girls High School And College
+125195     | Non-government School And College    | Collectorate Public College
+124792     | Non-government School And College    | Dohol Para Adarsha School And College
+124828     | Non-government School And College    | Gayabari High School And College
+125067     | Non-government School And College    | Gore Gram School And College
+124876     | Non-government School And College    | Goshaiganj School And College
+124908     | Non-government School And College    | Harish Chandra Path School And College
+125247     | Non-government School And College    | Hazarihat High School And College
+125211     | Non-government School And College    | Khalisha Belpukur School And College
+124983     | Non-government School And College    | Koimari School And College
+125250     | Non-government School And College    | Koyagola Hat School And College
+125212     | Non-government School And College    | Lakshmanpur School And College
+125204     | Non-government School And College    | Lions School And College
+124838     | Non-government School And College    | Motukpur School And College
+125081     | Non-government School And College    | Nagor Daroani School And College
+124770     | Non-government School And College    | Nautara Girls School And College
+124991     | Non-government School And College    | Nayan Khal School And College
+125068     | Non-government School And College    | Panchapukur School And College
+125057     | Non-government School And College    | Ranochandi High School And College
+125252     | Non-government School And College    | Saidpur Adarsha Girls School And College
+125248     | Non-government School And College    | Saidpur Cantonment Public School And College
+125060     | Non-government School And College    | Samir Uddin School And College
+125213     | Non-government School And College    | Satpai High School And College
+124836     | Non-government School And College    | Shal Mara Bachiran Nesa School And College
+124998     | Non-government School And College    | Shisu Nikatan School And College
+124927     | Non-government School And College    | Shoulmari Girls School And College
+124771     | Non-government School And College    | Sundar Khata School And College
+125251     | Non-government School And College    | Sunflower School And College
+125201     | Non-government School And College    | Syedpur Pilot Girls High School And College
+125087     | Non-government School And College    | Taranibari School And College
+125197     | Non-government School And College    | Uttar Chowra Baragachha School And College
+125003     | Non-government School And College    | Ververy Majhapara School And College
 133568     | Non-government Technical And Vocational | Al-haj Mijanur Rahma Chow. Krishi College
 135157     | Non-government Technical And Vocational | Balarpukur Mohila Technical School & B.m College
 132826     | Non-government Technical And Vocational | Chanderhat Agriculture College
@@ -644,7 +662,7 @@ EIIN       | TYPE                                | INSTITUTION NAME
 135355     | Non-government Technical And Vocational | Dimla Mohila Bussiness Managment College
 132940     | Non-government Technical And Vocational | Gomnati Technical And Business Management College
 132138     | Non-government Technical And Vocational | Gouharpur Technical And Business Management College
-135964     | Non-government Technical And Vocational | Kachua Chowrongi Mohila Bm College
+135964     | Non-government Technical And Vocational | Kachua Chowrangi Mohela Technical And B. M. College
 133123     | Non-government Technical And Vocational | Kalikapur Agriculture And Technical College
 132201     | Non-government Technical And Vocational | Kanchanpara Ideal Technical And B.m College
 132757     | Non-government Technical And Vocational | Kellabari Technical And Business Management College
@@ -662,67 +680,71 @@ EIIN       | TYPE                                | INSTITUTION NAME
 137269     | Non-government Technical And Vocational | Tengonmari Technical And Bm College
 132875     | Non-government Technical And Vocational | Vadur Dorga Aual-najia Bm College
 
-############################# LALMONIRHAT DISTRICT (83 Institutions) #############################
+############################# LALMONIRHAT DISTRICT (87 Institutions) #############################
 
-EIIN       | TYPE                                | INSTITUTION NAME
------------------------------------------------------------------------------------------------
-137653     | Autonomous School And College       | Cantonment Public School And College Lalmonirhat
-123027     | Government College                  | Govt. Jashimuddin Kazi Abdul Goni Degree College
-122988     | Government College                  | Lalmonirhat Govt.college
-122989     | Government College                  | Majida Khatun Govt. Mohila College
-132279     | Government Technical And Vocational | Lalmonirhat Technical School And College
-122829     | Non-government College              | Alimuddin Degree College
-136931     | Non-government College              | Aminur Rahman College
-134400     | Non-government College              | Barajan Naya College
-122826     | Non-government College              | Barakhata College
-134401     | Non-government College              | Barua Panam Chand Bhutoria Mahabiddalya
-137661     | Non-government College              | Beer Muktijoddha Motahar Hossain College
-122987     | Non-government College              | Begum Kumrunnessa Degree College
-136916     | Non-government College              | Border Guard Public College
-122827     | Non-government College              | Daikhawa Adarsha College
-137992     | Non-government College              | Daikhawa Mohila College
-135348     | Non-government College              | Fakirpara Adarsha Mohila College
-134878     | Non-government College              | Gandukuri Ideal Mohila College
-122830     | Non-government College              | Hatibandha  Women`s Degree  College
-122828     | Non-government College              | Hatibandha Model College
-132005     | Non-government College              | Hazi Ganj Udioman Suruj College
-122892     | Non-government College              | Karim Uddin Pabalic  Degree  College
-122990     | Non-government College              | Lalmonirhat Adarsha Degree College
-122986     | Non-government College              | Mohendra Nagar College
-122771     | Non-government College              | Namuri College
-134402     | Non-government College              | Nasir Uddin College
-123026     | Non-government College              | Patgram Adarsha Degree College
-123028     | Non-government College              | Patgram Womens Degree College
-122768     | Non-government College              | Sapti Bari  Degree College
-122991     | Non-government College              | Shahid Abul Kashem College
-122893     | Non-government College              | Shamsuddin Kamaruddin Degree College , Chaparhat
-134762     | Non-government College              | Shial Khowa College
-122985     | Non-government College              | Tista Degree College
-122894     | Non-government College              | Tushbhander Momens College
-122891     | Non-government College              | Uttar Bangla College
-122890     | Non-government College              | Uttaran College
-135300     | Non-government College              | Zamena Rowshan Ara Mohila College
-122773     | Non-government School               | Hatibanda Ss High School And Technical College
-122717     | Non-government School And College   | Aditmari Girija Shankar Model School And College
-122772     | Non-government School And College   | Aditmari Kateswar Barman Girls High School And College
-122724     | Non-government School And College   | Bhelabhari School And College
-122895     | Non-government School And College   | Chandrapur High School & College
-122849     | Non-government School And College   | Dakshin Ghanashyam  School And College
-122844     | Non-government School And College   | Duhuli S. C. High School And College
-122725     | Non-government School And College   | Gandha Marua School And College
-122730     | Non-government School And College   | Hazigonj  School And College
-122866     | Non-government School And College   | Kakina Girls High School And College
-122719     | Non-government School And College   | Kumarirhat S.c.bl High School And College
-122726     | Non-government School And College   | Mahisha Shahar High School And College
-122770     | Non-government School And College   | Mohiskhocha M.l. High School And College
-122718     | Non-government School And College   | Namuri  High School And College
-122744     | Non-government School And College   | Namuri Adarsha Multilateral Girls High School And College
-122775     | Non-government School And College   | Parulia Schedule Caste High School And College
-122858     | Non-government School And College   | Rudresswar High School And College
-122733     | Non-government School And College   | Sabera Khatun Girls High School And College
-122843     | Non-government School And College   | Shial Khowa S.c.  School And College
-122845     | Non-government School And College   | Sonar Hat High School And College
-122859     | Non-government School And College   | Uttar Dal Gram  Adarsha  High  School And College
+EIIN       | TYPE                                 | INSTITUTION NAME
+------------------------------------------------------------------------------------------------
+137653     | Autonomous School And College        | Cantonment Public School And College Lalmonirhat
+122767     | General College (HSC)                | Aditamari College
+122840     | General College (HSC)                | Lohakuchi School And College
+122992     | General College (HSC)                | Patgram Taraknath (T.N) School And College
+131015     | General College (HSC)                | Phakal Police Lines School And College
+123027     | Government College                   | Govt. Jasmuddin Kazi A. Gani College Patgram
+122988     | Government College                   | Lalmonirhat Govt. College
+122989     | Government College                   | Majida Khatun Govt. Women S College
+132279     | Government Technical And Vocational  | Lalmonirhat Technical School And College
+122829     | Non-government College               | Alimuddin College Hatibandha
+136931     | Non-government College               | Aminur Rahman College
+122826     | Non-government College               | Bara Khata College
+134400     | Non-government College               | Barajan Naya College
+134401     | Non-government College               | Baura Punamchand Bhutoria College
+137661     | Non-government College               | Beer Muktijoddha Motahar Hossain College
+122987     | Non-government College               | Begum Kamrun Nessa College Lalmonirhat
+136916     | Non-government College               | Border Guard Public College
+137992     | Non-government College               | Daikhawa Mohila College
+122827     | Non-government College               | Doi Khawa Adarsha College
+135348     | Non-government College               | Fakirpara Adarsho Mohila College
+134878     | Non-government College               | Gandukuri Ideal Mohila College
+132005     | Non-government College               | Hajiganj Udioman Suruj College
+122828     | Non-government College               | Hatibandha Model College
+122830     | Non-government College               | Hatibandha Women S College Lalmonirhat
+122892     | Non-government College               | Karim Uddin Public College Kaliganj
+122990     | Non-government College               | Lalmonirhat Adarsha College
+122986     | Non-government College               | Mohendra Nagar College
+122771     | Non-government College               | Namuri College
+134402     | Non-government College               | Nasir Uddin College
+123028     | Non-government College               | Patgram Women S College
+123026     | Non-government College               | Pathgram Adarsha College
+122768     | Non-government College               | Sapti Bari College
+122991     | Non-government College               | Shahid Abul Kashem College Panga
+122893     | Non-government College               | Shamsuddin Kamaruddin College
+134762     | Non-government College               | Shial Khowa College
+122985     | Non-government College               | Tista College
+122894     | Non-government College               | Tushvandar Women S College
+122891     | Non-government College               | Uttar Bangla College
+122890     | Non-government College               | Uttaran College
+135300     | Non-government College               | Zamena Rowshan Ara Mohila College
+122773     | Non-government School                | Hatibanda Ss High School And Technical College
+122717     | Non-government School And College    | Aditmari Girja Sankar Model School And College
+122772     | Non-government School And College    | Aditmari Kanteswar Barmon Girls High School And College
+122724     | Non-government School And College    | Bhelabari School And College
+122895     | Non-government School And College    | Chandrapur High School And College
+122849     | Non-government School And College    | Dakshin Ghanashyam School And College
+122844     | Non-government School And College    | Duhuly S.C. High School And College
+122725     | Non-government School And College    | Gandhamarua School And College
+122730     | Non-government School And College    | Hazigonj School And College
+122866     | Non-government School And College    | Kakina Girls High School And College
+122719     | Non-government School And College    | Kumrirhat S. C School And College
+122726     | Non-government School And College    | Mahishashahar School And College
+122770     | Non-government School And College    | Mohish Khocha High School And College
+122744     | Non-government School And College    | Namuri Adarsh Multmeiernal Girls High School And College
+122718     | Non-government School And College    | Namuri High School And College
+122775     | Non-government School And College    | Parulia Schedule Caste High School And College
+122858     | Non-government School And College    | Ruddreshwar School And College
+122733     | Non-government School And College    | Sabera Khatun Girls High School And College
+122843     | Non-government School And College    | Shial Khowa S.C School And College
+122845     | Non-government School And College    | Sonarhat School And College
+122859     | Non-government School And College    | Uttar Dalgram Adarsha School And College
 136017     | Non-government Technical And Vocational | Aminganj Technical And Bm College
 136252     | Non-government Technical And Vocational | Ananda Bazar Bm College
 138023     | Non-government Technical And Vocational | Barakhata Public Technical And Bm College
@@ -750,65 +772,70 @@ EIIN       | TYPE                                | INSTITUTION NAME
 132874     | Non-government Technical And Vocational | Taluk Mrittinga Technical And Business Management College
 132646     | Non-government Technical And Vocational | Uttorbongo  Technical  And  Business  Management  College
 
-############################# THAKURGAON DISTRICT (79 Institutions) #############################
+############################# THAKURGAON DISTRICT (84 Institutions) #############################
 
-EIIN       | TYPE                                | INSTITUTION NAME
------------------------------------------------------------------------------------------------
-128965     | Government College                  | Pirganj Govt. College
-129305     | Government College                  | Thakurgaon Govt College. Thakurgaon
-129308     | Government College                  | Thakurgaon Govt. Mohila College
-133007     | Government Technical And Vocational | Thakurgaon Tecnical School And College
-129312     | Non-government College              | Abdur Rashid Degree College
-129306     | Non-government College              | Abul Hossain Sarker College
-129074     | Non-government College              | Banglagar College
-128972     | Non-government College              | Banshgara Ideal College
-129311     | Non-government College              | Bhully Degree College
-128969     | Non-government College              | Chandaria Degree College
-128967     | Non-government College              | D. N. Degree College
-129077     | Non-government College              | D.k. College
-128855     | Non-government College              | Damol Ideal College
-129310     | Non-government College              | Gareya Drgree College
-129073     | Non-government College              | Gazirhat  College
-129314     | Non-government College              | Ginnidebi Agar Wal Mahila College
-131940     | Non-government College              | Gogor College
-128971     | Non-government College              | Hajipur College
-128854     | Non-government College              | Haripur Adarsha Womens College
-128853     | Non-government College              | Haripur Womens College
-128966     | Non-government College              | Jaborhat Degree College
-128851     | Non-government College              | Jadu Rani College
-128850     | Non-government College              | Jadurani Adarsha College
-128849     | Non-government College              | K B Degree College
-128852     | Non-government College              | Kathal Dangi Mohila College
-128769     | Non-government College              | Lahiri Degree College
-128970     | Non-government College              | Lohagara Mohaviddalaya
-128848     | Non-government College              | Moslemuddin Degree College
-128974     | Non-government College              | Nawdanga College
-129072     | Non-government College              | Nekmord Banga Bondhu College
-128973     | Non-government College              | Pirgang Adarsha Mohabiddaroy
-128968     | Non-government College              | Pirgonj Mahila Degree College
-129071     | Non-government College              | Ranisonkail Degree College
-129070     | Non-government College              | Ranisonkail Womens Degree College
-129304     | Non-government College              | Ruhea Degree College
-129307     | Non-government College              | Salandar Degree College
-131995     | Non-government College              | Salandar Womens College
-128768     | Non-government College              | Samiruddin Smriti College
-128770     | Non-government College              | Shahid Akbar Ali  Science And Technology  College
-129313     | Non-government College              | Shibganj Degree College
-129316     | Non-government College              | Thakurgaon New Model College
-129309     | Non-government College              | Thakurgaon Road College
-136455     | Non-government College              | Valajan Mohabiddalay
-133731     | Non-government School And College   | Collectorate Public School And College
-128861     | Non-government School And College   | Ektir Pur Shahid Salauddin High School
-128976     | Non-government School And College   | Ghughua Abdus Sobhan School And College
-128975     | Non-government School And College   | H.k High School And B.m College
-128699     | Non-government School And College   | Harin Mari High School And College
-129175     | Non-government School And College   | Kadam   Rasul Hat High School And College
-128771     | Non-government School And College   | Kalmegh R. Ali High School  And College
-128700     | Non-government School And College   | Morol Hat Janata School And College
-128977     | Non-government School And College   | Pirganj Collegiate School & College
-128693     | Non-government School And College   | Ratnai Bogulabari High School And College
-128981     | Non-government School And College   | Routhnagar Bl High School And College
-128799     | Non-government School And College   | Tangria High School And College
+EIIN       | TYPE                                 | INSTITUTION NAME
+------------------------------------------------------------------------------------------------
+129171     | General College (HSC)                | Amantullah Islami Academy School And College
+129012     | General College (HSC)                | Dhuljhari School And College
+129145     | General College (HSC)                | Motra Hat School And College
+129083     | General College (HSC)                | Police Lines School And College Thakurgaon
+131942     | General College (HSC)                | Rampur College
+128965     | Government College                   | Pirganj Govt. College
+129305     | Government College                   | Thakurgaon Govt. College
+129308     | Government College                   | Thakurgaon Govt. Women S College
+133007     | Government Technical And Vocational  | Thakurgaon Tecnical School And College
+129312     | Non-government College               | Abdur Rashid College
+129306     | Non-government College               | Abul Hossain Sarker College
+129074     | Non-government College               | Banglagar College
+128972     | Non-government College               | Banshgara Ideal College
+129311     | Non-government College               | Bhulli College
+128969     | Non-government College               | Chandaria College
+128967     | Non-government College               | D. N. College Pirganj
+129077     | Non-government College               | D.K. College.
+128855     | Non-government College               | Damol Ideal College
+129073     | Non-government College               | Gazir Hat College Thakurgaon
+129314     | Non-government College               | Ginnidebi Agarwal Women S College
+131940     | Non-government College               | Gogor College
+129310     | Non-government College               | Goreya College
+128971     | Non-government College               | Hajipur College
+128854     | Non-government College               | Haripur Adarsha Women S College
+128853     | Non-government College               | Haripur Women S College
+128966     | Non-government College               | Jabarhat College
+128850     | Non-government College               | Jadurani Adarsha College
+128851     | Non-government College               | Jadurani College
+128849     | Non-government College               | K. B. College Thakurgaon
+128852     | Non-government College               | Kanthaldangi Women S College
+128769     | Non-government College               | Lahiri College Thakurgaon
+128970     | Non-government College               | Lohagara College
+128848     | Non-government College               | Moslem Uddin College Haripur
+128974     | Non-government College               | Nawdanga College
+129072     | Non-government College               | Nek Marad Bangabandhu College
+128973     | Non-government College               | Pirganj Adarsha College
+128968     | Non-government College               | Pirganj Women S College
+129071     | Non-government College               | Rani Sankail College
+129070     | Non-government College               | Ranisankail Women S College
+129304     | Non-government College               | Ruhea College
+129307     | Non-government College               | Salandar College
+131995     | Non-government College               | Salandar Women S College
+128768     | Non-government College               | Samir Uddin Smrity College Baliadangi
+128770     | Non-government College               | Shahid Akbar Ali Science And Technology College
+129313     | Non-government College               | Shibganj College
+129316     | Non-government College               | Thakurgaon New Model College
+129309     | Non-government College               | Thakurgaon Road College
+136455     | Non-government College               | Valajan Mohabiddalay
+133731     | Non-government School And College    | Collectorate Public School And College
+128861     | Non-government School And College    | Ektiarpur Shahid Salahuddin School And College
+128976     | Non-government School And College    | Ghughua Abdus Sobhan High School And College
+128975     | Non-government School And College    | H.k High School And B.m College
+128699     | Non-government School And College    | Harin Mari School And College
+129175     | Non-government School And College    | Kadamrasul Hat School And College
+128771     | Non-government School And College    | Kalomegh R. Ali Bahumukhi High School And College
+128700     | Non-government School And College    | Morol Hat Janata School And College
+128977     | Non-government School And College    | Pirganj Collegiate School And College
+128693     | Non-government School And College    | Ratnai Bagula Bari High School And College
+128981     | Non-government School And College    | Routhnagor School And College
+128799     | Non-government School And College    | Tangria High School And College
 134392     | Non-government Technical And Vocational | Akhanagar Technical And Business Management College
 132717     | Non-government Technical And Vocational | Baliadangi Technical & B M College
 132857     | Non-government Technical And Vocational | Bishmail Technical And Business Managment College
@@ -827,53 +854,57 @@ EIIN       | TYPE                                | INSTITUTION NAME
 132737     | Non-government Technical And Vocational | Pirganj Technical And Business Management College
 132679     | Non-government Technical And Vocational | Pirganj Women Technichel And Business Management College
 132651     | Non-government Technical And Vocational | Puratan Thakurgaon Technical And Business Management College
+132981     | Non-government Technical And Vocational | Ranisankail B. M. College
 132489     | Non-government Technical And Vocational | Ranisankail Women Technical & Busness Mangement College
-132981     | Non-government Technical And Vocational | Ranisonkail B M College
 133165     | Non-government Technical And Vocational | Ruhea Technical And Business Management College
 132817     | Non-government Technical And Vocational | Thakurgaon Technical And Business Management College
 132680     | Non-government Technical And Vocational | Valatoir Mohila Tecn. & B.m College
-135359     | Others College                      | Eco College
+135359     | Others College                       | Eco College
 
-############################# PANCHAGARH DISTRICT (49 Institutions) #############################
+############################# PANCHAGARH DISTRICT (53 Institutions) #############################
 
-EIIN       | TYPE                                | INSTITUTION NAME
------------------------------------------------------------------------------------------------
-126148     | Government College                  | Govt. Panchagarh Mohila College
-126147     | Government College                  | Moqular Rahman Govt. College, Panchagarh
-132244     | Government Technical And Vocational | Panchagarh Technical School And College
-126150     | Non-government College              | Amlaher Degree College
-125865     | Non-government College              | Atwari Adarsha Women S College
-135313     | Non-government College              | Bagdaha Degree College
-125866     | Non-government College              | Balarampur Adarsha College
-125867     | Non-government College              | Bangabandhu Dangir Hat Adarsha College
-132011     | Non-government College              | Barrister Jamir Uddin Sircar Institute (degree) Panchagarh
-126192     | Non-government College              | Bhajanpur Degree College
-126048     | Non-government College              | Bhaulaganj College
-125976     | Non-government College              | Boda Womens College
-126049     | Non-government College              | Chengthi Hazradanga College
-126047     | Non-government College              | Debiganj College
-126050     | Non-government College              | Debiganj Womens  College
-125977     | Non-government College              | Dhardhara College
-126151     | Non-government College              | Jagdal Degree College
-126051     | Non-government College              | Kaligong College
-125975     | Non-government College              | Maidandighi College
-126194     | Non-government College              | Majhipara Womens Degree College
-125864     | Non-government College              | Mirza Gholam Hafiz Degree College
-138048     | Non-government College              | Mofizar Rahman College
-125973     | Non-government College              | Pathraj College
-125974     | Non-government College              | Sakowa  College
-126149     | Non-government College              | Shahid Ziaur Rahman Mohabiddayalaya
-126052     | Non-government College              | Sonahar College
-126193     | Non-government College              | Tatulia Degree College
-134801     | Non-government School               | Shahid Police Smrity School & College, Panchgarh
-126053     | Non-government School And College   | Bagdha  School And College
-125877     | Non-government School And College   | Boda Pilot Girls High School And College
-125868     | Non-government School And College   | Boda Pilot High School And College
-126153     | Non-government School And College   | Dr. Abeda Hafiz Girls School And College
-126154     | Non-government School And College   | Futkibari High School And College
-126195     | Non-government School And College   | Kazi Shahabuddin Girls High School & College
-125876     | Non-government School And College   | Maraya Model School And College
-125870     | Non-government School And College   | Sakowa  School And College
+EIIN       | TYPE                                 | INSTITUTION NAME
+------------------------------------------------------------------------------------------------
+126191     | General College (HSC)                | Alhaj Tamij Uddin College
+125800     | General College (HSC)                | Alowakhoa Tafshili School And College
+126104     | General College (HSC)                | Hazi Sofir Uddin Ahamad Girls School And College
+126015     | General College (HSC)                | Laxminarayoni Girls School And College
+126147     | Government College                   | Mokbular Rahman Govt. College Panchagarh
+126148     | Government College                   | Panchagarh Govt. Women S College
+132244     | Government Technical And Vocational  | Panchagarh Technical School And College
+126150     | Non-government College               | Amlahar College
+125865     | Non-government College               | Atowari Adarsha Women S College
+135313     | Non-government College               | Bagdaha Degree College
+125866     | Non-government College               | Balarampur Adarsha College
+125867     | Non-government College               | Bangabandhu Dangirhat Adarsha College
+132011     | Non-government College               | Barrister Jamiruddin Sircar Collegiate Institute
+126192     | Non-government College               | Bhajanpur College
+126048     | Non-government College               | Bhaulaganj College Panchagarh
+125976     | Non-government College               | Boda Women S College
+126049     | Non-government College               | Chengthi Hazradanga College Panchagarh
+126047     | Non-government College               | Debiganj College
+126050     | Non-government College               | Debiganj Women S College
+125977     | Non-government College               | Dhardhara College
+126151     | Non-government College               | Jagdal College
+126051     | Non-government College               | Kaligonj College
+125975     | Non-government College               | Maidan Dighi College
+126194     | Non-government College               | Majhipara Women S College
+125864     | Non-government College               | Mirza Golam Hafiz College Atoary
+138048     | Non-government College               | Mofizar Rahman College
+125973     | Non-government College               | Pathraj College
+125974     | Non-government College               | Sakoa College
+126149     | Non-government College               | Shahid Ziaur Rahman College Tunirhat
+126052     | Non-government College               | Sonaher College
+126193     | Non-government College               | Tentulia College
+134801     | Non-government School                | Shahid Police Smrity School & College, Panchgarh
+126053     | Non-government School And College    | Bagdaha College Panchagarh
+125877     | Non-government School And College    | Boda Pilot Girls School And College
+125868     | Non-government School And College    | Boda Pilot Model School And College
+126153     | Non-government School And College    | Dr. Abeda Hafiz Girls High School And College
+126154     | Non-government School And College    | Futkibari High School And College
+126195     | Non-government School And College    | Kaji Sahabuddin Girls High School And College
+125876     | Non-government School And College    | Maraya Model High School And College
+125870     | Non-government School And College    | Sakowa High School And College
 132815     | Non-government Technical And Vocational | Atwari Tecnical & Business Management College
 132853     | Non-government Technical And Vocational | Bhajanpur Nagar Tecnical & Business Management College
 132248     | Non-government Technical And Vocational | Bscic Nagar Tecnical & Business Management College
@@ -885,5 +916,5 @@ EIIN       | TYPE                                | INSTITUTION NAME
 132256     | Non-government Technical And Vocational | Sakowa Technical And Business Managment College
 132243     | Non-government Technical And Vocational | Sonahar Technical & Bm College
 132263     | Non-government Technical And Vocational | Toria Technical And Business Management College
-130923     | Others School                       | Panchagarh Model School  And  College
-133755     | Others Technical And Vocational     | Harivasa Technical & Business Management College
+130923     | Others School                        | Panchagarh Model School  And  College
+133755     | Others Technical And Vocational      | Harivasa Technical & Business Management College
