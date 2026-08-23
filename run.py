@@ -124,8 +124,9 @@ class FastProxyPool:
         return []
 
     def _test_proxy(self, p: str, test_url: str, timeout: float = 2.5) -> Optional[tuple]:
-        """Test a single proxy. Returns (ip, latency) if alive, None if dead.
+        """Test a single proxy. Returns (ip, latency) if reachable, None if dead.
         Supports both ip:port and ip:port:user:pass formats.
+        NOTE: HTTP 429 = proxy IS alive (board rate-limited it, not proxy failure).
         """
         import urllib3
         urllib3.disable_warnings()
@@ -143,21 +144,37 @@ class FastProxyPool:
                 timeout=timeout,
                 verify=False
             )
-            if r.status_code == 200 and "Student Result" in r.text:
+            # 200 = success, 429 = proxy reached board (rate limited = proxy alive!)
+            # Both count as the proxy being reachable and working
+            if r.status_code in (200, 429):
                 return (p, time.time() - t0)
         except Exception:
             pass
         return None
 
     def _count_alive(self, proxies: List[str], test_url: str) -> int:
-        """Quick health check: count how many proxies in a list are still alive."""
+        """Quick health check: count how many proxies in a list are still alive.
+        Dedicated auth proxies (ip:port:user:pass) are trusted without testing —
+        they're from paid services and don't die overnight.
+        Free proxies (ip:port only) are spot-checked.
+        """
         import concurrent.futures
-        alive = 0
-        sample = proxies[:30]  # Test a sample of 30 for speed
-        with concurrent.futures.ThreadPoolExecutor(max_workers=30) as ex:
-            results = list(ex.map(lambda p: self._test_proxy(p, test_url, 2.5), sample))
-        alive = sum(1 for r in results if r is not None)
-        return alive
+        # Separate dedicated (auth) proxies from free ones
+        dedicated = [p for p in proxies if len(p.split(":")) == 4]
+        free = [p for p in proxies if len(p.split(":")) == 2]
+
+        # Trust dedicated proxies — they're from paid services
+        dedicated_count = len(dedicated)
+
+        # Spot-check up to 20 free proxies
+        free_alive = 0
+        if free:
+            sample = free[:20]
+            with concurrent.futures.ThreadPoolExecutor(max_workers=20) as ex:
+                results = list(ex.map(lambda p: self._test_proxy(p, test_url, 2.5), sample))
+            free_alive = sum(1 for r in results if r is not None)
+
+        return dedicated_count + free_alive
 
     def _harvest_fresh(self, test_url: str, needed: int = 40) -> List[str]:
         """Scrape and verify fresh proxies from all sources."""
