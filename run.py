@@ -169,10 +169,11 @@ def run_scraper_cli():
     proxy_pool = FastProxyPool()
     print(f"{DIM}Checking dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
     proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=250)
-    num_workers = min(35, len(proxies)) if len(proxies) > 0 else 25
+    num_workers = min(50, len(proxies)) if len(proxies) >= 35 else max(25, len(proxies))
     spare_proxies = max(0, len(proxies) - num_workers)
+    addon_text = f" ({num_workers} Workers [35 Base + 15 Speed Addon] + {spare_proxies} Standby Spares)"
     fetcher = InstituteResultFetcher(proxies=proxies)
-    print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} ultra-fast nodes ready! ({num_workers} Parallel Workers + {spare_proxies} Standby Spares){RESET}\n")
+    print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} ultra-fast nodes ready!{addon_text}{RESET}\n")
 
     while True:
         eiins = get_eiin_inputs()
@@ -584,8 +585,8 @@ def run_scraper_cli():
                     active_count[0] -= 1
                 rolls_queue.task_done()
 
-        # Launch Producer and Consumer threads concurrently (35 parallel workers + standby spares)
-        num_workers = min(35, len(proxies)) if len(proxies) > 0 else 25
+        # Launch Producer and Consumer threads concurrently (50 parallel workers [35 base + 15 speed addon])
+        num_workers = min(50, len(proxies)) if len(proxies) >= 35 else max(25, len(proxies))
         producer_thread = threading.Thread(target=harvest_producer, daemon=True)
         consumer_threads = [
             threading.Thread(target=student_consumer, args=(i,), daemon=True)
