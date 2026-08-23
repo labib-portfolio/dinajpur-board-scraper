@@ -357,14 +357,14 @@ def run_scraper_cli():
                     pass
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-            # 1. Rotate through up to 5 auto-recycled proxy sessions with 2.0s reliable timeout
+            # 1. Rotate through up to 3 auto-recycled proxy sessions with 1.2s fast timeout
             if proxy_session_wrappers:
                 num_sessions = len(proxy_session_wrappers)
-                for offset in range(min(5, num_sessions)):
-                    sess = get_proxy_session(worker_idx * 5 + offset)
+                for offset in range(min(3, num_sessions)):
+                    sess = get_proxy_session(worker_idx * 3 + offset)
                     try:
                         url = ENDPOINT.format(roll=roll_str)
-                        r = sess.get(url, timeout=2.0)
+                        r = sess.get(url, timeout=1.2)
                         if r.status_code == 200:
                             parsed = parse_student_html(r.text, roll_str)
                             if parsed:
@@ -372,10 +372,10 @@ def run_scraper_cli():
                     except Exception:
                         pass
 
-            # 2. Fast direct attempt fallback with 2.0s timeout
+            # 2. Fast direct attempt fallback with 1.2s timeout
             try:
                 url = ENDPOINT.format(roll=roll_str)
-                r = direct_session.get(url, timeout=2.0)
+                r = direct_session.get(url, timeout=1.2)
                 if r.status_code == 200:
                     parsed = parse_student_html(r.text, roll_str)
                     if parsed:
@@ -545,14 +545,18 @@ def run_scraper_cli():
                     is_pass = "GPA" in str(gpa_res)
                     status_color = GREEN if is_pass else RED
                     status_label = "PASSED" if is_pass else "FAILED"
-                    p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=35)
                     pct = (cur_rec / max(1, cur_target)) * 100
+                    elapsed = time.time() - (first_roll_time[0] or time.time())
+                    speed = cur_rec / max(0.1, elapsed)
+                    mins, secs = divmod(elapsed, 60)
+                    time_str = f"{int(mins)}m {int(secs):02d}s"
+                    p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=24)
 
                     with print_lock:
                         sys.stdout.write("\r\033[K")
                         student_line = f" {cur_rec:4d}/{cur_target}  Roll {roll_str:<7}  {s_name:<30}  {gpa_res:<10} {status_color}{status_label}{RESET}\n"
                         sys.stdout.write(student_line)
-                        p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec}/{cur_target} ({pct:.1f}%)"
+                        p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec}/{cur_target} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
                         sys.stdout.write(p_bar_line)
                         sys.stdout.flush()
                 else:
@@ -626,13 +630,13 @@ def run_scraper_cli():
                             is_pass = "GPA" in str(gpa_res)
                             status_color = GREEN if is_pass else RED
                             status_label = "PASSED" if is_pass else "FAILED"
-                            p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=35)
+                            p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=24)
 
                             with print_lock:
                                 sys.stdout.write("\r\033[K")
                                 student_line = f" {cur_rec:4d}/{cur_target}  Roll {roll:<7}  {s_name:<30}  {gpa_res:<10} {status_color}{status_label}{RESET}\n"
                                 sys.stdout.write(student_line)
-                                p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec}/{cur_target} ({pct:.1f}%)"
+                                p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec}/{cur_target} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
                                 sys.stdout.write(p_bar_line)
                                 sys.stdout.flush()
 
