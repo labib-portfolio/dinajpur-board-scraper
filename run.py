@@ -161,70 +161,72 @@ class FastProxyPool:
             pass
         return None
 
-    def _harvest_fresh(self, test_url: str, needed: int = 50) -> List[tuple]:
-        """Scrape and verify fresh proxies from all sources, keeping only 200 OK."""
+    def _harvest_fresh(self, test_url: str, needed: int = 35) -> List[tuple]:
+        """Scrape and verify fresh proxies from all sources, keeping only 200 OK (chunked for mobile stability)."""
         import re, concurrent.futures
-        sys.stdout.write(f"\r{DIM}  [1/2] Harvesting proxy lists from {len(self.SOURCES)} global sources...{RESET}")
+        sys.stdout.write(f"\r{DIM}  [1/2] Harvesting candidate lists from {len(self.SOURCES)} sources...{RESET}")
         sys.stdout.flush()
-        candidates = set()
+        candidates = []
         for s in self.SOURCES:
             try:
                 r = requests.get(s, timeout=3.0)
                 if r.status_code == 200:
                     found = re.findall(r'[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}:[0-9]{2,5}', r.text)
-                    candidates.update(found)
+                    candidates.extend(found)
             except Exception:
                 pass
 
-        sys.stdout.write(f"\r{DIM}  [2/2] Benchmarking {len(candidates)} candidates on Dinajpur Board...{RESET}")
+        candidates = list(dict.fromkeys(candidates))
+        sys.stdout.write(f"\r{DIM}  [2/2] Benchmarking candidates on Dinajpur Board...{RESET}")
         sys.stdout.flush()
 
         verified = []
-        with concurrent.futures.ThreadPoolExecutor(max_workers=350) as ex:
-            futs = [ex.submit(self._test_proxy_strict, p, test_url, 2.5) for p in list(candidates)[:30000]]
-            for f in concurrent.futures.as_completed(futs):
-                res = f.result()
+        chunk_size = 200
+        for i in range(0, min(len(candidates), 6000), chunk_size):
+            chunk = candidates[i:i+chunk_size]
+            with concurrent.futures.ThreadPoolExecutor(max_workers=60) as ex:
+                results = list(ex.map(lambda p: self._test_proxy_strict(p, test_url, 2.5), chunk))
+            for res in results:
                 if res:
                     verified.append(res)
-                    sys.stdout.write(f"\r{DIM}  Found {len(verified)}/{needed} ultra-fast 200 OK nodes (Latest: {res[1]:.2f}s)...{RESET}")
-                    sys.stdout.flush()
-                    if len(verified) >= needed:
-                        for fut in futs:
-                            fut.cancel()
-                        break
+            sys.stdout.write(f"\r{DIM}  Found {len(verified)}/{needed} ultra-fast 200 OK nodes...{RESET}")
+            sys.stdout.flush()
+            if len(verified) >= needed:
+                break
 
         verified.sort(key=lambda x: x[1])
         return verified
 
-    def _harvest_fresh_silent(self, test_url: str, needed: int = 40) -> List[tuple]:
+    def _harvest_fresh_silent(self, test_url: str, needed: int = 35) -> List[tuple]:
         """Silent version of _harvest_fresh for background threads (zero terminal output)."""
         import re, concurrent.futures
-        candidates = set()
+        candidates = []
         for s in self.SOURCES:
             try:
                 r = requests.get(s, timeout=3.0)
                 if r.status_code == 200:
                     found = re.findall(r'[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}:[0-9]{2,5}', r.text)
-                    candidates.update(found)
+                    candidates.extend(found)
             except Exception:
                 pass
 
+        candidates = list(dict.fromkeys(candidates))
         verified = []
-        with concurrent.futures.ThreadPoolExecutor(max_workers=250) as ex:
-            futs = [ex.submit(self._test_proxy_strict, p, test_url, 2.5) for p in list(candidates)[:25000]]
-            for f in concurrent.futures.as_completed(futs):
-                res = f.result()
+        chunk_size = 200
+        for i in range(0, min(len(candidates), 6000), chunk_size):
+            chunk = candidates[i:i+chunk_size]
+            with concurrent.futures.ThreadPoolExecutor(max_workers=60) as ex:
+                results = list(ex.map(lambda p: self._test_proxy_strict(p, test_url, 2.5), chunk))
+            for res in results:
                 if res:
                     verified.append(res)
-                    if len(verified) >= needed:
-                        for fut in futs:
-                            fut.cancel()
-                        break
+            if len(verified) >= needed:
+                break
 
         verified.sort(key=lambda x: x[1])
         return verified
 
-    def refresh_pool_background(self, target_working: int = 35, max_valid: int = 250) -> List[str]:
+    def refresh_pool_background(self, target_working: int = 30, max_valid: int = 250) -> List[str]:
         """Runs silently in the background every 5 minutes:
         benchmarks public nodes, purges dead/429/slow ones, harvests fresh 200 OK nodes,
         and seamlessly updates the live in-memory pool while scraping continues.
@@ -250,7 +252,7 @@ class FastProxyPool:
             verified_public.sort(key=lambda x: x[1])
 
         if len(verified_public) < target_working:
-            needed = target_working - len(verified_public) + 10
+            needed = target_working - len(verified_public)
             fresh_verified = self._harvest_fresh_silent(test_url, needed=needed)
             seen_ips = set()
             merged = []
@@ -273,7 +275,7 @@ class FastProxyPool:
         self.proxies = combined_pool[:max_valid]
         return self.proxies
 
-    def load_and_verify(self, max_valid: int = 250, target_working: int = 35) -> List[str]:
+    def load_and_verify(self, max_valid: int = 250, target_working: int = 30) -> List[str]:
         """Runs on EVERY startup:
         retains all dedicated proxies, benchmarks existing public proxies strictly for 200 OK,
         harvests fresh high-speed public proxies, and builds a massive pool of 140+ nodes.
@@ -295,7 +297,7 @@ class FastProxyPool:
         # 2. Benchmark public cached proxies
         verified_public = []
         if cached:
-            sys.stdout.write(f"\r{DIM}  Benchmarking {len(cached)} cached public nodes on Dinajpur Board...{RESET}")
+            sys.stdout.write(f"\r{DIM}  Checking proxy pool ({len(webshare)} Dedicated + {len(cached)} Public)...{RESET}")
             sys.stdout.flush()
             with concurrent.futures.ThreadPoolExecutor(max_workers=50) as ex:
                 results = list(ex.map(lambda p: self._test_proxy_strict(p, test_url, 2.5), cached))
@@ -304,8 +306,8 @@ class FastProxyPool:
 
         # 3. If needed, harvest fresh ultra-fast 200 OK public proxies
         if len(verified_public) < target_working:
-            needed = target_working - len(verified_public) + 10
-            sys.stdout.write(f"\r{YELLOW}  {len(verified_public)} active public nodes — harvesting {needed} fresh high-speed proxies...{RESET}\n")
+            needed = target_working - len(verified_public)
+            sys.stdout.write(f"\r{YELLOW}  Harvesting {needed} fresh high-speed public proxies...{RESET}\n")
             sys.stdout.flush()
             fresh_verified = self._harvest_fresh(test_url, needed=needed)
             seen_ips = set()
@@ -329,7 +331,7 @@ class FastProxyPool:
         # 5. Combined Master Pool: Dedicated + Fresh Public
         combined_pool = list(dict.fromkeys(webshare + [p for p, _ in verified_public]))
         self.proxies = combined_pool[:max_valid]
-        sys.stdout.write(f"\r{GREEN}✓ Proxy Engine Ready: {len(self.proxies)} Total Active Nodes ({len(webshare)} Dedicated + {len(verified_public)} Fresh 200 OK Public)!{RESET}\n\n")
+        sys.stdout.write(f"\r{GREEN}✓ Active Proxy Engine: {len(self.proxies)} Total Live Nodes ({len(webshare)} Dedicated + {len(verified_public)} Fresh 200 OK Public)!{RESET}\n\n")
         sys.stdout.flush()
         return self.proxies
 
