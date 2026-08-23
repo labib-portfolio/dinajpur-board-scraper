@@ -558,8 +558,12 @@ def run_scraper_cli():
                 upazila = inst_data.get("upazila", "UNKNOWN")
                 students = inst_data.get("students", [])
 
-                appeared_students = [s for s in students if s.get("status") != "ABSENT" and "ABS" not in str(s.get("gpa", "")).upper()]
-                rolls = [str(s["roll"]) for s in appeared_students if s.get("roll")]
+                # Exclude Failed & Absent students — only queue verified PASSED students
+                passed_students = [
+                    s for s in students 
+                    if s.get("status") == "PASSED" and "ABS" not in str(s.get("gpa", "")).upper() and not str(s.get("gpa", "")).startswith("F")
+                ]
+                rolls = [str(s["roll"]) for s in passed_students if s.get("roll")]
 
                 upz_slug = re.sub(r'[^a-zA-Z0-9]+', '_', upazila.strip().lower()).strip('_')
                 if upz_slug not in upazilla_summary:
@@ -567,7 +571,7 @@ def run_scraper_cli():
                 upazilla_summary[upz_slug]["rolls_count"] += len(rolls)
 
                 queued_for_inst = 0
-                for s in appeared_students:
+                for s in passed_students:
                     r_str = str(s["roll"])
                     meta = {
                         "eiin": int(eiin),
