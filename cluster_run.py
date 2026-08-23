@@ -124,14 +124,22 @@ class FastProxyPool:
         return []
 
     def _test_proxy(self, p: str, test_url: str, timeout: float = 2.5) -> Optional[tuple]:
-        """Test a single proxy. Returns (ip, latency) if alive, None if dead."""
+        """Test a single proxy. Returns (ip, latency) if alive, None if dead.
+        Supports both ip:port and ip:port:user:pass formats.
+        """
         import urllib3
         urllib3.disable_warnings()
         t0 = time.time()
         try:
+            parts = p.split(":")
+            if len(parts) == 4:
+                ip, port, user, pwd = parts
+                proxy_url = f"http://{user}:{pwd}@{ip}:{port}"
+            else:
+                proxy_url = f"http://{p}"
             r = requests.get(
                 test_url,
-                proxies={"http": f"http://{p}", "https": f"http://{p}"},
+                proxies={"http": proxy_url, "https": proxy_url},
                 timeout=timeout,
                 verify=False
             )
@@ -337,7 +345,15 @@ def run_scraper_cli():
             s.mount("http://", adapter)
             s.mount("https://", adapter)
             if proxy_ip:
-                s.proxies.update({"http": f"http://{proxy_ip}", "https": f"http://{proxy_ip}"})
+                parts = proxy_ip.split(":")
+                if len(parts) == 4:
+                    # Authenticated proxy: ip:port:user:pass (Webshare format)
+                    ip, port, user, pwd = parts
+                    proxy_url = f"http://{user}:{pwd}@{ip}:{port}"
+                else:
+                    # Plain proxy: ip:port
+                    proxy_url = f"http://{proxy_ip}"
+                s.proxies.update({"http": proxy_url, "https": proxy_url})
             s.headers.update({
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
