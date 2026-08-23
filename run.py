@@ -383,19 +383,20 @@ def run_scraper_cli():
     print(f"{DIM}Storage Destination: {results_root}{RESET}")
     
     proxy_pool = FastProxyPool()
-    print(f"{DIM}Checking dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
-    proxies = proxy_pool.load_and_verify(max_valid=250)
-    num_workers = min(50, len(proxies)) if len(proxies) >= 35 else max(25, len(proxies))
-    spare_proxies = max(0, len(proxies) - num_workers)
-    addon_text = f" ({num_workers} Workers [35 Base + 15 Speed Addon] + {spare_proxies} Standby Spares)"
-    fetcher = InstituteResultFetcher(proxies=proxies)
-    print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} ultra-fast nodes ready!{addon_text}{RESET}\n")
 
     while True:
         eiins = get_eiin_inputs()
         if not eiins:
             print(f"\n{YELLOW}[!] No EIIN entered. Exiting... Goodbye!{RESET}\n")
             break
+
+        print(f"\n{DIM}Checking dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
+        proxies = proxy_pool.load_and_verify(max_valid=250, target_working=35)
+        num_workers = min(50, len(proxies)) if len(proxies) >= 35 else max(25, len(proxies))
+        spare_proxies = max(0, len(proxies) - num_workers)
+        addon_text = f" ({num_workers} Workers [35 Base + 15 Speed Addon] + {spare_proxies} Standby Spares)"
+        fetcher = InstituteResultFetcher(proxies=proxies)
+        print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} ultra-fast nodes ready!{addon_text}{RESET}\n")
 
         batch_start_time = time.time()
 
@@ -424,14 +425,6 @@ def run_scraper_cli():
                             already_scraped_map[str(r.get("roll_no"))] = r
             except Exception:
                 pass
-
-        # Ensure proxy pool is active
-        if len(proxies) < 30:
-            print(f"{DIM}Refreshing proxy pool...{RESET}", end="", flush=True)
-            proxies = proxy_pool.load_and_verify(max_valid=250)
-            num_workers = 50 if len(proxies) >= 50 else max(30, len(proxies)) if len(proxies) > 0 else 35
-            spare_proxies = max(0, len(proxies) - num_workers)
-            print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
         # Thread-Isolated Dedicated Session Factory (100% Lock-Free & Thread-Safe)
         def create_isolated_session(proxy_ip: Optional[str] = None) -> requests.Session:
