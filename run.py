@@ -685,12 +685,14 @@ def run_scraper_cli():
         active_count = [0]
         active_lock = threading.Lock()
 
-        # Dynamic Proxy Circuit Breaker with 429 Cooldown & 5-Min Auto-Refresher
+        # Dynamic Proxy Circuit Breaker with 429 Cooldown & 3-Min Auto-Refresher
         proxy_list_lock = threading.Lock()
         proxy_cooldowns = {}
         cooldown_lock = threading.Lock()
+        recent_completions = collections.deque()
+        recent_lock = threading.Lock()
 
-        def mark_proxy_cooldown(p: str, seconds: float = 30.0):
+        def mark_proxy_cooldown(p: str, seconds: float = 20.0):
             with cooldown_lock:
                 proxy_cooldowns[p] = time.time() + seconds
 
@@ -708,13 +710,13 @@ def run_scraper_cli():
             return avail[(worker_idx + offset * 13) % len(avail)]
 
         def background_proxy_refresher():
-            """Runs silently in the background every 5 minutes:
+            """Runs silently in the background every 3 minutes (180s):
             periodically purges dead/429/slow proxies, harvests fresh 200 OK nodes,
             and seamlessly updates the live in-memory pool while scraping continues.
             """
             while not stop_event.is_set():
-                # Sleep for 5 minutes (300 seconds) in 1-second increments for clean exit
-                for _ in range(300):
+                # Sleep for 3 minutes (180 seconds) in 1-second increments for clean exit
+                for _ in range(180):
                     if stop_event.is_set():
                         return
                     time.sleep(1)
@@ -723,7 +725,7 @@ def run_scraper_cli():
                     break
 
                 try:
-                    fresh_pool = proxy_pool.refresh_pool_background(target_working=45, max_valid=250)
+                    fresh_pool = proxy_pool.refresh_pool_background(target_working=40, max_valid=250)
                     if fresh_pool:
                         with proxy_list_lock:
                             proxies.clear()
@@ -799,8 +801,8 @@ def run_scraper_cli():
                                 break
                             res = None
                         elif r.status_code == 429:
-                            # 429 = Board rate-limited this IP. Put on 30s cooldown and switch instantly!
-                            mark_proxy_cooldown(p_ip, 30.0)
+                            # 429 = Board rate-limited this IP. Put on 20s cooldown and switch instantly!
+                            mark_proxy_cooldown(p_ip, 20.0)
                             if p_ip == assigned_proxy:
                                 try:
                                     worker_sess.close()
@@ -809,9 +811,9 @@ def run_scraper_cli():
                                 assigned_proxy = get_best_proxy(worker_idx, p_offset + 1)
                                 worker_sess = create_isolated_session(assigned_proxy)
                         else:
-                            mark_proxy_cooldown(p_ip, 15.0)
+                            mark_proxy_cooldown(p_ip, 10.0)
                     except Exception:
-                        mark_proxy_cooldown(p_ip, 15.0)
+                        mark_proxy_cooldown(p_ip, 10.0)
                         if p_ip == assigned_proxy:
                             try:
                                 worker_sess.close()
@@ -823,22 +825,31 @@ def run_scraper_cli():
                 if res and res.get("success"):
                     save_record_to_upazilla(res, meta)
                     
+                    now_ts = time.time()
                     with stats_lock:
                         if first_roll_time[0] is None:
-                            first_roll_time[0] = time.time()
-                        last_roll_time[0] = time.time()
+                            first_roll_time[0] = now_ts
+                        last_roll_time[0] = now_ts
                         batch_received_count += 1
                         seen_rolls.add(roll_str)
                         cur_rec = batch_received_count
                         cur_target = len(pending_rolls)
+
+                    with recent_lock:
+                        recent_completions.append(now_ts)
+                        cutoff = now_ts - 6.0
+                        while recent_completions and recent_completions[0] < cutoff:
+                            recent_completions.popleft()
+                        sample_duration = max(0.5, now_ts - recent_completions[0]) if len(recent_completions) > 1 else 1.0
+                        speed = len(recent_completions) / sample_duration
+
                     s_name = res.get("student_name", "STUDENT")
                     gpa_res = res.get("result", "N/A")
                     is_pass = "GPA" in str(gpa_res)
                     status_color = GREEN if is_pass else RED
                     status_label = "PASSED" if is_pass else "FAILED"
                     pct = (cur_rec / max(1, cur_target)) * 100
-                    elapsed = time.time() - (first_roll_time[0] or time.time())
-                    speed = cur_rec / max(0.1, elapsed)
+                    elapsed = now_ts - (first_roll_time[0] or now_ts)
                     mins, secs = divmod(elapsed, 60)
                     time_str = f"{int(mins)}m {int(secs):02d}s"
                     p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=24)
