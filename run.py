@@ -537,10 +537,16 @@ def run_scraper_cli():
                     is_pass = "GPA" in str(gpa_res)
                     status_color = GREEN if is_pass else RED
                     status_label = "PASSED" if is_pass else "FAILED"
-                    p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=18)
+                    p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=35)
+                    pct = (cur_rec / max(1, cur_target)) * 100
 
                     with print_lock:
-                        print(f"{CYAN}{p_bar}{RESET} {cur_rec:4d}/{cur_target}  Roll {roll_str:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}", flush=True)
+                        sys.stdout.write("\r\033[K")
+                        student_line = f" {cur_rec:4d}/{cur_target}  Roll {roll_str:<7}  {s_name:<30}  {gpa_res:<10} {status_color}{status_label}{RESET}\n"
+                        sys.stdout.write(student_line)
+                        p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec}/{cur_target} ({pct:.1f}%)"
+                        sys.stdout.write(p_bar_line)
+                        sys.stdout.flush()
                 else:
                     if attempts < 3 and not stop_event.is_set():
                         rolls_queue.put((roll_str, meta, attempts + 1))
@@ -612,13 +618,21 @@ def run_scraper_cli():
                             is_pass = "GPA" in str(gpa_res)
                             status_color = GREEN if is_pass else RED
                             status_label = "PASSED" if is_pass else "FAILED"
-                            p_bar = format_progress_bar(batch_received_count, len(pending_rolls), width=18)
-                            print(f"{CYAN}{p_bar}{RESET} {batch_received_count:4d}/{len(pending_rolls)}  Roll {roll:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}", flush=True)
+                            p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=35)
+
+                            with print_lock:
+                                sys.stdout.write("\r\033[K")
+                                student_line = f" {cur_rec:4d}/{cur_target}  Roll {roll:<7}  {s_name:<30}  {gpa_res:<10} {status_color}{status_label}{RESET}\n"
+                                sys.stdout.write(student_line)
+                                p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec}/{cur_target} ({pct:.1f}%)"
+                                sys.stdout.write(p_bar_line)
+                                sys.stdout.flush()
 
                 flush_dirty_upazillas(force=True)
                 unretrieved = [r for r in pending_rolls if r not in seen_rolls]
 
         flush_dirty_upazillas(force=True)
+        sys.stdout.write("\n\n")
 
         total_elapsed = time.time() - batch_start_time
         mins, secs = divmod(total_elapsed, 60)
