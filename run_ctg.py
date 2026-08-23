@@ -1,6 +1,6 @@
 """
 Interactive Terminal CLI for Chittagong Education Board (BISE CTG) Result Scraper 2026
-Ultra-Fast Concurrent Scraping Engine (EIIN Institutional Mode & Roll Range Mode)
+Ultra-Fast Concurrent Scraping Engine (Unified Master File Across All Modes)
 Endpoints:
   • Institutional Gazette (with subject marks): https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/resultm.php
   • Individual Marksheet (by roll): https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/individual/result.php
@@ -44,11 +44,22 @@ DIM = "\033[2m"
 RESET = "\033[0m"
 
 
+def get_default_results_dir() -> str:
+    """Auto-detect Android Mobile Internal Storage (Termux) or PC directory."""
+    if os.path.exists("/storage/emulated/0"):
+        return "/storage/emulated/0/Result Scraper/Chittagong"
+    elif os.path.exists("/sdcard"):
+        return "/sdcard/Result Scraper/Chittagong"
+    elif os.path.exists("/storage/emulated"):
+        return "/storage/emulated/Result Scraper/Chittagong"
+    return os.path.join(BASE_DIR, "results", "chittagong")
+
+
 def print_ctg_banner():
     print(f"\n{CYAN}┌───────────────────────────────────────────────────────────┐{RESET}")
     print(f"{CYAN}│{RESET}  {BOLD}Chittagong Board SSC Result Scraper 2026 — High-Speed{RESET}     {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}EIIN Institutional Mode • Direct POST • Subject Marks{RESET}      {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}Unified Master Storage • Auto-Calculated Total Marks{RESET}       {CYAN}│{RESET}")
     print(f"{CYAN}│{RESET}  {DIM}Zero CAPTCHA • Multi-Threaded Proxies • Real-Time JSON{RESET}    {CYAN}│{RESET}")
     print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n", flush=True)
 
@@ -79,25 +90,14 @@ def format_progress_bar(current: int, total: int, width: int = 24) -> str:
 def run_ctg_eiin_scraper(
     eiins: List[str],
     output_dir: Optional[str] = None,
-    output_name: str = "chittagong_eiin_results.json"
+    output_name: str = "chittagong_results.json"
 ):
     eiins = sorted(list(dict.fromkeys(str(e).strip() for e in eiins if str(e).strip().isdigit() and len(str(e).strip()) == 6)))
     if not eiins:
         print(f"{RED}[!] No valid 6-digit EIINs provided.{RESET}", flush=True)
         return
 
-    # Auto-detect Android Mobile Internal Storage (Termux)
-    if output_dir:
-        out_dir = output_dir
-    elif os.path.exists("/storage/emulated/0"):
-        out_dir = "/storage/emulated/0/Result Scraper/Chittagong"
-    elif os.path.exists("/sdcard"):
-        out_dir = "/sdcard/Result Scraper/Chittagong"
-    elif os.path.exists("/storage/emulated"):
-        out_dir = "/storage/emulated/Result Scraper/Chittagong"
-    else:
-        out_dir = os.path.join(BASE_DIR, "results", "chittagong")
-
+    out_dir = output_dir or get_default_results_dir()
     os.makedirs(out_dir, exist_ok=True)
     master_file = os.path.join(out_dir, output_name)
 
@@ -106,7 +106,7 @@ def run_ctg_eiin_scraper(
     print(f"🏛️  {BOLD}CHITTAGONG EIIN INSTITUTIONAL PIPELINE:{RESET}")
     print(f"  • Target Institutions: {GREEN}{BOLD}{len(eiins)} School EIINs{RESET}")
     print(f"  • Active Proxy Pool:   {CYAN}{BOLD}{len(proxies)} Dedicated Nodes{RESET}")
-    print(f"  • Destination File:    {YELLOW}{master_file}{RESET}")
+    print(f"  • Master Destination:  {YELLOW}{master_file}{RESET}")
     print(f"=======================================================\n", flush=True)
 
     already_scraped_institutes = {}
@@ -118,7 +118,8 @@ def run_ctg_eiin_scraper(
                 for inst in prev_data.get("institutions", []):
                     if inst.get("eiin"):
                         already_scraped_institutes[str(inst.get("eiin"))] = inst
-                for st in prev_data.get("students", []):
+                raw_studs = prev_data.get("students", []) or prev_data.get("records", [])
+                for st in raw_studs:
                     if st.get("roll_no"):
                         already_scraped_students[str(st.get("roll_no"))] = st
         except Exception:
@@ -130,7 +131,7 @@ def run_ctg_eiin_scraper(
         print(f"  • Pending to Scrape:   {YELLOW}{len(pending_eiins)} institutions{RESET}\n", flush=True)
 
     if not pending_eiins:
-        print(f"{GREEN}✓ All {len(eiins)} institutions are already scraped! Total students in file: {len(already_scraped_students)}{RESET}", flush=True)
+        print(f"{GREEN}✓ All {len(eiins)} institutions are already in master file! Total students: {len(already_scraped_students)}{RESET}", flush=True)
         return
 
     institutions_map = dict(already_scraped_institutes)
@@ -177,7 +178,6 @@ def run_ctg_eiin_scraper(
         
         res = fetch_ctg_institute(eiin=eiin_str, proxy=p, timeout=8.0)
         if not res or not res.get("success"):
-            # Retry with alternate proxy
             p_alt = proxies[(idx + 13) % len(proxies)] if proxies else None
             res = fetch_ctg_institute(eiin=eiin_str, proxy=p_alt, timeout=8.0)
             
@@ -211,7 +211,7 @@ def run_ctg_eiin_scraper(
             with print_lock:
                 sys.stdout.write("\r\033[K")
                 print(f" {cur_c:3d}/{cur_t}  EIIN {eiin_str}  {inst_name:<40}  {len(studs):3d} Students  {GREEN}✓ OK{RESET}", flush=True)
-                sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) │ 👥 {len(students_map)} Total Students")
+                sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) │ 👥 {len(students_map)} Total Master Students")
                 sys.stdout.flush()
         elif res and res.get("error") == "EIIN Not Found":
             with print_lock:
@@ -247,15 +247,15 @@ def run_ctg_eiin_scraper(
 
     print(f"=======================================================")
     print(f"🎉 {GREEN}{BOLD}CHITTAGONG INSTITUTIONAL SCRAPING COMPLETE!{RESET}")
-    print(f"  • Institutions Processed: {len(institutions_map)}")
-    print(f"  • Total Student Records:  {GREEN}{BOLD}{len(students_map)} Students (with full subject marks){RESET}")
+    print(f"  • Institutions in Master: {len(institutions_map)}")
+    print(f"  • Total Master Students:  {GREEN}{BOLD}{len(students_map)} Students{RESET}")
     print(f"  • Total Time Elapsed:     {CYAN}{time_str}{RESET}")
     print(f"  • Master JSON File:       {GREEN}{master_file}{RESET}")
     print(f"=======================================================\n", flush=True)
 
 
 # =========================================================================
-# 2. INDIVIDUAL ROLL / RANGE SCRAPING ENGINE
+# 2. INDIVIDUAL ROLL / RANGE SCRAPING ENGINE (Merges into Same Master File)
 # =========================================================================
 def run_ctg_scraper(
     rolls: List[str],
@@ -268,17 +268,7 @@ def run_ctg_scraper(
         print(f"{RED}[!] No valid 6-digit rolls provided.{RESET}", flush=True)
         return
 
-    if output_dir:
-        out_dir = output_dir
-    elif os.path.exists("/storage/emulated/0"):
-        out_dir = "/storage/emulated/0/Result Scraper/Chittagong"
-    elif os.path.exists("/sdcard"):
-        out_dir = "/sdcard/Result Scraper/Chittagong"
-    elif os.path.exists("/storage/emulated"):
-        out_dir = "/storage/emulated/Result Scraper/Chittagong"
-    else:
-        out_dir = os.path.join(BASE_DIR, "results", "chittagong")
-
+    out_dir = output_dir or get_default_results_dir()
     os.makedirs(out_dir, exist_ok=True)
     master_file = os.path.join(out_dir, output_name)
     cache_file = os.path.join(out_dir, f".{os.path.splitext(output_name)[0]}_memory.json")
@@ -288,16 +278,21 @@ def run_ctg_scraper(
     print(f"🚀 {BOLD}CHITTAGONG ROLL SCRAPER PIPELINE CONFIGURATION:{RESET}")
     print(f"  • Requested Range:     {GREEN}{BOLD}{len(rolls)} Candidate Rolls{RESET}")
     print(f"  • Active Proxy Pool:   {CYAN}{BOLD}{len(proxies)} Dedicated Nodes{RESET}")
-    print(f"  • Destination File:    {YELLOW}{master_file}{RESET}")
+    print(f"  • Master Destination:  {YELLOW}{master_file}{RESET}")
     print(f"=======================================================\n", flush=True)
 
     already_scraped = {}
+    institutions_map = {}
     if os.path.exists(master_file):
         try:
             with open(master_file, "r", encoding="utf-8") as f:
                 prev_data = json.load(f)
-                for r in prev_data.get("records", []):
-                    if r.get("roll_no") and r.get("success"):
+                for inst in prev_data.get("institutions", []):
+                    if inst.get("eiin"):
+                        institutions_map[str(inst.get("eiin"))] = inst
+                raw_studs = prev_data.get("students", []) or prev_data.get("records", [])
+                for r in raw_studs:
+                    if r.get("roll_no"):
                         already_scraped[str(r.get("roll_no"))] = r
         except Exception:
             pass
@@ -322,14 +317,14 @@ def run_ctg_scraper(
     if skipped_success > 0 or skipped_dead > 0:
         print(f"🧠 {BOLD}CACHED MEMORY STATUS:{RESET}")
         if skipped_success > 0:
-            print(f"  • Already Saved Results: {GREEN}{skipped_success} rolls (Skipped - 100% Cached){RESET}")
+            print(f"  • Already Saved in Master: {GREEN}{skipped_success} rolls (Skipped - 100% Cached){RESET}")
         if skipped_dead > 0:
-            print(f"  • Confirmed Dead Slots:  {DIM}{skipped_dead} empty rolls (Skipped - Already Checked){RESET}")
-        print(f"  • Pending Live Queries:  {YELLOW}{len(pending_rolls)} rolls{RESET}\n", flush=True)
+            print(f"  • Confirmed Dead Slots:    {DIM}{skipped_dead} empty rolls (Skipped - Already Checked){RESET}")
+        print(f"  • Pending Live Queries:    {YELLOW}{len(pending_rolls)} rolls{RESET}\n", flush=True)
 
     if not pending_rolls:
-        print(f"{GREEN}✓ All {len(rolls)} rolls in this range have already been checked and resolved!{RESET}", flush=True)
-        print(f"  (Total valid saved records in file: {len(already_scraped)})")
+        print(f"{GREEN}✓ All {len(rolls)} rolls in this range are already in master file!{RESET}", flush=True)
+        print(f"  (Total valid saved records in master: {len(already_scraped)})")
         return
 
     results_map = dict(already_scraped)
@@ -349,19 +344,21 @@ def run_ctg_scraper(
 
     def save_master():
         with results_lock:
-            recs = list(results_map.values())
-            passed = sum(1 for x in recs if "GPA" in str(x.get("result", "")))
-            gpa5 = sum(1 for x in recs if str(x.get("gpa", "")) in ["5.00", "5", "5.0"])
+            all_studs = list(results_map.values())
+            passed = sum(1 for x in all_studs if x.get("status") == "PASSED" or "GPA" in str(x.get("result", "")))
+            gpa5 = sum(1 for x in all_studs if str(x.get("gpa", "")) in ["5.00", "5", "5.0"])
             data = {
                 "board": "CHATTOGRAM",
                 "summary": {
-                    "total_records": len(recs),
+                    "total_institutions": len(institutions_map),
+                    "total_students": len(all_studs),
                     "total_passed": passed,
-                    "total_failed": len(recs) - passed,
+                    "total_failed": len(all_studs) - passed,
                     "total_gpa_5": gpa5,
                     "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
                 },
-                "records": recs
+                "institutions": list(institutions_map.values()),
+                "students": all_studs
             }
             tmp_f = master_file + ".tmp"
             try:
@@ -420,7 +417,18 @@ def run_ctg_scraper(
 
         if res and res.get("success"):
             with results_lock:
-                results_map[roll_str] = res
+                results_map[roll_str] = {
+                    "roll_no": roll_str,
+                    "student_name": res.get("student_name"),
+                    "gpa": res.get("gpa"),
+                    "total_marks": res.get("total_marks"),
+                    "group": res.get("group", "GENERAL"),
+                    "status": "PASSED" if "GPA" in str(res.get("result", "")) else "FAILED",
+                    "institute": res.get("institute", ""),
+                    "registration_no": res.get("registration_no", ""),
+                    "father_name": res.get("father_name", ""),
+                    "mother_name": res.get("mother_name", "")
+                }
 
             s_name = res.get("student_name", "STUDENT")
             gpa_res = res.get("result", "N/A")
@@ -465,7 +473,7 @@ def run_ctg_scraper(
 
     print(f"=======================================================")
     print(f"🎉 {GREEN}{BOLD}CHITTAGONG BOARD SCRAPING COMPLETE!{RESET}")
-    print(f"  • Total Valid Records:    {GREEN}{len(results_map)}{RESET}")
+    print(f"  • Total Master Students:  {GREEN}{len(results_map)}{RESET}")
     print(f"  • Total Dead Slots:       {DIM}{len(dead_slots_set)}{RESET}")
     print(f"  • Total Time Elapsed:     {CYAN}{time_str}{RESET}")
     print(f"  • Master JSON File:       {GREEN}{master_file}{RESET}")
@@ -478,7 +486,7 @@ def run_ctg_scraper(
 def interactive_ctg_menu():
     print_ctg_banner()
     print(f"{BOLD}Select Chittagong Board Scraping Mode:{RESET}")
-    print(f"  {GREEN}[1]{RESET} {BOLD}EIIN Mode{RESET} — Instant Institutional Results with Full Subject Marks (Recommended ⚡)")
+    print(f"  {GREEN}[1]{RESET} {BOLD}EIIN Mode{RESET} — Instant Institutional Results (Recommended ⚡)")
     print(f"  {GREEN}[2]{RESET} {BOLD}District / Upazila Bulk Scraper{RESET} — Select Upazila and scrape all colleges/schools")
     print(f"  {CYAN}[3]{RESET} Roll Number Range (e.g. 100001-105000, 129000-129100)")
     print(f"  {CYAN}[4]{RESET} Single / Multiple Candidate Rolls (e.g. 129051, 100001)")
@@ -520,7 +528,7 @@ def interactive_ctg_menu():
                 if os.path.exists(all_z_file):
                     with open(all_z_file, "r", encoding="utf-8") as azf:
                         eiins = [l.strip() for l in azf if l.strip().isdigit()]
-                    out_d = os.path.join(BASE_DIR, "results", "chittagong", selected_z)
+                    out_d = os.path.join(get_default_results_dir(), selected_z)
                     run_ctg_eiin_scraper(eiins, output_dir=out_d, output_name=f"all_{selected_z.lower()}_results.json")
             elif u_choice.isdigit() and 1 <= int(u_choice) <= len(upz_files):
                 selected_upz_file = upz_files[int(u_choice) - 1]
@@ -528,7 +536,7 @@ def interactive_ctg_menu():
                 with open(selected_upz_file, "r", encoding="utf-8") as uf:
                     eiins = [l.strip() for l in uf if l.strip().isdigit()]
                 print(f"\n{GREEN}Selected: {selected_z} -> {upz_name} ({len(eiins)} institutions){RESET}", flush=True)
-                out_d = os.path.join(BASE_DIR, "results", "chittagong", selected_z)
+                out_d = os.path.join(get_default_results_dir(), selected_z)
                 run_ctg_eiin_scraper(eiins, output_dir=out_d, output_name=f"{upz_name.lower()}_results.json")
     elif choice == "3":
         raw = input(f"\n{BOLD}Enter Roll Range (e.g. 100001-100500, 129000-129050): {RESET}").strip()
@@ -538,7 +546,7 @@ def interactive_ctg_menu():
             if start_r > end_r:
                 start_r, end_r = end_r, start_r
             rolls = [str(r) for r in range(start_r, end_r + 1)]
-            run_ctg_scraper(rolls, output_name="chittagong_results.json")
+            run_ctg_scraper(rolls)
         else:
             print(f"{RED}[!] Invalid range format. Example: 129000-129050{RESET}", flush=True)
     elif choice == "4":
