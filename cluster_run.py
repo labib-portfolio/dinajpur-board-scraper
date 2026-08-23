@@ -326,46 +326,19 @@ def run_scraper_cli():
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
             url = ENDPOINT.format(roll=roll_str)
-            # 1. Try dedicated assigned proxy (0.7s fast cutoff)
-            if proxies:
-                p_ip = proxies[worker_idx % len(proxies)]
+            # Try 3 different proxies from pool (2.0s timeout, board blocks direct requests)
+            for offset in range(3):
+                if not proxies:
+                    break
+                p_ip = proxies[(worker_idx + offset * 17) % len(proxies)]
                 try:
                     s = create_isolated_session(p_ip)
-                    r = s.get(url, timeout=0.7)
+                    r = s.get(url, timeout=2.0)
+                    s.close()
                     if r.status_code == 200:
                         parsed = parse_student_html(r.text, roll_str)
-                        s.close()
-                        if parsed:
+                        if parsed and parsed.get("success"):
                             return parsed
-                    s.close()
-                except Exception:
-                    pass
-
-            # 2. Fast direct attempt fallback (0.5s cutoff)
-            try:
-                s = create_isolated_session(None)
-                r = s.get(url, timeout=0.5)
-                if r.status_code == 200:
-                    parsed = parse_student_html(r.text, roll_str)
-                    s.close()
-                    if parsed:
-                        return parsed
-                s.close()
-            except Exception:
-                pass
-
-            # 3. Failover spare proxy (0.7s cutoff)
-            if proxies and len(proxies) > 1:
-                spare_ip = proxies[(worker_idx * 7 + 13) % len(proxies)]
-                try:
-                    s = create_isolated_session(spare_ip)
-                    r = s.get(url, timeout=0.7)
-                    if r.status_code == 200:
-                        parsed = parse_student_html(r.text, roll_str)
-                        s.close()
-                        if parsed:
-                            return parsed
-                    s.close()
                 except Exception:
                     pass
             return None
@@ -532,33 +505,23 @@ def run_scraper_cli():
                 url = ENDPOINT.format(roll=roll_str)
                 res = None
 
-                # 1. Try assigned proxy (0.7s fast cutoff)
-                if assigned_proxy:
+                # Try 3 different proxies (2.0s timeout; direct is 429-blocked by board)
+                for p_offset in range(3):
+                    if not proxies:
+                        break
+                    p_ip = proxies[(worker_idx + p_offset * 19) % len(proxies)]
                     try:
-                        r = worker_sess.get(url, timeout=0.7)
+                        if p_offset == 0:
+                            r = worker_sess.get(url, timeout=2.0)
+                        else:
+                            tmp = create_isolated_session(p_ip)
+                            r = tmp.get(url, timeout=2.0)
+                            tmp.close()
                         if r.status_code == 200:
                             res = parse_student_html(r.text, roll_str)
-                    except Exception:
-                        pass
-
-                # 2. Fast direct attempt fallback (0.5s cutoff)
-                if not res:
-                    try:
-                        r = direct_sess.get(url, timeout=0.5)
-                        if r.status_code == 200:
-                            res = parse_student_html(r.text, roll_str)
-                    except Exception:
-                        pass
-
-                # 3. Failover spare proxy (0.7s cutoff)
-                if not res and proxies and len(proxies) > 1:
-                    spare_ip = proxies[(worker_idx + attempts * 11 + 3) % len(proxies)]
-                    try:
-                        temp_s = create_isolated_session(spare_ip)
-                        r = temp_s.get(url, timeout=0.7)
-                        if r.status_code == 200:
-                            res = parse_student_html(r.text, roll_str)
-                        temp_s.close()
+                            if res and res.get("success"):
+                                break
+                            res = None
                     except Exception:
                         pass
 
