@@ -98,7 +98,18 @@ def run_ctg_scraper(rolls: List[str], output_dir: Optional[str] = None, output_n
         print(f"{RED}[!] No valid 6-digit rolls provided.{RESET}", flush=True)
         return
 
-    out_dir = output_dir or os.path.join(BASE_DIR, "results", "chittagong")
+    # Auto-detect Android Mobile Internal Storage (Termux)
+    if output_dir:
+        out_dir = output_dir
+    elif os.path.exists("/storage/emulated/0"):
+        out_dir = "/storage/emulated/0/Result Scraper/Chittagong"
+    elif os.path.exists("/sdcard"):
+        out_dir = "/sdcard/Result Scraper/Chittagong"
+    elif os.path.exists("/storage/emulated"):
+        out_dir = "/storage/emulated/Result Scraper/Chittagong"
+    else:
+        out_dir = os.path.join(BASE_DIR, "results", "chittagong")
+
     os.makedirs(out_dir, exist_ok=True)
     master_file = os.path.join(out_dir, output_name)
 
