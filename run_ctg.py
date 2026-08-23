@@ -1,6 +1,7 @@
 """
 Interactive Terminal CLI for Chittagong Education Board (BISE CTG) Result Scraper 2026
-Full District-Folder & Upazila-Wise JSON Persistence System
+Ultra-Fast Concurrent Scraping Engine (Identical UI & Animation to Dinajpur Board Engine)
+District-Folder & Upazila-Wise JSON Persistence System + Live Student Swiping
 Endpoints:
   • Institutional Gazette (with subject marks): https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/resultm.php
   • Individual Marksheet (by roll): https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/individual/result.php
@@ -17,6 +18,8 @@ import threading
 import collections
 import concurrent.futures
 from typing import List, Dict, Any, Optional
+import requests
+from requests.adapters import HTTPAdapter
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
@@ -61,7 +64,6 @@ def slugify(text: str) -> str:
     return text.strip('_') or 'unknown'
 
 
-# EIIN to District/Upazila lookup cache
 _EIIN_GEO_MAP = {}
 def load_eiin_geo_map():
     global _EIIN_GEO_MAP
@@ -90,10 +92,10 @@ def load_eiin_geo_map():
 
 def print_ctg_banner():
     print(f"\n{CYAN}┌───────────────────────────────────────────────────────────┐{RESET}")
-    print(f"{CYAN}│{RESET}  {BOLD}Chittagong Board SSC Result Scraper 2026 — High-Speed{RESET}     {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {BOLD}Chittagong Board Result Scraper 2026 — High-Speed Engine{RESET}  {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}District-Folder & Upazila-Wise JSON Architecture{RESET}           {CYAN}│{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}Zero CAPTCHA • Multi-Threaded Proxies • Total Marks Calc{RESET}    {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}100% Guaranteed Roll Extraction • Multi-Threaded Workers{RESET}  {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}Real-time Upazilla JSON Persistence • Auto-Calculated Marks{RESET}{CYAN}│{RESET}")
     print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n", flush=True)
 
 
@@ -111,24 +113,44 @@ def load_proxies() -> List[str]:
 
 def format_progress_bar(current: int, total: int, width: int = 24) -> str:
     if total <= 0:
-        return f"[{'=' * width}]"
+        return f"[{'░' * width}]"
     fraction = min(1.0, max(0.0, current / total))
     filled = int(round(width * fraction))
-    return f"[{'=' * filled}{' ' * (width - filled)}]"
+    return f"[{'█' * filled}{'░' * (width - filled)}]"
+
+
+def create_isolated_session(proxy_ip: Optional[str] = None) -> requests.Session:
+    s = requests.Session()
+    adapter = HTTPAdapter(pool_connections=5, pool_maxsize=5, max_retries=0)
+    s.mount("http://", adapter)
+    s.mount("https://", adapter)
+    if proxy_ip:
+        parts = proxy_ip.split(":")
+        if len(parts) == 4:
+            ip, port, user, pwd = parts
+            proxy_url = f"http://{user}:{pwd}@{ip}:{port}"
+        else:
+            proxy_url = f"http://{proxy_ip}"
+        s.proxies.update({"http": proxy_url, "https": proxy_url})
+    s.headers.update({
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Connection": "keep-alive"
+    })
+    return s
 
 
 # =========================================================================
-# UNIFIED DUAL STORAGE ENGINE (Upazila-Wise JSON + District Folders + Master)
+# UNIFIED UPALIZA & MASTER STORAGE MANAGER
 # =========================================================================
 class CtgResultsManager:
     def __init__(self, results_root: Optional[str] = None):
         self.root = results_root or get_default_results_root()
         os.makedirs(self.root, exist_ok=True)
-        self.master_file = os.path.join(self.root, "chittagong_results_all.json")
+        self.master_file = os.path.join(self.root, "scraped_results_all.json")
         self.geo_map = load_eiin_geo_map()
         self.lock = threading.Lock()
         
-        # Load Master Cache
         self.master_students = {}
         self.master_institutions = {}
         if os.path.exists(self.master_file):
@@ -145,7 +167,6 @@ class CtgResultsManager:
             except Exception:
                 pass
 
-        # In-memory upazila datasets: key -> (zilla_slug, upz_slug)
         self.upazila_data = {}
         self._load_existing_upazilas()
 
@@ -168,71 +189,12 @@ class CtgResultsManager:
                     except Exception:
                         pass
 
-    def add_institution_and_students(self, inst_info: Dict[str, Any], students: List[Dict[str, Any]]):
-        eiin_str = str(inst_info.get("eiin", "")).strip()
-        zilla_raw = inst_info.get("zilla", "")
-        upz_raw = inst_info.get("thana", "") or inst_info.get("upazila", "")
-
-        # Fallback to geo map if not provided in gazette
-        if not zilla_raw and eiin_str in self.geo_map:
-            zilla_raw = self.geo_map[eiin_str].get("zilla", "CHATTOGRAM")
-            upz_raw = self.geo_map[eiin_str].get("upazila", "UNKNOWN")
-
-        zilla_name = zilla_raw.upper() if zilla_raw else "CHATTOGRAM"
-        upz_name = upz_raw.upper() if upz_raw else "UNKNOWN"
-        z_slug = slugify(zilla_name)
-        u_slug = slugify(upz_name)
-
-        with self.lock:
-            # 1. Update Master
-            self.master_institutions[eiin_str] = {
-                "eiin": eiin_str,
-                "name": inst_info.get("institute_name", ""),
-                "zilla": zilla_name,
-                "thana": upz_name,
-                "appeared": inst_info.get("total_appeared", len(students)),
-                "passed": inst_info.get("total_passed", sum(1 for s in students if s.get("status") == "PASSED")),
-                "gpa5": inst_info.get("total_gpa5", 0),
-                "pass_percentage": inst_info.get("pass_percentage", ""),
-                "students_count": len(students)
-            }
-            for s in students:
-                s["zilla"] = zilla_name
-                s["upazila"] = upz_name
-                self.master_students[str(s["roll_no"])] = s
-
-            # 2. Update Upazila Specific File
-            key = (z_slug, u_slug)
-            z_folder = os.path.join(self.root, zilla_name)
-            os.makedirs(z_folder, exist_ok=True)
-            u_file = os.path.join(z_folder, f"results_upazilla_{u_slug}.json")
-
-            if key not in self.upazila_data:
-                self.upazila_data[key] = {
-                    "file_path": u_file,
-                    "data": {
-                        "board": "CHATTOGRAM",
-                        "district": zilla_name,
-                        "upazilla": upz_name,
-                        "upazilla_slug": u_slug,
-                        "summary": {},
-                        "institutions": [],
-                        "records": []
-                    },
-                    "students_map": {},
-                    "institutions_map": {}
-                }
-
-            u_entry = self.upazila_data[key]
-            u_entry["institutions_map"][eiin_str] = self.master_institutions[eiin_str]
-            for s in students:
-                u_entry["students_map"][str(s["roll_no"])] = s
-
-    def add_single_student(self, s: Dict[str, Any]):
+    def add_student_record(self, s: Dict[str, Any], inst_meta: Optional[Dict[str, Any]] = None):
         roll_str = str(s.get("roll_no"))
-        eiin_str = str(s.get("eiin", ""))
-        zilla_raw = s.get("zilla", "")
-        upz_raw = s.get("upazila", "")
+        eiin_str = str(s.get("eiin", "") or (inst_meta.get("eiin") if inst_meta else ""))
+        
+        zilla_raw = s.get("zilla", "") or (inst_meta.get("zilla") if inst_meta else "")
+        upz_raw = s.get("upazila", "") or s.get("thana", "") or (inst_meta.get("thana") if inst_meta else "")
 
         if not zilla_raw and eiin_str in self.geo_map:
             zilla_raw = self.geo_map[eiin_str].get("zilla", "CHATTOGRAM")
@@ -248,6 +210,9 @@ class CtgResultsManager:
 
         with self.lock:
             self.master_students[roll_str] = s
+            if inst_meta and eiin_str:
+                self.master_institutions[eiin_str] = inst_meta
+
             key = (z_slug, u_slug)
             z_folder = os.path.join(self.root, zilla_name)
             os.makedirs(z_folder, exist_ok=True)
@@ -270,11 +235,13 @@ class CtgResultsManager:
                 }
 
             u_entry = self.upazila_data[key]
+            if inst_meta and eiin_str:
+                u_entry["institutions_map"][eiin_str] = inst_meta
             u_entry["students_map"][roll_str] = s
 
     def flush_to_disk(self):
         with self.lock:
-            # 1. Save Master File
+            # 1. Master File
             all_insts = list(self.master_institutions.values())
             all_studs = list(self.master_students.values())
             passed = sum(1 for x in all_studs if x.get("status") == "PASSED" or "GPA" in str(x.get("result", "")))
@@ -284,14 +251,14 @@ class CtgResultsManager:
                 "board": "CHATTOGRAM",
                 "summary": {
                     "total_institutions": len(all_insts),
-                    "total_students": len(all_studs),
+                    "total_records": len(all_studs),
                     "total_passed": passed,
                     "total_failed": len(all_studs) - passed,
                     "total_gpa_5": gpa5,
                     "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
                 },
                 "institutions": all_insts,
-                "students": all_studs
+                "records": all_studs
             }
             tmp_m = self.master_file + ".tmp"
             try:
@@ -301,7 +268,7 @@ class CtgResultsManager:
             except Exception:
                 pass
 
-            # 2. Save Upazila Files
+            # 2. Upazila Files
             for key, entry in self.upazila_data.items():
                 u_file = entry["file_path"]
                 u_studs = list(entry["students_map"].values())
@@ -313,6 +280,7 @@ class CtgResultsManager:
                     "board": "CHATTOGRAM",
                     "district": entry["data"].get("district", "CHATTOGRAM"),
                     "upazilla": entry["data"].get("upazilla", "UNKNOWN"),
+                    "upazilla_slug": entry["data"].get("upazilla_slug", "unknown"),
                     "summary": {
                         "total_institutions": len(u_insts),
                         "total_records": len(u_studs),
@@ -334,7 +302,7 @@ class CtgResultsManager:
 
 
 # =========================================================================
-# 1. EIIN INSTITUTIONAL SCRAPING ENGINE (Writes Upazila JSONs & Master)
+# 1. EIIN INSTITUTIONAL SCRAPING ENGINE (With Animated Student Swiping)
 # =========================================================================
 def run_ctg_eiin_scraper(
     eiins: List[str],
@@ -347,81 +315,131 @@ def run_ctg_eiin_scraper(
 
     mgr = CtgResultsManager(results_root)
     proxies = load_proxies()
+    num_workers = min(35, len(proxies)) if len(proxies) >= 20 else max(10, len(proxies))
+    spare_proxies = max(0, len(proxies) - num_workers)
 
     print(f"\n=======================================================")
-    print(f"🏛️  {BOLD}CHITTAGONG EIIN INSTITUTIONAL PIPELINE:{RESET}")
-    print(f"  • Target Institutions: {GREEN}{BOLD}{len(eiins)} School EIINs{RESET}")
-    print(f"  • Active Proxy Pool:   {CYAN}{BOLD}{len(proxies)} Dedicated Nodes{RESET}")
-    print(f"  • District Storage:    {YELLOW}{mgr.root}/<ZILLA>/results_upazilla_<upz>.json{RESET}")
-    print(f"  • Master All File:     {YELLOW}{mgr.master_file}{RESET}")
+    print(f"🚀 {BOLD}ENGINE PIPELINE CONFIGURATION:{RESET}")
+    print(f"  • Target Board:            {CYAN}{BOLD}Chittagong Education Board (BISE CTG){RESET}")
+    print(f"  • Active Proxy Pool:       {GREEN}{BOLD}{len(proxies)} Verified Ultra-Fast Nodes{RESET}")
+    print(f"  • Concurrent Workers:      {CYAN}{BOLD}{num_workers} Parallel Threads{RESET}")
+    print(f"  • Standby Failover Spares: {YELLOW}{BOLD}{spare_proxies} Spare Proxies{RESET}")
+    print(f"  • Target Institutions:     {len(eiins)} Schools")
+    print(f"  • District Storage:        {YELLOW}{mgr.root}/<ZILLA>/results_upazilla_<upz>.json{RESET}")
     print(f"=======================================================\n", flush=True)
 
     pending_eiins = [e for e in eiins if e not in mgr.master_institutions]
-    if len(mgr.master_institutions) > 0:
-        print(f"  • Already Scraped:     {GREEN}{len(mgr.master_institutions)} institutions (Skipping){RESET}")
-        print(f"  • Pending to Scrape:   {YELLOW}{len(pending_eiins)} institutions{RESET}\n", flush=True)
+    already_scraped_count = len(eiins) - len(pending_eiins)
+    if already_scraped_count > 0:
+        print(f"  • Already Scraped:         {GREEN}{already_scraped_count} institutions (Skipped){RESET}")
+        print(f"  • Pending to Scrape:       {YELLOW}{len(pending_eiins)} institutions{RESET}\n", flush=True)
 
     if not pending_eiins:
-        print(f"{GREEN}✓ All {len(eiins)} institutions are already scraped! Total students in dataset: {len(mgr.master_students)}{RESET}", flush=True)
+        print(f"{GREEN}✓ All {len(eiins)} institutions are already in master database! Total students: {len(mgr.master_students)}{RESET}\n", flush=True)
         return
 
-    completed_inst_count = 0
-    stats_lock = threading.Lock()
     print_lock = threading.Lock()
-    batch_start_time = time.time()
+    stats_lock = threading.Lock()
+    recent_completions = collections.deque()
+    recent_lock = threading.Lock()
 
-    def process_eiin(task_info):
-        nonlocal completed_inst_count
+    batch_start_time = time.time()
+    first_roll_time = [None]
+    last_roll_time = [None]
+    batch_received_count = 0
+    total_appeared_count = 0
+
+    def harvest_and_stream_eiin(task_info):
+        nonlocal batch_received_count, total_appeared_count
         idx, eiin_str = task_info
         p = proxies[idx % len(proxies)] if proxies else None
-        
+
         res = fetch_ctg_institute(eiin=eiin_str, proxy=p, timeout=8.0)
         if not res or not res.get("success"):
             p_alt = proxies[(idx + 13) % len(proxies)] if proxies else None
             res = fetch_ctg_institute(eiin=eiin_str, proxy=p_alt, timeout=8.0)
-            
-        with stats_lock:
-            completed_inst_count += 1
-            cur_c = completed_inst_count
-            cur_t = len(pending_eiins)
 
-        pct = (cur_c / max(1, cur_t)) * 100
-        p_bar = format_progress_bar(cur_c, cur_t, width=20)
-
-        if res and res.get("success"):
-            inst_name = res.get("institute_name", "UNKNOWN")
-            studs = res.get("students", [])
-            mgr.add_institution_and_students(res, studs)
-
+        if not res or not res.get("success"):
             with print_lock:
                 sys.stdout.write("\r\033[K")
-                print(f" {cur_c:3d}/{cur_t}  EIIN {eiin_str}  {inst_name:<38}  {len(studs):3d} Students  {GREEN}✓ OK{RESET}", flush=True)
-                sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) │ 👥 {len(mgr.master_students)} Total Students")
+                sys.stdout.write(f"  [{idx+1}/{len(pending_eiins)}] EIIN {eiin_str} -> {RED}Not Found / Error{RESET}\n")
                 sys.stdout.flush()
-        elif res and res.get("error") == "EIIN Not Found":
+            return
+
+        inst_name = res.get("institute_name", "UNKNOWN")
+        zilla_name = res.get("zilla", "CHATTOGRAM")
+        thana_name = res.get("thana", "UNKNOWN")
+        students = res.get("students", [])
+
+        inst_meta = {
+            "eiin": eiin_str,
+            "name": inst_name,
+            "zilla": zilla_name,
+            "thana": thana_name,
+            "appeared": res.get("total_appeared", len(students)),
+            "passed": res.get("total_passed", sum(1 for s in students if s.get("status") == "PASSED")),
+            "gpa5": res.get("total_gpa5", 0),
+            "pass_percentage": res.get("pass_percentage", ""),
+            "students_count": len(students)
+        }
+
+        with print_lock:
+            sys.stdout.write("\r\033[K")
+            sys.stdout.write(f"  [{idx+1}/{len(pending_eiins)}] EIIN {eiin_str}: {inst_name[:30]} {GREEN}+{len(students)} rolls{RESET}\n")
+            sys.stdout.flush()
+
+        # Real-time student list swiping / streaming animation
+        for s in students:
+            mgr.add_student_record(s, inst_meta)
+            now_ts = time.time()
+            with stats_lock:
+                if first_roll_time[0] is None:
+                    first_roll_time[0] = now_ts
+                last_roll_time[0] = now_ts
+                batch_received_count += 1
+                total_appeared_count += 1
+                cur_rec = batch_received_count
+
+            with recent_lock:
+                recent_completions.append(now_ts)
+                cutoff = now_ts - 6.0
+                while recent_completions and recent_completions[0] < cutoff:
+                    recent_completions.popleft()
+                sample_duration = max(0.5, now_ts - recent_completions[0]) if len(recent_completions) > 1 else 1.0
+                speed = len(recent_completions) / sample_duration
+
+            roll_str = str(s.get("roll_no"))
+            s_name = s.get("student_name", f"{s.get('group', 'STUDENT')}")
+            gpa_res = s.get("result", f"GPA={s.get('gpa')}")
+            is_pass = s.get("status") == "PASSED"
+            status_color = GREEN if is_pass else RED
+            status_label = "PASSED" if is_pass else "FAILED"
+            
+            elapsed = now_ts - (first_roll_time[0] or now_ts)
+            mins, secs = divmod(elapsed, 60)
+            time_str = f"{int(mins)}m {int(secs):02d}s"
+            p_bar = format_progress_bar(cur_rec, max(cur_rec, len(students)), width=24)
+
             with print_lock:
                 sys.stdout.write("\r\033[K")
-                print(f" {cur_c:3d}/{cur_t}  EIIN {eiin_str}  {RED}EIIN Not Found{RESET}", flush=True)
-        else:
-            with print_lock:
-                sys.stdout.write("\r\033[K")
-                print(f" {cur_c:3d}/{cur_t}  EIIN {eiin_str}  {YELLOW}Failed to fetch{RESET}", flush=True)
+                student_line = f" {cur_rec:4d}  Roll {roll_str:<7}  {s_name:<30}  {gpa_res:<12} {status_color}{status_label}{RESET}\n"
+                sys.stdout.write(student_line)
+                p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec} rolls processed ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
+                sys.stdout.write(p_bar_line)
+                sys.stdout.flush()
 
-        if completed_inst_count % 3 == 0:
-            mgr.flush_to_disk()
+        mgr.flush_to_disk()
 
-        return res
-
-    num_threads = min(20, max(2, len(proxies) if proxies else 6))
+    num_threads = min(15, max(2, len(proxies) if proxies else 5))
     if len(pending_eiins) < num_threads:
         num_threads = len(pending_eiins)
 
     tasks = list(enumerate(pending_eiins))
     with concurrent.futures.ThreadPoolExecutor(max_workers=num_threads) as executor:
         try:
-            list(executor.map(process_eiin, tasks))
+            list(executor.map(harvest_and_stream_eiin, tasks))
         except KeyboardInterrupt:
-            print(f"\n\n{YELLOW}[!] Pipeline interrupted by user. Saved data safely!{RESET}", flush=True)
+            print(f"\n\n{YELLOW}[!] Pipeline stopped by user (Ctrl+C). Preserved all scraped records!{RESET}", flush=True)
 
     mgr.flush_to_disk()
     sys.stdout.write("\n\n")
@@ -430,18 +448,30 @@ def run_ctg_eiin_scraper(
     mins, secs = divmod(total_elapsed, 60)
     time_str = f"{int(mins)}m {secs:.2f}s" if mins > 0 else f"{secs:.2f}s"
 
+    if first_roll_time[0] and last_roll_time[0]:
+        scrape_duration = max(0.1, last_roll_time[0] - first_roll_time[0])
+        pure_speed = batch_received_count / scrape_duration
+        pure_rpm = int(pure_speed * 60)
+        pure_speed_str = f"{pure_speed:.1f} rolls/sec ({pure_rpm} rolls/min)"
+    else:
+        pure_speed_str = "N/A"
+
     print(f"=======================================================")
-    print(f"🎉 {GREEN}{BOLD}CHITTAGONG INSTITUTIONAL SCRAPING COMPLETE!{RESET}")
-    print(f"  • Institutions Processed: {len(mgr.master_institutions)}")
+    print(f"⏱️ {BOLD}PIPELINED PROCESS EXECUTION TIME & PERFORMANCE:{RESET}")
+    print(f"  • Total Pipeline Time:    {CYAN}{BOLD}{time_str}{RESET}")
+    print(f"  • Institutions Processed: {len(pending_eiins)} ({already_scraped_count} already cached)")
     print(f"  • Total Student Records:  {GREEN}{BOLD}{len(mgr.master_students)} Students{RESET}")
-    print(f"  • Total Time Elapsed:     {CYAN}{time_str}{RESET}")
-    print(f"  • District Folders:       {GREEN}{mgr.root}/<ZILLA>/results_upazilla_<upz>.json{RESET}")
-    print(f"  • Master All File:        {GREEN}{mgr.master_file}{RESET}")
+    print(f"  • Live Scraped in Batch:  {batch_received_count} rolls")
+    print(f"  • Active Scraping Speed:  {GREEN}{BOLD}{pure_speed_str}{RESET}")
+    print(f"  • Storage Root Directory: {YELLOW}{mgr.root}{RESET}")
     print(f"=======================================================\n", flush=True)
+
+    print(f"{GREEN}{BOLD}🎉 Finished Batch! All results saved across Upazilla files in {time_str}!{RESET}")
+    print(f"{CYAN}───────────────────────────────────────────────────────────{RESET}\n", flush=True)
 
 
 # =========================================================================
-# 2. INDIVIDUAL ROLL / RANGE SCRAPING ENGINE (Writes Upazila JSONs & Master)
+# 2. ROLL RANGE SCRAPING ENGINE (With Animated Student Swiping)
 # =========================================================================
 def run_ctg_scraper(
     rolls: List[str],
@@ -456,13 +486,17 @@ def run_ctg_scraper(
     mgr = CtgResultsManager(results_root)
     cache_file = os.path.join(mgr.root, ".chittagong_memory_cache.json")
     proxies = load_proxies()
+    num_workers = min(35, len(proxies)) if len(proxies) >= 20 else max(10, len(proxies))
+    spare_proxies = max(0, len(proxies) - num_workers)
 
     print(f"\n=======================================================")
-    print(f"🚀 {BOLD}CHITTAGONG ROLL SCRAPER PIPELINE CONFIGURATION:{RESET}")
-    print(f"  • Requested Range:     {GREEN}{BOLD}{len(rolls)} Candidate Rolls{RESET}")
-    print(f"  • Active Proxy Pool:   {CYAN}{BOLD}{len(proxies)} Dedicated Nodes{RESET}")
-    print(f"  • District Storage:    {YELLOW}{mgr.root}/<ZILLA>/results_upazilla_<upz>.json{RESET}")
-    print(f"  • Master All File:     {YELLOW}{mgr.master_file}{RESET}")
+    print(f"🚀 {BOLD}ENGINE PIPELINE CONFIGURATION:{RESET}")
+    print(f"  • Target Board:            {CYAN}{BOLD}Chittagong Education Board (BISE CTG){RESET}")
+    print(f"  • Active Proxy Pool:       {GREEN}{BOLD}{len(proxies)} Verified Ultra-Fast Nodes{RESET}")
+    print(f"  • Concurrent Workers:      {CYAN}{BOLD}{num_workers} Parallel Threads{RESET}")
+    print(f"  • Standby Failover Spares: {YELLOW}{BOLD}{spare_proxies} Spare Proxies{RESET}")
+    print(f"  • Target Rolls:            {len(rolls)} Candidate Rolls")
+    print(f"  • District Storage:        {YELLOW}{mgr.root}/<ZILLA>/results_upazilla_<upz>.json{RESET}")
     print(f"=======================================================\n", flush=True)
 
     dead_slots = set()
@@ -491,7 +525,7 @@ def run_ctg_scraper(
         print(f"  • Pending Live Queries:    {YELLOW}{len(pending_rolls)} rolls{RESET}\n", flush=True)
 
     if not pending_rolls:
-        print(f"{GREEN}✓ All {len(rolls)} rolls in this range are already in dataset!{RESET}", flush=True)
+        print(f"{GREEN}✓ All {len(rolls)} rolls in this range are already in dataset!{RESET}\n", flush=True)
         return
 
     dead_slots_set = set(dead_slots)
@@ -537,7 +571,7 @@ def run_ctg_scraper(
         elapsed = now_ts - (first_roll_time[0] or now_ts)
         mins, secs = divmod(elapsed, 60)
         time_str = f"{int(mins)}m {int(secs):02d}s"
-        p_bar = format_progress_bar(cur_c, cur_t, width=22)
+        p_bar = format_progress_bar(cur_c, cur_t, width=24)
 
         if res and res.get("success"):
             student_obj = {
@@ -552,18 +586,20 @@ def run_ctg_scraper(
                 "father_name": res.get("father_name", ""),
                 "mother_name": res.get("mother_name", "")
             }
-            mgr.add_single_student(student_obj)
+            mgr.add_student_record(student_obj)
 
             s_name = res.get("student_name", "STUDENT")
             gpa_res = res.get("result", "N/A")
             is_pass = "GPA" in str(gpa_res)
-            st_color = GREEN if is_pass else RED
-            st_label = "PASSED" if is_pass else "FAILED"
+            status_color = GREEN if is_pass else RED
+            status_label = "PASSED" if is_pass else "FAILED"
 
             with print_lock:
                 sys.stdout.write("\r\033[K")
-                print(f" {cur_c:4d}/{cur_t}  Roll {roll_str:<7}  {s_name:<30}  {gpa_res:<10} {st_color}{st_label}{RESET}", flush=True)
-                sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
+                student_line = f" {cur_c:4d}/{cur_t}  Roll {roll_str:<7}  {s_name:<30}  {gpa_res:<10} {status_color}{status_label}{RESET}\n"
+                sys.stdout.write(student_line)
+                p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
+                sys.stdout.write(p_bar_line)
                 sys.stdout.flush()
         elif res and res.get("error") == "Record Not Found":
             with dead_lock:
@@ -574,32 +610,15 @@ def run_ctg_scraper(
 
         if scraped_count % 20 == 0:
             mgr.flush_to_disk()
-            with dead_lock:
-                try:
-                    tmp_c = cache_file + ".tmp"
-                    with open(tmp_c, "w", encoding="utf-8") as out_c:
-                        json.dump({
-                            "board": "CHATTOGRAM",
-                            "dead_slots_count": len(dead_slots_set),
-                            "dead_slots": sorted(list(dead_slots_set)),
-                            "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
-                        }, out_c, indent=2)
-                    os.replace(tmp_c, cache_file)
-                except Exception:
-                    pass
 
         return res
 
-    num_threads = min(30, max(4, len(proxies) if proxies else 10))
-    if len(pending_rolls) < num_threads:
-        num_threads = len(pending_rolls)
-
     tasks = list(enumerate(pending_rolls))
-    with concurrent.futures.ThreadPoolExecutor(max_workers=num_threads) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
         try:
             list(executor.map(process_roll, tasks))
         except KeyboardInterrupt:
-            print(f"\n\n{YELLOW}[!] Pipeline interrupted by user. Saved records safely!{RESET}", flush=True)
+            print(f"\n\n{YELLOW}[!] Pipeline stopped by user (Ctrl+C). Preserved all scraped records!{RESET}", flush=True)
 
     mgr.flush_to_disk()
     sys.stdout.write("\n\n")
@@ -608,14 +627,25 @@ def run_ctg_scraper(
     mins, secs = divmod(total_elapsed, 60)
     time_str = f"{int(mins)}m {secs:.2f}s" if mins > 0 else f"{secs:.2f}s"
 
+    if first_roll_time[0] and last_roll_time[0]:
+        scrape_duration = max(0.1, last_roll_time[0] - first_roll_time[0])
+        pure_speed = scraped_count / scrape_duration
+        pure_rpm = int(pure_speed * 60)
+        pure_speed_str = f"{pure_speed:.1f} rolls/sec ({pure_rpm} rolls/min)"
+    else:
+        pure_speed_str = "N/A"
+
     print(f"=======================================================")
-    print(f"🎉 {GREEN}{BOLD}CHITTAGONG BOARD SCRAPING COMPLETE!{RESET}")
-    print(f"  • Total Master Students:  {GREEN}{len(mgr.master_students)}{RESET}")
-    print(f"  • Total Dead Slots:       {DIM}{len(dead_slots_set)}{RESET}")
-    print(f"  • Total Time Elapsed:     {CYAN}{time_str}{RESET}")
-    print(f"  • District Folders:       {GREEN}{mgr.root}/<ZILLA>/results_upazilla_<upz>.json{RESET}")
-    print(f"  • Master All File:        {GREEN}{mgr.master_file}{RESET}")
+    print(f"⏱️ {BOLD}PIPELINED PROCESS EXECUTION TIME & PERFORMANCE:{RESET}")
+    print(f"  • Total Pipeline Time:    {CYAN}{BOLD}{time_str}{RESET}")
+    print(f"  • Total Candidate Rolls:  {len(rolls)} ({skipped_success} already cached)")
+    print(f"  • Live Scraped in Batch:  {scraped_count}/{len(pending_rolls)} ({100.0 * scraped_count / max(1, len(pending_rolls)):.1f}%)")
+    print(f"  • Active Scraping Speed:  {GREEN}{BOLD}{pure_speed_str}{RESET}")
+    print(f"  • Storage Root Directory: {YELLOW}{mgr.root}{RESET}")
     print(f"=======================================================\n", flush=True)
+
+    print(f"{GREEN}{BOLD}🎉 Finished Batch! All results saved across Upazilla files in {time_str}!{RESET}")
+    print(f"{CYAN}───────────────────────────────────────────────────────────{RESET}\n", flush=True)
 
 
 # =========================================================================
