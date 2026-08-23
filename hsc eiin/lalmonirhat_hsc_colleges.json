@@ -1,175 +1,588 @@
 {
   "district": "Lalmonirhat",
-  "total_colleges": 13,
+  "total_institutions": 83,
+  "board": "DINAJPUR",
   "colleges": [
     {
-      "eiin": "122772",
-      "name": "Aditmari Kateswar Barman Girls' High School And College, Lalmonirhat",
+      "eiin": "137653",
+      "name": "Cantonment Public School And College Lalmonirhat",
       "district": "Lalmonirhat",
-      "upazila": "Aditmari",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/aditmari-kateswar-barman-girls-high-school-and-college/"
+      "type": "Autonomous School And College",
+      "board": "DINAJPUR"
     },
     {
-      "eiin": "122719",
-      "name": "Kumarirhat S.c.bl High School And College, Lalmonirhat",
+      "eiin": "123027",
+      "name": "Govt. Jashimuddin Kazi Abdul Goni Degree College",
       "district": "Lalmonirhat",
-      "upazila": "Aditmari",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/kumarirhat-s-c-bl-high-school-and-college/"
+      "type": "Government College",
+      "board": "DINAJPUR"
     },
     {
-      "eiin": "122827",
-      "name": "Daikhawa Adarsha College, Lalmonirhat",
+      "eiin": "122988",
+      "name": "Lalmonirhat Govt.college",
       "district": "Lalmonirhat",
-      "upazila": "Hatibandha",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/daikhawa-adarsha-college/"
-    },
-    {
-      "eiin": "137992",
-      "name": "Daikhawa Mohila College, Lalmonirhat",
-      "district": "Lalmonirhat",
-      "upazila": "Hatibandha",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/daikhawa-mohila-college/"
-    },
-    {
-      "eiin": "135348",
-      "name": "Fakirpara Adarsha Mohila College, Lalmonirhat",
-      "district": "Lalmonirhat",
-      "upazila": "Hatibandha",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/fakirpara-adarsha-mohila-college/"
-    },
-    {
-      "eiin": "122892",
-      "name": "Karim Uddin Pabalic Degree College, Lalmonirhat",
-      "district": "Lalmonirhat",
-      "upazila": "Kaliganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/karim-uddin-pabalic-degree-college/"
-    },
-    {
-      "eiin": "122893",
-      "name": "Shamsuddin Kamaruddin Degree College , Chaparhat, Lalmonirhat",
-      "district": "Lalmonirhat",
-      "upazila": "Kaliganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/shamsuddin-kamaruddin-degree-college-chaparhat/"
-    },
-    {
-      "eiin": "134762",
-      "name": "Shial Khowa College, Lalmonirhat",
-      "district": "Lalmonirhat",
-      "upazila": "Kaliganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/shial-khowa-college/"
-    },
-    {
-      "eiin": "122891",
-      "name": "Uttar Bangla College, Lalmonirhat",
-      "district": "Lalmonirhat",
-      "upazila": "Kaliganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/uttar-bangla-college/"
-    },
-    {
-      "eiin": "135300",
-      "name": "Zamena Rowshan Ara Mohila College, Lalmonirhat",
-      "district": "Lalmonirhat",
-      "upazila": "Kaliganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/zamena-rowshan-ara-mohila-college/"
-    },
-    {
-      "eiin": "136916",
-      "name": "Border Guard Public College, Lalmonirhat",
-      "district": "Lalmonirhat",
-      "upazila": "Lalmonirhat Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/border-guard-public-college/"
+      "type": "Government College",
+      "board": "DINAJPUR"
     },
     {
       "eiin": "122989",
-      "name": "Majida Khatun Govt. Mohila College, Lalmonirhat",
+      "name": "Majida Khatun Govt. Mohila College",
       "district": "Lalmonirhat",
-      "upazila": "Lalmonirhat Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/majida-khatun-govt-mohila-college/"
+      "type": "Government College",
+      "board": "DINAJPUR"
     },
     {
-      "eiin": "131015",
-      "name": "Phakal Police Lines School & College, Lalmonirhat",
+      "eiin": "132279",
+      "name": "Lalmonirhat Technical School And College",
       "district": "Lalmonirhat",
-      "upazila": "Lalmonirhat Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/phakal-police-lines-school-college-lalmonirhat/"
+      "type": "Government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122829",
+      "name": "Alimuddin Degree College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "136931",
+      "name": "Aminur Rahman College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "134400",
+      "name": "Barajan Naya College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122826",
+      "name": "Barakhata College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "134401",
+      "name": "Barua Panam Chand Bhutoria Mahabiddalya",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "137661",
+      "name": "Beer Muktijoddha Motahar Hossain College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122987",
+      "name": "Begum Kumrunnessa Degree College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "136916",
+      "name": "Border Guard Public College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122827",
+      "name": "Daikhawa Adarsha College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "137992",
+      "name": "Daikhawa Mohila College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135348",
+      "name": "Fakirpara Adarsha Mohila College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "134878",
+      "name": "Gandukuri Ideal Mohila College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122830",
+      "name": "Hatibandha  Women`s Degree  College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122828",
+      "name": "Hatibandha Model College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132005",
+      "name": "Hazi Ganj Udioman Suruj College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122892",
+      "name": "Karim Uddin Pabalic  Degree  College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122990",
+      "name": "Lalmonirhat Adarsha Degree College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122986",
+      "name": "Mohendra Nagar College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122771",
+      "name": "Namuri College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "134402",
+      "name": "Nasir Uddin College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "123026",
+      "name": "Patgram Adarsha Degree College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "123028",
+      "name": "Patgram Womens Degree College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122768",
+      "name": "Sapti Bari  Degree College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122991",
+      "name": "Shahid Abul Kashem College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122893",
+      "name": "Shamsuddin Kamaruddin Degree College , Chaparhat",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "134762",
+      "name": "Shial Khowa College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122985",
+      "name": "Tista Degree College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122894",
+      "name": "Tushbhander Momens College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122891",
+      "name": "Uttar Bangla College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122890",
+      "name": "Uttaran College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135300",
+      "name": "Zamena Rowshan Ara Mohila College",
+      "district": "Lalmonirhat",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122773",
+      "name": "Hatibanda Ss High School And Technical College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122717",
+      "name": "Aditmari Girija Shankar Model School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122772",
+      "name": "Aditmari Kateswar Barman Girls High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122724",
+      "name": "Bhelabhari School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122895",
+      "name": "Chandrapur High School & College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122849",
+      "name": "Dakshin Ghanashyam  School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122844",
+      "name": "Duhuli S. C. High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122725",
+      "name": "Gandha Marua School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122730",
+      "name": "Hazigonj  School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122866",
+      "name": "Kakina Girls High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122719",
+      "name": "Kumarirhat S.c.bl High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122726",
+      "name": "Mahisha Shahar High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122770",
+      "name": "Mohiskhocha M.l. High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122718",
+      "name": "Namuri  High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122744",
+      "name": "Namuri Adarsha Multilateral Girls High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122775",
+      "name": "Parulia Schedule Caste High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122858",
+      "name": "Rudresswar High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122733",
+      "name": "Sabera Khatun Girls High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122843",
+      "name": "Shial Khowa S.c.  School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122845",
+      "name": "Sonar Hat High School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "122859",
+      "name": "Uttar Dal Gram  Adarsha  High  School And College",
+      "district": "Lalmonirhat",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "136017",
+      "name": "Aminganj Technical And Bm College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "136252",
+      "name": "Ananda Bazar Bm College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "138023",
+      "name": "Barakhata Public Technical And Bm College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "134407",
+      "name": "Chandrapur Model Women Technical And B.m College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133156",
+      "name": "Chaparhat Technical And Bm College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132782",
+      "name": "Daikhawa Technical And Business Management College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132889",
+      "name": "Dhaknai Technical & Business Management College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133164",
+      "name": "Duhuli Technical & Business Management College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "134406",
+      "name": "Hatibandha Technical And Business Management Mohila College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133121",
+      "name": "Haziganj Udioman Suruj Tec. And B. M. College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "137818",
+      "name": "Jowranihat Public Bm College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133902",
+      "name": "Lalmonirhat Technical And Commerce College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132221",
+      "name": "Mohandranagar Business Management & Technical College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132525",
+      "name": "Northbengol Technical And Business Management College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132595",
+      "name": "Patgram Poura Technical And B M College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "137762",
+      "name": "Patgram Pourasova Women Technical And Bm College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133045",
+      "name": "Patgram Technical And Business Management College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135499",
+      "name": "Ramdas Shibbari Mohila Bm College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132986",
+      "name": "Rokon Uddin Babul Anowar Begum Krishi College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "136832",
+      "name": "Rostompur Mohila Technical And Bm College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132908",
+      "name": "Sakoyar Manjil Technical (business Management)college",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "137037",
+      "name": "Shangkharbazar Technical And Bm College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133144",
+      "name": "Sheikh Shafiuddin Commerce College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "136161",
+      "name": "Shurjomukhi Technical And Bm College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132874",
+      "name": "Taluk Mrittinga Technical And Business Management College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132646",
+      "name": "Uttorbongo  Technical  And  Business  Management  College",
+      "district": "Lalmonirhat",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
     }
   ]
 }

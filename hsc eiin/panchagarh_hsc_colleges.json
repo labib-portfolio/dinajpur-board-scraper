@@ -1,201 +1,350 @@
 {
   "district": "Panchagarh",
-  "total_colleges": 15,
+  "total_institutions": 49,
+  "board": "DINAJPUR",
   "colleges": [
-    {
-      "eiin": "125800",
-      "name": "Alowa Khoa S C High School And College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Atwari",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/alowa-khoa-s-c-high-school-and-college/"
-    },
-    {
-      "eiin": "125864",
-      "name": "Mirza Gholam Hafiz Degree College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Atwari",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/mirza-gholam-hafiz-degree-college/"
-    },
-    {
-      "eiin": "125868",
-      "name": "Boda Pilot High School And College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Boda",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/boda-pilot-high-school-and-college/"
-    },
-    {
-      "eiin": "125976",
-      "name": "Boda Womens College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Boda",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/boda-womens-college/"
-    },
-    {
-      "eiin": "125973",
-      "name": "Pathraj College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Boda",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/pathraj-college/"
-    },
-    {
-      "eiin": "125974",
-      "name": "Sakowa College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Boda",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/sakowa-college/"
-    },
-    {
-      "eiin": "125870",
-      "name": "Sakowa School And College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Boda",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/sakowa-school-and-college/"
-    },
-    {
-      "eiin": "126048",
-      "name": "Bhaulaganj College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Debiganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/bhaulaganj-college/"
-    },
-    {
-      "eiin": "126047",
-      "name": "Debiganj College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Debiganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/debiganj-college/"
-    },
-    {
-      "eiin": "126050",
-      "name": "Debiganj Womens College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Debiganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/debiganj-womens-college/"
-    },
-    {
-      "eiin": "126153",
-      "name": "Dr. Abeda Hafiz Girls' School And College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Panchagarh Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/dr-abeda-hafiz-girls-school-and-college/"
-    },
-    {
-      "eiin": "126154",
-      "name": "Futkibari High School And College, Panchagarh",
-      "district": "Panchagarh",
-      "upazila": "Panchagarh Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/futkibari-high-school-and-college/"
-    },
     {
       "eiin": "126148",
       "name": "Govt. Panchagarh Mohila College",
       "district": "Panchagarh",
-      "upazila": "Panchagarh Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/govt-panchagarh-mohila-college/"
+      "type": "Government College",
+      "board": "DINAJPUR"
     },
     {
       "eiin": "126147",
       "name": "Moqular Rahman Govt. College, Panchagarh",
       "district": "Panchagarh",
-      "upazila": "Panchagarh Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/moqular-rahman-govt-college-panchagarh/"
+      "type": "Government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132244",
+      "name": "Panchagarh Technical School And College",
+      "district": "Panchagarh",
+      "type": "Government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126150",
+      "name": "Amlaher Degree College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125865",
+      "name": "Atwari Adarsha Women S College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135313",
+      "name": "Bagdaha Degree College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125866",
+      "name": "Balarampur Adarsha College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125867",
+      "name": "Bangabandhu Dangir Hat Adarsha College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132011",
+      "name": "Barrister Jamir Uddin Sircar Institute (degree) Panchagarh",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126192",
+      "name": "Bhajanpur Degree College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126048",
+      "name": "Bhaulaganj College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125976",
+      "name": "Boda Womens College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126049",
+      "name": "Chengthi Hazradanga College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126047",
+      "name": "Debiganj College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126050",
+      "name": "Debiganj Womens  College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125977",
+      "name": "Dhardhara College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126151",
+      "name": "Jagdal Degree College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126051",
+      "name": "Kaligong College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125975",
+      "name": "Maidandighi College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126194",
+      "name": "Majhipara Womens Degree College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125864",
+      "name": "Mirza Gholam Hafiz Degree College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "138048",
+      "name": "Mofizar Rahman College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125973",
+      "name": "Pathraj College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125974",
+      "name": "Sakowa  College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126149",
+      "name": "Shahid Ziaur Rahman Mohabiddayalaya",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126052",
+      "name": "Sonahar College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126193",
+      "name": "Tatulia Degree College",
+      "district": "Panchagarh",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "134801",
+      "name": "Shahid Police Smrity School & College, Panchgarh",
+      "district": "Panchagarh",
+      "type": "Non-government School",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126053",
+      "name": "Bagdha  School And College",
+      "district": "Panchagarh",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125877",
+      "name": "Boda Pilot Girls High School And College",
+      "district": "Panchagarh",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125868",
+      "name": "Boda Pilot High School And College",
+      "district": "Panchagarh",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126153",
+      "name": "Dr. Abeda Hafiz Girls School And College",
+      "district": "Panchagarh",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "126154",
+      "name": "Futkibari High School And College",
+      "district": "Panchagarh",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
     },
     {
       "eiin": "126195",
-      "name": "Kazi Shahabuddin Girls' High School & College, Panchagarh",
+      "name": "Kazi Shahabuddin Girls High School & College",
       "district": "Panchagarh",
-      "upazila": "Tetulia",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/kazi-shahabuddin-girls-high-school-college/"
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125876",
+      "name": "Maraya Model School And College",
+      "district": "Panchagarh",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "125870",
+      "name": "Sakowa  School And College",
+      "district": "Panchagarh",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132815",
+      "name": "Atwari Tecnical & Business Management College",
+      "district": "Panchagarh",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132853",
+      "name": "Bhajanpur Nagar Tecnical & Business Management College",
+      "district": "Panchagarh",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132248",
+      "name": "Bscic Nagar Tecnical & Business Management College",
+      "district": "Panchagarh",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "136785",
+      "name": "Chaklahat Technical And B.m. College",
+      "district": "Panchagarh",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132255",
+      "name": "Kaliganj Technical & Business Management College",
+      "district": "Panchagarh",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132245",
+      "name": "Mithapukur Technical And Bussiness Managment College",
+      "district": "Panchagarh",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135138",
+      "name": "Panchagarh Technical And B M Girls College",
+      "district": "Panchagarh",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132273",
+      "name": "Panchagarh Technical And Bussiness Mangement College",
+      "district": "Panchagarh",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132256",
+      "name": "Sakowa Technical And Business Managment College",
+      "district": "Panchagarh",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132243",
+      "name": "Sonahar Technical & Bm College",
+      "district": "Panchagarh",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132263",
+      "name": "Toria Technical And Business Management College",
+      "district": "Panchagarh",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "130923",
+      "name": "Panchagarh Model School  And  College",
+      "district": "Panchagarh",
+      "type": "Others School",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133755",
+      "name": "Harivasa Technical & Business Management College",
+      "district": "Panchagarh",
+      "type": "Others Technical And Vocational",
+      "board": "DINAJPUR"
     }
   ]
 }

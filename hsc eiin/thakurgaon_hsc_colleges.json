@@ -1,161 +1,560 @@
 {
   "district": "Thakurgaon",
-  "total_colleges": 12,
+  "total_institutions": 79,
+  "board": "DINAJPUR",
   "colleges": [
     {
-      "eiin": "128771",
-      "name": "Kalmegh R. Ali High School And College, Thakurgaon",
-      "district": "Thakurgaon",
-      "upazila": "Baliadangi",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/kalmegh-r-ali-high-school-and-college/"
-    },
-    {
-      "eiin": "128693",
-      "name": "Ratnai Bogulabari High School And College, Thakurgaon",
-      "district": "Thakurgaon",
-      "upazila": "Baliadangi",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/ratnai-bogulabari-high-school-and-college/"
-    },
-    {
-      "eiin": "128768",
-      "name": "Samiruddin Smriti College, Thakurgaon",
-      "district": "Thakurgaon",
-      "upazila": "Baliadangi",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/samiruddin-smriti-college/"
-    },
-    {
       "eiin": "128965",
-      "name": "Pirganj Govt. College, Thakurgaon",
+      "name": "Pirganj Govt. College",
       "district": "Thakurgaon",
-      "upazila": "Pirganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/pirganj-govt-college/"
-    },
-    {
-      "eiin": "132981",
-      "name": "Ranisonkail B M College, Thakurgaon",
-      "district": "Thakurgaon",
-      "upazila": "Ranisankail",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/ranisonkail-b-m-college/"
-    },
-    {
-      "eiin": "129071",
-      "name": "Ranisonkail Degree College, Thakurgaon",
-      "district": "Thakurgaon",
-      "upazila": "Ranisankail",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/ranisonkail-degree-college/"
-    },
-    {
-      "eiin": "128981",
-      "name": "Routhnagar Bl High School And College, Thakurgaon",
-      "district": "Thakurgaon",
-      "upazila": "Ranisankail",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/routhnagar-bl-high-school-and-college/"
-    },
-    {
-      "eiin": "128700",
-      "name": "Morol Hat Janata School And College, Thakurgaon",
-      "district": "Thakurgaon",
-      "upazila": "Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES"
-      ],
-      "url": "https://www.sohopathi.com/morol-hat-janata-school-and-college/"
-    },
-    {
-      "eiin": "129175",
-      "name": "Kadam Rasul Hat High School And College, Thakurgaon",
-      "district": "Thakurgaon",
-      "upazila": "Thakurgaon Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/kadam-rasul-hat-high-school-and-college/"
+      "type": "Government College",
+      "board": "DINAJPUR"
     },
     {
       "eiin": "129305",
       "name": "Thakurgaon Govt College. Thakurgaon",
       "district": "Thakurgaon",
-      "upazila": "Thakurgaon Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/thakurgaon-govt-college-thakurgaon/"
+      "type": "Government College",
+      "board": "DINAJPUR"
     },
     {
       "eiin": "129308",
       "name": "Thakurgaon Govt. Mohila College",
       "district": "Thakurgaon",
-      "upazila": "Thakurgaon Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/thakurgaon-govt-mohila-college/"
+      "type": "Government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133007",
+      "name": "Thakurgaon Tecnical School And College",
+      "district": "Thakurgaon",
+      "type": "Government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129312",
+      "name": "Abdur Rashid Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129306",
+      "name": "Abul Hossain Sarker College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129074",
+      "name": "Banglagar College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128972",
+      "name": "Banshgara Ideal College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129311",
+      "name": "Bhully Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128969",
+      "name": "Chandaria Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128967",
+      "name": "D. N. Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129077",
+      "name": "D.k. College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128855",
+      "name": "Damol Ideal College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129310",
+      "name": "Gareya Drgree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129073",
+      "name": "Gazirhat  College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129314",
+      "name": "Ginnidebi Agar Wal Mahila College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "131940",
+      "name": "Gogor College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128971",
+      "name": "Hajipur College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128854",
+      "name": "Haripur Adarsha Womens College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128853",
+      "name": "Haripur Womens College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128966",
+      "name": "Jaborhat Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128851",
+      "name": "Jadu Rani College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128850",
+      "name": "Jadurani Adarsha College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128849",
+      "name": "K B Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128852",
+      "name": "Kathal Dangi Mohila College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128769",
+      "name": "Lahiri Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128970",
+      "name": "Lohagara Mohaviddalaya",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128848",
+      "name": "Moslemuddin Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128974",
+      "name": "Nawdanga College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129072",
+      "name": "Nekmord Banga Bondhu College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128973",
+      "name": "Pirgang Adarsha Mohabiddaroy",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128968",
+      "name": "Pirgonj Mahila Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129071",
+      "name": "Ranisonkail Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129070",
+      "name": "Ranisonkail Womens Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129304",
+      "name": "Ruhea Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129307",
+      "name": "Salandar Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "131995",
+      "name": "Salandar Womens College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128768",
+      "name": "Samiruddin Smriti College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128770",
+      "name": "Shahid Akbar Ali  Science And Technology  College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129313",
+      "name": "Shibganj Degree College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129316",
+      "name": "Thakurgaon New Model College",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
     },
     {
       "eiin": "129309",
       "name": "Thakurgaon Road College",
       "district": "Thakurgaon",
-      "upazila": "Thakurgaon Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/thakurgaon-road-college/"
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "136455",
+      "name": "Valajan Mohabiddalay",
+      "district": "Thakurgaon",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133731",
+      "name": "Collectorate Public School And College",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128861",
+      "name": "Ektir Pur Shahid Salauddin High School",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128976",
+      "name": "Ghughua Abdus Sobhan School And College",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128975",
+      "name": "H.k High School And B.m College",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128699",
+      "name": "Harin Mari High School And College",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "129175",
+      "name": "Kadam   Rasul Hat High School And College",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128771",
+      "name": "Kalmegh R. Ali High School  And College",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128700",
+      "name": "Morol Hat Janata School And College",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128977",
+      "name": "Pirganj Collegiate School & College",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128693",
+      "name": "Ratnai Bogulabari High School And College",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128981",
+      "name": "Routhnagar Bl High School And College",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "128799",
+      "name": "Tangria High School And College",
+      "district": "Thakurgaon",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "134392",
+      "name": "Akhanagar Technical And Business Management College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132717",
+      "name": "Baliadangi Technical & B M College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132857",
+      "name": "Bishmail Technical And Business Managment College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132801",
+      "name": "Chawrangi Technical And B.m. College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132910",
+      "name": "Dehatta Woman B.m College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132764",
+      "name": "Dholar Hat Technical And Business Managment College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132643",
+      "name": "Gazirhat Technical And B M College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135141",
+      "name": "Goreya Womens Technical And B M College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133499",
+      "name": "Kathal Dangi Agriculture College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "134405",
+      "name": "Madargonj Technical And Business Management College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132872",
+      "name": "Madnisagar Tech. And B.m. College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132787",
+      "name": "Mirdangi Technical And Buisness Management College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132026",
+      "name": "Padampur Tecnical And Business Managment College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133859",
+      "name": "Paligaon Technical And Business Managment College, Pirgonj",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132282",
+      "name": "Pirganj Adarsha Technical And Business Management College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132737",
+      "name": "Pirganj Technical And Business Management College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132679",
+      "name": "Pirganj Women Technichel And Business Management College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132651",
+      "name": "Puratan Thakurgaon Technical And Business Management College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132489",
+      "name": "Ranisankail Women Technical & Busness Mangement College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132981",
+      "name": "Ranisonkail B M College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133165",
+      "name": "Ruhea Technical And Business Management College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132817",
+      "name": "Thakurgaon Technical And Business Management College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132680",
+      "name": "Valatoir Mohila Tecn. & B.m College",
+      "district": "Thakurgaon",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135359",
+      "name": "Eco College",
+      "district": "Thakurgaon",
+      "type": "Others College",
+      "board": "DINAJPUR"
     }
   ]
 }

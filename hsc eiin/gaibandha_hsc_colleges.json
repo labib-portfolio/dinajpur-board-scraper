@@ -1,175 +1,749 @@
 {
   "district": "Gaibandha",
-  "total_colleges": 13,
+  "total_institutions": 106,
+  "board": "DINAJPUR",
   "colleges": [
     {
       "eiin": "121190",
-      "name": "Ahammad Uddin Shah Shishu Niketan School And College, Gaibandha",
+      "name": "Ahammad Uddin Shah Shishu Niketan School And College",
       "district": "Gaibandha",
-      "upazila": "Gaibandha Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/ahammad-uddin-shah-shishu-niketan-school-and-college/"
+      "type": "Autonomous School And College",
+      "board": "DINAJPUR"
     },
     {
       "eiin": "121184",
       "name": "Gaibandha Govt. College",
       "district": "Gaibandha",
-      "upazila": "Gaibandha Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/gaibandha-govt-college/"
+      "type": "Government College",
+      "board": "DINAJPUR"
     },
     {
       "eiin": "121183",
       "name": "Gaibandha Govt. Mohila College,gaibandha",
       "district": "Gaibandha",
-      "upazila": "Gaibandha Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/gaibandha-govt-mohila-collegegaibandha/"
+      "type": "Government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121426",
+      "name": "Palashbari Govt.college Gaibandha",
+      "district": "Gaibandha",
+      "type": "Government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132422",
+      "name": "Gaibandha Tecnical School And College",
+      "district": "Gaibandha",
+      "type": "Government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121756",
+      "name": "Bamandanga Abdul Haque College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121762",
+      "name": "Bazarpara College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121759",
+      "name": "Belka Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121610",
+      "name": "Bonarpara Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121754",
+      "name": "Dharmapur Abdul Jabbar Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "131930",
+      "name": "Dharmapur Womens College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121760",
+      "name": "Dhubni Kanchibari College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121761",
+      "name": "Dubni Mohila College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121354",
+      "name": "Ekramul Haque Ideal And Computer Biggyan College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "138012",
+      "name": "Fakirhat Mohila College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121427",
+      "name": "Fakirhat Shahid Smriti Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121099",
+      "name": "Fulchari Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121353",
+      "name": "Fulpukuriya  College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121185",
+      "name": "Gaibanda Adarsha College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121347",
+      "name": "Gobinda Gonj College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121349",
+      "name": "Gobindaganj  Mahila College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121186",
+      "name": "Haji Osman Gani College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121429",
+      "name": "Harinabari College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121543",
+      "name": "Joyen Pur Adarsha College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121611",
+      "name": "Jumarbari Adarsha College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "136909",
+      "name": "Jumarbari Mohila College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121612",
+      "name": "Kamaler Para College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121541",
+      "name": "Kamar Para College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121351",
+      "name": "Kamdia Nurul Haque Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121098",
+      "name": "Kanchipara Dehree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121345",
+      "name": "Kochasahahar Shilpa Nagori College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121188",
+      "name": "Lenga Bazar Ideal College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121346",
+      "name": "Mahimaganj Womens College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121430",
+      "name": "Marirhat Model College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121350",
+      "name": "Mohimaganj  College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121540",
+      "name": "Mohipur Bazar College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121344",
+      "name": "Nakai Hat College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121538",
+      "name": "Naldanga Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135421",
+      "name": "Naldanga Womens College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121428",
+      "name": "Palash  Bari   Mahila  College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121425",
+      "name": "Palash Bari Adarsha Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121753",
+      "name": "Ramdeb Shaikh Khabir Uddin College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135415",
+      "name": "Sabek Tajpur Mohila College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121539",
+      "name": "Sadullapur Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121542",
+      "name": "Sadullapur Girls College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121609",
+      "name": "Shaghata Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121537",
+      "name": "Shah Asgar Ali Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121352",
+      "name": "Shahargachhi Adarsa  Degrkee College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121348",
+      "name": "Shamim And Shakil Karigori College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121763",
+      "name": "Shobhaganj Womens Model College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121758",
+      "name": "Sobhaganj Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121757",
+      "name": "Sundarfanj Degree Womens College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121755",
+      "name": "Sundargaj D.w Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121182",
+      "name": "Tulshi Ghat Shamsul Haque Degree College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121096",
+      "name": "Udakhali Model College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121097",
+      "name": "Udakhali Womens College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121608",
+      "name": "Udayan Womens College",
+      "district": "Gaibandha",
+      "type": "Non-government College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133246",
+      "name": "Green Field International High School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121365",
+      "name": "Amlagachhi D.u.girls High School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121191",
+      "name": "Asaduzzaman Girls High School & College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121765",
+      "name": "Banandanga M.m.alhaz Hossain Mohammad Ershad School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121431",
+      "name": "Basudebpur Chandra Kishore High School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121544",
+      "name": "Bhatgram High School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121613",
+      "name": "Bonar Para Girls High School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121355",
+      "name": "Bura Buri Azitulla Sarker High School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121100",
+      "name": "Burail Model School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121095",
+      "name": "Chandia Mohila College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121766",
+      "name": "Chnadipur Fazlul Hoque School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121546",
+      "name": "Dhaperhat Priobala Girls High School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121547",
+      "name": "Dhol Bhanga High School  And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
     },
     {
       "eiin": "131077",
       "name": "Gaibandha Sadar Upazila Model School And College",
       "district": "Gaibandha",
-      "upazila": "Gaibandha Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/gaibandha-sadar-upazila-model-school-college/"
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121638",
+      "name": "Ghagoa High School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121545",
+      "name": "Hingarpara Girls High School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121483",
+      "name": "Hingerpara High School And B M College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "121369",
+      "name": "Kashiabari School And College",
+      "district": "Gaibandha",
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
     },
     {
       "eiin": "121189",
-      "name": "Lakshmipur School & College, Gaibandha",
+      "name": "Lakshmipur School & College",
       "district": "Gaibandha",
-      "upazila": "Gaibandha Sadar",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/lakshmipur-school-college/"
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
     },
     {
-      "eiin": "121431",
-      "name": "Basudebpur Chandra Kishore High School And College, Gaibandha",
+      "eiin": "121226",
+      "name": "Nakai Hat Girls  High School And College",
       "district": "Gaibandha",
-      "upazila": "Palashbari",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/basudebpur-chandra-kishore-high-school-and-college/"
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
     },
     {
-      "eiin": "121426",
-      "name": "Palashbari Govt. College Gaibandha",
+      "eiin": "121386",
+      "name": "Palashbari S.m.b Adarsh M.l High School And College",
       "district": "Gaibandha",
-      "upazila": "Palashbari",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/palashbari-govt-college-gaibandha/"
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
     },
     {
-      "eiin": "121613",
-      "name": "Bonar Para Girls' High School And College, Gaibandha",
+      "eiin": "121356",
+      "name": "Piarapur I.g.m.school & College",
       "district": "Gaibandha",
-      "upazila": "Saghata",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/bonar-para-girls-high-school-and-college/"
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
     },
     {
-      "eiin": "121610",
-      "name": "Bonarpara Degree College, Gaibandha",
+      "eiin": "132089",
+      "name": "R. A. Gani School & College",
       "district": "Gaibandha",
-      "upazila": "Saghata",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/bonarpara-degree-college/"
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
     },
     {
-      "eiin": "121766",
-      "name": "Chnadipur Fazlul Hoque School And College, Gaibandha",
+      "eiin": "121614",
+      "name": "Shaghata Pilot Girls School And College",
       "district": "Gaibandha",
-      "upazila": "Sundarganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/chnadipur-fazlul-hoque-school-and-college/"
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
     },
     {
-      "eiin": "121760",
-      "name": "Dhubni Kanchibari College, Gaibandha",
+      "eiin": "121357",
+      "name": "Shahargachi Model M/l Girls School & College",
       "district": "Gaibandha",
-      "upazila": "Sundarganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/dhubni-kanchibari-college/"
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
     },
     {
       "eiin": "121764",
-      "name": "Shibram Alhaz Md. Hossain Smrity School & College, Gaibandha",
+      "name": "Shibram Alhaz Md. Hossain  Smrity School & College",
       "district": "Gaibandha",
-      "upazila": "Sundarganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/shibram-alhaz-md-hossain-smrity-school-college/"
+      "type": "Non-government School And College",
+      "board": "DINAJPUR"
     },
     {
-      "eiin": "121755",
-      "name": "Sundargaj D.w Degree College, Gaibandha",
+      "eiin": "133528",
+      "name": "Abdul Quddus Sarker Krishi College And Research Centre",
       "district": "Gaibandha",
-      "upazila": "Sundarganj",
-      "board": "DINAJPUR",
-      "streams": [
-        "SCIENCE",
-        "HUMANITIES",
-        "BUSINESS STUDIES"
-      ],
-      "url": "https://www.sohopathi.com/sundargaj-d-w-degree-college/"
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132377",
+      "name": "Abu Hossian Sarker Mohila College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133118",
+      "name": "Al-haj Selima Secondary And Technical College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132414",
+      "name": "Bazar Para Technical School And Business Management College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135912",
+      "name": "Bishubari Mohila Technical College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132946",
+      "name": "Dhaperhat Technical And Business Management College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132740",
+      "name": "Dharmopur S.i.d. Vocational School And Technical College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132405",
+      "name": "Hatkhola  Tecnical And  B M  Women  College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135162",
+      "name": "Idilpur Technical & Business Management College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "135451",
+      "name": "Kishamot Sherpur Technical And Bm College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132667",
+      "name": "M A  Mottalib  Technecal  And  Business  Managemant  College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132607",
+      "name": "M.a.samad Karigory  And Biggun College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132702",
+      "name": "Matiar Rahman Technical And Business Managment College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "134362",
+      "name": "Mouzamalibari Tacnical School And B M College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132588",
+      "name": "Palashbari Technical College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132402",
+      "name": "Rahman Nagar Tecnical School And College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133686",
+      "name": "Shaghata Technical And Business Management College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132765",
+      "name": "Shobhagonj Amenabad Technical And B. M College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132363",
+      "name": "Shovaganj Secondary Vocational School And B.m.college",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132468",
+      "name": "Sofiron Nessa Abdul Sheikh Technical And Business Management Women College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "133012",
+      "name": "Solaiman Nagar Technical And Business Management College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132800",
+      "name": "Sundarganj Technical College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
+    },
+    {
+      "eiin": "132463",
+      "name": "Sundarganj Technical Commercial College",
+      "district": "Gaibandha",
+      "type": "Non-government Technical And Vocational",
+      "board": "DINAJPUR"
     }
   ]
 }
