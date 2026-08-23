@@ -427,7 +427,9 @@ def run_scraper_cli():
                 if not is_cached:
                     def on_retry_status(msg):
                         with print_lock:
-                            print(f"  [{idx}/{len(eiins)}] EIIN {eiin} ({YELLOW}{msg[:20]}{RESET})", flush=True)
+                            sys.stdout.write("\r\033[K")
+                            sys.stdout.write(f"  [{idx}/{len(eiins)}] EIIN {eiin} ({YELLOW}{msg[:20]}{RESET})\n")
+                            sys.stdout.flush()
 
                     inst_data = fetcher.fetch_by_eiin(eiin, status_callback=on_retry_status)
                     if inst_data and not inst_data.get("error") and inst_data.get("name"):
@@ -441,7 +443,9 @@ def run_scraper_cli():
 
                 if not inst_data or "error" in inst_data or not inst_data.get("name"):
                     with print_lock:
-                        print(f"  [{idx}/{len(eiins)}] EIIN {eiin} -> {RED}Not Found{RESET}", flush=True)
+                        sys.stdout.write("\r\033[K")
+                        sys.stdout.write(f"  [{idx}/{len(eiins)}] EIIN {eiin} -> {RED}Not Found{RESET}\n")
+                        sys.stdout.flush()
                     continue
 
                 inst_name = inst_data.get("name", "Unknown")
@@ -480,18 +484,23 @@ def run_scraper_cli():
 
                 with print_lock:
                     if not is_cached:
-                        print(f"  [{idx}/{len(eiins)}] EIIN {eiin}: {inst_name[:25]} {GREEN}+{queued_for_inst} rolls{RESET}", flush=True)
+                        sys.stdout.write("\r\033[K")
+                        sys.stdout.write(f"  [{idx}/{len(eiins)}] EIIN {eiin}: {inst_name[:25]} {GREEN}+{queued_for_inst} rolls{RESET}\n")
+                        sys.stdout.flush()
 
                 if not is_cached:
                     time.sleep(1.2)
 
             with print_lock:
-                print(f"\n  {GREEN}✓ Loaded all {len(eiins)} institutions ({total_appeared_count} rolls queued){RESET}\n", flush=True)
+                sys.stdout.write("\r\033[K")
+                sys.stdout.write(f"  {GREEN}✓ Loaded all {len(eiins)} institutions ({total_appeared_count} rolls queued){RESET}\n\n")
+                sys.stdout.flush()
 
             harvest_done.set()
 
         first_roll_time = [None]
         last_roll_time = [None]
+        hud_rendered = [False]
         active_count = [0]
         active_lock = threading.Lock()
 
@@ -536,10 +545,16 @@ def run_scraper_cli():
                     is_pass = "GPA" in str(gpa_res)
                     status_color = GREEN if is_pass else RED
                     status_label = "PASSED" if is_pass else "FAILED"
-                    p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=18)
+                    p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=35)
+                    pct = (cur_rec / max(1, cur_target)) * 100
 
                     with print_lock:
-                        print(f"{CYAN}{p_bar}{RESET} {cur_rec:4d}/{cur_target}  Roll {roll_str:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}", flush=True)
+                        sys.stdout.write("\r\033[K")
+                        student_line = f" {cur_rec:4d}/{cur_target}  Roll {roll_str:<7}  {s_name:<30}  {gpa_res:<10} {status_color}{status_label}{RESET}\n"
+                        sys.stdout.write(student_line)
+                        p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec}/{cur_target} ({pct:.1f}%)"
+                        sys.stdout.write(p_bar_line)
+                        sys.stdout.flush()
                 else:
                     if attempts < 3 and not stop_event.is_set():
                         rolls_queue.put((roll_str, meta, attempts + 1))
@@ -611,15 +626,21 @@ def run_scraper_cli():
                             is_pass = "GPA" in str(gpa_res)
                             status_color = GREEN if is_pass else RED
                             status_label = "PASSED" if is_pass else "FAILED"
-                            p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=18)
+                            p_bar = format_progress_bar(cur_rec, max(1, cur_target), width=35)
 
                             with print_lock:
-                                print(f"{CYAN}{p_bar}{RESET} {cur_rec:4d}/{cur_target}  Roll {roll:<7}  {s_name:<32}  {gpa_res:<10} {status_color}{status_label}{RESET}", flush=True)
+                                sys.stdout.write("\r\033[K")
+                                student_line = f" {cur_rec:4d}/{cur_target}  Roll {roll:<7}  {s_name:<30}  {gpa_res:<10} {status_color}{status_label}{RESET}\n"
+                                sys.stdout.write(student_line)
+                                p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec}/{cur_target} ({pct:.1f}%)"
+                                sys.stdout.write(p_bar_line)
+                                sys.stdout.flush()
 
                 flush_dirty_upazillas(force=True)
                 unretrieved = [r for r in pending_rolls if r not in seen_rolls]
 
         flush_dirty_upazillas(force=True)
+        sys.stdout.write("\n\n")
 
         total_elapsed = time.time() - batch_start_time
         mins, secs = divmod(total_elapsed, 60)
