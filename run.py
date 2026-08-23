@@ -87,13 +87,13 @@ class FastProxyPool:
         self.proxies: List[str] = []
         self.cache_file = os.path.join(BASE_DIR, "working_proxies.txt")
 
-    def load_and_verify(self, max_candidates: int = 1500, max_valid: int = 90) -> List[str]:
+    def load_and_verify(self, max_candidates: int = 2500, max_valid: int = 250) -> List[str]:
         # 1. Instantly load from local verified proxy cache if available (0.00s startup)
         if os.path.exists(self.cache_file):
             try:
                 with open(self.cache_file, "r", encoding="utf-8") as f:
                     cached = [line.strip() for line in f if ":" in line.strip()]
-                if len(cached) >= 20:
+                if len(cached) >= 15:
                     self.proxies = cached[:max_valid]
                     return self.proxies
             except Exception:
@@ -121,7 +121,7 @@ def print_banner():
     print(f"\n{CYAN}┌───────────────────────────────────────────────────────────┐{RESET}")
     print(f"{CYAN}│{RESET}  {BOLD}Dinajpur Board Result Scraper 2026 — High-Speed Engine{RESET}   {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}100% Guaranteed Roll Extraction • 35 Active Proxy Networks{RESET}  {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}100% Guaranteed Roll Extraction • 50 Parallel Workers{RESET}     {CYAN}│{RESET}")
     print(f"{CYAN}│{RESET}  {DIM}Zero Webhook Drops • Real-time Upazilla JSON Persistence{RESET}   {CYAN}│{RESET}")
     print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n")
 
@@ -168,8 +168,8 @@ def run_scraper_cli():
     
     proxy_pool = FastProxyPool()
     print(f"{DIM}Checking dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
-    proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
-    num_workers = min(35, max(15, len(proxies) - 20)) if len(proxies) > 0 else 20
+    proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=250)
+    num_workers = 50 if len(proxies) >= 50 else max(30, len(proxies)) if len(proxies) > 0 else 35
     spare_proxies = max(0, len(proxies) - num_workers)
     fetcher = InstituteResultFetcher(proxies=proxies)
     print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} ultra-fast nodes ready! ({num_workers} Parallel Workers + {spare_proxies} Standby Spares){RESET}\n")
@@ -211,8 +211,8 @@ def run_scraper_cli():
         # Ensure proxy pool is active
         if len(proxies) < 30:
             print(f"{DIM}Refreshing proxy pool...{RESET}", end="", flush=True)
-            proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=90)
-            num_workers = min(35, max(15, len(proxies) - 20)) if len(proxies) > 0 else 20
+            proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=250)
+            num_workers = 50 if len(proxies) >= 50 else max(30, len(proxies)) if len(proxies) > 0 else 35
             spare_proxies = max(0, len(proxies) - num_workers)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
 
@@ -584,8 +584,8 @@ def run_scraper_cli():
                     active_count[0] -= 1
                 rolls_queue.task_done()
 
-        # Launch Producer and Consumer threads concurrently (35 parallel workers with 51+ standby spares)
-        num_workers = min(35, max(15, len(proxies) - 20)) if len(proxies) > 0 else 20
+        # Launch Producer and Consumer threads concurrently (50 parallel workers with massive standby spares)
+        num_workers = 50 if len(proxies) >= 50 else max(30, len(proxies)) if len(proxies) > 0 else 35
         producer_thread = threading.Thread(target=harvest_producer, daemon=True)
         consumer_threads = [
             threading.Thread(target=student_consumer, args=(i,), daemon=True)
