@@ -350,7 +350,7 @@ def run_scraper_cli():
         # Ensure proxy pool is active
         if len(proxies) < 30:
             print(f"{DIM}Refreshing proxy pool...{RESET}", end="", flush=True)
-            proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=250)
+            proxies = proxy_pool.load_and_verify(max_valid=250)
             num_workers = 50 if len(proxies) >= 50 else max(30, len(proxies)) if len(proxies) > 0 else 35
             spare_proxies = max(0, len(proxies) - num_workers)
             print(f"\r{GREEN}✓ Active Proxy Pool: {len(proxies)} high-speed nodes ready!{RESET}\n")
@@ -608,11 +608,29 @@ def run_scraper_cli():
         active_count = [0]
         active_lock = threading.Lock()
 
+        # Dynamic Proxy Circuit Breaker with 429 Cooldown
+        proxy_cooldowns = {}
+        cooldown_lock = threading.Lock()
+
+        def mark_proxy_cooldown(p: str, seconds: float = 30.0):
+            with cooldown_lock:
+                proxy_cooldowns[p] = time.time() + seconds
+
+        def get_best_proxy(worker_idx: int, offset: int = 0) -> Optional[str]:
+            if not proxies:
+                return None
+            now = time.time()
+            with cooldown_lock:
+                avail = [p for p in proxies if proxy_cooldowns.get(p, 0) < now]
+            if not avail:
+                # If all are in cooldown, take the one closest to expiry
+                avail = proxies
+            return avail[(worker_idx + offset * 13) % len(avail)]
+
         def student_consumer(worker_idx: int):
             nonlocal batch_received_count
-            assigned_proxy = proxies[worker_idx % len(proxies)] if proxies else None
+            assigned_proxy = get_best_proxy(worker_idx, 0)
             worker_sess = create_isolated_session(assigned_proxy)
-            direct_sess = create_isolated_session(None)
             req_count = 0
 
             while not stop_event.is_set():
@@ -638,38 +656,65 @@ def run_scraper_cli():
                     attempts = 0
 
                 req_count += 1
-                if req_count >= 30:
+                if req_count >= 25:
                     try:
                         worker_sess.close()
                     except Exception:
                         pass
-                    if attempts > 0 and proxies:
-                        assigned_proxy = proxies[(worker_idx + attempts * 7) % len(proxies)]
+                    assigned_proxy = get_best_proxy(worker_idx, req_count)
                     worker_sess = create_isolated_session(assigned_proxy)
                     req_count = 0
 
                 url = ENDPOINT.format(roll=roll_str)
                 res = None
 
-                # Try 3 different proxies (2.0s timeout; direct is 429-blocked by board)
+                # Try up to 3 candidate proxies
                 for p_offset in range(3):
-                    if not proxies:
+                    p_ip = get_best_proxy(worker_idx, p_offset + attempts * 5)
+                    if not p_ip:
                         break
-                    p_ip = proxies[(worker_idx + p_offset * 19) % len(proxies)]
                     try:
-                        if p_offset == 0:
-                            r = worker_sess.get(url, timeout=2.0)
+                        if p_offset == 0 and p_ip == assigned_proxy:
+                            r = worker_sess.get(url, timeout=2.2)
                         else:
                             tmp = create_isolated_session(p_ip)
-                            r = tmp.get(url, timeout=2.0)
+                            r = tmp.get(url, timeout=2.2)
                             tmp.close()
+
                         if r.status_code == 200:
                             res = parse_student_html(r.text, roll_str)
                             if res and res.get("success"):
+                                # Keep this working proxy for the next requests!
+                                if p_ip != assigned_proxy:
+                                    try:
+                                        worker_sess.close()
+                                    except Exception:
+                                        pass
+                                    assigned_proxy = p_ip
+                                    worker_sess = create_isolated_session(assigned_proxy)
                                 break
                             res = None
+                        elif r.status_code == 429:
+                            # 429 = Board rate-limited this IP. Put on 30s cooldown and switch instantly!
+                            mark_proxy_cooldown(p_ip, 30.0)
+                            if p_ip == assigned_proxy:
+                                try:
+                                    worker_sess.close()
+                                except Exception:
+                                    pass
+                                assigned_proxy = get_best_proxy(worker_idx, p_offset + 1)
+                                worker_sess = create_isolated_session(assigned_proxy)
+                        else:
+                            mark_proxy_cooldown(p_ip, 15.0)
                     except Exception:
-                        pass
+                        mark_proxy_cooldown(p_ip, 15.0)
+                        if p_ip == assigned_proxy:
+                            try:
+                                worker_sess.close()
+                            except Exception:
+                                pass
+                            assigned_proxy = get_best_proxy(worker_idx, p_offset + 1)
+                            worker_sess = create_isolated_session(assigned_proxy)
 
                 if res and res.get("success"):
                     save_record_to_upazilla(res, meta)
