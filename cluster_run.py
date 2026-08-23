@@ -235,24 +235,41 @@ def run_scraper_cli():
             proxy_session_wrappers.append({
                 "ip": p,
                 "session": create_proxy_session(p),
-                "uses": 0
+                "uses": 0,
+                "fails": 0,
+                "healthy": True
             })
 
         wrapper_lock = threading.Lock()
 
-        def get_proxy_session(idx: int) -> requests.Session:
+        def get_healthy_session(worker_idx: int, offset: int = 0):
             with wrapper_lock:
-                item = proxy_session_wrappers[idx % len(proxy_session_wrappers)]
+                healthy = [w for w in proxy_session_wrappers if w["healthy"]]
+                if not healthy:
+                    for w in proxy_session_wrappers:
+                        w["healthy"] = True
+                        w["fails"] = 0
+                    healthy = proxy_session_wrappers
+
+                item = healthy[(worker_idx + offset) % len(healthy)]
                 item["uses"] += 1
-                # Auto-recycle TCP socket every 25 requests to maintain maximum peak throughput indefinitely
-                if item["uses"] >= 25:
+                if item["uses"] >= 30:
                     try:
                         item["session"].close()
                     except Exception:
                         pass
                     item["session"] = create_proxy_session(item["ip"])
                     item["uses"] = 0
-                return item["session"]
+                return item
+
+        def report_proxy_result(wrapper, success: bool):
+            with wrapper_lock:
+                if success:
+                    wrapper["fails"] = 0
+                else:
+                    wrapper["fails"] += 1
+                    if wrapper["fails"] >= 3:
+                        wrapper["healthy"] = False  # Evict slow/dead node
 
         direct_session = requests.Session()
         direct_adapter = HTTPAdapter(pool_connections=50, pool_maxsize=50)
@@ -357,25 +374,25 @@ def run_scraper_cli():
                     pass
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
-            # 1. Rotate through up to 3 auto-recycled proxy sessions with 1.2s fast timeout
+            url = ENDPOINT.format(roll=roll_str)
+            # 1. Rotate through healthy proxies with 0.9s ultra-fast timeout & auto-eviction
             if proxy_session_wrappers:
-                num_sessions = len(proxy_session_wrappers)
-                for offset in range(min(3, num_sessions)):
-                    sess = get_proxy_session(worker_idx * 3 + offset)
+                for offset in range(2):
+                    w = get_healthy_session(worker_idx, offset)
                     try:
-                        url = ENDPOINT.format(roll=roll_str)
-                        r = sess.get(url, timeout=1.2)
+                        r = w["session"].get(url, timeout=0.9)
                         if r.status_code == 200:
                             parsed = parse_student_html(r.text, roll_str)
                             if parsed:
+                                report_proxy_result(w, True)
                                 return parsed
+                        report_proxy_result(w, False)
                     except Exception:
-                        pass
+                        report_proxy_result(w, False)
 
-            # 2. Fast direct attempt fallback with 1.2s timeout
+            # 2. Fast direct attempt fallback (0.9s timeout)
             try:
-                url = ENDPOINT.format(roll=roll_str)
-                r = direct_session.get(url, timeout=1.2)
+                r = direct_session.get(url, timeout=0.9)
                 if r.status_code == 200:
                     parsed = parse_student_html(r.text, roll_str)
                     if parsed:
