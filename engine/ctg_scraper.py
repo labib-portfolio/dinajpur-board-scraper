@@ -21,11 +21,36 @@ CTG_INSTITUTE_URL = f"{CTG_BASE_URL}/resultm.php"
 CTG_INDIVIDUAL_URL = f"{CTG_BASE_URL}/individual/result.php"
 CTG_REFERER = f"{CTG_BASE_URL}/"
 
+# Common SSC Subject Code Map
+SUBJECT_CODE_MAP = {
+    "101": "BANGLA",
+    "107": "ENGLISH",
+    "109": "MATHEMATICS",
+    "110": "GEOGRAPHY & ENVIRONMENT",
+    "111": "ISLAM & MORAL EDUCATION",
+    "112": "HINDU RELIGION & MORAL EDUCATION",
+    "113": "BUDDHIST RELIGION & MORAL EDUCATION",
+    "114": "CHRISTIAN RELIGION & MORAL EDUCATION",
+    "126": "HIGHER MATHEMATICS",
+    "127": "GENERAL SCIENCE",
+    "134": "AGRICULTURE STUDIES",
+    "136": "PHYSICS",
+    "137": "CHEMISTRY",
+    "138": "BIOLOGY",
+    "140": "CIVICS & CITIZENSHIP",
+    "143": "FINANCE & BANKING",
+    "146": "BUSINESS ENTREPRENEURSHIP",
+    "150": "BANGLADESH & GLOBAL STUDIES",
+    "152": "ACCOUNTING",
+    "153": "HISTORY OF BANGLADESH & WORLD CIVILIZATION",
+    "154": "INFORMATION & COMMUNICATION TECHNOLOGY (ICT)"
+}
+
 
 def parse_ctg_institute_gazette(html_text: str, eiin: str) -> Dict[str, Any]:
     """
-    Parses the full institutional mark sheet response from sresult.bise-ctg.gov.bd/to_ssc_26_ctg/resultm.php
-    Extracts all students, rolls, GPAs, groups, and subject marks/grades in a single request.
+    Parses the full institutional mark sheet response from resultm.php.
+    Calculates total marks automatically by summing up individual subject marks.
     """
     if not html_text or "RESULTS OF SSC EXAMINATION" not in html_text or "INSTITUTE NAME" not in html_text:
         if "not found" in html_text.lower() or "invalid" in html_text.lower():
@@ -87,17 +112,27 @@ def parse_ctg_institute_gazette(html_text: str, eiin: str) -> Dict[str, Any]:
             raw_subs = m.group(3).strip()
             
             sub_list = []
+            total_marks = 0
+            has_marks = False
+            
             sub_items = re.findall(r'(\d{3}):[A-Z]:(?:(\d{3}))?\(([A-Z\+\-\s]+)\)', raw_subs)
-            for sub_code, marks, grade in sub_items:
+            for sub_code, marks_str, grade in sub_items:
+                marks_int = int(marks_str) if marks_str and marks_str.isdigit() else None
+                if marks_int is not None:
+                    total_marks += marks_int
+                    has_marks = True
+                    
                 sub_list.append({
                     "code": sub_code,
-                    "marks": marks if marks else "",
+                    "subject_name": SUBJECT_CODE_MAP.get(sub_code, f"SUBJECT {sub_code}"),
+                    "marks": marks_int if marks_int is not None else "",
                     "grade": grade.strip()
                 })
                 
             students.append({
                 "roll_no": roll,
                 "gpa": gpa,
+                "total_marks": total_marks if has_marks else None,
                 "result": f"GPA={gpa}",
                 "group": current_group,
                 "status": "PASSED",
@@ -117,6 +152,7 @@ def parse_ctg_institute_gazette(html_text: str, eiin: str) -> Dict[str, Any]:
             students.append({
                 "roll_no": f_roll,
                 "gpa": "FAIL",
+                "total_marks": None,
                 "result": f"FAILED ({f_reason})",
                 "fail_detail": f_reason,
                 "status": "FAILED",
@@ -149,7 +185,7 @@ def fetch_ctg_institute(
     session: Optional[requests.Session] = None,
     eiin: str = "",
     proxy: Optional[str] = None,
-    timeout: float = 12.0,
+    timeout: float = 10.0,
     max_retries: int = 3
 ) -> Optional[Dict[str, Any]]:
     """
@@ -195,7 +231,7 @@ def fetch_ctg_institute(
                     return parsed
         except Exception:
             if attempt < max_retries:
-                time.sleep(0.4 * attempt)
+                time.sleep(0.3 * attempt)
     return None
 
 
@@ -251,6 +287,8 @@ def parse_ctg_student_html(html_text: str, roll: str) -> Optional[Dict[str, Any]
     subjects = []
     ca_subjects = []
     is_ca_section = False
+    total_marks = 0
+    has_marks = False
 
     grade_tbl = soup.find("table", class_="tftable2")
     if grade_tbl:
@@ -263,6 +301,13 @@ def parse_ctg_student_html(html_text: str, roll: str) -> Optional[Dict[str, Any]
                 code, sub_name, grade_mark = cells[0], cells[1], cells[2]
                 if code.lower() in ["code", "subject", "grade"]:
                     continue
+                
+                m_num = re.search(r'\((\d+)\)|\b(\d+)\b', grade_mark)
+                if m_num and not is_ca_section:
+                    val = int(m_num.group(1) or m_num.group(2))
+                    total_marks += val
+                    has_marks = True
+
                 sub_entry = {
                     "code": code,
                     "subject": sub_name,
@@ -288,6 +333,7 @@ def parse_ctg_student_html(html_text: str, roll: str) -> Optional[Dict[str, Any]
         "institute": institute,
         "result": result_str,
         "gpa": gpa_val,
+        "total_marks": total_marks if has_marks else None,
         "dob": dob,
         "subjects": subjects,
         "ca_subjects": ca_subjects,
