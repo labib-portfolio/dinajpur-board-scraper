@@ -1,0 +1,266 @@
+{
+  "district": "Kurigram",
+  "total_colleges": 20,
+  "colleges": [
+    {
+      "eiin": "122123",
+      "name": "Bhurunga Mari Mohila College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Bhurungamari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/bhurunga-mari-mohila-college/"
+    },
+    {
+      "eiin": "122122",
+      "name": "Bhurungamari Degree College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Bhurungamari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/bhurungamari-degree-college/"
+    },
+    {
+      "eiin": "122127",
+      "name": "Dhol Danga B.l High School And College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Bhurungamari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/dhol-danga-b-l-high-school-and-college/"
+    },
+    {
+      "eiin": "122146",
+      "name": "Rajibpur Degree College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Charrajibpur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/rajibpur-degree-college/"
+    },
+    {
+      "eiin": "122336",
+      "name": "Khalilganj High School & College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Kurigram Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/khalilganj-high-school-college/"
+    },
+    {
+      "eiin": "135337",
+      "name": "Kurigram City College",
+      "district": "Kurigram",
+      "upazila": "Kurigram Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/kurigram-city-college/"
+    },
+    {
+      "eiin": "122331",
+      "name": "Kurigram Govt College",
+      "district": "Kurigram",
+      "upazila": "Kurigram Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/kurigram-govt-college/"
+    },
+    {
+      "eiin": "122330",
+      "name": "Kurigram Govt. Mohila College",
+      "district": "Kurigram",
+      "upazila": "Kurigram Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/kurigram-govt-mohila-college/"
+    },
+    {
+      "eiin": "122272",
+      "name": "Madhya Kumar Pur Girls' School And College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Kurigram Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/madhya-kumar-pur-girls-school-and-college/"
+    },
+    {
+      "eiin": "122454",
+      "name": "Bhitar Banda Drgree College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Nageshwari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/bhitar-banda-drgree-college/"
+    },
+    {
+      "eiin": "135266",
+      "name": "Bhitarbanda Women College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Nageshwari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/bhitarbanda-women-college/"
+    },
+    {
+      "eiin": "122453",
+      "name": "Nageswari Mohila College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Nageshwari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/nageswari-mohila-college/"
+    },
+    {
+      "eiin": "136292",
+      "name": "Kholerhat College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Phulbari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/kholerhat-college/"
+    },
+    {
+      "eiin": "139496",
+      "name": "Rashed Khan Menon College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Phulbari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/rashed-khan-menon-college/"
+    },
+    {
+      "eiin": "136930",
+      "name": "Habibur Rahman Model College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Rajarhat",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/habibur-rahman-model-college/"
+    },
+    {
+      "eiin": "122539",
+      "name": "Nazim Khan High School & College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Rajarhat",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/nazim-khan-high-school-college/"
+    },
+    {
+      "eiin": "122245",
+      "name": "Kurigram Collectorate School And College",
+      "district": "Kurigram",
+      "upazila": "Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/kurigram-collectorate-school-and-college/"
+    },
+    {
+      "eiin": "136492",
+      "name": "Namazer Char College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Ulipur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/namazer-char-college/"
+    },
+    {
+      "eiin": "136925",
+      "name": "Ulipur Adarshaw College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Ulipur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/ulipur-adarshaw-college/"
+    },
+    {
+      "eiin": "122712",
+      "name": "Ulipur M.s. School & College, Kurigram",
+      "district": "Kurigram",
+      "upazila": "Ulipur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/ulipur-m-s-school-college/"
+    }
+  ]
+}

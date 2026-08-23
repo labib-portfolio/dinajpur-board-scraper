@@ -1,0 +1,175 @@
+{
+  "district": "Gaibandha",
+  "total_colleges": 13,
+  "colleges": [
+    {
+      "eiin": "121190",
+      "name": "Ahammad Uddin Shah Shishu Niketan School And College, Gaibandha",
+      "district": "Gaibandha",
+      "upazila": "Gaibandha Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/ahammad-uddin-shah-shishu-niketan-school-and-college/"
+    },
+    {
+      "eiin": "121184",
+      "name": "Gaibandha Govt. College",
+      "district": "Gaibandha",
+      "upazila": "Gaibandha Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/gaibandha-govt-college/"
+    },
+    {
+      "eiin": "121183",
+      "name": "Gaibandha Govt. Mohila College,gaibandha",
+      "district": "Gaibandha",
+      "upazila": "Gaibandha Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/gaibandha-govt-mohila-collegegaibandha/"
+    },
+    {
+      "eiin": "131077",
+      "name": "Gaibandha Sadar Upazila Model School And College",
+      "district": "Gaibandha",
+      "upazila": "Gaibandha Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/gaibandha-sadar-upazila-model-school-college/"
+    },
+    {
+      "eiin": "121189",
+      "name": "Lakshmipur School & College, Gaibandha",
+      "district": "Gaibandha",
+      "upazila": "Gaibandha Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/lakshmipur-school-college/"
+    },
+    {
+      "eiin": "121431",
+      "name": "Basudebpur Chandra Kishore High School And College, Gaibandha",
+      "district": "Gaibandha",
+      "upazila": "Palashbari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/basudebpur-chandra-kishore-high-school-and-college/"
+    },
+    {
+      "eiin": "121426",
+      "name": "Palashbari Govt. College Gaibandha",
+      "district": "Gaibandha",
+      "upazila": "Palashbari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/palashbari-govt-college-gaibandha/"
+    },
+    {
+      "eiin": "121613",
+      "name": "Bonar Para Girls' High School And College, Gaibandha",
+      "district": "Gaibandha",
+      "upazila": "Saghata",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/bonar-para-girls-high-school-and-college/"
+    },
+    {
+      "eiin": "121610",
+      "name": "Bonarpara Degree College, Gaibandha",
+      "district": "Gaibandha",
+      "upazila": "Saghata",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/bonarpara-degree-college/"
+    },
+    {
+      "eiin": "121766",
+      "name": "Chnadipur Fazlul Hoque School And College, Gaibandha",
+      "district": "Gaibandha",
+      "upazila": "Sundarganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/chnadipur-fazlul-hoque-school-and-college/"
+    },
+    {
+      "eiin": "121760",
+      "name": "Dhubni Kanchibari College, Gaibandha",
+      "district": "Gaibandha",
+      "upazila": "Sundarganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/dhubni-kanchibari-college/"
+    },
+    {
+      "eiin": "121764",
+      "name": "Shibram Alhaz Md. Hossain Smrity School & College, Gaibandha",
+      "district": "Gaibandha",
+      "upazila": "Sundarganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/shibram-alhaz-md-hossain-smrity-school-college/"
+    },
+    {
+      "eiin": "121755",
+      "name": "Sundargaj D.w Degree College, Gaibandha",
+      "district": "Gaibandha",
+      "upazila": "Sundarganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/sundargaj-d-w-degree-college/"
+    }
+  ]
+}

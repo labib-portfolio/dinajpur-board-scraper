@@ -1,0 +1,201 @@
+{
+  "district": "Panchagarh",
+  "total_colleges": 15,
+  "colleges": [
+    {
+      "eiin": "125800",
+      "name": "Alowa Khoa S C High School And College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Atwari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/alowa-khoa-s-c-high-school-and-college/"
+    },
+    {
+      "eiin": "125864",
+      "name": "Mirza Gholam Hafiz Degree College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Atwari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/mirza-gholam-hafiz-degree-college/"
+    },
+    {
+      "eiin": "125868",
+      "name": "Boda Pilot High School And College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Boda",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/boda-pilot-high-school-and-college/"
+    },
+    {
+      "eiin": "125976",
+      "name": "Boda Womens College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Boda",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/boda-womens-college/"
+    },
+    {
+      "eiin": "125973",
+      "name": "Pathraj College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Boda",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/pathraj-college/"
+    },
+    {
+      "eiin": "125974",
+      "name": "Sakowa College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Boda",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/sakowa-college/"
+    },
+    {
+      "eiin": "125870",
+      "name": "Sakowa School And College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Boda",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/sakowa-school-and-college/"
+    },
+    {
+      "eiin": "126048",
+      "name": "Bhaulaganj College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Debiganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/bhaulaganj-college/"
+    },
+    {
+      "eiin": "126047",
+      "name": "Debiganj College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Debiganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/debiganj-college/"
+    },
+    {
+      "eiin": "126050",
+      "name": "Debiganj Womens College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Debiganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/debiganj-womens-college/"
+    },
+    {
+      "eiin": "126153",
+      "name": "Dr. Abeda Hafiz Girls' School And College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Panchagarh Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/dr-abeda-hafiz-girls-school-and-college/"
+    },
+    {
+      "eiin": "126154",
+      "name": "Futkibari High School And College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Panchagarh Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/futkibari-high-school-and-college/"
+    },
+    {
+      "eiin": "126148",
+      "name": "Govt. Panchagarh Mohila College",
+      "district": "Panchagarh",
+      "upazila": "Panchagarh Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/govt-panchagarh-mohila-college/"
+    },
+    {
+      "eiin": "126147",
+      "name": "Moqular Rahman Govt. College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Panchagarh Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/moqular-rahman-govt-college-panchagarh/"
+    },
+    {
+      "eiin": "126195",
+      "name": "Kazi Shahabuddin Girls' High School & College, Panchagarh",
+      "district": "Panchagarh",
+      "upazila": "Tetulia",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/kazi-shahabuddin-girls-high-school-college/"
+    }
+  ]
+}

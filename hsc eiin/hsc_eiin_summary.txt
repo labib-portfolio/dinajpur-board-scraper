@@ -1,0 +1,168 @@
+=========================================================================
+       DINAJPUR EDUCATION BOARD — HSC COLLEGE EIIN MASTER LIST
+       Total Verified Colleges: 123 across 8 Districts
+=========================================================================
+
+
+############################# DINAJPUR DISTRICT (16 Colleges) #############################
+
+EIIN       | UPAZILA                | COLLEGE NAME
+--------------------------------------------------------------------------------
+120127     | Birganj                | Birgonj Degree College, Dinajpur
+120272     | Bochaganj              | Hazi Danesh College, Dinajpur
+120950     | Chirirbandar           | Amena Baki Resdential Model School And College, Dinajpur
+120733     | Dinajpur Sadar         | Chandganj A. S. M. Bl School And College, Dinajpur
+120711     | Dinajpur Sadar         | Chehel Gazi Shiksha Niketan School And College, Dinajpur
+120818     | Dinajpur Sadar         | Dinajpur Govt. College
+135372     | Dinajpur Sadar         | Holy Land College, Dinajpur
+120723     | Dinajpur Sadar         | Saint Philips High School And College, Dinajpur
+120769     | Dinajpur Sadar         | Shaheed Jamir Uddin Girls' School And College, Dinajpur
+120459     | Ghoraghat              | Ghoraghat K C Pilot School And College, Dinajpur
+120947     | Nawabganj              | Bhaduria School And College, Dinajpur
+121064     | Parbatipur             | Cantonment Public School & College, Dinajpur
+121056     | Parbatipur             | Kholahati Degree College, Dinajpur
+121057     | Parbatipur             | Monmathpur Ideal Degree College, Dinajpur
+121059     | Parbatipur             | Parbatipur Degree College, Dinajpur
+138328     | Sadar                  | Mosharaf Hossain Prodhan College
+
+############################# RANGPUR DISTRICT (19 Colleges) #############################
+
+EIIN       | UPAZILA                | COLLEGE NAME
+--------------------------------------------------------------------------------
+135274     | Badarganj              | V I P Shahadat Hossain College, Rangpur
+135349     | Pirgacha               | Khadija Abedin Chowdhurani College, Rangpur
+135403     | Pirgacha               | Ramjan Ali Munshi College, Rangpur
+135304     | Rangpur Sadar          | Arcadia International College, Rangpur
+127378     | Rangpur Sadar          | Border Guard Bangladesh Public School And College, Rangpur
+127500     | Rangpur Sadar          | Cantonment Public School And College, Rangpur
+127503     | Rangpur Sadar          | Collectorate School And College, Rangpur
+127485     | Rangpur Sadar          | Govt. Begum Rokeya College, Rangpur
+127496     | Rangpur Sadar          | Lions School And College Rangpur
+127501     | Rangpur Sadar          | Police Line School And College Rangpur
+127483     | Rangpur Sadar          | Rangpur Cadet College
+133547     | Rangpur Sadar          | Rangpur Govt. City College
+127484     | Rangpur Sadar          | Rangpur Govt. College, Rangpur
+136959     | Rangpur Sadar          | Rangpur Public School And College
+127497     | Rangpur Sadar          | Rcci Public School And College, Rangpur
+131017     | Rangpur Sadar          | Siddique Memorial School And College, Rangpur
+134127     | Rangpur Sadar          | The Millennium Stars School & College, Rangpur
+138217     | Rangpur Sadar          | Wins College, Rangpur
+139058     | Sadar                  | Faiyaz School And College, Rangpur
+
+############################# GAIBANDHA DISTRICT (13 Colleges) #############################
+
+EIIN       | UPAZILA                | COLLEGE NAME
+--------------------------------------------------------------------------------
+121190     | Gaibandha Sadar        | Ahammad Uddin Shah Shishu Niketan School And College, Gaibandha
+121184     | Gaibandha Sadar        | Gaibandha Govt. College
+121183     | Gaibandha Sadar        | Gaibandha Govt. Mohila College,gaibandha
+131077     | Gaibandha Sadar        | Gaibandha Sadar Upazila Model School And College
+121189     | Gaibandha Sadar        | Lakshmipur School & College, Gaibandha
+121431     | Palashbari             | Basudebpur Chandra Kishore High School And College, Gaibandha
+121426     | Palashbari             | Palashbari Govt. College Gaibandha
+121613     | Saghata                | Bonar Para Girls' High School And College, Gaibandha
+121610     | Saghata                | Bonarpara Degree College, Gaibandha
+121766     | Sundarganj             | Chnadipur Fazlul Hoque School And College, Gaibandha
+121760     | Sundarganj             | Dhubni Kanchibari College, Gaibandha
+121764     | Sundarganj             | Shibram Alhaz Md. Hossain Smrity School & College, Gaibandha
+121755     | Sundarganj             | Sundargaj D.w Degree College, Gaibandha
+
+############################# KURIGRAM DISTRICT (20 Colleges) #############################
+
+EIIN       | UPAZILA                | COLLEGE NAME
+--------------------------------------------------------------------------------
+122123     | Bhurungamari           | Bhurunga Mari Mohila College, Kurigram
+122122     | Bhurungamari           | Bhurungamari Degree College, Kurigram
+122127     | Bhurungamari           | Dhol Danga B.l High School And College, Kurigram
+122146     | Charrajibpur           | Rajibpur Degree College, Kurigram
+122336     | Kurigram Sadar         | Khalilganj High School & College, Kurigram
+135337     | Kurigram Sadar         | Kurigram City College
+122331     | Kurigram Sadar         | Kurigram Govt College
+122330     | Kurigram Sadar         | Kurigram Govt. Mohila College
+122272     | Kurigram Sadar         | Madhya Kumar Pur Girls' School And College, Kurigram
+122454     | Nageshwari             | Bhitar Banda Drgree College, Kurigram
+135266     | Nageshwari             | Bhitarbanda Women College, Kurigram
+122453     | Nageshwari             | Nageswari Mohila College, Kurigram
+136292     | Phulbari               | Kholerhat College, Kurigram
+139496     | Phulbari               | Rashed Khan Menon College, Kurigram
+136930     | Rajarhat               | Habibur Rahman Model College, Kurigram
+122539     | Rajarhat               | Nazim Khan High School & College, Kurigram
+122245     | Sadar                  | Kurigram Collectorate School And College
+136492     | Ulipur                 | Namazer Char College, Kurigram
+136925     | Ulipur                 | Ulipur Adarshaw College, Kurigram
+122712     | Ulipur                 | Ulipur M.s. School & College, Kurigram
+
+############################# NILPHAMARI DISTRICT (15 Colleges) #############################
+
+EIIN       | UPAZILA                | COLLEGE NAME
+--------------------------------------------------------------------------------
+124792     | Dimla                  | Dohol Para Adarsha High School And College, Nilphamari
+136507     | Dimla                  | Zila Parishad School And College, Nilphamari
+124844     | Domar Upazila          | Chilahati Girls' High School And College, Nilphamari
+125057     | Kishorganj             | Rana Chandi High School And College, Nilphamari
+125195     | Nilphamari Sadar       | Collectorate Public School & College Nilphamari
+125189     | Nilphamari Sadar       | Nilphamari Govt College
+125188     | Nilphamari Sadar       | Nilphamari Govt. Womens College
+135420     | Nilphamari Sadar       | Nilphamari Model College
+125248     | Syedpur                | Cantonment Public School And College Saidpur, Nilphamari
+125242     | Syedpur                | Govt. Saidpur Intermediate Technical College, Nilphamari
+125212     | Syedpur                | Lakshmanpur High School And College, Nilphamari
+125204     | Syedpur                | Lions School And College, Nilphamari
+125252     | Syedpur                | Saidpur Adarsha Girls' School & College, Nilphamari
+125201     | Syedpur                | Saidpur Pilot Girls' School And College, Nilphamari
+125251     | Syedpur                | Sunflowar School & College, Nilphamari
+
+############################# LALMONIRHAT DISTRICT (13 Colleges) #############################
+
+EIIN       | UPAZILA                | COLLEGE NAME
+--------------------------------------------------------------------------------
+122772     | Aditmari               | Aditmari Kateswar Barman Girls' High School And College, Lalmonirhat
+122719     | Aditmari               | Kumarirhat S.c.bl High School And College, Lalmonirhat
+122827     | Hatibandha             | Daikhawa Adarsha College, Lalmonirhat
+137992     | Hatibandha             | Daikhawa Mohila College, Lalmonirhat
+135348     | Hatibandha             | Fakirpara Adarsha Mohila College, Lalmonirhat
+122892     | Kaliganj               | Karim Uddin Pabalic Degree College, Lalmonirhat
+122893     | Kaliganj               | Shamsuddin Kamaruddin Degree College , Chaparhat, Lalmonirhat
+134762     | Kaliganj               | Shial Khowa College, Lalmonirhat
+122891     | Kaliganj               | Uttar Bangla College, Lalmonirhat
+135300     | Kaliganj               | Zamena Rowshan Ara Mohila College, Lalmonirhat
+136916     | Lalmonirhat Sadar      | Border Guard Public College, Lalmonirhat
+122989     | Lalmonirhat Sadar      | Majida Khatun Govt. Mohila College, Lalmonirhat
+131015     | Lalmonirhat Sadar      | Phakal Police Lines School & College, Lalmonirhat
+
+############################# THAKURGAON DISTRICT (12 Colleges) #############################
+
+EIIN       | UPAZILA                | COLLEGE NAME
+--------------------------------------------------------------------------------
+128771     | Baliadangi             | Kalmegh R. Ali High School And College, Thakurgaon
+128693     | Baliadangi             | Ratnai Bogulabari High School And College, Thakurgaon
+128768     | Baliadangi             | Samiruddin Smriti College, Thakurgaon
+128965     | Pirganj                | Pirganj Govt. College, Thakurgaon
+132981     | Ranisankail            | Ranisonkail B M College, Thakurgaon
+129071     | Ranisankail            | Ranisonkail Degree College, Thakurgaon
+128981     | Ranisankail            | Routhnagar Bl High School And College, Thakurgaon
+128700     | Sadar                  | Morol Hat Janata School And College, Thakurgaon
+129175     | Thakurgaon Sadar       | Kadam Rasul Hat High School And College, Thakurgaon
+129305     | Thakurgaon Sadar       | Thakurgaon Govt College. Thakurgaon
+129308     | Thakurgaon Sadar       | Thakurgaon Govt. Mohila College
+129309     | Thakurgaon Sadar       | Thakurgaon Road College
+
+############################# PANCHAGARH DISTRICT (15 Colleges) #############################
+
+EIIN       | UPAZILA                | COLLEGE NAME
+--------------------------------------------------------------------------------
+125800     | Atwari                 | Alowa Khoa S C High School And College, Panchagarh
+125864     | Atwari                 | Mirza Gholam Hafiz Degree College, Panchagarh
+125868     | Boda                   | Boda Pilot High School And College, Panchagarh
+125976     | Boda                   | Boda Womens College, Panchagarh
+125973     | Boda                   | Pathraj College, Panchagarh
+125974     | Boda                   | Sakowa College, Panchagarh
+125870     | Boda                   | Sakowa School And College, Panchagarh
+126048     | Debiganj               | Bhaulaganj College, Panchagarh
+126047     | Debiganj               | Debiganj College, Panchagarh
+126050     | Debiganj               | Debiganj Womens College, Panchagarh
+126153     | Panchagarh Sadar       | Dr. Abeda Hafiz Girls' School And College, Panchagarh
+126154     | Panchagarh Sadar       | Futkibari High School And College, Panchagarh
+126148     | Panchagarh Sadar       | Govt. Panchagarh Mohila College
+126147     | Panchagarh Sadar       | Moqular Rahman Govt. College, Panchagarh
+126195     | Tetulia                | Kazi Shahabuddin Girls' High School & College, Panchagarh

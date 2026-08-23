@@ -1,0 +1,161 @@
+{
+  "district": "Thakurgaon",
+  "total_colleges": 12,
+  "colleges": [
+    {
+      "eiin": "128771",
+      "name": "Kalmegh R. Ali High School And College, Thakurgaon",
+      "district": "Thakurgaon",
+      "upazila": "Baliadangi",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/kalmegh-r-ali-high-school-and-college/"
+    },
+    {
+      "eiin": "128693",
+      "name": "Ratnai Bogulabari High School And College, Thakurgaon",
+      "district": "Thakurgaon",
+      "upazila": "Baliadangi",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/ratnai-bogulabari-high-school-and-college/"
+    },
+    {
+      "eiin": "128768",
+      "name": "Samiruddin Smriti College, Thakurgaon",
+      "district": "Thakurgaon",
+      "upazila": "Baliadangi",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/samiruddin-smriti-college/"
+    },
+    {
+      "eiin": "128965",
+      "name": "Pirganj Govt. College, Thakurgaon",
+      "district": "Thakurgaon",
+      "upazila": "Pirganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/pirganj-govt-college/"
+    },
+    {
+      "eiin": "132981",
+      "name": "Ranisonkail B M College, Thakurgaon",
+      "district": "Thakurgaon",
+      "upazila": "Ranisankail",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/ranisonkail-b-m-college/"
+    },
+    {
+      "eiin": "129071",
+      "name": "Ranisonkail Degree College, Thakurgaon",
+      "district": "Thakurgaon",
+      "upazila": "Ranisankail",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/ranisonkail-degree-college/"
+    },
+    {
+      "eiin": "128981",
+      "name": "Routhnagar Bl High School And College, Thakurgaon",
+      "district": "Thakurgaon",
+      "upazila": "Ranisankail",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/routhnagar-bl-high-school-and-college/"
+    },
+    {
+      "eiin": "128700",
+      "name": "Morol Hat Janata School And College, Thakurgaon",
+      "district": "Thakurgaon",
+      "upazila": "Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES"
+      ],
+      "url": "https://www.sohopathi.com/morol-hat-janata-school-and-college/"
+    },
+    {
+      "eiin": "129175",
+      "name": "Kadam Rasul Hat High School And College, Thakurgaon",
+      "district": "Thakurgaon",
+      "upazila": "Thakurgaon Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/kadam-rasul-hat-high-school-and-college/"
+    },
+    {
+      "eiin": "129305",
+      "name": "Thakurgaon Govt College. Thakurgaon",
+      "district": "Thakurgaon",
+      "upazila": "Thakurgaon Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/thakurgaon-govt-college-thakurgaon/"
+    },
+    {
+      "eiin": "129308",
+      "name": "Thakurgaon Govt. Mohila College",
+      "district": "Thakurgaon",
+      "upazila": "Thakurgaon Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/thakurgaon-govt-mohila-college/"
+    },
+    {
+      "eiin": "129309",
+      "name": "Thakurgaon Road College",
+      "district": "Thakurgaon",
+      "upazila": "Thakurgaon Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/thakurgaon-road-college/"
+    }
+  ]
+}

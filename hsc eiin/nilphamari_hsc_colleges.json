@@ -1,0 +1,199 @@
+{
+  "district": "Nilphamari",
+  "total_colleges": 15,
+  "colleges": [
+    {
+      "eiin": "124792",
+      "name": "Dohol Para Adarsha High School And College, Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Dimla",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/dohol-para-adarsha-high-school-and-college/"
+    },
+    {
+      "eiin": "136507",
+      "name": "Zila Parishad School And College, Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Dimla",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/zila-parishad-school-and-college/"
+    },
+    {
+      "eiin": "124844",
+      "name": "Chilahati Girls' High School And College, Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Domar Upazila",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/chilahati-girls-high-school-and-college/"
+    },
+    {
+      "eiin": "125057",
+      "name": "Rana Chandi High School And College, Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Kishorganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/rana-chandi-high-school-and-college/"
+    },
+    {
+      "eiin": "125195",
+      "name": "Collectorate Public School & College Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Nilphamari Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/collectorate-public-school-college-nilphamari/"
+    },
+    {
+      "eiin": "125189",
+      "name": "Nilphamari Govt College",
+      "district": "Nilphamari",
+      "upazila": "Nilphamari Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/nilphamari-govt-college/"
+    },
+    {
+      "eiin": "125188",
+      "name": "Nilphamari Govt. Womens College",
+      "district": "Nilphamari",
+      "upazila": "Nilphamari Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/nilphamari-govt-womens-college/"
+    },
+    {
+      "eiin": "135420",
+      "name": "Nilphamari Model College",
+      "district": "Nilphamari",
+      "upazila": "Nilphamari Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/nilphamari-model-college/"
+    },
+    {
+      "eiin": "125248",
+      "name": "Cantonment Public School And College Saidpur, Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Syedpur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/cantonment-public-school-and-college-saidpur/"
+    },
+    {
+      "eiin": "125242",
+      "name": "Govt. Saidpur Intermediate Technical College, Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Syedpur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE"
+      ],
+      "url": "https://www.sohopathi.com/govt-saidpur-intermediate-technical-college/"
+    },
+    {
+      "eiin": "125212",
+      "name": "Lakshmanpur High School And College, Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Syedpur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/lakshmanpur-high-school-and-college/"
+    },
+    {
+      "eiin": "125204",
+      "name": "Lions School And College, Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Syedpur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/lions-school-and-college/"
+    },
+    {
+      "eiin": "125252",
+      "name": "Saidpur Adarsha Girls' School & College, Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Syedpur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/saidpur-adarsha-girls-school-college/"
+    },
+    {
+      "eiin": "125201",
+      "name": "Saidpur Pilot Girls' School And College, Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Syedpur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/saidpur-pilot-girls-school-and-college/"
+    },
+    {
+      "eiin": "125251",
+      "name": "Sunflowar School & College, Nilphamari",
+      "district": "Nilphamari",
+      "upazila": "Syedpur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/sunflowar-school-college/"
+    }
+  ]
+}

@@ -1,0 +1,213 @@
+{
+  "district": "Dinajpur",
+  "total_colleges": 16,
+  "colleges": [
+    {
+      "eiin": "120127",
+      "name": "Birgonj Degree College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Birganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/birgonj-degree-college/"
+    },
+    {
+      "eiin": "120272",
+      "name": "Hazi Danesh College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Bochaganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/hazi-danesh-college/"
+    },
+    {
+      "eiin": "120950",
+      "name": "Amena Baki Resdential Model School And College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Chirirbandar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/amena-baki-resdential-model-school-and-college/"
+    },
+    {
+      "eiin": "120733",
+      "name": "Chandganj A. S. M. Bl School And College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Dinajpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/chandganj-a-s-m-bl-school-and-college/"
+    },
+    {
+      "eiin": "120711",
+      "name": "Chehel Gazi Shiksha Niketan School And College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Dinajpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/chehel-gazi-shiksha-niketan-school-and-college/"
+    },
+    {
+      "eiin": "120818",
+      "name": "Dinajpur Govt. College",
+      "district": "Dinajpur",
+      "upazila": "Dinajpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/dinajpur-govt-college/"
+    },
+    {
+      "eiin": "135372",
+      "name": "Holy Land College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Dinajpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/holy-land-college/"
+    },
+    {
+      "eiin": "120723",
+      "name": "Saint Philips High School And College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Dinajpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/saint-philips-high-school-and-college/"
+    },
+    {
+      "eiin": "120769",
+      "name": "Shaheed Jamir Uddin Girls' School And College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Dinajpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/shaheed-jamir-uddin-girls-school-and-college/"
+    },
+    {
+      "eiin": "120459",
+      "name": "Ghoraghat K C Pilot School And College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Ghoraghat",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/ghoraghat-k-c-pilot-school-and-college/"
+    },
+    {
+      "eiin": "120947",
+      "name": "Bhaduria School And College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Nawabganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/bhaduria-school-and-college/"
+    },
+    {
+      "eiin": "121064",
+      "name": "Cantonment Public School & College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Parbatipur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/cantonment-public-school-college-dinajpur-education-hub/"
+    },
+    {
+      "eiin": "121056",
+      "name": "Kholahati Degree College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Parbatipur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/kholahati-degree-college/"
+    },
+    {
+      "eiin": "121057",
+      "name": "Monmathpur Ideal Degree College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Parbatipur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/monmathpur-ideal-degree-college-2/"
+    },
+    {
+      "eiin": "121059",
+      "name": "Parbatipur Degree College, Dinajpur",
+      "district": "Dinajpur",
+      "upazila": "Parbatipur",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/parbatipur-degree-college/"
+    },
+    {
+      "eiin": "138328",
+      "name": "Mosharaf Hossain Prodhan College",
+      "district": "Dinajpur",
+      "upazila": "Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/mosharaf-hossain-prodhan-college/"
+    }
+  ]
+}

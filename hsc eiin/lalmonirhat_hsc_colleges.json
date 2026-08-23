@@ -1,0 +1,175 @@
+{
+  "district": "Lalmonirhat",
+  "total_colleges": 13,
+  "colleges": [
+    {
+      "eiin": "122772",
+      "name": "Aditmari Kateswar Barman Girls' High School And College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Aditmari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/aditmari-kateswar-barman-girls-high-school-and-college/"
+    },
+    {
+      "eiin": "122719",
+      "name": "Kumarirhat S.c.bl High School And College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Aditmari",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/kumarirhat-s-c-bl-high-school-and-college/"
+    },
+    {
+      "eiin": "122827",
+      "name": "Daikhawa Adarsha College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Hatibandha",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/daikhawa-adarsha-college/"
+    },
+    {
+      "eiin": "137992",
+      "name": "Daikhawa Mohila College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Hatibandha",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/daikhawa-mohila-college/"
+    },
+    {
+      "eiin": "135348",
+      "name": "Fakirpara Adarsha Mohila College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Hatibandha",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/fakirpara-adarsha-mohila-college/"
+    },
+    {
+      "eiin": "122892",
+      "name": "Karim Uddin Pabalic Degree College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Kaliganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/karim-uddin-pabalic-degree-college/"
+    },
+    {
+      "eiin": "122893",
+      "name": "Shamsuddin Kamaruddin Degree College , Chaparhat, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Kaliganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/shamsuddin-kamaruddin-degree-college-chaparhat/"
+    },
+    {
+      "eiin": "134762",
+      "name": "Shial Khowa College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Kaliganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/shial-khowa-college/"
+    },
+    {
+      "eiin": "122891",
+      "name": "Uttar Bangla College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Kaliganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/uttar-bangla-college/"
+    },
+    {
+      "eiin": "135300",
+      "name": "Zamena Rowshan Ara Mohila College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Kaliganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/zamena-rowshan-ara-mohila-college/"
+    },
+    {
+      "eiin": "136916",
+      "name": "Border Guard Public College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Lalmonirhat Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/border-guard-public-college/"
+    },
+    {
+      "eiin": "122989",
+      "name": "Majida Khatun Govt. Mohila College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Lalmonirhat Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/majida-khatun-govt-mohila-college/"
+    },
+    {
+      "eiin": "131015",
+      "name": "Phakal Police Lines School & College, Lalmonirhat",
+      "district": "Lalmonirhat",
+      "upazila": "Lalmonirhat Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/phakal-police-lines-school-college-lalmonirhat/"
+    }
+  ]
+}

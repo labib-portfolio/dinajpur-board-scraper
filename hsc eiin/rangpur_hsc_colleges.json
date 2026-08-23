@@ -1,0 +1,249 @@
+{
+  "district": "Rangpur",
+  "total_colleges": 19,
+  "colleges": [
+    {
+      "eiin": "135274",
+      "name": "V I P Shahadat Hossain College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Badarganj",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/v-i-p-shahadat-hossain-college/"
+    },
+    {
+      "eiin": "135349",
+      "name": "Khadija Abedin Chowdhurani College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Pirgacha",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/khadija-abedin-chowdhurani-college/"
+    },
+    {
+      "eiin": "135403",
+      "name": "Ramjan Ali Munshi College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Pirgacha",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/ramjan-ali-munshi-college/"
+    },
+    {
+      "eiin": "135304",
+      "name": "Arcadia International College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/arcadia-international-college/"
+    },
+    {
+      "eiin": "127378",
+      "name": "Border Guard Bangladesh Public School And College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/border-guard-bangladesh-public-school-and-college-rangpur/"
+    },
+    {
+      "eiin": "127500",
+      "name": "Cantonment Public School And College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/cantonment-public-school-and-college-rangpur/"
+    },
+    {
+      "eiin": "127503",
+      "name": "Collectorate School And College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/collectorate-school-and-college/"
+    },
+    {
+      "eiin": "127485",
+      "name": "Govt. Begum Rokeya College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/govt-begum-rokeya-college-rangpur/"
+    },
+    {
+      "eiin": "127496",
+      "name": "Lions School And College Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/lions-school-and-college-rangpur/"
+    },
+    {
+      "eiin": "127501",
+      "name": "Police Line School And College Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/police-line-school-and-college-rangpur/"
+    },
+    {
+      "eiin": "127483",
+      "name": "Rangpur Cadet College",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/rangpur-cadet-college/"
+    },
+    {
+      "eiin": "133547",
+      "name": "Rangpur Govt. City College",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/rangpur-govt-city-college/"
+    },
+    {
+      "eiin": "127484",
+      "name": "Rangpur Govt. College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/rangpur-govt-college-rangpur/"
+    },
+    {
+      "eiin": "136959",
+      "name": "Rangpur Public School And College",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/rangpur-public-school-and-college/"
+    },
+    {
+      "eiin": "127497",
+      "name": "Rcci Public School And College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/rcci-public-school-and-college/"
+    },
+    {
+      "eiin": "131017",
+      "name": "Siddique Memorial School And College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/siddique-memorial-school-and-college/"
+    },
+    {
+      "eiin": "134127",
+      "name": "The Millennium Stars School & College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/the-millennium-stars-school-college/"
+    },
+    {
+      "eiin": "138217",
+      "name": "Wins College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Rangpur Sadar",
+      "board": "DINAJPUR",
+      "streams": [
+        "SCIENCE",
+        "HUMANITIES",
+        "BUSINESS STUDIES"
+      ],
+      "url": "https://www.sohopathi.com/wins-college-rangpur/"
+    },
+    {
+      "eiin": "139058",
+      "name": "Faiyaz School And College, Rangpur",
+      "district": "Rangpur",
+      "upazila": "Sadar",
+      "board": "DINAJPUR",
+      "streams": [],
+      "url": "https://www.sohopathi.com/faiyaz-school-and-college-rangpur/"
+    }
+  ]
+}
