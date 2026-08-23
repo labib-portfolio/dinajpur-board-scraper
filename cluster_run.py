@@ -83,38 +83,151 @@ PROXY_SOURCES = [
 ]
 
 class FastProxyPool:
+    SOURCES = [
+        'https://api.proxyscrape.com/v4/free-proxy-list/get?request=display_proxies&proxy_format=protocolipport&format=text',
+        'https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http,https&timeout=3000&ssl=all&anonymity=all',
+        'https://raw.githubusercontent.com/roosterkid/openproxylist/main/HTTPS_RAW.txt',
+        'https://raw.githubusercontent.com/prxchk/proxy-list/main/https.txt',
+        'https://raw.githubusercontent.com/prxchk/proxy-list/main/http.txt',
+        'https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/all.txt',
+        'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt',
+        'https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/http/data.txt',
+        'https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/protocols/https/data.txt',
+        'https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/master/http.txt',
+        'https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/master/https.txt',
+        'https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt',
+        'https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/https.txt',
+        'https://raw.githubusercontent.com/SevenworksDev/proxy-list/main/proxies/http.txt',
+        'https://raw.githubusercontent.com/SevenworksDev/proxy-list/main/proxies/https.txt',
+        'https://raw.githubusercontent.com/mertguvencli/http-proxy-list/main/proxy-list/data.txt',
+        'https://raw.githubusercontent.com/MuRongPIG/Proxy-Master-List/main/http.txt',
+        'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt',
+        'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/https.txt',
+        'https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/http.txt',
+        'https://raw.githubusercontent.com/sunny9577/proxy-scraper/master/generated/http_proxies.txt'
+    ]
+
     def __init__(self):
         self.proxies: List[str] = []
         self.cache_file = os.path.join(BASE_DIR, "working_proxies.txt")
+        self.webshare_file = os.path.join(BASE_DIR, "webshare_proxies.txt")
 
-    def load_and_verify(self, max_candidates: int = 2500, max_valid: int = 250) -> List[str]:
-        # 1. Instantly load from local verified proxy cache if available (0.00s startup)
-        if os.path.exists(self.cache_file):
+    def _load_webshare(self) -> List[str]:
+        """Load dedicated Webshare proxies (always highest priority)."""
+        if os.path.exists(self.webshare_file):
             try:
-                with open(self.cache_file, "r", encoding="utf-8") as f:
-                    cached = [line.strip() for line in f if ":" in line.strip()]
-                if len(cached) >= 15:
-                    self.proxies = cached[:max_valid]
-                    return self.proxies
+                with open(self.webshare_file, "r", encoding="utf-8") as f:
+                    ws = [l.strip() for l in f if ":" in l.strip() and not l.strip().startswith("#")]
+                return ws
+            except Exception:
+                pass
+        return []
+
+    def _test_proxy(self, p: str, test_url: str, timeout: float = 2.5) -> Optional[tuple]:
+        """Test a single proxy. Returns (ip, latency) if alive, None if dead."""
+        import urllib3
+        urllib3.disable_warnings()
+        t0 = time.time()
+        try:
+            r = requests.get(
+                test_url,
+                proxies={"http": f"http://{p}", "https": f"http://{p}"},
+                timeout=timeout,
+                verify=False
+            )
+            if r.status_code == 200 and "Student Result" in r.text:
+                return (p, time.time() - t0)
+        except Exception:
+            pass
+        return None
+
+    def _count_alive(self, proxies: List[str], test_url: str) -> int:
+        """Quick health check: count how many proxies in a list are still alive."""
+        import concurrent.futures
+        alive = 0
+        sample = proxies[:30]  # Test a sample of 30 for speed
+        with concurrent.futures.ThreadPoolExecutor(max_workers=30) as ex:
+            results = list(ex.map(lambda p: self._test_proxy(p, test_url, 2.5), sample))
+        alive = sum(1 for r in results if r is not None)
+        return alive
+
+    def _harvest_fresh(self, test_url: str, needed: int = 40) -> List[str]:
+        """Scrape and verify fresh proxies from all sources."""
+        import re, concurrent.futures
+        print(f"\r{DIM}  Harvesting fresh proxies from {len(self.SOURCES)} sources...{RESET}", end="", flush=True)
+        candidates = set()
+        for s in self.SOURCES:
+            try:
+                r = requests.get(s, timeout=3.0)
+                if r.status_code == 200:
+                    found = re.findall(r'[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}:[0-9]{2,5}', r.text)
+                    candidates.update(found)
             except Exception:
                 pass
 
-        # 2. Run fast async verification across 35 sources
-        try:
-            import asyncio
-            from engine.proxy_manager import harvest_and_verify_proxies
-            valid = asyncio.run(harvest_and_verify_proxies(needed=max_valid, max_candidates=max_candidates))
-            if valid:
-                self.proxies = valid[:max_valid]
-                try:
-                    with open(self.cache_file, "w", encoding="utf-8") as f:
-                        f.write("\n".join(self.proxies))
-                except Exception:
-                    pass
-                return self.proxies
-        except Exception:
-            pass
+        verified = []
+        with concurrent.futures.ThreadPoolExecutor(max_workers=300) as ex:
+            futs = [ex.submit(self._test_proxy, p, test_url, 2.5) for p in list(candidates)[:25000]]
+            for f in concurrent.futures.as_completed(futs):
+                res = f.result()
+                if res:
+                    verified.append(res)
+                    print(f"\r{DIM}  Found {len(verified)} fresh proxies...{RESET}", end="", flush=True)
+                    if len(verified) >= needed:
+                        for fut in futs:
+                            fut.cancel()
+                        break
 
+        verified.sort(key=lambda x: x[1])
+        return [p for p, _ in verified]
+
+    def load_and_verify(self, max_valid: int = 250) -> List[str]:
+        from engine.fast_student_scraper import ENDPOINT
+        test_url = ENDPOINT.format(roll='183509')
+
+        # 1. Always load Webshare dedicated proxies first (permanent, highest priority)
+        webshare = self._load_webshare()
+
+        # 2. Load cached public proxies
+        cached = []
+        if os.path.exists(self.cache_file):
+            try:
+                with open(self.cache_file, "r", encoding="utf-8") as f:
+                    cached = [l.strip() for l in f if ":" in l.strip()]
+            except Exception:
+                pass
+
+        # 3. Health-check existing pool — if too many dead, auto-refresh
+        combined = list(dict.fromkeys(webshare + cached))
+        need_refresh = True
+
+        if combined:
+            print(f"\r{DIM}  Checking proxy health ({len(combined)} cached)...{RESET}", end="", flush=True)
+            alive_count = self._count_alive(combined, test_url)
+            # Only skip refresh if at least 15 working proxies exist
+            if alive_count >= 15:
+                need_refresh = False
+                print(f"\r{GREEN}  Pool healthy: {alive_count}+ live proxies confirmed.{RESET}           ", flush=True)
+            else:
+                print(f"\r{YELLOW}  Only {alive_count} live proxies — auto-refreshing...{RESET}        ", flush=True)
+
+        # 4. Harvest fresh proxies if needed
+        if need_refresh:
+            fresh = self._harvest_fresh(test_url, needed=40)
+            # Merge: Webshare always first, then fresh, then any surviving cached
+            combined = list(dict.fromkeys(webshare + fresh + cached))
+            # Save updated cache (Webshare excluded — they go in their own file)
+            public_pool = [p for p in combined if p not in webshare]
+            try:
+                with open(self.cache_file, "w", encoding="utf-8") as f:
+                    for p in public_pool[:max_valid]:
+                        f.write(p + "\n")
+            except Exception:
+                pass
+            ws_label = f" (+{len(webshare)} Webshare)" if webshare else ""
+            print(f"\r{GREEN}  Refreshed: {len(fresh)} new public proxies{ws_label} ready!{RESET}      ", flush=True)
+
+        self.proxies = combined[:max_valid]
         return self.proxies
 
 def print_banner():
@@ -168,7 +281,7 @@ def run_scraper_cli():
     
     proxy_pool = FastProxyPool()
     print(f"{DIM}Checking dynamic proxy pool for zero rate limits...{RESET}", end="", flush=True)
-    proxies = proxy_pool.load_and_verify(max_candidates=4000, max_valid=250)
+    proxies = proxy_pool.load_and_verify(max_valid=250)
     num_workers = min(50, len(proxies)) if len(proxies) >= 35 else max(25, len(proxies))
     spare_proxies = max(0, len(proxies) - num_workers)
     addon_text = f" ({num_workers} Workers [35 Base + 15 Speed Addon] + {spare_proxies} Standby Spares)"

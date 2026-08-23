@@ -1,0 +1,5 @@
+# Webshare dedicated proxies — paste your 10 proxies here (ip:port format)
+# Example:
+# 154.195.27.14:9020
+# 154.195.27.15:9020
+# These are loaded FIRST and always take priority over free proxies.
