@@ -332,17 +332,15 @@ class FastProxyPool:
         # 5. Combined Master Pool: Dedicated + Fresh Public
         combined_pool = list(dict.fromkeys(webshare + [p for p, _ in verified_public]))
         self.proxies = combined_pool[:max_valid]
-        sys.stdout.write(f"\r{GREEN}✓ Active Proxy Engine: {len(self.proxies)} Total Live Nodes ({len(webshare)} Dedicated + {len(verified_public)} Fresh 200 OK Public)!{RESET}\n\n")
-        sys.stdout.flush()
         return self.proxies
 
 def print_banner():
     print(f"\n{CYAN}┌───────────────────────────────────────────────────────────┐{RESET}")
-    print(f"{CYAN}│{RESET}  {BOLD}Dinajpur Board Result Scraper 2026 — High-Speed Engine{RESET}   {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {BOLD}Bangladesh Education Board Result Scraper 2026 Engine{RESET}    {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}100% Guaranteed Roll Extraction • 50 Parallel Workers{RESET}     {CYAN}│{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}Zero Webhook Drops • Real-time Upazilla JSON Persistence{RESET}   {CYAN}│{RESET}")
-    print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n")
+    print(f"{CYAN}│{RESET}  {DIM}Dinajpur Board & Chittagong Board Multi-Engine Support{RESET}    {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}100% Guaranteed Roll Extraction • Multi-Threaded Proxies{RESET}  {CYAN}│{RESET}")
+    print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n", flush=True)
 
 def get_eiin_inputs() -> List[str]:
     print(f"{BOLD}Enter EIIN number(s) (space, comma, or newline separated).{RESET}")
@@ -371,6 +369,43 @@ def format_progress_bar(current: int, total: int, width: int = 20) -> str:
     return f"[{'█' * filled}{'░' * (width - filled)}]"
 
 def run_scraper_cli():
+    # Check CLI arguments for board routing
+    if "--board" in sys.argv:
+        b_idx = sys.argv.index("--board")
+        if b_idx + 1 < len(sys.argv):
+            b_val = sys.argv[b_idx + 1].lower()
+            if any(k in b_val for k in ["ctg", "chittagong", "chattogram"]):
+                from run_ctg import run_ctg_scraper, interactive_ctg_menu
+                other_args = [a for i, a in enumerate(sys.argv) if i not in (b_idx, b_idx + 1) and i > 0]
+                arg_rolls = []
+                for a in other_args:
+                    if "-" in a and re.match(r'^\d+-\d+$', a):
+                        s, e = map(int, a.split("-"))
+                        arg_rolls.extend([str(x) for x in range(min(s, e), max(s, e) + 1)])
+                    elif a.isdigit():
+                        arg_rolls.append(a)
+                if arg_rolls:
+                    run_ctg_scraper(arg_rolls)
+                else:
+                    interactive_ctg_menu()
+                return
+
+    print_banner()
+
+    print(f"{BOLD}Select Education Board to Scrape:{RESET}")
+    print(f"  {CYAN}[1]{RESET} Dinajpur Board ({GREEN}results.dinajpurboard.gov.bd{RESET})")
+    print(f"  {CYAN}[2]{RESET} Chittagong Board ({GREEN}sresult.bise-ctg.gov.bd{RESET})")
+    print(f"  {CYAN}[0]{RESET} Exit\n")
+
+    board_choice = input(f"{BOLD}Enter Board [1-2, default 1]: {RESET}").strip()
+    if board_choice in ["2", "ctg", "chittagong", "chattogram"]:
+        from run_ctg import interactive_ctg_menu
+        interactive_ctg_menu()
+        return
+    elif board_choice == "0":
+        print(f"{YELLOW}Exiting.{RESET}")
+        return
+
     # Storage Root Directory: Auto-detect Android Phone Storage or Local PC
     if os.path.exists("/storage/emulated/0"):
         results_root = "/storage/emulated/0/Result Scraper"

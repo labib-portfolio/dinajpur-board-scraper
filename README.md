@@ -1,6 +1,6 @@
-# 🚀 Dinajpur Board Result Scraper 2026
+# 🚀 Bangladesh Education Board Result Scraper 2026
 
-An ultra-fast, concurrent result scraping engine and interactive CLI designed for high-throughput marksheet and student data extraction from the Dinajpur Education Board portal (`results.dinajpurboard.gov.bd`).
+An ultra-fast, concurrent multi-board result scraping engine and interactive CLI designed for high-throughput marksheet and student data extraction from the **Dinajpur Education Board** (`results.dinajpurboard.gov.bd`) and **Chittagong Education Board** (`sresult.bise-ctg.gov.bd`).
 
 ```
 =======================================================================
@@ -15,14 +15,23 @@ An ultra-fast, concurrent result scraping engine and interactive CLI designed fo
 
 ---
 
+## 🌟 Supported Boards & Engines
+
+| Education Board | Portal Endpoint | Method | Key Features |
+| :--- | :--- | :---: | :--- |
+| **Dinajpur Board** | `results.dinajpurboard.gov.bd` | GET / Institutional Search | EIIN-based gazette parsing, roll ranges, multi-threaded proxy pool |
+| **Chittagong Board** | `sresult.bise-ctg.gov.bd` | Direct POST (`result.php`) | **Zero CAPTCHA**, roll range scanner, full subject-wise marksheets |
+
+---
+
 ## 🌟 Key Features
 
-- ⚡ **Ultra-Fast Parallel Engine:** Concurrently scrapes institutional gazettes and individual student marksheets at speeds exceeding **10+ rolls/sec**.
-- 🔄 **Background Proxy Refresher:** Continuously monitors, tests, and hot-swaps live proxies from 35+ global endpoints every 3 minutes in the background.
-- 🛡️ **Dedicated Proxy Support:** Built-in permanent failover pool (`webshare_proxies.txt`) that stays locked in rotation.
-- ⏱️ **Real-Time Rolling Speedometer:** Displays instant completion rate (rolls/sec) calculated over an active 8-second rolling window.
+- ⚡ **Ultra-Fast Parallel Engine:** Concurrently scrapes marksheets at speeds exceeding **15+ rolls/sec**.
+- 🏢 **Multi-Board Architecture:** Switch seamlessly between **Dinajpur Board** and **Chittagong Board**.
+- 🔄 **Automatic Proxy Pool Rotation:** Uses dedicated nodes (`webshare_proxies.txt`) and harvests live public proxies.
+- ⏱️ **Real-Time Rolling Speedometer:** Displays instant completion rate (rolls/sec) calculated over an active rolling window.
 - 📱 **Mobile & Termux Optimized:** Seamlessly runs on Android with automatic output saving to `/storage/emulated/0/Result Scraper/`.
-- 🔁 **100% Result Delivery:** Automatic exponential backoff, circuit-breaker retry on HTTP 429 rate limits, and guaranteed student roll extraction.
+- 🔁 **100% Result Delivery:** Automatic exponential backoff, circuit-breaker retry on rate limits, and real-time JSON persistence.
 
 ---
 
@@ -31,13 +40,15 @@ An ultra-fast, concurrent result scraping engine and interactive CLI designed fo
 ```tree
 .
 ├── engine/                       # Core Scraping & Parser Modules
-│   ├── fast_student_scraper.py   # High-speed student marksheet extraction
+│   ├── ctg_scraper.py            # Chittagong Board high-speed engine
+│   ├── fast_student_scraper.py   # Dinajpur Board marksheet extractor
 │   ├── institute_fetcher.py      # Institute gazette & roll range resolver
 │   ├── captcha_solver.py         # Automated arithmetic CAPTCHA solver
 │   ├── proxy_manager.py          # Dynamic proxy rotators & connection pools
 │   └── parser_utils.py           # HTML-to-JSON structural converter
-├── app.py                        # Web UI Dashboard Server (Flask / SSE)
-├── run.py                        # Standalone Terminal Scraper CLI (Interactive)
+├── app.py                        # Web UI Dashboard Server (FastAPI / SSE)
+├── run.py                        # Multi-Board Interactive Terminal CLI
+├── run_ctg.py                    # Dedicated Chittagong Board Terminal CLI
 ├── webshare_proxies.txt          # Dedicated permanent proxy list
 ├── working_proxies.txt           # Active verified proxy cache
 ├── requirements.txt              # Project dependencies
@@ -69,16 +80,29 @@ termux-setup-storage
 
 ---
 
-### 2. Running the Interactive CLI Scraper (Recommended)
+### 2. Running the Interactive CLI Scraper
 
-To launch the high-speed terminal scraper:
+#### Launch Multi-Board Menu:
 ```bash
 python run.py
 ```
 
-1. **Enter EIIN Numbers:** Type or paste one or multiple 6-digit EIINs (comma or space-separated, e.g. `120818, 127500, 121064`).
-2. **Proxy Auto-Benchmark:** The scraper verifies dedicated proxies and harvests fresh nodes.
-3. **Live Extraction:** Watch real-time institutional progress, live speedometer, and auto-export to JSON.
+#### Launch Chittagong Board Directly:
+```bash
+# Interactive Chittagong CLI
+python run_ctg.py
+
+# Or scrape a specific roll range directly:
+python run_ctg.py 129000-129050
+
+# Or via run.py with --board ctg:
+python run.py --board ctg 129051
+```
+
+#### Launch Dinajpur Board Directly:
+```bash
+python run.py --board dinajpur
+```
 
 ---
 
@@ -94,10 +118,11 @@ Open your browser and visit: **`http://127.0.0.1:8000`**
 
 ## ⚙️ Proxy Configuration
 
-- **Dedicated Proxies:** Add your private proxies (e.g. Webshare) into `webshare_proxies.txt` formatted as `ip:port` or `user:pass@ip:port`.
-- **Public Nodes:** The background daemon will automatically supplement private proxies with verified `200 OK` public nodes.
+- **Dedicated Proxies:** Add your private proxies (e.g. Webshare) into `webshare_proxies.txt` formatted as `ip:port` or `ip:port:user:pass`.
+- **Public Nodes:** The background daemon automatically supplements private proxies with verified `200 OK` public nodes.
 
 ---
 
-## 📄 License
-Open source under the MIT License.
+## 📄 License & Disclaimer
+
+This software is developed strictly for educational, research, and institutional performance analytics purposes.
