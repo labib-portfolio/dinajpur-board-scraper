@@ -123,10 +123,9 @@ class FastProxyPool:
                 pass
         return []
 
-    def _test_proxy(self, p: str, test_url: str, timeout: float = 2.5) -> Optional[tuple]:
-        """Test a single proxy. Returns (ip, latency) if reachable, None if dead.
-        Supports both ip:port and ip:port:user:pass formats.
-        NOTE: HTTP 429 = proxy IS alive (board rate-limited it, not proxy failure).
+    def _test_proxy_strict(self, p: str, test_url: str, timeout: float = 2.2) -> Optional[tuple]:
+        """Test a proxy strictly for HTTP 200 + 'Student Result' on Dinajpur Board.
+        Returns (proxy_str, latency) if successful, None if 429, error, or slow.
         """
         import urllib3
         urllib3.disable_warnings()
@@ -144,42 +143,17 @@ class FastProxyPool:
                 timeout=timeout,
                 verify=False
             )
-            # 200 = success, 429 = proxy reached board (rate limited = proxy alive!)
-            # Both count as the proxy being reachable and working
-            if r.status_code in (200, 429):
+            if r.status_code == 200 and "Student Result" in r.text:
                 return (p, time.time() - t0)
         except Exception:
             pass
         return None
 
-    def _count_alive(self, proxies: List[str], test_url: str) -> int:
-        """Quick health check: count how many proxies in a list are still alive.
-        Dedicated auth proxies (ip:port:user:pass) are trusted without testing —
-        they're from paid services and don't die overnight.
-        Free proxies (ip:port only) are spot-checked.
-        """
-        import concurrent.futures
-        # Separate dedicated (auth) proxies from free ones
-        dedicated = [p for p in proxies if len(p.split(":")) == 4]
-        free = [p for p in proxies if len(p.split(":")) == 2]
-
-        # Trust dedicated proxies — they're from paid services
-        dedicated_count = len(dedicated)
-
-        # Spot-check up to 20 free proxies
-        free_alive = 0
-        if free:
-            sample = free[:20]
-            with concurrent.futures.ThreadPoolExecutor(max_workers=20) as ex:
-                results = list(ex.map(lambda p: self._test_proxy(p, test_url, 2.5), sample))
-            free_alive = sum(1 for r in results if r is not None)
-
-        return dedicated_count + free_alive
-
-    def _harvest_fresh(self, test_url: str, needed: int = 40) -> List[str]:
-        """Scrape and verify fresh proxies from all sources."""
+    def _harvest_fresh(self, test_url: str, needed: int = 50) -> List[tuple]:
+        """Scrape and verify fresh proxies from all sources, keeping only 200 OK."""
         import re, concurrent.futures
-        print(f"\r{DIM}  Harvesting fresh proxies from {len(self.SOURCES)} sources...{RESET}", end="", flush=True)
+        sys.stdout.write(f"\r{DIM}  [1/2] Harvesting proxy lists from {len(self.SOURCES)} global sources...{RESET}")
+        sys.stdout.flush()
         candidates = set()
         for s in self.SOURCES:
             try:
@@ -190,30 +164,36 @@ class FastProxyPool:
             except Exception:
                 pass
 
+        sys.stdout.write(f"\r{DIM}  [2/2] Benchmarking {len(candidates)} candidates on Dinajpur Board...{RESET}")
+        sys.stdout.flush()
+
         verified = []
-        with concurrent.futures.ThreadPoolExecutor(max_workers=300) as ex:
-            futs = [ex.submit(self._test_proxy, p, test_url, 2.5) for p in list(candidates)[:25000]]
+        with concurrent.futures.ThreadPoolExecutor(max_workers=350) as ex:
+            futs = [ex.submit(self._test_proxy_strict, p, test_url, 2.5) for p in list(candidates)[:30000]]
             for f in concurrent.futures.as_completed(futs):
                 res = f.result()
                 if res:
                     verified.append(res)
-                    print(f"\r{DIM}  Found {len(verified)} fresh proxies...{RESET}", end="", flush=True)
+                    sys.stdout.write(f"\r{DIM}  Found {len(verified)}/{needed} ultra-fast 200 OK nodes (Latest: {res[1]:.2f}s)...{RESET}")
+                    sys.stdout.flush()
                     if len(verified) >= needed:
                         for fut in futs:
                             fut.cancel()
                         break
 
         verified.sort(key=lambda x: x[1])
-        return [p for p, _ in verified]
+        return verified
 
-    def load_and_verify(self, max_valid: int = 250) -> List[str]:
+    def load_and_verify(self, max_valid: int = 250, target_working: int = 40) -> List[str]:
+        """Runs on EVERY startup: tests existing proxies strictly for 200 OK,
+        discards dead/429/slow proxies, and harvests fresh high-speed ones to guarantee max speed.
+        """
+        import concurrent.futures
         from engine.fast_student_scraper import ENDPOINT
         test_url = ENDPOINT.format(roll='183509')
 
-        # 1. Always load Webshare dedicated proxies first (permanent, highest priority)
+        # 1. Load Webshare dedicated + cached public proxies
         webshare = self._load_webshare()
-
-        # 2. Load cached public proxies
         cached = []
         if os.path.exists(self.cache_file):
             try:
@@ -222,37 +202,48 @@ class FastProxyPool:
             except Exception:
                 pass
 
-        # 3. Health-check existing pool — if too many dead, auto-refresh
-        combined = list(dict.fromkeys(webshare + cached))
-        need_refresh = True
+        existing_all = list(dict.fromkeys(webshare + cached))
+        verified_existing = []
 
-        if combined:
-            print(f"\r{DIM}  Checking proxy health ({len(combined)} cached)...{RESET}", end="", flush=True)
-            alive_count = self._count_alive(combined, test_url)
-            # Only skip refresh if at least 15 working proxies exist
-            if alive_count >= 15:
-                need_refresh = False
-                print(f"\r{GREEN}  Pool healthy: {alive_count}+ live proxies confirmed.{RESET}           ", flush=True)
-            else:
-                print(f"\r{YELLOW}  Only {alive_count} live proxies — auto-refreshing...{RESET}        ", flush=True)
+        if existing_all:
+            sys.stdout.write(f"\r{DIM}  Benchmarking {len(existing_all)} existing nodes on Dinajpur Board...{RESET}")
+            sys.stdout.flush()
+            with concurrent.futures.ThreadPoolExecutor(max_workers=50) as ex:
+                results = list(ex.map(lambda p: self._test_proxy_strict(p, test_url, 2.2), existing_all))
+            verified_existing = [r for r in results if r is not None]
+            verified_existing.sort(key=lambda x: x[1])
 
-        # 4. Harvest fresh proxies if needed
-        if need_refresh:
-            fresh = self._harvest_fresh(test_url, needed=40)
-            # Merge: Webshare always first, then fresh, then any surviving cached
-            combined = list(dict.fromkeys(webshare + fresh + cached))
-            # Save updated cache (Webshare excluded — they go in their own file)
-            public_pool = [p for p in combined if p not in webshare]
-            try:
-                with open(self.cache_file, "w", encoding="utf-8") as f:
-                    for p in public_pool[:max_valid]:
-                        f.write(p + "\n")
-            except Exception:
-                pass
-            ws_label = f" (+{len(webshare)} Webshare)" if webshare else ""
-            print(f"\r{GREEN}  Refreshed: {len(fresh)} new public proxies{ws_label} ready!{RESET}      ", flush=True)
+        # 2. If we don't have enough ultra-fast 200 OK proxies, harvest fresh ones immediately
+        if len(verified_existing) < target_working:
+            needed = target_working - len(verified_existing) + 15
+            sys.stdout.write(f"\r{YELLOW}  {len(verified_existing)} active nodes — harvesting {needed} fresh high-speed proxies...{RESET}\n")
+            sys.stdout.flush()
+            fresh_verified = self._harvest_fresh(test_url, needed=needed)
+            # Combine and deduplicate
+            seen_ips = set()
+            all_verified = []
+            for p, lat in verified_existing + fresh_verified:
+                ip = p.split(":")[0]
+                if ip not in seen_ips:
+                    seen_ips.add(ip)
+                    all_verified.append((p, lat))
+            all_verified.sort(key=lambda x: x[1])
+        else:
+            all_verified = verified_existing
 
-        self.proxies = combined[:max_valid]
+        # 3. Save sorted high-speed public proxies back to cache file (replacing slow/dead ones)
+        public_to_save = [p for p, _ in all_verified if p not in webshare]
+        try:
+            with open(self.cache_file, "w", encoding="utf-8") as f:
+                for p in public_to_save[:max_valid]:
+                    f.write(p + "\n")
+        except Exception:
+            pass
+
+        self.proxies = [p for p, _ in all_verified[:max_valid]]
+        avg_lat = sum(lat for _, lat in all_verified[:len(self.proxies)]) / max(1, len(self.proxies))
+        sys.stdout.write(f"\r{GREEN}✓ Proxy Engine Ready: {len(self.proxies)} Verified 200 OK Nodes (Avg Latency: {avg_lat:.2f}s)!{RESET}\n\n")
+        sys.stdout.flush()
         return self.proxies
 
 def print_banner():
