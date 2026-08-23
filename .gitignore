@@ -1,9 +1,41 @@
+# Python Bytecode & Cache
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
 .env
 .venv/
 env/
 venv/
+ENV/
+
+# Testing & IDE
 .pytest_cache/
-tests/test_output.json
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Output Data & Scraping Results
+*.jsonl
+*.tmp
+*.log
+scratch/
+cache/
+results/
+upazilla_results/
 test_chunks/
+.session_cache.json
+output.json
+batch_results.json
+scraped_results_all.json
+dinajpur_result.json
+chunk_test_*.json
+scratch_payload.json
+
+# Scratch HTML Dumps
+*.html
+!templates/*.html
