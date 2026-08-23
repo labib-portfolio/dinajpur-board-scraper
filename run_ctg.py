@@ -1,6 +1,6 @@
 """
 Interactive Terminal CLI for Chittagong Education Board (BISE CTG) Result Scraper 2026
-Ultra-Fast Concurrent Scraping Engine (with Automatic Proxy Pool & Real-Time Persistence)
+Ultra-Fast Concurrent Scraping Engine (with Dual-Cache Memory System & Real-Time Persistence)
 Endpoint: https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/individual/result.php
 """
 
@@ -44,7 +44,7 @@ def print_ctg_banner():
     print(f"\n{CYAN}┌───────────────────────────────────────────────────────────┐{RESET}")
     print(f"{CYAN}│{RESET}  {BOLD}Chittagong Board SSC Result Scraper 2026 — High-Speed{RESET}     {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}Direct POST Engine • Full Marksheets • Zero CAPTCHA{RESET}        {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}Dual-Cache Memory Engine • 100% Skip Already Checked Rolls{RESET} {CYAN}│{RESET}")
     print(f"{CYAN}│{RESET}  {DIM}Multi-Threaded Proxy Rotation • Real-Time JSON Export{RESET}     {CYAN}│{RESET}")
     print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n", flush=True)
 
@@ -92,7 +92,12 @@ def create_isolated_session(proxy_ip: Optional[str] = None) -> requests.Session:
     return s
 
 
-def run_ctg_scraper(rolls: List[str], output_dir: Optional[str] = None, output_name: str = "chittagong_results.json"):
+def run_ctg_scraper(
+    rolls: List[str],
+    output_dir: Optional[str] = None,
+    output_name: str = "chittagong_results.json",
+    force_recheck: bool = False
+):
     rolls = sorted(list(dict.fromkeys(str(r).strip() for r in rolls if str(r).strip().isdigit())))
     if not rolls:
         print(f"{RED}[!] No valid 6-digit rolls provided.{RESET}", flush=True)
@@ -112,15 +117,17 @@ def run_ctg_scraper(rolls: List[str], output_dir: Optional[str] = None, output_n
 
     os.makedirs(out_dir, exist_ok=True)
     master_file = os.path.join(out_dir, output_name)
+    cache_file = os.path.join(out_dir, f".{os.path.splitext(output_name)[0]}_memory.json")
 
     proxies = load_proxies()
     print(f"\n=======================================================")
     print(f"🚀 {BOLD}CHITTAGONG SCRAPER PIPELINE CONFIGURATION:{RESET}")
-    print(f"  • Target Rolls:        {GREEN}{BOLD}{len(rolls)} Candidate Rolls{RESET}")
+    print(f"  • Requested Range:     {GREEN}{BOLD}{len(rolls)} Candidate Rolls{RESET}")
     print(f"  • Active Proxy Pool:   {CYAN}{BOLD}{len(proxies)} Dedicated Nodes{RESET}")
     print(f"  • Destination File:    {YELLOW}{master_file}{RESET}")
     print(f"=======================================================\n", flush=True)
 
+    # 1. Load Successful Records
     already_scraped = {}
     if os.path.exists(master_file):
         try:
@@ -132,17 +139,43 @@ def run_ctg_scraper(rolls: List[str], output_dir: Optional[str] = None, output_n
         except Exception:
             pass
 
-    pending_rolls = [r for r in rolls if r not in already_scraped]
-    if len(already_scraped) > 0:
-        print(f"  • Already Scraped:     {GREEN}{len(already_scraped)} rolls (Skipping){RESET}")
-        print(f"  • Pending to Scrape:   {YELLOW}{len(pending_rolls)} rolls{RESET}\n", flush=True)
+    # 2. Load Empty / Dead Slot Cache (Rolls confirmed Not Found)
+    dead_slots = set()
+    if not force_recheck and os.path.exists(cache_file):
+        try:
+            with open(cache_file, "r", encoding="utf-8") as cf:
+                cache_data = json.load(cf)
+                dead_slots = set(str(x) for x in cache_data.get("dead_slots", []))
+        except Exception:
+            pass
+
+    # Filter out both already saved records and confirmed dead slots
+    if force_recheck:
+        pending_rolls = [r for r in rolls if r not in already_scraped]
+    else:
+        pending_rolls = [r for r in rolls if r not in already_scraped and r not in dead_slots]
+
+    skipped_success = sum(1 for r in rolls if r in already_scraped)
+    skipped_dead = sum(1 for r in rolls if r in dead_slots and r not in already_scraped)
+
+    if skipped_success > 0 or skipped_dead > 0:
+        print(f"🧠 {BOLD}CACHED MEMORY STATUS:{RESET}")
+        if skipped_success > 0:
+            print(f"  • Already Saved Results: {GREEN}{skipped_success} rolls (Skipped - 100% Cached){RESET}")
+        if skipped_dead > 0:
+            print(f"  • Confirmed Dead Slots:  {DIM}{skipped_dead} empty rolls (Skipped - Already Checked){RESET}")
+        print(f"  • Pending Live Queries:  {YELLOW}{len(pending_rolls)} rolls{RESET}\n", flush=True)
 
     if not pending_rolls:
-        print(f"{GREEN}✓ All {len(rolls)} rolls are already scraped and saved!{RESET}", flush=True)
+        print(f"{GREEN}✓ All {len(rolls)} rolls in this range have already been checked and resolved!{RESET}", flush=True)
+        print(f"  (Total valid saved records in file: {len(already_scraped)})")
         return
 
     results_map = dict(already_scraped)
+    dead_slots_set = set(dead_slots)
+
     results_lock = threading.Lock()
+    dead_lock = threading.Lock()
     print_lock = threading.Lock()
     stats_lock = threading.Lock()
     recent_completions = collections.deque()
@@ -154,7 +187,7 @@ def run_ctg_scraper(rolls: List[str], output_dir: Optional[str] = None, output_n
     batch_start_time = time.time()
     stop_event = threading.Event()
 
-    num_workers = min(30, max(5, len(proxies) if proxies else 10))
+    num_workers = min(35, max(5, len(proxies) if proxies else 10))
     if len(pending_rolls) < num_workers:
         num_workers = len(pending_rolls)
 
@@ -183,6 +216,20 @@ def run_ctg_scraper(rolls: List[str], output_dir: Optional[str] = None, output_n
                 with open(tmp_f, "w", encoding="utf-8") as out:
                     json.dump(data, out, indent=2, ensure_ascii=False)
                 os.replace(tmp_f, master_file)
+            except Exception:
+                pass
+
+        with dead_lock:
+            tmp_c = cache_file + ".tmp"
+            try:
+                with open(tmp_c, "w", encoding="utf-8") as out_c:
+                    json.dump({
+                        "board": "CHATTOGRAM",
+                        "dead_slots_count": len(dead_slots_set),
+                        "dead_slots": sorted(list(dead_slots_set)),
+                        "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
+                    }, out_c, indent=2)
+                os.replace(tmp_c, cache_file)
             except Exception:
                 pass
 
@@ -224,47 +271,55 @@ def run_ctg_scraper(rolls: List[str], output_dir: Optional[str] = None, output_n
                 except Exception:
                     pass
 
+            now_ts = time.time()
+            with stats_lock:
+                if first_roll_time[0] is None:
+                    first_roll_time[0] = now_ts
+                last_roll_time[0] = now_ts
+                scraped_count += 1
+                cur_c = scraped_count
+                cur_t = len(pending_rolls)
+
+            with recent_lock:
+                recent_completions.append(now_ts)
+                cutoff = now_ts - 6.0
+                while recent_completions and recent_completions[0] < cutoff:
+                    recent_completions.popleft()
+                dur = max(0.5, now_ts - recent_completions[0]) if len(recent_completions) > 1 else 1.0
+                speed = len(recent_completions) / dur
+
+            pct = (cur_c / max(1, cur_t)) * 100
+            elapsed = now_ts - (first_roll_time[0] or now_ts)
+            mins, secs = divmod(elapsed, 60)
+            time_str = f"{int(mins)}m {int(secs):02d}s"
+            p_bar = format_progress_bar(cur_c, cur_t, width=22)
+
             if res and res.get("success"):
                 with results_lock:
                     results_map[roll_str] = res
-                now_ts = time.time()
-                with stats_lock:
-                    if first_roll_time[0] is None:
-                        first_roll_time[0] = now_ts
-                    last_roll_time[0] = now_ts
-                    scraped_count += 1
-                    cur_c = scraped_count
-                    cur_t = len(pending_rolls)
-
-                with recent_lock:
-                    recent_completions.append(now_ts)
-                    cutoff = now_ts - 6.0
-                    while recent_completions and recent_completions[0] < cutoff:
-                        recent_completions.popleft()
-                    dur = max(0.5, now_ts - recent_completions[0]) if len(recent_completions) > 1 else 1.0
-                    speed = len(recent_completions) / dur
 
                 s_name = res.get("student_name", "STUDENT")
                 gpa_res = res.get("result", "N/A")
                 is_pass = "GPA" in str(gpa_res)
                 st_color = GREEN if is_pass else RED
                 st_label = "PASSED" if is_pass else "FAILED"
-                pct = (cur_c / max(1, cur_t)) * 100
-                elapsed = now_ts - (first_roll_time[0] or now_ts)
-                mins, secs = divmod(elapsed, 60)
-                time_str = f"{int(mins)}m {int(secs):02d}s"
-                p_bar = format_progress_bar(cur_c, cur_t, width=22)
 
                 with print_lock:
                     sys.stdout.write("\r\033[K")
                     print(f" {cur_c:4d}/{cur_t}  Roll {roll_str:<7}  {s_name:<30}  {gpa_res:<10} {st_color}{st_label}{RESET}", flush=True)
                     sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
                     sys.stdout.flush()
+            elif res and res.get("error") == "Record Not Found":
+                with dead_lock:
+                    dead_slots_set.add(roll_str)
+                with print_lock:
+                    sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
+                    sys.stdout.flush()
             else:
                 if attempt < 3 and not stop_event.is_set():
                     rolls_queue.put((roll_str, attempt + 1))
 
-            if scraped_count % 15 == 0:
+            if scraped_count % 20 == 0:
                 save_master()
 
             rolls_queue.task_done()
@@ -300,9 +355,10 @@ def run_ctg_scraper(rolls: List[str], output_dir: Optional[str] = None, output_n
 
     print(f"=======================================================")
     print(f"🎉 {GREEN}{BOLD}CHITTAGONG BOARD SCRAPING COMPLETE!{RESET}")
-    print(f"  • Total Rolls Processed:  {len(results_map)}")
+    print(f"  • Total Valid Records:    {GREEN}{len(results_map)}{RESET}")
+    print(f"  • Total Dead Slots:       {DIM}{len(dead_slots_set)}{RESET}")
     print(f"  • Total Time Elapsed:     {CYAN}{time_str}{RESET}")
-    print(f"  • Output File:            {GREEN}{master_file}{RESET}")
+    print(f"  • Master JSON File:       {GREEN}{master_file}{RESET}")
     print(f"=======================================================\n", flush=True)
 
 
@@ -310,7 +366,7 @@ def interactive_ctg_menu():
     print_ctg_banner()
     print(f"{BOLD}Select Chittagong Board Scraping Mode:{RESET}")
     print(f"  {CYAN}[1]{RESET} Single / Comma-Separated Candidate Rolls (e.g. 129051, 129052)")
-    print(f"  {CYAN}[2]{RESET} Roll Number Range (e.g. 129000-129100)")
+    print(f"  {CYAN}[2]{RESET} Roll Number Range (e.g. 129000-129100, 100001-105000)")
     print(f"  {CYAN}[3]{RESET} Upazila / Zilla Selector (from chittagong_board_eiin dataset)")
     print(f"  {CYAN}[4]{RESET} Load Rolls from File (txt/json)")
     print(f"  {CYAN}[0]{RESET} Exit\n", flush=True)
@@ -330,7 +386,7 @@ def interactive_ctg_menu():
             if start_r > end_r:
                 start_r, end_r = end_r, start_r
             rolls = [str(r) for r in range(start_r, end_r + 1)]
-            run_ctg_scraper(rolls, output_name=f"ctg_range_{start_r}_{end_r}.json")
+            run_ctg_scraper(rolls, output_name="chittagong_results.json")
         else:
             print(f"{RED}[!] Invalid range format. Example: 129000-129050{RESET}", flush=True)
     elif choice == "3":
@@ -377,16 +433,18 @@ def interactive_ctg_menu():
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
+    force_flag = "--force" in sys.argv
+    args = [a for a in sys.argv[1:] if a != "--force"]
+    if args:
         arg_rolls = []
-        for a in sys.argv[1:]:
+        for a in args:
             if "-" in a and re.match(r'^\d+-\d+$', a):
                 s, e = map(int, a.split("-"))
                 arg_rolls.extend([str(x) for x in range(min(s, e), max(s, e) + 1)])
             elif a.isdigit():
                 arg_rolls.append(a)
         if arg_rolls:
-            run_ctg_scraper(arg_rolls)
+            run_ctg_scraper(arg_rolls, force_recheck=force_flag)
         else:
             interactive_ctg_menu()
     else:
