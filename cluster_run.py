@@ -326,12 +326,12 @@ def run_scraper_cli():
 
         def fetch_worker(roll_str: str, worker_idx: int) -> Optional[Dict[str, Any]]:
             url = ENDPOINT.format(roll=roll_str)
-            # 1. Try dedicated assigned proxy
+            # 1. Try dedicated assigned proxy (0.7s fast cutoff)
             if proxies:
                 p_ip = proxies[worker_idx % len(proxies)]
                 try:
                     s = create_isolated_session(p_ip)
-                    r = s.get(url, timeout=1.8)
+                    r = s.get(url, timeout=0.7)
                     if r.status_code == 200:
                         parsed = parse_student_html(r.text, roll_str)
                         s.close()
@@ -341,10 +341,10 @@ def run_scraper_cli():
                 except Exception:
                     pass
 
-            # 2. Fast direct attempt fallback
+            # 2. Fast direct attempt fallback (0.5s cutoff)
             try:
                 s = create_isolated_session(None)
-                r = s.get(url, timeout=1.5)
+                r = s.get(url, timeout=0.5)
                 if r.status_code == 200:
                     parsed = parse_student_html(r.text, roll_str)
                     s.close()
@@ -354,12 +354,12 @@ def run_scraper_cli():
             except Exception:
                 pass
 
-            # 3. Failover spare proxy
+            # 3. Failover spare proxy (0.7s cutoff)
             if proxies and len(proxies) > 1:
                 spare_ip = proxies[(worker_idx * 7 + 13) % len(proxies)]
                 try:
                     s = create_isolated_session(spare_ip)
-                    r = s.get(url, timeout=1.8)
+                    r = s.get(url, timeout=0.7)
                     if r.status_code == 200:
                         parsed = parse_student_html(r.text, roll_str)
                         s.close()
@@ -532,30 +532,30 @@ def run_scraper_cli():
                 url = ENDPOINT.format(roll=roll_str)
                 res = None
 
-                # 1. Try assigned proxy (1.8s timeout)
+                # 1. Try assigned proxy (0.7s fast cutoff)
                 if assigned_proxy:
                     try:
-                        r = worker_sess.get(url, timeout=1.8)
+                        r = worker_sess.get(url, timeout=0.7)
                         if r.status_code == 200:
                             res = parse_student_html(r.text, roll_str)
                     except Exception:
                         pass
 
-                # 2. Fast direct attempt fallback (1.5s timeout)
+                # 2. Fast direct attempt fallback (0.5s cutoff)
                 if not res:
                     try:
-                        r = direct_sess.get(url, timeout=1.5)
+                        r = direct_sess.get(url, timeout=0.5)
                         if r.status_code == 200:
                             res = parse_student_html(r.text, roll_str)
                     except Exception:
                         pass
 
-                # 3. Failover spare proxy
+                # 3. Failover spare proxy (0.7s cutoff)
                 if not res and proxies and len(proxies) > 1:
                     spare_ip = proxies[(worker_idx + attempts * 11 + 3) % len(proxies)]
                     try:
                         temp_s = create_isolated_session(spare_ip)
-                        r = temp_s.get(url, timeout=1.8)
+                        r = temp_s.get(url, timeout=0.7)
                         if r.status_code == 200:
                             res = parse_student_html(r.text, roll_str)
                         temp_s.close()
