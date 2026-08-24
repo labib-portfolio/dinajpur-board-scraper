@@ -1,9 +1,8 @@
 """
 Interactive Terminal CLI for Chittagong Education Board (BISE CTG) Result Scraper 2026
-Ultra-Fast Concurrent Scraping Engine (Identical UI & Animation to Dinajpur Board Engine)
-District-Folder & Upazila-Wise JSON Persistence System + Live Student Swiping
+Full Student Names + District-Folder & Upazila-Wise JSON Persistence System
 Endpoints:
-  • Institutional Gazette (with subject marks): https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/resultm.php
+  • Institutional Gazette: https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/resultm.php
   • Individual Marksheet (by roll): https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/individual/result.php
 """
 
@@ -64,38 +63,68 @@ def slugify(text: str) -> str:
     return text.strip('_') or 'unknown'
 
 
-_EIIN_GEO_MAP = {}
-def load_eiin_geo_map():
-    global _EIIN_GEO_MAP
-    if _EIIN_GEO_MAP:
-        return _EIIN_GEO_MAP
-    
-    geo_file = os.path.join(BASE_DIR, "chittagong_board_eiin", "chittagong_board_all_eiins.json")
-    if not os.path.exists(geo_file):
-        geo_file = os.path.join(r"C:\Users\labib_n4\Documents\Project\Result-Scraper\chittagong_board_eiin\chittagong_board_all_eiins.json")
-    
-    if os.path.exists(geo_file):
+# Comprehensive School Geo & EIIN Index
+_INST_NAME_MAP = {}
+_EIIN_MAP = {}
+
+def load_geo_database():
+    global _INST_NAME_MAP, _EIIN_MAP
+    if _INST_NAME_MAP:
+        return _INST_NAME_MAP, _EIIN_MAP
+
+    upz_file = os.path.join(BASE_DIR, "chittagong_board_eiin", "chittagong_board_eiins_by_upazilla.json")
+    if not os.path.exists(upz_file):
+        upz_file = os.path.join(r"C:\Users\labib_n4\Documents\Project\Result-Scraper\chittagong_board_eiin\chittagong_board_eiins_by_upazilla.json")
+
+    if os.path.exists(upz_file):
         try:
-            with open(geo_file, "r", encoding="utf-8") as f:
+            with open(upz_file, "r", encoding="utf-8") as f:
                 d = json.load(f)
-                for inst in d.get("institutions", []):
-                    e = str(inst.get("eiin"))
-                    _EIIN_GEO_MAP[e] = {
-                        "zilla": inst.get("zila", "CHATTOGRAM").upper(),
-                        "upazila": inst.get("upazilla", "UNKNOWN").upper(),
-                        "name": inst.get("name", "")
-                    }
+                for z, upzs in d.items():
+                    z_clean = z.replace("'", "_").replace(" ", "_").upper()
+                    for u, inst_list in upzs.items():
+                        u_clean = u.replace("'", "_").replace(" ", "_").upper()
+                        for inst in inst_list:
+                            n_clean = re.sub(r'[^a-zA-Z0-9]+', '', inst["name"].lower())
+                            meta = {
+                                "eiin": str(inst["eiin"]),
+                                "zilla": z_clean,
+                                "upazila": u_clean,
+                                "name": inst["name"]
+                            }
+                            _INST_NAME_MAP[n_clean] = meta
+                            _EIIN_MAP[str(inst["eiin"])] = meta
         except Exception:
             pass
-    return _EIIN_GEO_MAP
+    return _INST_NAME_MAP, _EIIN_MAP
+
+
+def resolve_school_geo(inst_name_str: str, eiin_str: str = ""):
+    inst_map, eiin_map = load_geo_database()
+    
+    if eiin_str and eiin_str in eiin_map:
+        return eiin_map[eiin_str]
+    
+    if inst_name_str:
+        clean = re.sub(r'[^a-zA-Z0-9]+', '', inst_name_str.lower())
+        for k, v in inst_map.items():
+            if k in clean or clean in k:
+                return v
+
+        for z in ["BANDARBAN", "CHATTOGRAM", "CHITTAGONG", "COX_S_BAZAR", "COX'S BAZAR", "KHAGRACHHARI", "RANGAMATI"]:
+            if z in inst_name_str.upper():
+                norm_z = "CHATTOGRAM" if "CHITTAGONG" in z else z.replace("'", "_").replace(" ", "_")
+                return {"eiin": "", "zilla": norm_z, "upazila": "UNKNOWN", "name": inst_name_str}
+
+    return {"eiin": "", "zilla": "CHATTOGRAM", "upazila": "UNKNOWN", "name": inst_name_str or "UNKNOWN"}
 
 
 def print_ctg_banner():
     print(f"\n{CYAN}┌───────────────────────────────────────────────────────────┐{RESET}")
     print(f"{CYAN}│{RESET}  {BOLD}Chittagong Board Result Scraper 2026 — High-Speed Engine{RESET}  {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}100% Guaranteed Roll Extraction • Multi-Threaded Workers{RESET}  {CYAN}│{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}Real-time Upazilla JSON Persistence • Auto-Calculated Marks{RESET}{CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}Full Student Name Storage • Upazila-Wise Persistence{RESET}      {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}Zero CAPTCHA • Multi-Threaded Proxies • Total Marks Calc{RESET}    {CYAN}│{RESET}")
     print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n", flush=True)
 
 
@@ -119,27 +148,6 @@ def format_progress_bar(current: int, total: int, width: int = 24) -> str:
     return f"[{'█' * filled}{'░' * (width - filled)}]"
 
 
-def create_isolated_session(proxy_ip: Optional[str] = None) -> requests.Session:
-    s = requests.Session()
-    adapter = HTTPAdapter(pool_connections=5, pool_maxsize=5, max_retries=0)
-    s.mount("http://", adapter)
-    s.mount("https://", adapter)
-    if proxy_ip:
-        parts = proxy_ip.split(":")
-        if len(parts) == 4:
-            ip, port, user, pwd = parts
-            proxy_url = f"http://{user}:{pwd}@{ip}:{port}"
-        else:
-            proxy_url = f"http://{proxy_ip}"
-        s.proxies.update({"http": proxy_url, "https": proxy_url})
-    s.headers.update({
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Connection": "keep-alive"
-    })
-    return s
-
-
 # =========================================================================
 # UNIFIED UPALIZA & MASTER STORAGE MANAGER
 # =========================================================================
@@ -148,7 +156,6 @@ class CtgResultsManager:
         self.root = results_root or get_default_results_root()
         os.makedirs(self.root, exist_ok=True)
         self.master_file = os.path.join(self.root, "scraped_results_all.json")
-        self.geo_map = load_eiin_geo_map()
         self.lock = threading.Lock()
         
         self.master_students = {}
@@ -192,26 +199,25 @@ class CtgResultsManager:
     def add_student_record(self, s: Dict[str, Any], inst_meta: Optional[Dict[str, Any]] = None):
         roll_str = str(s.get("roll_no"))
         eiin_str = str(s.get("eiin", "") or (inst_meta.get("eiin") if inst_meta else ""))
-        
-        zilla_raw = s.get("zilla", "") or (inst_meta.get("zilla") if inst_meta else "")
-        upz_raw = s.get("upazila", "") or s.get("thana", "") or (inst_meta.get("thana") if inst_meta else "")
+        inst_name = s.get("institute", "") or (inst_meta.get("name") if inst_meta else "")
 
-        if not zilla_raw and eiin_str in self.geo_map:
-            zilla_raw = self.geo_map[eiin_str].get("zilla", "CHATTOGRAM")
-            upz_raw = self.geo_map[eiin_str].get("upazila", "UNKNOWN")
-
-        zilla_name = zilla_raw.upper() if zilla_raw else "CHATTOGRAM"
-        upz_name = upz_raw.upper() if upz_raw else "UNKNOWN"
-        z_slug = slugify(zilla_name)
-        u_slug = slugify(upz_name)
+        geo = resolve_school_geo(inst_name, eiin_str)
+        zilla_name = s.get("zilla") or geo.get("zilla", "CHATTOGRAM")
+        upz_name = s.get("upazila") or s.get("thana") or geo.get("upazila", "UNKNOWN")
+        final_eiin = eiin_str or geo.get("eiin", "")
 
         s["zilla"] = zilla_name
         s["upazila"] = upz_name
+        if final_eiin:
+            s["eiin"] = final_eiin
+
+        z_slug = slugify(zilla_name)
+        u_slug = slugify(upz_name)
 
         with self.lock:
             self.master_students[roll_str] = s
-            if inst_meta and eiin_str:
-                self.master_institutions[eiin_str] = inst_meta
+            if inst_meta and final_eiin:
+                self.master_institutions[final_eiin] = inst_meta
 
             key = (z_slug, u_slug)
             z_folder = os.path.join(self.root, zilla_name)
@@ -235,13 +241,12 @@ class CtgResultsManager:
                 }
 
             u_entry = self.upazila_data[key]
-            if inst_meta and eiin_str:
-                u_entry["institutions_map"][eiin_str] = inst_meta
+            if inst_meta and final_eiin:
+                u_entry["institutions_map"][final_eiin] = inst_meta
             u_entry["students_map"][roll_str] = s
 
     def flush_to_disk(self):
         with self.lock:
-            # 1. Master File
             all_insts = list(self.master_institutions.values())
             all_studs = list(self.master_students.values())
             passed = sum(1 for x in all_studs if x.get("status") == "PASSED" or "GPA" in str(x.get("result", "")))
@@ -268,7 +273,6 @@ class CtgResultsManager:
             except Exception:
                 pass
 
-            # 2. Upazila Files
             for key, entry in self.upazila_data.items():
                 u_file = entry["file_path"]
                 u_studs = list(entry["students_map"].values())
@@ -347,10 +351,9 @@ def run_ctg_eiin_scraper(
     first_roll_time = [None]
     last_roll_time = [None]
     batch_received_count = 0
-    total_appeared_count = 0
 
     def harvest_and_stream_eiin(task_info):
-        nonlocal batch_received_count, total_appeared_count
+        nonlocal batch_received_count
         idx, eiin_str = task_info
         p = proxies[idx % len(proxies)] if proxies else None
 
@@ -388,7 +391,6 @@ def run_ctg_eiin_scraper(
             sys.stdout.write(f"  [{idx+1}/{len(pending_eiins)}] EIIN {eiin_str}: {inst_name[:30]} {GREEN}+{len(students)} rolls{RESET}\n")
             sys.stdout.flush()
 
-        # Real-time student list swiping / streaming animation
         for s in students:
             mgr.add_student_record(s, inst_meta)
             now_ts = time.time()
@@ -397,7 +399,6 @@ def run_ctg_eiin_scraper(
                     first_roll_time[0] = now_ts
                 last_roll_time[0] = now_ts
                 batch_received_count += 1
-                total_appeared_count += 1
                 cur_rec = batch_received_count
 
             with recent_lock:
@@ -471,7 +472,7 @@ def run_ctg_eiin_scraper(
 
 
 # =========================================================================
-# 2. ROLL RANGE SCRAPING ENGINE (With Animated Student Swiping)
+# 2. ROLL RANGE / FILE SCRAPING ENGINE (With Full Names & Upazila Routing)
 # =========================================================================
 def run_ctg_scraper(
     rolls: List[str],
@@ -486,7 +487,7 @@ def run_ctg_scraper(
     mgr = CtgResultsManager(results_root)
     cache_file = os.path.join(mgr.root, ".chittagong_memory_cache.json")
     proxies = load_proxies()
-    num_workers = min(35, len(proxies)) if len(proxies) >= 20 else max(10, len(proxies))
+    num_workers = min(40, len(proxies)) if len(proxies) >= 20 else max(10, len(proxies))
     spare_proxies = max(0, len(proxies) - num_workers)
 
     print(f"\n=======================================================")
@@ -525,7 +526,7 @@ def run_ctg_scraper(
         print(f"  • Pending Live Queries:    {YELLOW}{len(pending_rolls)} rolls{RESET}\n", flush=True)
 
     if not pending_rolls:
-        print(f"{GREEN}✓ All {len(rolls)} rolls in this range are already in dataset!{RESET}\n", flush=True)
+        print(f"{GREEN}✓ All {len(rolls)} rolls in this batch are already in dataset!{RESET}\n", flush=True)
         return
 
     dead_slots_set = set(dead_slots)
@@ -576,15 +577,19 @@ def run_ctg_scraper(
         if res and res.get("success"):
             student_obj = {
                 "roll_no": roll_str,
-                "student_name": res.get("student_name"),
-                "gpa": res.get("gpa"),
+                "student_name": res.get("student_name", ""),
+                "father_name": res.get("father_name", ""),
+                "mother_name": res.get("mother_name", ""),
+                "registration_no": res.get("registration_no", ""),
+                "gpa": res.get("gpa", ""),
                 "total_marks": res.get("total_marks"),
                 "group": res.get("group", "GENERAL"),
                 "status": "PASSED" if "GPA" in str(res.get("result", "")) else "FAILED",
+                "result": res.get("result", ""),
                 "institute": res.get("institute", ""),
-                "registration_no": res.get("registration_no", ""),
-                "father_name": res.get("father_name", ""),
-                "mother_name": res.get("mother_name", "")
+                "session": res.get("session", ""),
+                "type": res.get("type", "REGULAR"),
+                "dob": res.get("dob", "")
             }
             mgr.add_student_record(student_obj)
 
@@ -608,7 +613,7 @@ def run_ctg_scraper(
                 sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
                 sys.stdout.flush()
 
-        if scraped_count % 20 == 0:
+        if scraped_count % 25 == 0:
             mgr.flush_to_disk()
 
         return res
@@ -621,6 +626,20 @@ def run_ctg_scraper(
             print(f"\n\n{YELLOW}[!] Pipeline stopped by user (Ctrl+C). Preserved all scraped records!{RESET}", flush=True)
 
     mgr.flush_to_disk()
+    with dead_lock:
+        try:
+            tmp_c = cache_file + ".tmp"
+            with open(tmp_c, "w", encoding="utf-8") as out_c:
+                json.dump({
+                    "board": "CHATTOGRAM",
+                    "dead_slots_count": len(dead_slots_set),
+                    "dead_slots": sorted(list(dead_slots_set)),
+                    "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
+                }, out_c, indent=2)
+            os.replace(tmp_c, cache_file)
+        except Exception:
+            pass
+
     sys.stdout.write("\n\n")
 
     total_elapsed = time.time() - batch_start_time
@@ -642,9 +661,12 @@ def run_ctg_scraper(
     print(f"  • Live Scraped in Batch:  {scraped_count}/{len(pending_rolls)} ({100.0 * scraped_count / max(1, len(pending_rolls)):.1f}%)")
     print(f"  • Active Scraping Speed:  {GREEN}{BOLD}{pure_speed_str}{RESET}")
     print(f"  • Storage Root Directory: {YELLOW}{mgr.root}{RESET}")
-    print(f"=======================================================\n", flush=True)
+    print(f"=======================================================")
 
-    print(f"{GREEN}{BOLD}🎉 Finished Batch! All results saved across Upazilla files in {time_str}!{RESET}")
+    if scraped_count == len(pending_rolls):
+        print(f"\n{GREEN}{BOLD}🎉 Finished Batch! All results saved across Upazilla files in {time_str}!{RESET}")
+    else:
+        print(f"\n{YELLOW}{BOLD}⚠️ Finished Batch! {scraped_count}/{len(pending_rolls)} results saved in {time_str}!{RESET}")
     print(f"{CYAN}───────────────────────────────────────────────────────────{RESET}\n", flush=True)
 
 
@@ -654,11 +676,11 @@ def run_ctg_scraper(
 def interactive_ctg_menu():
     print_ctg_banner()
     print(f"{BOLD}Select Chittagong Board Scraping Mode:{RESET}")
-    print(f"  {GREEN}[1]{RESET} {BOLD}EIIN Mode{RESET} — Instant Institutional Results (Recommended ⚡)")
-    print(f"  {GREEN}[2]{RESET} {BOLD}District / Upazila Bulk Scraper{RESET} — Select Upazila and scrape all colleges/schools")
+    print(f"  {GREEN}[1]{RESET} {BOLD}EIIN Mode{RESET} — Instant Institutional Results (Single / Multiple EIINs)")
+    print(f"  {GREEN}[2]{RESET} {BOLD}District / Upazila Bulk Scraper{RESET} — Select Upazila and scrape all schools")
     print(f"  {CYAN}[3]{RESET} Roll Number Range (e.g. 100001-105000, 129000-129100)")
     print(f"  {CYAN}[4]{RESET} Single / Multiple Candidate Rolls (e.g. 129051, 100001)")
-    print(f"  {CYAN}[5]{RESET} Load Rolls / EIINs from File (txt/json)")
+    print(f"  {GREEN}[5]{RESET} {BOLD}Load Rolls / EIINs from File{RESET} (e.g. chittagong_all_rolls.txt) {GREEN}⚡ Recommended{RESET}")
     print(f"  {CYAN}[0]{RESET} Exit\n", flush=True)
 
     choice = input(f"{BOLD}Enter choice [1-5]: {RESET}").strip()
@@ -721,18 +743,18 @@ def interactive_ctg_menu():
         if rolls:
             run_ctg_scraper(rolls)
     elif choice == "5":
-        path = input(f"\n{BOLD}Enter filepath (txt/json): {RESET}").strip().strip('"')
+        path = input(f"\n{BOLD}Enter filepath (txt/json, e.g. chittagong_all_rolls.txt): {RESET}").strip().strip('"')
+        if not os.path.exists(path):
+            local_cand = os.path.join(BASE_DIR, path)
+            if os.path.exists(local_cand):
+                path = local_cand
+
         if os.path.exists(path):
             with open(path, "r", encoding="utf-8") as f:
                 content = f.read()
             items = [r.strip() for r in re.split(r'[,\s\n"\[\]]+', content) if r.strip().isdigit()]
-            if items and len(items[0]) == 6:
-                t_choice = input(f"Are these EIIN numbers or Candidate Rolls? [E=EIIN, R=Rolls, default E]: ").strip().upper()
-                if t_choice == "R":
-                    run_ctg_scraper(items)
-                else:
-                    run_ctg_eiin_scraper(items)
-            elif items:
+            print(f"{GREEN}✓ Loaded {len(items)} items from {path}{RESET}\n")
+            if items:
                 run_ctg_scraper(items)
         else:
             print(f"{RED}[!] File not found: {path}{RESET}", flush=True)
@@ -755,6 +777,11 @@ if __name__ == "__main__":
             if "-" in a and re.match(r'^\d+-\d+$', a):
                 s, e = map(int, a.split("-"))
                 arg_rolls.extend([str(x) for x in range(min(s, e), max(s, e) + 1)])
+            elif a.endswith(".txt") or a.endswith(".json"):
+                if os.path.exists(a):
+                    with open(a, "r", encoding="utf-8") as af:
+                        items = [r.strip() for r in re.split(r'[,\s\n"\[\]]+', af.read()) if r.strip().isdigit()]
+                        arg_rolls.extend(items)
             elif a.isdigit():
                 arg_rolls.append(a)
         if arg_rolls:
