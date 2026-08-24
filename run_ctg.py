@@ -1,9 +1,10 @@
 """
 Interactive Terminal CLI for Chittagong Education Board (BISE CTG) Result Scraper 2026
-Ultra-Low CPU Optimization & High-Speed Architecture:
+Ultra-Low CPU Optimization Architecture:
+  • Pre-Allocated Worker Session Pool (Zero TLS Renegotiation)
+  • Throttled UI Redraws (Prevents Windows Terminal GPU/CPU Thrashing)
   • Memoized Geo Resolver (0ms O(1) Cache)
-  • Time-Throttled Dirty-Only JSON Disk Flushing (Every 10-15s instead of every 25 reqs)
-  • Reusable Worker HTTP Sessions (Zero SSL/TLS renegotiation overhead)
+  • Time-Throttled Dirty-Only JSON Disk Flushing (Every 15s)
   • Standardized 8-Field Schema
 """
 
@@ -73,7 +74,7 @@ def slugify(text: str) -> str:
 _EXACT_SCHOOL_MAP = {}
 _TOKEN_SCHOOL_MAP = {}
 _EIIN_GEO_MAP = {}
-_GEO_RESOLVER_CACHE = {}  # In-memory instant cache
+_GEO_RESOLVER_CACHE = {}
 _STOP_WORDS = {"govt", "government", "model", "high", "school", "college", "boys", "girls", "and", "the", "for", "secondary", "institute", "institution", "corporation", "city"}
 
 ALL_KNOWN_UPAZILAS = {
@@ -222,7 +223,7 @@ def resolve_school_geo(inst_name_str: str, eiin_str: str = "") -> Dict[str, str]
             _GEO_RESOLVER_CACHE[cache_key] = res
             return res
 
-    # 2. Distinctive token match (e.g. "parbati", "fasiakhali", "digerpankhali")
+    # 2. Distinctive token match
     tokens = set(re.findall(r'[a-zA-Z]{4,}', inst_name_str.lower())) - _STOP_WORDS
     for tok in tokens:
         if tok in _TOKEN_SCHOOL_MAP and len(_TOKEN_SCHOOL_MAP[tok]) == 1:
@@ -230,7 +231,7 @@ def resolve_school_geo(inst_name_str: str, eiin_str: str = "") -> Dict[str, str]
             _GEO_RESOLVER_CACHE[cache_key] = res
             return res
 
-    # 3. Direct Upazila keyword match from school name
+    # 3. Direct Upazila keyword match
     inst_upper = inst_name_str.upper()
     for upz_kw, (z_val, u_val) in ALL_KNOWN_UPAZILAS.items():
         if re.search(rf'\b{upz_kw}\b', inst_upper):
@@ -269,13 +270,12 @@ def format_progress_bar(current: int, total: int, width: int = 24) -> str:
     return f"[{'█' * filled}{'░' * (width - filled)}]"
 
 
-# Global Proxy Pool
 proxy_pool = SmartProxyPool()
 
 
 def create_isolated_session(proxy: Optional[str] = None) -> requests.Session:
     session = requests.Session()
-    adapter = HTTPAdapter(pool_connections=10, pool_maxsize=10, max_retries=0)
+    adapter = HTTPAdapter(pool_connections=15, pool_maxsize=15, max_retries=0)
     session.mount("http://", adapter)
     session.mount("https://", adapter)
 
@@ -407,9 +407,9 @@ class CtgResultsManager:
             self.dirty_upazilas.add(key)
 
     def maybe_flush(self, force: bool = False):
-        """Flushes data to disk only every 12 seconds or on force exit to maintain ~0% CPU."""
+        """Flushes dirty upazila files and master file every 15s to keep CPU < 5%."""
         now = time.time()
-        if not force and (now - self.last_flush_time < 12.0 or not self.dirty_upazilas):
+        if not force and (now - self.last_flush_time < 15.0 or not self.dirty_upazilas):
             return
 
         with self.lock:
@@ -495,7 +495,7 @@ def run_ctg_eiin_scraper(
 
     mgr = CtgResultsManager(results_root)
     proxies = proxy_pool.ensure_pool(min_size=20)
-    num_workers = min(25, len(proxies)) if len(proxies) >= 15 else max(8, len(proxies))
+    num_workers = min(20, len(proxies)) if len(proxies) >= 10 else max(6, len(proxies))
     spare_proxies = max(0, len(proxies) - num_workers)
 
     print(f"\n=======================================================")
@@ -522,6 +522,7 @@ def run_ctg_eiin_scraper(
     stats_lock = threading.Lock()
     recent_completions = collections.deque()
     recent_lock = threading.Lock()
+    last_ui_draw = [0.0]
 
     batch_start_time = time.time()
     first_roll_time = [None]
@@ -597,17 +598,21 @@ def run_ctg_eiin_scraper(
             time_str = f"{int(mins)}m {int(secs):02d}s"
             p_bar = format_progress_bar(cur_rec, max(cur_rec, len(students)), width=24)
 
+            # Throttle UI redraw to 10 FPS to keep Windows Console CPU at 0%
             with print_lock:
                 sys.stdout.write("\r\033[K")
                 student_line = f" {cur_rec:4d}  Roll {roll_str:<7}  {s_name:<30}  GPA={grade_res:<6} {status_color}{status_label}{RESET}\n"
                 sys.stdout.write(student_line)
-                p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec} rolls processed ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
-                sys.stdout.write(p_bar_line)
+                if now_ts - last_ui_draw[0] > 0.10:
+                    last_ui_draw[0] = now_ts
+                    p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec} rolls processed ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
+                    sys.stdout.write(p_bar_line)
                 sys.stdout.flush()
 
         mgr.maybe_flush()
+        time.sleep(0.001)
 
-    num_threads = min(15, max(2, len(proxies) if proxies else 5))
+    num_threads = min(12, max(2, len(proxies) if proxies else 4))
     if len(pending_eiins) < num_threads:
         num_threads = len(pending_eiins)
 
@@ -641,14 +646,14 @@ def run_ctg_eiin_scraper(
     print(f"  • Live Scraped in Batch:  {batch_received_count} rolls")
     print(f"  • Active Scraping Speed:  {GREEN}{BOLD}{pure_speed_str}{RESET}")
     print(f"  • Storage Root Directory: {YELLOW}{mgr.root}{RESET}")
-    print(f"=======================================================\n", flush=True)
+    print(f"=======================================================")
 
-    print(f"{GREEN}{BOLD}🎉 Finished Batch! All results saved across Upazilla files in {time_str}!{RESET}")
+    print(f"\n{GREEN}{BOLD}🎉 Finished Batch! All results saved across Upazilla files in {time_str}!{RESET}")
     print(f"{CYAN}───────────────────────────────────────────────────────────{RESET}\n", flush=True)
 
 
 # =========================================================================
-# 2. ROLL RANGE / FILE SCRAPING ENGINE (Thread-Local Session Reuse)
+# 2. ROLL RANGE / FILE SCRAPING ENGINE (Persistent Session Pool)
 # =========================================================================
 def run_ctg_scraper(
     rolls: List[str],
@@ -663,7 +668,7 @@ def run_ctg_scraper(
     mgr = CtgResultsManager(results_root)
     cache_file = os.path.join(mgr.root, ".chittagong_memory_cache.json")
     proxies = proxy_pool.ensure_pool(min_size=20)
-    num_workers = min(25, len(proxies)) if len(proxies) >= 15 else max(8, len(proxies))
+    num_workers = min(20, len(proxies)) if len(proxies) >= 10 else max(6, len(proxies))
     spare_proxies = max(0, len(proxies) - num_workers)
 
     print(f"\n=======================================================")
@@ -711,41 +716,34 @@ def run_ctg_scraper(
     stats_lock = threading.Lock()
     recent_completions = collections.deque()
     recent_lock = threading.Lock()
+    last_ui_draw = [0.0]
 
     scraped_count = 0
     first_roll_time = [None]
     last_roll_time = [None]
     batch_start_time = time.time()
 
-    # Thread-local reusable sessions (avoids rebuilding TCP/SSL on every call)
-    thread_local = threading.local()
-
-    def get_thread_session(proxy_str: Optional[str]) -> requests.Session:
-        if not hasattr(thread_local, "session") or thread_local.proxy != proxy_str:
-            if hasattr(thread_local, "session"):
-                try:
-                    thread_local.session.close()
-                except Exception:
-                    pass
-            thread_local.session = create_isolated_session(proxy_str)
-            thread_local.proxy = proxy_str
-        return thread_local.session
+    # Pre-allocated persistent sessions (one per thread worker index)
+    worker_sessions = []
+    for i in range(num_workers):
+        p = proxies[i % len(proxies)] if proxies else None
+        worker_sessions.append(create_isolated_session(p))
 
     def process_roll(task_info):
         nonlocal scraped_count
         idx, roll_str = task_info
-        cur_proxies = proxy_pool.get_all()
-        p = cur_proxies[idx % len(cur_proxies)] if cur_proxies else None
+        worker_id = idx % num_workers
+        sess = worker_sessions[worker_id]
 
-        sess = get_thread_session(p)
         res = None
         try:
             r = sess.post(INDIVIDUAL_ENDPOINT, data={"roll": roll_str, "button2": "Submit"}, timeout=7.0)
             if r.status_code == 200:
                 res = parse_ctg_student_html(r.text, roll_str)
         except Exception:
-            p_alt = cur_proxies[(idx + 17) % len(cur_proxies)] if cur_proxies else None
-            sess_alt = get_thread_session(p_alt)
+            # Fallback to secondary spare session
+            alt_worker_id = (worker_id + 7) % num_workers
+            sess_alt = worker_sessions[alt_worker_id]
             try:
                 r = sess_alt.post(INDIVIDUAL_ENDPOINT, data={"roll": roll_str, "button2": "Submit"}, timeout=7.0)
                 if r.status_code == 200:
@@ -789,17 +787,22 @@ def run_ctg_scraper(
                 sys.stdout.write("\r\033[K")
                 student_line = f" {cur_c:4d}/{cur_t}  Roll {roll_str:<7}  {s_name:<30}  GPA={grade_res:<6} {status_color}{status_label}{RESET}\n"
                 sys.stdout.write(student_line)
-                p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
-                sys.stdout.write(p_bar_line)
+                if now_ts - last_ui_draw[0] > 0.10:
+                    last_ui_draw[0] = now_ts
+                    p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
+                    sys.stdout.write(p_bar_line)
                 sys.stdout.flush()
         elif res and res.get("error") == "Record Not Found":
             with dead_lock:
                 dead_slots_set.add(roll_str)
             with print_lock:
-                sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
-                sys.stdout.flush()
+                if now_ts - last_ui_draw[0] > 0.10:
+                    last_ui_draw[0] = now_ts
+                    sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
+                    sys.stdout.flush()
 
         mgr.maybe_flush()
+        time.sleep(0.001)
 
         return res
 
@@ -809,6 +812,13 @@ def run_ctg_scraper(
             list(executor.map(process_roll, tasks))
         except KeyboardInterrupt:
             print(f"\n\n{YELLOW}[!] Pipeline stopped by user (Ctrl+C). Preserved all scraped records!{RESET}", flush=True)
+
+    # Clean up persistent worker sessions
+    for s in worker_sessions:
+        try:
+            s.close()
+        except Exception:
+            pass
 
     mgr.maybe_flush(force=True)
     with dead_lock:

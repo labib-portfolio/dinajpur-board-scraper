@@ -1,17 +1,6 @@
 """
 Chittagong Education Board (BISE CTG) Result Scraping Engine
-Standardized Clean 8-Field Output:
-  • name
-  • roll
-  • total_mark
-  • grade
-  • institution_name
-  • institution_eiin
-  • zilla
-  • upazilla
-Endpoints:
-  • Individual: https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/individual/result.php
-  • Institutional: https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/resultm.php
+Ultra-Fast Pre-Compiled Regex Parsing Architecture
 """
 
 import re
@@ -23,10 +12,32 @@ from requests.adapters import HTTPAdapter
 INDIVIDUAL_ENDPOINT = "https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/individual/result.php"
 INSTITUTION_ENDPOINT = "https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/resultm.php"
 
+# Pre-compiled Regexes for Sub-Millisecond Execution
+RE_NAME = re.compile(r'>Name</td>\s*<td[^>]*>([^<]+)</td>', re.IGNORECASE)
+RE_NAME_FALLBACK = re.compile(r'Name of Student.*?<td[^>]*>([^<]+)</td>', re.IGNORECASE | re.DOTALL)
+RE_RESULT = re.compile(r'>Result</td>\s*<td[^>]*>([^<]+)</td>', re.IGNORECASE)
+RE_INSTITUTE = re.compile(r'>Institute</td>\s*<td[^>]*>([^<]+)</td>', re.IGNORECASE)
+RE_GPA = re.compile(r'GPA\s*=?\s*([\d.]+)', re.IGNORECASE)
+RE_SUBJECT_ROWS = re.compile(
+    r'<td class="bg_grey">(\d+)</td>\s*<td class="bg_grey cap_lt">[^<]+</td>\s*<td class="bg_grey cap_lt">(\d{2,3})\(([A-Za-z0-9+\s-]+)\)</td>'
+)
+RE_RAW_MARKS = re.compile(r'<td[^>]*>(\d{2,3})\([A-Za-z0-9+\s-]+\)</td>')
+
+# Institutional Gazette Regexes
+RE_INST_NAME = re.compile(r'INSTITUTE NAME\s*:\s*</td>\s*<td[^>]*>([^<(\n]+)', re.IGNORECASE)
+RE_ZILLA = re.compile(r'ZILLA\s*:\s*</td>\s*<td[^>]*>([^<(\n]+)', re.IGNORECASE)
+RE_THANA = re.compile(r'THANA\s*:\s*</td>\s*<td[^>]*>([^<(\n]+)', re.IGNORECASE)
+RE_APP = re.compile(r'APP\s*:\s*</td>\s*<td[^>]*>\s*(\d+)', re.IGNORECASE)
+RE_PASS = re.compile(r'PASS\s*:\s*</td>\s*<td[^>]*>\s*(\d+)', re.IGNORECASE)
+RE_GPA5 = re.compile(r'GPA5\s*:\s*</td>\s*<td[^>]*>\s*(\d+)', re.IGNORECASE)
+RE_PASSED_STUDENTS = re.compile(r'(\d{6})\[([\d.]+)\]:([0-9A-Z:(),+\-\s]+?)(?=(?:\s+\d{6}\[|\s*<|\s*$))')
+RE_FAILED_STUDENTS = re.compile(r'(\d{6})\[([A-Z0-9]+)\](?!\:)')
+RE_SCORE = re.compile(r':(\d{2,3})\(')
+
 
 def create_ctg_session(proxy: Optional[str] = None) -> requests.Session:
     session = requests.Session()
-    adapter = HTTPAdapter(pool_connections=5, pool_maxsize=5, max_retries=0)
+    adapter = HTTPAdapter(pool_connections=10, pool_maxsize=10, max_retries=0)
     session.mount("http://", adapter)
     session.mount("https://", adapter)
 
@@ -53,44 +64,37 @@ def parse_ctg_student_html(html_text: str, roll_no: str) -> Optional[Dict[str, A
     if not html_text or "No Result Found" in html_text or "Invalid Roll" in html_text or "Record Not Found" in html_text:
         return {"success": False, "error": "Record Not Found", "roll": roll_no}
 
-    def get_cell(label: str) -> str:
-        m = re.search(rf'>{label}</td>\s*<td[^>]*>([^<]+)</td>', html_text, re.IGNORECASE)
-        if m:
-            return html.unescape(m.group(1)).strip()
-        return ""
-
-    student_name = get_cell("Name")
+    m_name = RE_NAME.search(html_text)
+    student_name = html.unescape(m_name.group(1)).strip() if m_name else ""
     if not student_name:
-        m = re.search(r'Name of Student.*?<td[^>]*>([^<]+)</td>', html_text, re.IGNORECASE | re.DOTALL)
-        if m:
-            student_name = html.unescape(m.group(1)).strip()
+        m_fb = RE_NAME_FALLBACK.search(html_text)
+        if m_fb:
+            student_name = html.unescape(m_fb.group(1)).strip()
 
-    result_raw = get_cell("Result")
-    institute = get_cell("Institute")
-    
+    m_res = RE_RESULT.search(html_text)
+    result_raw = html.unescape(m_res.group(1)).strip() if m_res else ""
+
+    m_inst = RE_INSTITUTE.search(html_text)
+    institute = html.unescape(m_inst.group(1)).strip() if m_inst else ""
+
     if not student_name and not result_raw and "GPA" not in html_text:
         return {"success": False, "error": "Record Not Found", "roll": roll_no}
 
     gpa_val = "FAIL"
-    m_gpa = re.search(r'GPA\s*=?\s*([\d.]+)', result_raw, re.IGNORECASE)
+    m_gpa = RE_GPA.search(result_raw)
     if m_gpa:
         gpa_val = m_gpa.group(1).strip()
     elif "PASS" in result_raw.upper():
         gpa_val = "PASSED"
 
-    # Extract subject marks and calculate total marks
-    subject_rows = re.findall(
-        r'<td class="bg_grey">(\d+)</td>\s*<td class="bg_grey cap_lt">[^<]+</td>\s*<td class="bg_grey cap_lt">(\d{2,3})\(([A-Za-z0-9+\s-]+)\)</td>',
-        html_text
-    )
-
+    subject_rows = RE_SUBJECT_ROWS.findall(html_text)
     total_marks = 0
     if subject_rows:
         for code, mark_str, _ in subject_rows:
-            if code not in ['147', '152', '156']:  # Omit continuous assessment subjects
+            if code not in ('147', '152', '156'):
                 total_marks += int(mark_str)
     else:
-        raw_marks = re.findall(r'<td[^>]*>(\d{2,3})\([A-Za-z0-9+\s-]+\)</td>', html_text)
+        raw_marks = RE_RAW_MARKS.findall(html_text)
         if raw_marks:
             for m_str in raw_marks:
                 total_marks += int(m_str)
@@ -114,34 +118,32 @@ def parse_ctg_institute_gazette(html_text: str, eiin: str) -> Optional[Dict[str,
     if not html_text or "No Result Found" in html_text or "Invalid EIIN" in html_text:
         return {"success": False, "error": "EIIN Not Found", "eiin": eiin}
 
-    def get_meta(label: str) -> str:
-        m = re.search(rf'{label}\s*:\s*</td>\s*<td[^>]*>([^<(\n]+)', html_text, re.IGNORECASE)
-        return m.group(1).strip() if m else ""
+    m_inst = RE_INST_NAME.search(html_text)
+    institute_name = m_inst.group(1).strip() if m_inst else f"EIIN_{eiin}"
 
-    institute_name = get_meta('INSTITUTE NAME') or f"EIIN_{eiin}"
-    zilla_name = get_meta('ZILLA').upper() or "CHATTOGRAM"
-    thana_name = get_meta('THANA').upper() or "UNKNOWN"
+    m_z = RE_ZILLA.search(html_text)
+    zilla_name = m_z.group(1).strip().upper() if m_z else "CHATTOGRAM"
 
-    stat_m = re.search(r'APP\s*:\s*</td>\s*<td[^>]*>\s*(\d+)', html_text, re.IGNORECASE)
+    m_t = RE_THANA.search(html_text)
+    thana_name = m_t.group(1).strip().upper() if m_t else "UNKNOWN"
+
+    stat_m = RE_APP.search(html_text)
     total_appeared = int(stat_m.group(1)) if stat_m else 0
-    pass_m = re.search(r'PASS\s*:\s*</td>\s*<td[^>]*>\s*(\d+)', html_text, re.IGNORECASE)
+    pass_m = RE_PASS.search(html_text)
     total_passed = int(pass_m.group(1)) if pass_m else 0
-    gpa5_m = re.search(r'GPA5\s*:\s*</td>\s*<td[^>]*>\s*(\d+)', html_text, re.IGNORECASE)
+    gpa5_m = RE_GPA5.search(html_text)
     total_gpa5 = int(gpa5_m.group(1)) if gpa5_m else 0
 
     students: List[Dict[str, Any]] = []
 
-    # Parse PASSED examinees with marks
-    passed_pattern = re.compile(r'(\d{6})\[([\d.]+)\]:([0-9A-Z:(),+\-\s]+?)(?=(?:\s+\d{6}\[|\s*<|\s*$))')
-    for p_match in passed_pattern.finditer(html_text):
+    for p_match in RE_PASSED_STUDENTS.finditer(html_text):
         r_no = p_match.group(1).strip()
         gpa_val = p_match.group(2).strip()
         raw_marks_block = p_match.group(3).strip()
 
         calc_total = 0
-        subject_entries = raw_marks_block.split(',')
-        for entry in subject_entries:
-            score_m = re.search(r':(\d{2,3})\(', entry)
+        for entry in raw_marks_block.split(','):
+            score_m = RE_SCORE.search(entry)
             if score_m:
                 calc_total += int(score_m.group(1))
 
@@ -156,9 +158,7 @@ def parse_ctg_institute_gazette(html_text: str, eiin: str) -> Optional[Dict[str,
             "upazilla": thana_name
         })
 
-    # Parse FAILED examinees
-    failed_pattern = re.compile(r'(\d{6})\[([A-Z0-9]+)\](?!\:)')
-    for f_match in failed_pattern.finditer(html_text):
+    for f_match in RE_FAILED_STUDENTS.finditer(html_text):
         r_no = f_match.group(1).strip()
         fail_code = f_match.group(2).strip()
         if not any(s["roll"] == r_no for s in students):
