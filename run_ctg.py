@@ -1021,7 +1021,12 @@ def interactive_ctg_menu():
             print(f"{GREEN}✓ Loaded {len(items):,} candidate rolls from Top 51 Institutes!{RESET}\n")
             sub_opt = input(f"{BOLD}Include Subject-Wise Marks Breakdown? [Y/n]: {RESET}").strip().lower()
             with_sub = sub_opt != 'n'
-            run_ctg_scraper(items, with_subjects=with_sub)
+            
+            default_out = os.path.join(BASE_DIR, "results", "chittagong_top_51_with_marks" if with_sub else "chittagong_top_51")
+            out_prompt = input(f"{BOLD}Save folder [default: {default_out}]: {RESET}").strip()
+            dest_dir = out_prompt if out_prompt else default_out
+            
+            run_ctg_scraper(items, results_root=dest_dir, with_subjects=with_sub, force_recheck=True)
         else:
             print(f"{RED}[!] File top_51_institutes_all_rolls.txt not found.{RESET}", flush=True)
     elif choice == "7":
@@ -1033,11 +1038,15 @@ def interactive_ctg_menu():
         sub_choice = input(f"{BOLD}Enter choice [1-4]: {RESET}").strip()
         
         rolls_to_scrape = []
+        default_dir_name = "chittagong_with_marks"
         if sub_choice == "1":
             p = os.path.join(BASE_DIR, "top_51_institutes_all_rolls.txt")
+            if not os.path.exists(p):
+                p = r"C:\Users\labib_n4\Documents\Project\Result-Scraper-Antygravity-Project\top_51_institutes_all_rolls.txt"
             if os.path.exists(p):
                 with open(p, "r", encoding="utf-8") as f:
                     rolls_to_scrape = [r.strip() for r in re.split(r'[,\s\n"\[\]]+', f.read()) if r.strip().isdigit()]
+            default_dir_name = "chittagong_top_51_with_marks"
         elif sub_choice == "2":
             p = os.path.join(BASE_DIR, "chittagong_all_rolls.txt")
             if os.path.exists(p):
@@ -1056,24 +1065,41 @@ def interactive_ctg_menu():
                     rolls_to_scrape = [r.strip() for r in re.split(r'[,\s\n"\[\]]+', f.read()) if r.strip().isdigit()]
 
         if rolls_to_scrape:
-            run_ctg_scraper(rolls_to_scrape, with_subjects=True, force_recheck=True)
+            default_out = os.path.join(BASE_DIR, "results", default_dir_name)
+            out_prompt = input(f"{BOLD}Save folder [default: {default_out}]: {RESET}").strip()
+            dest_dir = out_prompt if out_prompt else default_out
+            run_ctg_scraper(rolls_to_scrape, results_root=dest_dir, with_subjects=True, force_recheck=True)
 
 
 if __name__ == "__main__":
     force_flag = "--force" in sys.argv
     with_sub_flag = "--with-marks" in sys.argv or "--subjects" in sys.argv
-    args = [a for a in sys.argv[1:] if a not in ("--force", "--with-marks", "--subjects")]
     
-    if "--eiin" in args:
-        e_idx = args.index("--eiin")
-        eiin_args = args[e_idx + 1:]
+    # Check custom --out-dir / --output
+    custom_out_dir = None
+    clean_argv = []
+    i = 1
+    while i < len(sys.argv):
+        arg = sys.argv[i]
+        if arg in ("--out-dir", "--output") and i + 1 < len(sys.argv):
+            custom_out_dir = sys.argv[i + 1]
+            i += 2
+        elif arg not in ("--force", "--with-marks", "--subjects"):
+            clean_argv.append(arg)
+            i += 1
+        else:
+            i += 1
+
+    if "--eiin" in clean_argv:
+        e_idx = clean_argv.index("--eiin")
+        eiin_args = clean_argv[e_idx + 1:]
         if eiin_args:
-            run_ctg_eiin_scraper(eiin_args, with_subjects=with_sub_flag)
+            run_ctg_eiin_scraper(eiin_args, results_root=custom_out_dir, with_subjects=with_sub_flag)
         else:
             interactive_ctg_menu()
-    elif args:
+    elif clean_argv:
         arg_rolls = []
-        for a in args:
+        for a in clean_argv:
             if "-" in a and re.match(r'^\d+-\d+$', a):
                 s, e = map(int, a.split("-"))
                 arg_rolls.extend([str(x) for x in range(min(s, e), max(s, e) + 1)])
@@ -1085,7 +1111,11 @@ if __name__ == "__main__":
             elif a.isdigit():
                 arg_rolls.append(a)
         if arg_rolls:
-            run_ctg_scraper(arg_rolls, force_recheck=force_flag, with_subjects=with_sub_flag)
+            # If top 51 rolls passed and no custom dir specified, route to dedicated directory
+            if not custom_out_dir and any("top_51" in a.lower() for a in clean_argv):
+                custom_out_dir = os.path.join(BASE_DIR, "results", "chittagong_top_51_with_marks" if with_sub_flag else "chittagong_top_51")
+            
+            run_ctg_scraper(arg_rolls, results_root=custom_out_dir, force_recheck=force_flag, with_subjects=with_sub_flag)
         else:
             interactive_ctg_menu()
     else:
