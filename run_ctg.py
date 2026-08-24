@@ -1,19 +1,10 @@
 """
 Interactive Terminal CLI for Chittagong Education Board (BISE CTG) Result Scraper 2026
-Standardized 8-Field Schema:
-  • name
-  • roll
-  • total_mark
-  • grade
-  • institution_name
-  • institution_eiin
-  • zilla
-  • upazilla
-Features:
-  • 100% Precision Multi-Tier Upazila & District Resolution Engine
-  • Smart Dynamic Proxy Harvester (Webshare + Public Fallback Pool)
-  • District Folders & Upazila-Wise JSON Persistence
-  • Live Real-Time Student List Swiping
+Ultra-Low CPU Optimization & High-Speed Architecture:
+  • Memoized Geo Resolver (0ms O(1) Cache)
+  • Time-Throttled Dirty-Only JSON Disk Flushing (Every 10-15s instead of every 25 reqs)
+  • Reusable Worker HTTP Sessions (Zero SSL/TLS renegotiation overhead)
+  • Standardized 8-Field Schema
 """
 
 import sys
@@ -27,6 +18,8 @@ import threading
 import collections
 import concurrent.futures
 from typing import List, Dict, Any, Optional
+import requests
+from requests.adapters import HTTPAdapter
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
@@ -41,7 +34,9 @@ from engine.ctg_scraper import (
     parse_ctg_student_html,
     fetch_ctg_student,
     parse_ctg_institute_gazette,
-    fetch_ctg_institute
+    fetch_ctg_institute,
+    INDIVIDUAL_ENDPOINT,
+    INSTITUTION_ENDPOINT
 )
 from engine.proxy_harvester import SmartProxyPool
 
@@ -73,11 +68,12 @@ def slugify(text: str) -> str:
 
 
 # =========================================================================
-# 100% PRECISION MULTI-TIER UPAZILA DETECTOR
+# 100% PRECISION MULTI-TIER UPAZILA DETECTOR (WITH O(1) MEMOIZATION CACHE)
 # =========================================================================
 _EXACT_SCHOOL_MAP = {}
 _TOKEN_SCHOOL_MAP = {}
 _EIIN_GEO_MAP = {}
+_GEO_RESOLVER_CACHE = {}  # In-memory instant cache
 _STOP_WORDS = {"govt", "government", "model", "high", "school", "college", "boys", "girls", "and", "the", "for", "secondary", "institute", "institution", "corporation", "city"}
 
 ALL_KNOWN_UPAZILAS = {
@@ -204,45 +200,63 @@ def load_upazila_indexes():
 load_upazila_indexes()
 
 def resolve_school_geo(inst_name_str: str, eiin_str: str = "") -> Dict[str, str]:
+    cache_key = (inst_name_str, eiin_str)
+    if cache_key in _GEO_RESOLVER_CACHE:
+        return _GEO_RESOLVER_CACHE[cache_key]
+
     if eiin_str and eiin_str in _EIIN_GEO_MAP:
-        return dict(_EIIN_GEO_MAP[eiin_str])
+        res = dict(_EIIN_GEO_MAP[eiin_str])
+        _GEO_RESOLVER_CACHE[cache_key] = res
+        return res
 
     if not inst_name_str:
-        return {"eiin": "", "zilla": "CHATTOGRAM", "upazila": "UNKNOWN", "name": "UNKNOWN"}
+        res = {"eiin": "", "zilla": "CHATTOGRAM", "upazila": "UNKNOWN", "name": "UNKNOWN"}
+        _GEO_RESOLVER_CACHE[cache_key] = res
+        return res
 
     # 1. Exact string / Substring match against 1,218 schools
     clean = re.sub(r'[^a-zA-Z0-9]+', '', inst_name_str.lower())
     for k, v in _EXACT_SCHOOL_MAP.items():
         if k == clean or (len(k) > 10 and (k in clean or clean in k)):
-            return dict(v)
+            res = dict(v)
+            _GEO_RESOLVER_CACHE[cache_key] = res
+            return res
 
     # 2. Distinctive token match (e.g. "parbati", "fasiakhali", "digerpankhali")
     tokens = set(re.findall(r'[a-zA-Z]{4,}', inst_name_str.lower())) - _STOP_WORDS
     for tok in tokens:
         if tok in _TOKEN_SCHOOL_MAP and len(_TOKEN_SCHOOL_MAP[tok]) == 1:
-            return dict(_TOKEN_SCHOOL_MAP[tok][0])
+            res = dict(_TOKEN_SCHOOL_MAP[tok][0])
+            _GEO_RESOLVER_CACHE[cache_key] = res
+            return res
 
     # 3. Direct Upazila keyword match from school name
     inst_upper = inst_name_str.upper()
     for upz_kw, (z_val, u_val) in ALL_KNOWN_UPAZILAS.items():
         if re.search(rf'\b{upz_kw}\b', inst_upper):
-            return {"eiin": "", "zilla": z_val, "upazila": u_val, "name": inst_name_str}
+            res = {"eiin": "", "zilla": z_val, "upazila": u_val, "name": inst_name_str}
+            _GEO_RESOLVER_CACHE[cache_key] = res
+            return res
 
     # 4. District default fallback
     for z_kw, s_upz in [("COX'S BAZAR", "COX_S_BAZAR_SADAR"), ("KHAGRACHHARI", "KHAGRACHHARI_SADAR"), ("KHAGRACHARI", "KHAGRACHHARI_SADAR"), ("BANDARBAN", "BANDARBAN_SADAR"), ("RANGAMATI", "RANGAMATI_SADAR"), ("CHATTOGRAM", "CHATTOGRAM_SADAR"), ("CHITTAGONG", "CHATTOGRAM_SADAR")]:
         if z_kw in inst_upper:
             z_clean = "CHATTOGRAM" if "CHITTAGONG" in z_kw else z_kw.replace("'", "_").replace(" ", "_")
             if z_clean == "KHAGRACHARI": z_clean = "KHAGRACHHARI"
-            return {"eiin": "", "zilla": z_clean, "upazila": s_upz, "name": inst_name_str}
+            res = {"eiin": "", "zilla": z_clean, "upazila": s_upz, "name": inst_name_str}
+            _GEO_RESOLVER_CACHE[cache_key] = res
+            return res
 
-    return {"eiin": "", "zilla": "CHATTOGRAM", "upazila": "UNKNOWN", "name": inst_name_str}
+    res = {"eiin": "", "zilla": "CHATTOGRAM", "upazila": "UNKNOWN", "name": inst_name_str}
+    _GEO_RESOLVER_CACHE[cache_key] = res
+    return res
 
 
 def print_ctg_banner():
     print(f"\n{CYAN}┌───────────────────────────────────────────────────────────┐{RESET}")
     print(f"{CYAN}│{RESET}  {BOLD}Chittagong Board Result Scraper 2026 — High-Speed Engine{RESET}  {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}Standardized Clean 8-Field Output • Upazila-Wise Persistence{RESET}{CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}Standardized Clean 8-Field Output • Ultra-Low CPU Engine{RESET}  {CYAN}│{RESET}")
     print(f"{CYAN}│{RESET}  {DIM}Smart Proxy Harvester • 100% Precision Upazila Detection{RESET}  {CYAN}│{RESET}")
     print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n", flush=True)
 
@@ -259,8 +273,33 @@ def format_progress_bar(current: int, total: int, width: int = 24) -> str:
 proxy_pool = SmartProxyPool()
 
 
+def create_isolated_session(proxy: Optional[str] = None) -> requests.Session:
+    session = requests.Session()
+    adapter = HTTPAdapter(pool_connections=10, pool_maxsize=10, max_retries=0)
+    session.mount("http://", adapter)
+    session.mount("https://", adapter)
+
+    if proxy:
+        parts = proxy.split(":")
+        if len(parts) == 4:
+            ip, port, user, pwd = parts
+            proxy_url = f"http://{user}:{pwd}@{ip}:{port}"
+        else:
+            proxy_url = f"http://{proxy}"
+        session.proxies.update({"http": proxy_url, "https": proxy_url})
+
+    session.headers.update({
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Origin": "https://sresult.bise-ctg.gov.bd",
+        "Referer": "https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/individual/",
+        "Connection": "keep-alive"
+    })
+    return session
+
+
 # =========================================================================
-# UNIFIED UPALIZA & MASTER STORAGE MANAGER
+# ULTRA-LOW CPU PERSISTENCE MANAGER (Time-Throttled Dirty-Only Flushing)
 # =========================================================================
 class CtgResultsManager:
     def __init__(self, results_root: Optional[str] = None):
@@ -271,6 +310,9 @@ class CtgResultsManager:
         
         self.master_students = {}
         self.master_institutions = {}
+        self.dirty_upazilas = set()
+        self.last_flush_time = time.time()
+
         if os.path.exists(self.master_file):
             try:
                 with open(self.master_file, "r", encoding="utf-8") as f:
@@ -319,7 +361,6 @@ class CtgResultsManager:
         upz_name = geo.get("upazila") or s.get("upazilla") or s.get("upazila") or "UNKNOWN"
         final_eiin = eiin_str or geo.get("eiin", "")
 
-        # Standardized Clean 8-Field Object
         record = {
             "name": str(s.get("name") or s.get("student_name") or "").strip(),
             "roll": roll_str,
@@ -333,18 +374,17 @@ class CtgResultsManager:
 
         z_slug = slugify(zilla_name)
         u_slug = slugify(upz_name)
+        key = (z_slug, u_slug)
 
         with self.lock:
             self.master_students[roll_str] = record
             if inst_meta and final_eiin:
                 self.master_institutions[final_eiin] = inst_meta
 
-            key = (z_slug, u_slug)
-            z_folder = os.path.join(self.root, zilla_name)
-            os.makedirs(z_folder, exist_ok=True)
-            u_file = os.path.join(z_folder, f"results_upazilla_{u_slug}.json")
-
             if key not in self.upazila_data:
+                z_folder = os.path.join(self.root, zilla_name)
+                os.makedirs(z_folder, exist_ok=True)
+                u_file = os.path.join(z_folder, f"results_upazilla_{u_slug}.json")
                 self.upazila_data[key] = {
                     "file_path": u_file,
                     "data": {
@@ -364,11 +404,23 @@ class CtgResultsManager:
             if inst_meta and final_eiin:
                 u_entry["institutions_map"][final_eiin] = inst_meta
             u_entry["students_map"][roll_str] = record
+            self.dirty_upazilas.add(key)
 
-    def flush_to_disk(self):
+    def maybe_flush(self, force: bool = False):
+        """Flushes data to disk only every 12 seconds or on force exit to maintain ~0% CPU."""
+        now = time.time()
+        if not force and (now - self.last_flush_time < 12.0 or not self.dirty_upazilas):
+            return
+
         with self.lock:
+            self.last_flush_time = now
+            keys_to_flush = list(self.dirty_upazilas)
+            self.dirty_upazilas.clear()
+
             all_insts = list(self.master_institutions.values())
             all_studs = list(self.master_students.values())
+
+            # 1. Save Master File
             passed = sum(1 for x in all_studs if "FAIL" not in str(x.get("grade", "")).upper())
             gpa5 = sum(1 for x in all_studs if str(x.get("grade", "")) in ["5.00", "5", "5.0"])
 
@@ -393,7 +445,11 @@ class CtgResultsManager:
             except Exception:
                 pass
 
-            for key, entry in self.upazila_data.items():
+            # 2. Save only dirty Upazila files
+            for key in keys_to_flush:
+                entry = self.upazila_data.get(key)
+                if not entry:
+                    continue
                 u_file = entry["file_path"]
                 u_studs = list(entry["students_map"].values())
                 u_insts = list(entry["institutions_map"].values())
@@ -426,7 +482,7 @@ class CtgResultsManager:
 
 
 # =========================================================================
-# 1. EIIN INSTITUTIONAL SCRAPING ENGINE (Clean 8-Field Output)
+# 1. EIIN INSTITUTIONAL SCRAPING ENGINE
 # =========================================================================
 def run_ctg_eiin_scraper(
     eiins: List[str],
@@ -439,7 +495,7 @@ def run_ctg_eiin_scraper(
 
     mgr = CtgResultsManager(results_root)
     proxies = proxy_pool.ensure_pool(min_size=20)
-    num_workers = min(35, len(proxies)) if len(proxies) >= 20 else max(10, len(proxies))
+    num_workers = min(25, len(proxies)) if len(proxies) >= 15 else max(8, len(proxies))
     spare_proxies = max(0, len(proxies) - num_workers)
 
     print(f"\n=======================================================")
@@ -549,7 +605,7 @@ def run_ctg_eiin_scraper(
                 sys.stdout.write(p_bar_line)
                 sys.stdout.flush()
 
-        mgr.flush_to_disk()
+        mgr.maybe_flush()
 
     num_threads = min(15, max(2, len(proxies) if proxies else 5))
     if len(pending_eiins) < num_threads:
@@ -562,7 +618,7 @@ def run_ctg_eiin_scraper(
         except KeyboardInterrupt:
             print(f"\n\n{YELLOW}[!] Pipeline stopped by user (Ctrl+C). Preserved all scraped records!{RESET}", flush=True)
 
-    mgr.flush_to_disk()
+    mgr.maybe_flush(force=True)
     sys.stdout.write("\n\n")
 
     total_elapsed = time.time() - batch_start_time
@@ -592,7 +648,7 @@ def run_ctg_eiin_scraper(
 
 
 # =========================================================================
-# 2. ROLL RANGE / FILE SCRAPING ENGINE (Clean 8-Field Output)
+# 2. ROLL RANGE / FILE SCRAPING ENGINE (Thread-Local Session Reuse)
 # =========================================================================
 def run_ctg_scraper(
     rolls: List[str],
@@ -607,7 +663,7 @@ def run_ctg_scraper(
     mgr = CtgResultsManager(results_root)
     cache_file = os.path.join(mgr.root, ".chittagong_memory_cache.json")
     proxies = proxy_pool.ensure_pool(min_size=20)
-    num_workers = min(40, len(proxies)) if len(proxies) >= 20 else max(10, len(proxies))
+    num_workers = min(25, len(proxies)) if len(proxies) >= 15 else max(8, len(proxies))
     spare_proxies = max(0, len(proxies) - num_workers)
 
     print(f"\n=======================================================")
@@ -661,16 +717,41 @@ def run_ctg_scraper(
     last_roll_time = [None]
     batch_start_time = time.time()
 
+    # Thread-local reusable sessions (avoids rebuilding TCP/SSL on every call)
+    thread_local = threading.local()
+
+    def get_thread_session(proxy_str: Optional[str]) -> requests.Session:
+        if not hasattr(thread_local, "session") or thread_local.proxy != proxy_str:
+            if hasattr(thread_local, "session"):
+                try:
+                    thread_local.session.close()
+                except Exception:
+                    pass
+            thread_local.session = create_isolated_session(proxy_str)
+            thread_local.proxy = proxy_str
+        return thread_local.session
+
     def process_roll(task_info):
         nonlocal scraped_count
         idx, roll_str = task_info
         cur_proxies = proxy_pool.get_all()
         p = cur_proxies[idx % len(cur_proxies)] if cur_proxies else None
 
-        res = fetch_ctg_student(roll=roll_str, proxy=p, timeout=7.0)
-        if not res or not res.get("success"):
+        sess = get_thread_session(p)
+        res = None
+        try:
+            r = sess.post(INDIVIDUAL_ENDPOINT, data={"roll": roll_str, "button2": "Submit"}, timeout=7.0)
+            if r.status_code == 200:
+                res = parse_ctg_student_html(r.text, roll_str)
+        except Exception:
             p_alt = cur_proxies[(idx + 17) % len(cur_proxies)] if cur_proxies else None
-            res = fetch_ctg_student(roll=roll_str, proxy=p_alt, timeout=7.0)
+            sess_alt = get_thread_session(p_alt)
+            try:
+                r = sess_alt.post(INDIVIDUAL_ENDPOINT, data={"roll": roll_str, "button2": "Submit"}, timeout=7.0)
+                if r.status_code == 200:
+                    res = parse_ctg_student_html(r.text, roll_str)
+            except Exception:
+                pass
 
         now_ts = time.time()
         with stats_lock:
@@ -715,11 +796,10 @@ def run_ctg_scraper(
             with dead_lock:
                 dead_slots_set.add(roll_str)
             with print_lock:
-                sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
+                sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
                 sys.stdout.flush()
 
-        if scraped_count % 25 == 0:
-            mgr.flush_to_disk()
+        mgr.maybe_flush()
 
         return res
 
@@ -730,7 +810,7 @@ def run_ctg_scraper(
         except KeyboardInterrupt:
             print(f"\n\n{YELLOW}[!] Pipeline stopped by user (Ctrl+C). Preserved all scraped records!{RESET}", flush=True)
 
-    mgr.flush_to_disk()
+    mgr.maybe_flush(force=True)
     with dead_lock:
         try:
             tmp_c = cache_file + ".tmp"
