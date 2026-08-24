@@ -796,7 +796,7 @@ def run_ctg_scraper(
             with dead_lock:
                 dead_slots_set.add(roll_str)
             with print_lock:
-                sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
+                sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
                 sys.stdout.flush()
 
         mgr.maybe_flush()
