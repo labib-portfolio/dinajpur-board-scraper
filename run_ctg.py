@@ -527,7 +527,7 @@ class CtgResultsManager:
 def run_ctg_eiin_scraper(
     eiins: List[str],
     results_root: Optional[str] = None,
-    with_subjects: bool = False
+    with_subjects: bool = True
 ):
     eiins = sorted(list(dict.fromkeys(str(e).strip() for e in eiins if str(e).strip().isdigit() and len(str(e).strip()) == 6)))
     if not eiins:
@@ -703,7 +703,7 @@ def run_ctg_scraper(
     rolls: List[str],
     results_root: Optional[str] = None,
     force_recheck: bool = False,
-    with_subjects: bool = False
+    with_subjects: bool = True
 ):
     rolls = sorted(list(dict.fromkeys(str(r).strip() for r in rolls if str(r).strip().isdigit())))
     if not rolls:
@@ -1073,7 +1073,7 @@ def interactive_ctg_menu():
 
 if __name__ == "__main__":
     force_flag = "--force" in sys.argv
-    with_sub_flag = "--with-marks" in sys.argv or "--subjects" in sys.argv
+    with_sub_flag = "--no-marks" not in sys.argv
     
     # Check custom --out-dir / --output
     custom_out_dir = None
@@ -1084,7 +1084,7 @@ if __name__ == "__main__":
         if arg in ("--out-dir", "--output") and i + 1 < len(sys.argv):
             custom_out_dir = sys.argv[i + 1]
             i += 2
-        elif arg not in ("--force", "--with-marks", "--subjects"):
+        elif arg not in ("--force", "--with-marks", "--subjects", "--no-marks"):
             clean_argv.append(arg)
             i += 1
         else:
