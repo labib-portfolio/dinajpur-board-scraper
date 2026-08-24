@@ -1,6 +1,6 @@
 """
 Interactive Terminal CLI for Chittagong Education Board (BISE CTG) Result Scraper 2026
-Ultra-Low CPU Optimization Architecture with Subject-Wise Marks Breakdown Support
+High-Speed Non-Blocking Asynchronous Streaming Architecture (Zero-Freeze / Zero-Stuck)
 """
 
 import sys
@@ -210,7 +210,6 @@ def resolve_school_geo(inst_name_str: str, eiin_str: str = "") -> Dict[str, str]
         _GEO_RESOLVER_CACHE[cache_key] = res
         return res
 
-    # 1. Exact string / Substring match against 1,218 schools
     clean = re.sub(r'[^a-zA-Z0-9]+', '', inst_name_str.lower())
     for k, v in _EXACT_SCHOOL_MAP.items():
         if k == clean or (len(k) > 10 and (k in clean or clean in k)):
@@ -218,7 +217,6 @@ def resolve_school_geo(inst_name_str: str, eiin_str: str = "") -> Dict[str, str]
             _GEO_RESOLVER_CACHE[cache_key] = res
             return res
 
-    # 2. Distinctive token match
     tokens = set(re.findall(r'[a-zA-Z]{4,}', inst_name_str.lower())) - _STOP_WORDS
     for tok in tokens:
         if tok in _TOKEN_SCHOOL_MAP and len(_TOKEN_SCHOOL_MAP[tok]) == 1:
@@ -226,7 +224,6 @@ def resolve_school_geo(inst_name_str: str, eiin_str: str = "") -> Dict[str, str]
             _GEO_RESOLVER_CACHE[cache_key] = res
             return res
 
-    # 3. Direct Upazila keyword match
     inst_upper = inst_name_str.upper()
     for upz_kw, (z_val, u_val) in ALL_KNOWN_UPAZILAS.items():
         if re.search(rf'\b{upz_kw}\b', inst_upper):
@@ -234,7 +231,6 @@ def resolve_school_geo(inst_name_str: str, eiin_str: str = "") -> Dict[str, str]
             _GEO_RESOLVER_CACHE[cache_key] = res
             return res
 
-    # 4. District default fallback
     for z_kw, s_upz in [("COX'S BAZAR", "COX_S_BAZAR_SADAR"), ("KHAGRACHHARI", "KHAGRACHHARI_SADAR"), ("KHAGRACHARI", "KHAGRACHHARI_SADAR"), ("BANDARBAN", "BANDARBAN_SADAR"), ("RANGAMATI", "RANGAMATI_SADAR"), ("CHATTOGRAM", "CHATTOGRAM_SADAR"), ("CHITTAGONG", "CHATTOGRAM_SADAR")]:
         if z_kw in inst_upper:
             z_clean = "CHATTOGRAM" if "CHITTAGONG" in z_kw else z_kw.replace("'", "_").replace(" ", "_")
@@ -253,7 +249,7 @@ def print_ctg_banner():
     print(f"{CYAN}│{RESET}  {BOLD}Chittagong Board Result Scraper 2026 — High-Speed Engine{RESET}  {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
     print(f"{CYAN}│{RESET}  {DIM}Standardized Clean 8-Field Output • Subject Breakdown Mode{RESET}  {CYAN}│{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}Smart Proxy Harvester • 100% Precision Upazila Detection{RESET}  {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}Zero-Freeze Non-Blocking Stream • 100% Upazila Detection{RESET}   {CYAN}│{RESET}")
     print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n", flush=True)
 
 
@@ -270,7 +266,7 @@ proxy_pool = SmartProxyPool()
 
 def create_isolated_session(proxy: Optional[str] = None) -> requests.Session:
     session = requests.Session()
-    adapter = HTTPAdapter(pool_connections=15, pool_maxsize=15, max_retries=0)
+    adapter = HTTPAdapter(pool_connections=20, pool_maxsize=20, max_retries=0)
     session.mount("http://", adapter)
     session.mount("https://", adapter)
 
@@ -522,7 +518,7 @@ class CtgResultsManager:
 
 
 # =========================================================================
-# 1. EIIN INSTITUTIONAL SCRAPING ENGINE
+# 1. EIIN INSTITUTIONAL SCRAPING ENGINE (NON-BLOCKING STREAM)
 # =========================================================================
 def run_ctg_eiin_scraper(
     eiins: List[str],
@@ -536,7 +532,7 @@ def run_ctg_eiin_scraper(
 
     mgr = CtgResultsManager(results_root)
     proxies = proxy_pool.ensure_pool(min_size=20)
-    num_workers = min(20, len(proxies)) if len(proxies) >= 10 else max(6, len(proxies))
+    num_workers = min(20, max(6, len(proxies))) if proxies else 10
     spare_proxies = max(0, len(proxies) - num_workers)
 
     mode_label = "Subject-Wise Marks Detailed" if with_subjects else "Standard 8-Field Clean"
@@ -573,96 +569,79 @@ def run_ctg_eiin_scraper(
     last_roll_time = [None]
     batch_received_count = 0
 
-    def harvest_and_stream_eiin(task_info):
-        nonlocal batch_received_count
+    def harvest_eiin_worker(task_info):
         idx, eiin_str = task_info
         cur_proxies = proxy_pool.get_all()
         p = cur_proxies[idx % len(cur_proxies)] if cur_proxies else None
 
-        res = fetch_ctg_institute(eiin=eiin_str, proxy=p, timeout=8.0, with_subjects=with_subjects)
+        res = fetch_ctg_institute(eiin=eiin_str, proxy=p, timeout=5.0, with_subjects=with_subjects)
         if not res or not res.get("success"):
             p_alt = cur_proxies[(idx + 13) % len(cur_proxies)] if cur_proxies else None
-            res = fetch_ctg_institute(eiin=eiin_str, proxy=p_alt, timeout=8.0, with_subjects=with_subjects)
+            res = fetch_ctg_institute(eiin=eiin_str, proxy=p_alt, timeout=5.0, with_subjects=with_subjects)
 
-        if not res or not res.get("success"):
-            with print_lock:
-                sys.stdout.write("\r\033[K")
-                sys.stdout.write(f"  [{idx+1}/{len(pending_eiins)}] EIIN {eiin_str} -> {RED}Not Found / Error{RESET}\n")
-                sys.stdout.flush()
-            return
+        return (idx, eiin_str, res)
 
-        inst_name = res.get("institute_name", "UNKNOWN")
-        zilla_name = res.get("zilla", "CHATTOGRAM")
-        thana_name = res.get("thana", "UNKNOWN")
-        students = res.get("students", [])
-
-        inst_meta = {
-            "institution_eiin": eiin_str,
-            "name": inst_name,
-            "zilla": zilla_name,
-            "thana": thana_name,
-            "appeared": res.get("total_appeared", len(students)),
-            "passed": res.get("total_passed", sum(1 for s in students if "FAIL" not in str(s.get("grade", "")).upper())),
-            "gpa5": res.get("total_gpa5", 0),
-            "students_count": len(students)
-        }
-
-        with print_lock:
-            sys.stdout.write("\r\033[K")
-            sys.stdout.write(f"  [{idx+1}/{len(pending_eiins)}] EIIN {eiin_str}: {inst_name[:30]} {GREEN}+{len(students)} rolls{RESET}\n")
-            sys.stdout.flush()
-
-        for s in students:
-            mgr.add_student_record(s, inst_meta)
-            now_ts = time.time()
-            with stats_lock:
-                if first_roll_time[0] is None:
-                    first_roll_time[0] = now_ts
-                last_roll_time[0] = now_ts
-                batch_received_count += 1
-                cur_rec = batch_received_count
-
-            with recent_lock:
-                recent_completions.append(now_ts)
-                cutoff = now_ts - 6.0
-                while recent_completions and recent_completions[0] < cutoff:
-                    recent_completions.popleft()
-                sample_duration = max(0.5, now_ts - recent_completions[0]) if len(recent_completions) > 1 else 1.0
-                speed = len(recent_completions) / sample_duration
-
-            roll_str = str(s.get("roll"))
-            s_name = s.get("name", "STUDENT") or "STUDENT"
-            grade_res = s.get("grade", "N/A")
-            is_pass = "FAIL" not in str(grade_res).upper()
-            status_color = GREEN if is_pass else RED
-            status_label = "PASSED" if is_pass else "FAILED"
-            
-            elapsed = now_ts - (first_roll_time[0] or now_ts)
-            mins, secs = divmod(elapsed, 60)
-            time_str = f"{int(mins)}m {int(secs):02d}s"
-            p_bar = format_progress_bar(cur_rec, max(cur_rec, len(students)), width=24)
-
-            with print_lock:
-                sys.stdout.write("\r\033[K")
-                student_line = f" {cur_rec:4d}  Roll {roll_str:<7}  {s_name:<30}  GPA={grade_res:<6} {status_color}{status_label}{RESET}\n"
-                sys.stdout.write(student_line)
-                if now_ts - last_ui_draw[0] > 0.10:
-                    last_ui_draw[0] = now_ts
-                    p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec} rolls processed ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
-                    sys.stdout.write(p_bar_line)
-                sys.stdout.flush()
-
-        mgr.maybe_flush()
-        time.sleep(0.001)
-
-    num_threads = min(12, max(2, len(proxies) if proxies else 4))
-    if len(pending_eiins) < num_threads:
-        num_threads = len(pending_eiins)
-
-    tasks = list(enumerate(pending_eiins))
-    with concurrent.futures.ThreadPoolExecutor(max_workers=num_threads) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
+        futures = [executor.submit(harvest_eiin_worker, (i, e)) for i, e in enumerate(pending_eiins)]
         try:
-            list(executor.map(harvest_and_stream_eiin, tasks))
+            for fut in concurrent.futures.as_completed(futures):
+                idx, eiin_str, res = fut.result()
+                if not res or not res.get("success"):
+                    with print_lock:
+                        sys.stdout.write(f"  EIIN {eiin_str} -> {RED}Not Found / Error{RESET}\n")
+                        sys.stdout.flush()
+                    continue
+
+                inst_name = res.get("institute_name", "UNKNOWN")
+                zilla_name = res.get("zilla", "CHATTOGRAM")
+                thana_name = res.get("thana", "UNKNOWN")
+                students = res.get("students", [])
+
+                inst_meta = {
+                    "institution_eiin": eiin_str,
+                    "name": inst_name,
+                    "zilla": zilla_name,
+                    "thana": thana_name,
+                    "appeared": res.get("total_appeared", len(students)),
+                    "passed": res.get("total_passed", sum(1 for s in students if "FAIL" not in str(s.get("grade", "")).upper())),
+                    "gpa5": res.get("total_gpa5", 0),
+                    "students_count": len(students)
+                }
+
+                with print_lock:
+                    sys.stdout.write(f"  EIIN {eiin_str}: {inst_name[:30]} {GREEN}+{len(students)} rolls{RESET}\n")
+                    sys.stdout.flush()
+
+                for s in students:
+                    mgr.add_student_record(s, inst_meta)
+                    now_ts = time.time()
+                    with stats_lock:
+                        if first_roll_time[0] is None:
+                            first_roll_time[0] = now_ts
+                        last_roll_time[0] = now_ts
+                        batch_received_count += 1
+                        cur_rec = batch_received_count
+
+                    with recent_lock:
+                        recent_completions.append(now_ts)
+                        cutoff = now_ts - 5.0
+                        while recent_completions and recent_completions[0] < cutoff:
+                            recent_completions.popleft()
+                        sample_duration = max(0.5, now_ts - recent_completions[0]) if len(recent_completions) > 1 else 1.0
+                        speed = len(recent_completions) / sample_duration
+
+                    elapsed = now_ts - (first_roll_time[0] or now_ts)
+                    mins, secs = divmod(elapsed, 60)
+                    time_str = f"{int(mins)}m {int(secs):02d}s"
+                    p_bar = format_progress_bar(cur_rec, max(cur_rec, len(students)), width=24)
+
+                    with print_lock:
+                        if now_ts - last_ui_draw[0] > 0.10:
+                            last_ui_draw[0] = now_ts
+                            sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec} rolls processed ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
+                            sys.stdout.flush()
+
+                mgr.maybe_flush()
         except KeyboardInterrupt:
             print(f"\n\n{YELLOW}[!] Pipeline stopped by user (Ctrl+C). Preserved all scraped records!{RESET}", flush=True)
 
@@ -697,7 +676,7 @@ def run_ctg_eiin_scraper(
 
 
 # =========================================================================
-# 2. ROLL RANGE / FILE SCRAPING ENGINE
+# 2. ROLL RANGE / FILE SCRAPING ENGINE (NON-BLOCKING STREAM)
 # =========================================================================
 def run_ctg_scraper(
     rolls: List[str],
@@ -712,8 +691,8 @@ def run_ctg_scraper(
 
     mgr = CtgResultsManager(results_root)
     cache_file = os.path.join(mgr.root, ".chittagong_memory_cache.json")
-    proxies = proxy_pool.ensure_pool(min_size=20)
-    num_workers = min(20, len(proxies)) if len(proxies) >= 10 else max(6, len(proxies))
+    proxies = proxy_pool.ensure_pool(min_size=25)
+    num_workers = min(30, max(10, len(proxies))) if proxies else 15
     spare_proxies = max(0, len(proxies) - num_workers)
 
     mode_label = "Subject-Wise Marks Detailed" if with_subjects else "Standard 8-Field Clean"
@@ -738,7 +717,6 @@ def run_ctg_scraper(
         except Exception:
             pass
 
-    # If with_subjects requested, check if existing cached records lack subjects
     def is_cached(r_str):
         if r_str not in mgr.master_students:
             return False
@@ -779,99 +757,120 @@ def run_ctg_scraper(
     last_roll_time = [None]
     batch_start_time = time.time()
 
+    # Pre-allocate robust session pool with dual timeouts and fallback
     worker_sessions = []
     for i in range(num_workers):
         p = proxies[i % len(proxies)] if proxies else None
         worker_sessions.append(create_isolated_session(p))
 
-    def process_roll(task_info):
-        nonlocal scraped_count
+    # Fast direct session for fallback
+    direct_session = create_isolated_session(None)
+
+    def process_roll_worker(task_info):
         idx, roll_str = task_info
         worker_id = idx % num_workers
         sess = worker_sessions[worker_id]
 
         res = None
+        # Strict dual timeout (2.5s connect, 4.0s read)
         try:
-            r = sess.post(INDIVIDUAL_ENDPOINT, data={"roll": roll_str, "button2": "Submit"}, timeout=7.0)
+            r = sess.post(INDIVIDUAL_ENDPOINT, data={"roll": roll_str, "button2": "Submit"}, timeout=(2.5, 4.0))
             if r.status_code == 200:
                 res = parse_ctg_student_html(r.text, roll_str, with_subjects=with_subjects)
         except Exception:
+            # Immediate failover to alternative session
             alt_worker_id = (worker_id + 7) % num_workers
             sess_alt = worker_sessions[alt_worker_id]
             try:
-                r = sess_alt.post(INDIVIDUAL_ENDPOINT, data={"roll": roll_str, "button2": "Submit"}, timeout=7.0)
+                r = sess_alt.post(INDIVIDUAL_ENDPOINT, data={"roll": roll_str, "button2": "Submit"}, timeout=(2.5, 4.0))
                 if r.status_code == 200:
                     res = parse_ctg_student_html(r.text, roll_str, with_subjects=with_subjects)
             except Exception:
-                pass
+                # Direct fallback
+                try:
+                    r = direct_session.post(INDIVIDUAL_ENDPOINT, data={"roll": roll_str, "button2": "Submit"}, timeout=(2.5, 4.0))
+                    if r.status_code == 200:
+                        res = parse_ctg_student_html(r.text, roll_str, with_subjects=with_subjects)
+                except Exception:
+                    pass
 
-        now_ts = time.time()
-        with stats_lock:
-            if first_roll_time[0] is None:
-                first_roll_time[0] = now_ts
-            last_roll_time[0] = now_ts
-            scraped_count += 1
-            cur_c = scraped_count
-            cur_t = len(pending_rolls)
+        return (roll_str, res)
 
-        with recent_lock:
-            recent_completions.append(now_ts)
-            cutoff = now_ts - 6.0
-            while recent_completions and recent_completions[0] < cutoff:
-                recent_completions.popleft()
-            dur = max(0.5, now_ts - recent_completions[0]) if len(recent_completions) > 1 else 1.0
-            speed = len(recent_completions) / dur
+    # Chunk processing into non-blocking streams of 1,000 rolls
+    CHUNK_SIZE = 1000
+    total_to_scrape = len(pending_rolls)
 
-        pct = (cur_c / max(1, cur_t)) * 100
-        elapsed = now_ts - (first_roll_time[0] or now_ts)
-        mins, secs = divmod(elapsed, 60)
-        time_str = f"{int(mins)}m {int(secs):02d}s"
-        p_bar = format_progress_bar(cur_c, cur_t, width=24)
-
-        if res and res.get("success"):
-            mgr.add_student_record(res)
-
-            s_name = res.get("name", "STUDENT") or "STUDENT"
-            grade_res = res.get("grade", "N/A")
-            is_pass = "FAIL" not in str(grade_res).upper()
-            status_color = GREEN if is_pass else RED
-            status_label = "PASSED" if is_pass else "FAILED"
-
-            with print_lock:
-                sys.stdout.write("\r\033[K")
-                student_line = f" {cur_c:4d}/{cur_t}  Roll {roll_str:<7}  {s_name:<30}  GPA={grade_res:<6} {status_color}{status_label}{RESET}\n"
-                sys.stdout.write(student_line)
-                if now_ts - last_ui_draw[0] > 0.10:
-                    last_ui_draw[0] = now_ts
-                    p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
-                    sys.stdout.write(p_bar_line)
-                sys.stdout.flush()
-        elif res and res.get("error") == "Record Not Found":
-            with dead_lock:
-                dead_slots_set.add(roll_str)
-            with print_lock:
-                if now_ts - last_ui_draw[0] > 0.10:
-                    last_ui_draw[0] = now_ts
-                    sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
-                    sys.stdout.flush()
-
-        mgr.maybe_flush()
-        time.sleep(0.001)
-
-        return res
-
-    tasks = list(enumerate(pending_rolls))
     with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
-        try:
-            list(executor.map(process_roll, tasks))
-        except KeyboardInterrupt:
-            print(f"\n\n{YELLOW}[!] Pipeline stopped by user (Ctrl+C). Preserved all scraped records!{RESET}", flush=True)
+        for chunk_idx in range(0, total_to_scrape, CHUNK_SIZE):
+            chunk = pending_rolls[chunk_idx: chunk_idx + CHUNK_SIZE]
+            futures = [executor.submit(process_roll_worker, (chunk_idx + j, r)) for j, r in enumerate(chunk)]
+            
+            try:
+                for fut in concurrent.futures.as_completed(futures):
+                    roll_str, res = fut.result()
+                    now_ts = time.time()
+                    with stats_lock:
+                        if first_roll_time[0] is None:
+                            first_roll_time[0] = now_ts
+                        last_roll_time[0] = now_ts
+                        scraped_count += 1
+                        cur_c = scraped_count
+                        cur_t = total_to_scrape
+
+                    with recent_lock:
+                        recent_completions.append(now_ts)
+                        cutoff = now_ts - 5.0
+                        while recent_completions and recent_completions[0] < cutoff:
+                            recent_completions.popleft()
+                        dur = max(0.5, now_ts - recent_completions[0]) if len(recent_completions) > 1 else 1.0
+                        speed = len(recent_completions) / dur
+
+                    pct = (cur_c / max(1, cur_t)) * 100
+                    elapsed = now_ts - (first_roll_time[0] or now_ts)
+                    mins, secs = divmod(elapsed, 60)
+                    time_str = f"{int(mins)}m {int(secs):02d}s"
+                    p_bar = format_progress_bar(cur_c, cur_t, width=24)
+
+                    if res and res.get("success"):
+                        mgr.add_student_record(res)
+
+                        s_name = res.get("name", "STUDENT") or "STUDENT"
+                        grade_res = res.get("grade", "N/A")
+                        is_pass = "FAIL" not in str(grade_res).upper()
+                        status_color = GREEN if is_pass else RED
+                        status_label = "PASSED" if is_pass else "FAILED"
+
+                        with print_lock:
+                            sys.stdout.write("\r\033[K")
+                            student_line = f" {cur_c:4d}/{cur_t}  Roll {roll_str:<7}  {s_name:<30}  GPA={grade_res:<6} {status_color}{status_label}{RESET}\n"
+                            sys.stdout.write(student_line)
+                            if now_ts - last_ui_draw[0] > 0.08:
+                                last_ui_draw[0] = now_ts
+                                sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
+                            sys.stdout.flush()
+                    elif res and res.get("error") == "Record Not Found":
+                        with dead_lock:
+                            dead_slots_set.add(roll_str)
+                        with print_lock:
+                            if now_ts - last_ui_draw[0] > 0.08:
+                                last_ui_draw[0] = now_ts
+                                sys.stdout.write(f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}")
+                                sys.stdout.flush()
+
+                    mgr.maybe_flush()
+            except KeyboardInterrupt:
+                print(f"\n\n{YELLOW}[!] Pipeline stopped by user (Ctrl+C). Preserved all scraped records!{RESET}", flush=True)
+                break
 
     for s in worker_sessions:
         try:
             s.close()
         except Exception:
             pass
+    try:
+        direct_session.close()
+    except Exception:
+        pass
 
     mgr.maybe_flush(force=True)
     with dead_lock:
@@ -941,7 +940,7 @@ def interactive_ctg_menu():
         raw = input(f"{BOLD}EIIN: {RESET}").strip()
         eiins = [e.strip() for e in re.split(r'[,\s\n]+', raw) if e.strip().isdigit() and len(e.strip()) == 6]
         if eiins:
-            run_ctg_eiin_scraper(eiins)
+            run_ctg_eiin_scraper(eiins, with_subjects=True)
     elif choice == "2":
         zillas = ["BANDARBAN", "CHATTOGRAM", "COX_S_BAZAR", "KHAGRACHHARI", "RANGAMATI"]
         print(f"\n{BOLD}Select Zilla (District):{RESET}", flush=True)
@@ -969,14 +968,14 @@ def interactive_ctg_menu():
                 if os.path.exists(all_z_file):
                     with open(all_z_file, "r", encoding="utf-8") as azf:
                         eiins = [l.strip() for l in azf if l.strip().isdigit()]
-                    run_ctg_eiin_scraper(eiins)
+                    run_ctg_eiin_scraper(eiins, with_subjects=True)
             elif u_choice.isdigit() and 1 <= int(u_choice) <= len(upz_files):
                 selected_upz_file = upz_files[int(u_choice) - 1]
                 upz_name = os.path.splitext(os.path.basename(selected_upz_file))[0]
                 with open(selected_upz_file, "r", encoding="utf-8") as uf:
                     eiins = [l.strip() for l in uf if l.strip().isdigit()]
                 print(f"\n{GREEN}Selected: {selected_z} -> {upz_name} ({len(eiins)} institutions){RESET}", flush=True)
-                run_ctg_eiin_scraper(eiins)
+                run_ctg_eiin_scraper(eiins, with_subjects=True)
     elif choice == "3":
         raw = input(f"\n{BOLD}Enter Roll Range (e.g. 100001-100500, 129000-129050): {RESET}").strip()
         m = re.match(r'(\d+)\s*[-:]\s*(\d+)', raw)
@@ -985,14 +984,14 @@ def interactive_ctg_menu():
             if start_r > end_r:
                 start_r, end_r = end_r, start_r
             rolls = [str(r) for r in range(start_r, end_r + 1)]
-            run_ctg_scraper(rolls)
+            run_ctg_scraper(rolls, with_subjects=True)
         else:
             print(f"{RED}[!] Invalid range format. Example: 129000-129050{RESET}", flush=True)
     elif choice == "4":
         raw = input(f"\n{BOLD}Enter Roll number(s): {RESET}").strip()
         rolls = [r.strip() for r in re.split(r'[,\s\n]+', raw) if r.strip().isdigit()]
         if rolls:
-            run_ctg_scraper(rolls)
+            run_ctg_scraper(rolls, with_subjects=True)
     elif choice == "5":
         path = input(f"\n{BOLD}Enter filepath (txt/json, default chittagong_all_rolls.txt): {RESET}").strip().strip('"')
         if not path:
@@ -1006,9 +1005,9 @@ def interactive_ctg_menu():
             with open(path, "r", encoding="utf-8") as f:
                 content = f.read()
             items = [r.strip() for r in re.split(r'[,\s\n"\[\]]+', content) if r.strip().isdigit()]
-            print(f"{GREEN}✓ Loaded {len(items)} items from {path}{RESET}\n")
+            print(f"{GREEN}✓ Loaded {len(items):,} items from {path}{RESET}\n")
             if items:
-                run_ctg_scraper(items)
+                run_ctg_scraper(items, with_subjects=True)
         else:
             print(f"{RED}[!] File not found: {path}{RESET}", flush=True)
     elif choice == "6":
@@ -1019,14 +1018,12 @@ def interactive_ctg_menu():
             with open(path, "r", encoding="utf-8") as f:
                 items = [r.strip() for r in re.split(r'[,\s\n"\[\]]+', f.read()) if r.strip().isdigit()]
             print(f"{GREEN}✓ Loaded {len(items):,} candidate rolls from Top 51 Institutes!{RESET}\n")
-            sub_opt = input(f"{BOLD}Include Subject-Wise Marks Breakdown? [Y/n]: {RESET}").strip().lower()
-            with_sub = sub_opt != 'n'
             
-            default_out = os.path.join(BASE_DIR, "results", "chittagong_top_51_with_marks" if with_sub else "chittagong_top_51")
+            default_out = os.path.join(BASE_DIR, "results", "chittagong_top_51_with_marks")
             out_prompt = input(f"{BOLD}Save folder [default: {default_out}]: {RESET}").strip()
             dest_dir = out_prompt if out_prompt else default_out
             
-            run_ctg_scraper(items, results_root=dest_dir, with_subjects=with_sub, force_recheck=True)
+            run_ctg_scraper(items, results_root=dest_dir, with_subjects=True, force_recheck=True)
         else:
             print(f"{RED}[!] File top_51_institutes_all_rolls.txt not found.{RESET}", flush=True)
     elif choice == "7":
@@ -1075,7 +1072,6 @@ if __name__ == "__main__":
     force_flag = "--force" in sys.argv
     with_sub_flag = "--no-marks" not in sys.argv
     
-    # Check custom --out-dir / --output
     custom_out_dir = None
     clean_argv = []
     i = 1
@@ -1111,7 +1107,6 @@ if __name__ == "__main__":
             elif a.isdigit():
                 arg_rolls.append(a)
         if arg_rolls:
-            # If top 51 rolls passed and no custom dir specified, route to dedicated directory
             if not custom_out_dir and any("top_51" in a.lower() for a in clean_argv):
                 custom_out_dir = os.path.join(BASE_DIR, "results", "chittagong_top_51_with_marks" if with_sub_flag else "chittagong_top_51")
             
