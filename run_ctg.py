@@ -1,9 +1,18 @@
 """
 Interactive Terminal CLI for Chittagong Education Board (BISE CTG) Result Scraper 2026
-Full Student Names + District-Folder & Upazila-Wise JSON Persistence System
-Endpoints:
-  • Institutional Gazette: https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/resultm.php
-  • Individual Marksheet (by roll): https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/individual/result.php
+Standardized 8-Field Schema:
+  • name
+  • roll
+  • total_mark
+  • grade
+  • institution_name
+  • institution_eiin
+  • zilla
+  • upazilla
+Features:
+  • Smart Dynamic Proxy Harvester (Webshare + Public Fallback Pool)
+  • District Folders & Upazila-Wise JSON Persistence
+  • Live Real-Time Student List Swiping
 """
 
 import sys
@@ -17,8 +26,6 @@ import threading
 import collections
 import concurrent.futures
 from typing import List, Dict, Any, Optional
-import requests
-from requests.adapters import HTTPAdapter
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, BASE_DIR)
@@ -35,6 +42,7 @@ from engine.ctg_scraper import (
     parse_ctg_institute_gazette,
     fetch_ctg_institute
 )
+from engine.proxy_harvester import SmartProxyPool
 
 # ANSI Color Codes
 CYAN = "\033[96m"
@@ -123,21 +131,9 @@ def print_ctg_banner():
     print(f"\n{CYAN}┌───────────────────────────────────────────────────────────┐{RESET}")
     print(f"{CYAN}│{RESET}  {BOLD}Chittagong Board Result Scraper 2026 — High-Speed Engine{RESET}  {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}Full Student Name Storage • Upazila-Wise Persistence{RESET}      {CYAN}│{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}Zero CAPTCHA • Multi-Threaded Proxies • Total Marks Calc{RESET}    {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}Standardized Clean 8-Field Output • Upazila-Wise Persistence{RESET}{CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}Smart Proxy Harvester • Auto Total Marks Calculation{RESET}       {CYAN}│{RESET}")
     print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n", flush=True)
-
-
-def load_proxies() -> List[str]:
-    proxies = []
-    proxy_file = os.path.join(BASE_DIR, "webshare_proxies.txt")
-    if os.path.exists(proxy_file):
-        with open(proxy_file, "r", encoding="utf-8") as f:
-            for line in f:
-                l = line.strip()
-                if l and not l.startswith("#") and ":" in l:
-                    proxies.append(l)
-    return proxies
 
 
 def format_progress_bar(current: int, total: int, width: int = 24) -> str:
@@ -146,6 +142,10 @@ def format_progress_bar(current: int, total: int, width: int = 24) -> str:
     fraction = min(1.0, max(0.0, current / total))
     filled = int(round(width * fraction))
     return f"[{'█' * filled}{'░' * (width - filled)}]"
+
+
+# Global Proxy Pool
+proxy_pool = SmartProxyPool()
 
 
 # =========================================================================
@@ -165,12 +165,14 @@ class CtgResultsManager:
                 with open(self.master_file, "r", encoding="utf-8") as f:
                     d = json.load(f)
                     for inst in d.get("institutions", []):
-                        if inst.get("eiin"):
-                            self.master_institutions[str(inst.get("eiin"))] = inst
-                    raw_s = d.get("students", []) or d.get("records", [])
+                        if inst.get("eiin") or inst.get("institution_eiin"):
+                            e_key = str(inst.get("institution_eiin") or inst.get("eiin"))
+                            self.master_institutions[e_key] = inst
+                    raw_s = d.get("records", []) or d.get("students", [])
                     for s in raw_s:
-                        if s.get("roll_no"):
-                            self.master_students[str(s.get("roll_no"))] = s
+                        r_key = str(s.get("roll") or s.get("roll_no"))
+                        if r_key:
+                            self.master_students[r_key] = s
             except Exception:
                 pass
 
@@ -190,32 +192,39 @@ class CtgResultsManager:
                             self.upazila_data[key] = {
                                 "file_path": u_file,
                                 "data": u_json,
-                                "students_map": {str(x["roll_no"]): x for x in u_json.get("records", []) if x.get("roll_no")},
-                                "institutions_map": {str(x["eiin"]): x for x in u_json.get("institutions", []) if x.get("eiin")}
+                                "students_map": {str(x.get("roll") or x.get("roll_no")): x for x in u_json.get("records", []) if (x.get("roll") or x.get("roll_no"))},
+                                "institutions_map": {str(x.get("institution_eiin") or x.get("eiin")): x for x in u_json.get("institutions", []) if (x.get("institution_eiin") or x.get("eiin"))}
                             }
                     except Exception:
                         pass
 
     def add_student_record(self, s: Dict[str, Any], inst_meta: Optional[Dict[str, Any]] = None):
-        roll_str = str(s.get("roll_no"))
-        eiin_str = str(s.get("eiin", "") or (inst_meta.get("eiin") if inst_meta else ""))
-        inst_name = s.get("institute", "") or (inst_meta.get("name") if inst_meta else "")
+        roll_str = str(s.get("roll") or s.get("roll_no", "")).strip()
+        eiin_str = str(s.get("institution_eiin") or s.get("eiin", "") or (inst_meta.get("institution_eiin") if inst_meta else "")).strip()
+        inst_name = s.get("institution_name") or s.get("institute", "") or (inst_meta.get("name") if inst_meta else "")
 
         geo = resolve_school_geo(inst_name, eiin_str)
         zilla_name = s.get("zilla") or geo.get("zilla", "CHATTOGRAM")
-        upz_name = s.get("upazila") or s.get("thana") or geo.get("upazila", "UNKNOWN")
+        upz_name = s.get("upazilla") or s.get("upazila") or s.get("thana") or geo.get("upazila", "UNKNOWN")
         final_eiin = eiin_str or geo.get("eiin", "")
 
-        s["zilla"] = zilla_name
-        s["upazila"] = upz_name
-        if final_eiin:
-            s["eiin"] = final_eiin
+        # Standardized Clean 8-Field Object
+        record = {
+            "name": str(s.get("name") or s.get("student_name") or "").strip(),
+            "roll": roll_str,
+            "total_mark": s.get("total_mark") if s.get("total_mark") is not None else s.get("total_marks"),
+            "grade": str(s.get("grade") or s.get("gpa") or "FAIL").strip(),
+            "institution_name": inst_name,
+            "institution_eiin": final_eiin,
+            "zilla": zilla_name,
+            "upazilla": upz_name
+        }
 
         z_slug = slugify(zilla_name)
         u_slug = slugify(upz_name)
 
         with self.lock:
-            self.master_students[roll_str] = s
+            self.master_students[roll_str] = record
             if inst_meta and final_eiin:
                 self.master_institutions[final_eiin] = inst_meta
 
@@ -243,14 +252,14 @@ class CtgResultsManager:
             u_entry = self.upazila_data[key]
             if inst_meta and final_eiin:
                 u_entry["institutions_map"][final_eiin] = inst_meta
-            u_entry["students_map"][roll_str] = s
+            u_entry["students_map"][roll_str] = record
 
     def flush_to_disk(self):
         with self.lock:
             all_insts = list(self.master_institutions.values())
             all_studs = list(self.master_students.values())
-            passed = sum(1 for x in all_studs if x.get("status") == "PASSED" or "GPA" in str(x.get("result", "")))
-            gpa5 = sum(1 for x in all_studs if str(x.get("gpa", "")) in ["5.00", "5", "5.0"])
+            passed = sum(1 for x in all_studs if "FAIL" not in str(x.get("grade", "")).upper())
+            gpa5 = sum(1 for x in all_studs if str(x.get("grade", "")) in ["5.00", "5", "5.0"])
 
             master_payload = {
                 "board": "CHATTOGRAM",
@@ -277,8 +286,8 @@ class CtgResultsManager:
                 u_file = entry["file_path"]
                 u_studs = list(entry["students_map"].values())
                 u_insts = list(entry["institutions_map"].values())
-                u_passed = sum(1 for x in u_studs if x.get("status") == "PASSED" or "GPA" in str(x.get("result", "")))
-                u_gpa5 = sum(1 for x in u_studs if str(x.get("gpa", "")) in ["5.00", "5", "5.0"])
+                u_passed = sum(1 for x in u_studs if "FAIL" not in str(x.get("grade", "")).upper())
+                u_gpa5 = sum(1 for x in u_studs if str(x.get("grade", "")) in ["5.00", "5", "5.0"])
 
                 u_payload = {
                     "board": "CHATTOGRAM",
@@ -306,7 +315,7 @@ class CtgResultsManager:
 
 
 # =========================================================================
-# 1. EIIN INSTITUTIONAL SCRAPING ENGINE (With Animated Student Swiping)
+# 1. EIIN INSTITUTIONAL SCRAPING ENGINE (Clean 8-Field Output)
 # =========================================================================
 def run_ctg_eiin_scraper(
     eiins: List[str],
@@ -318,7 +327,7 @@ def run_ctg_eiin_scraper(
         return
 
     mgr = CtgResultsManager(results_root)
-    proxies = load_proxies()
+    proxies = proxy_pool.ensure_pool(min_size=20)
     num_workers = min(35, len(proxies)) if len(proxies) >= 20 else max(10, len(proxies))
     spare_proxies = max(0, len(proxies) - num_workers)
 
@@ -355,11 +364,12 @@ def run_ctg_eiin_scraper(
     def harvest_and_stream_eiin(task_info):
         nonlocal batch_received_count
         idx, eiin_str = task_info
-        p = proxies[idx % len(proxies)] if proxies else None
+        cur_proxies = proxy_pool.get_all()
+        p = cur_proxies[idx % len(cur_proxies)] if cur_proxies else None
 
         res = fetch_ctg_institute(eiin=eiin_str, proxy=p, timeout=8.0)
         if not res or not res.get("success"):
-            p_alt = proxies[(idx + 13) % len(proxies)] if proxies else None
+            p_alt = cur_proxies[(idx + 13) % len(cur_proxies)] if cur_proxies else None
             res = fetch_ctg_institute(eiin=eiin_str, proxy=p_alt, timeout=8.0)
 
         if not res or not res.get("success"):
@@ -375,14 +385,13 @@ def run_ctg_eiin_scraper(
         students = res.get("students", [])
 
         inst_meta = {
-            "eiin": eiin_str,
+            "institution_eiin": eiin_str,
             "name": inst_name,
             "zilla": zilla_name,
             "thana": thana_name,
             "appeared": res.get("total_appeared", len(students)),
-            "passed": res.get("total_passed", sum(1 for s in students if s.get("status") == "PASSED")),
+            "passed": res.get("total_passed", sum(1 for s in students if "FAIL" not in str(s.get("grade", "")).upper())),
             "gpa5": res.get("total_gpa5", 0),
-            "pass_percentage": res.get("pass_percentage", ""),
             "students_count": len(students)
         }
 
@@ -409,10 +418,10 @@ def run_ctg_eiin_scraper(
                 sample_duration = max(0.5, now_ts - recent_completions[0]) if len(recent_completions) > 1 else 1.0
                 speed = len(recent_completions) / sample_duration
 
-            roll_str = str(s.get("roll_no"))
-            s_name = s.get("student_name", f"{s.get('group', 'STUDENT')}")
-            gpa_res = s.get("result", f"GPA={s.get('gpa')}")
-            is_pass = s.get("status") == "PASSED"
+            roll_str = str(s.get("roll"))
+            s_name = s.get("name", "STUDENT") or "STUDENT"
+            grade_res = s.get("grade", "N/A")
+            is_pass = "FAIL" not in str(grade_res).upper()
             status_color = GREEN if is_pass else RED
             status_label = "PASSED" if is_pass else "FAILED"
             
@@ -423,7 +432,7 @@ def run_ctg_eiin_scraper(
 
             with print_lock:
                 sys.stdout.write("\r\033[K")
-                student_line = f" {cur_rec:4d}  Roll {roll_str:<7}  {s_name:<30}  {gpa_res:<12} {status_color}{status_label}{RESET}\n"
+                student_line = f" {cur_rec:4d}  Roll {roll_str:<7}  {s_name:<30}  GPA={grade_res:<6} {status_color}{status_label}{RESET}\n"
                 sys.stdout.write(student_line)
                 p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_rec} rolls processed ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
                 sys.stdout.write(p_bar_line)
@@ -472,7 +481,7 @@ def run_ctg_eiin_scraper(
 
 
 # =========================================================================
-# 2. ROLL RANGE / FILE SCRAPING ENGINE (With Full Names & Upazila Routing)
+# 2. ROLL RANGE / FILE SCRAPING ENGINE (Clean 8-Field Output)
 # =========================================================================
 def run_ctg_scraper(
     rolls: List[str],
@@ -486,7 +495,7 @@ def run_ctg_scraper(
 
     mgr = CtgResultsManager(results_root)
     cache_file = os.path.join(mgr.root, ".chittagong_memory_cache.json")
-    proxies = load_proxies()
+    proxies = proxy_pool.ensure_pool(min_size=20)
     num_workers = min(40, len(proxies)) if len(proxies) >= 20 else max(10, len(proxies))
     spare_proxies = max(0, len(proxies) - num_workers)
 
@@ -544,11 +553,12 @@ def run_ctg_scraper(
     def process_roll(task_info):
         nonlocal scraped_count
         idx, roll_str = task_info
-        p = proxies[idx % len(proxies)] if proxies else None
+        cur_proxies = proxy_pool.get_all()
+        p = cur_proxies[idx % len(cur_proxies)] if cur_proxies else None
 
         res = fetch_ctg_student(roll=roll_str, proxy=p, timeout=7.0)
         if not res or not res.get("success"):
-            p_alt = proxies[(idx + 17) % len(proxies)] if proxies else None
+            p_alt = cur_proxies[(idx + 17) % len(cur_proxies)] if cur_proxies else None
             res = fetch_ctg_student(roll=roll_str, proxy=p_alt, timeout=7.0)
 
         now_ts = time.time()
@@ -575,33 +585,17 @@ def run_ctg_scraper(
         p_bar = format_progress_bar(cur_c, cur_t, width=24)
 
         if res and res.get("success"):
-            student_obj = {
-                "roll_no": roll_str,
-                "student_name": res.get("student_name", ""),
-                "father_name": res.get("father_name", ""),
-                "mother_name": res.get("mother_name", ""),
-                "registration_no": res.get("registration_no", ""),
-                "gpa": res.get("gpa", ""),
-                "total_marks": res.get("total_marks"),
-                "group": res.get("group", "GENERAL"),
-                "status": "PASSED" if "GPA" in str(res.get("result", "")) else "FAILED",
-                "result": res.get("result", ""),
-                "institute": res.get("institute", ""),
-                "session": res.get("session", ""),
-                "type": res.get("type", "REGULAR"),
-                "dob": res.get("dob", "")
-            }
-            mgr.add_student_record(student_obj)
+            mgr.add_student_record(res)
 
-            s_name = res.get("student_name", "STUDENT")
-            gpa_res = res.get("result", "N/A")
-            is_pass = "GPA" in str(gpa_res)
+            s_name = res.get("name", "STUDENT") or "STUDENT"
+            grade_res = res.get("grade", "N/A")
+            is_pass = "FAIL" not in str(grade_res).upper()
             status_color = GREEN if is_pass else RED
             status_label = "PASSED" if is_pass else "FAILED"
 
             with print_lock:
                 sys.stdout.write("\r\033[K")
-                student_line = f" {cur_c:4d}/{cur_t}  Roll {roll_str:<7}  {s_name:<30}  {gpa_res:<10} {status_color}{status_label}{RESET}\n"
+                student_line = f" {cur_c:4d}/{cur_t}  Roll {roll_str:<7}  {s_name:<30}  GPA={grade_res:<6} {status_color}{status_label}{RESET}\n"
                 sys.stdout.write(student_line)
                 p_bar_line = f"\r\033[K{CYAN}{p_bar}{RESET}  {cur_c}/{cur_t} ({pct:.1f}%) ⚡ {speed:.1f} rolls/s │ ⏱️ {time_str}"
                 sys.stdout.write(p_bar_line)
