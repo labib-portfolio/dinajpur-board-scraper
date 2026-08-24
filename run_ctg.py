@@ -1,11 +1,6 @@
 """
 Interactive Terminal CLI for Chittagong Education Board (BISE CTG) Result Scraper 2026
-Ultra-Low CPU Optimization Architecture:
-  • Pre-Allocated Worker Session Pool (Zero TLS Renegotiation)
-  • Throttled UI Redraws (Prevents Windows Terminal GPU/CPU Thrashing)
-  • Memoized Geo Resolver (0ms O(1) Cache)
-  • Time-Throttled Dirty-Only JSON Disk Flushing (Every 15s)
-  • Standardized 8-Field Schema
+Ultra-Low CPU Optimization Architecture with Subject-Wise Marks Breakdown Support
 """
 
 import sys
@@ -257,7 +252,7 @@ def print_ctg_banner():
     print(f"\n{CYAN}┌───────────────────────────────────────────────────────────┐{RESET}")
     print(f"{CYAN}│{RESET}  {BOLD}Chittagong Board Result Scraper 2026 — High-Speed Engine{RESET}  {CYAN}│{RESET}")
     print(f"{CYAN}├───────────────────────────────────────────────────────────┤{RESET}")
-    print(f"{CYAN}│{RESET}  {DIM}Standardized Clean 8-Field Output • Ultra-Low CPU Engine{RESET}  {CYAN}│{RESET}")
+    print(f"{CYAN}│{RESET}  {DIM}Standardized Clean 8-Field Output • Subject Breakdown Mode{RESET}  {CYAN}│{RESET}")
     print(f"{CYAN}│{RESET}  {DIM}Smart Proxy Harvester • 100% Precision Upazila Detection{RESET}  {CYAN}│{RESET}")
     print(f"{CYAN}└───────────────────────────────────────────────────────────┘{RESET}\n", flush=True)
 
@@ -299,7 +294,7 @@ def create_isolated_session(proxy: Optional[str] = None) -> requests.Session:
 
 
 # =========================================================================
-# ULTRA-LOW CPU PERSISTENCE MANAGER (Time-Throttled Dirty-Only Flushing)
+# ULTRA-LOW CPU PERSISTENCE MANAGER WITH INSTITUTION AGGREGATOR
 # =========================================================================
 class CtgResultsManager:
     def __init__(self, results_root: Optional[str] = None):
@@ -371,6 +366,10 @@ class CtgResultsManager:
             "zilla": zilla_name,
             "upazilla": upz_name
         }
+
+        # Include subject breakdown if present
+        if "subjects" in s:
+            record["subjects"] = s["subjects"]
 
         z_slug = slugify(zilla_name)
         u_slug = slugify(upz_name)
@@ -527,7 +526,8 @@ class CtgResultsManager:
 # =========================================================================
 def run_ctg_eiin_scraper(
     eiins: List[str],
-    results_root: Optional[str] = None
+    results_root: Optional[str] = None,
+    with_subjects: bool = False
 ):
     eiins = sorted(list(dict.fromkeys(str(e).strip() for e in eiins if str(e).strip().isdigit() and len(str(e).strip()) == 6)))
     if not eiins:
@@ -539,9 +539,12 @@ def run_ctg_eiin_scraper(
     num_workers = min(20, len(proxies)) if len(proxies) >= 10 else max(6, len(proxies))
     spare_proxies = max(0, len(proxies) - num_workers)
 
+    mode_label = "Subject-Wise Marks Detailed" if with_subjects else "Standard 8-Field Clean"
+
     print(f"\n=======================================================")
     print(f"🚀 {BOLD}ENGINE PIPELINE CONFIGURATION:{RESET}")
     print(f"  • Target Board:            {CYAN}{BOLD}Chittagong Education Board (BISE CTG){RESET}")
+    print(f"  • Extraction Mode:         {GREEN}{BOLD}{mode_label}{RESET}")
     print(f"  • Active Proxy Pool:       {GREEN}{BOLD}{len(proxies)} Verified Ultra-Fast Nodes{RESET}")
     print(f"  • Concurrent Workers:      {CYAN}{BOLD}{num_workers} Parallel Threads{RESET}")
     print(f"  • Standby Failover Spares: {YELLOW}{BOLD}{spare_proxies} Spare Proxies{RESET}")
@@ -576,10 +579,10 @@ def run_ctg_eiin_scraper(
         cur_proxies = proxy_pool.get_all()
         p = cur_proxies[idx % len(cur_proxies)] if cur_proxies else None
 
-        res = fetch_ctg_institute(eiin=eiin_str, proxy=p, timeout=8.0)
+        res = fetch_ctg_institute(eiin=eiin_str, proxy=p, timeout=8.0, with_subjects=with_subjects)
         if not res or not res.get("success"):
             p_alt = cur_proxies[(idx + 13) % len(cur_proxies)] if cur_proxies else None
-            res = fetch_ctg_institute(eiin=eiin_str, proxy=p_alt, timeout=8.0)
+            res = fetch_ctg_institute(eiin=eiin_str, proxy=p_alt, timeout=8.0, with_subjects=with_subjects)
 
         if not res or not res.get("success"):
             with print_lock:
@@ -639,7 +642,6 @@ def run_ctg_eiin_scraper(
             time_str = f"{int(mins)}m {int(secs):02d}s"
             p_bar = format_progress_bar(cur_rec, max(cur_rec, len(students)), width=24)
 
-            # Throttle UI redraw to 10 FPS to keep Windows Console CPU at 0%
             with print_lock:
                 sys.stdout.write("\r\033[K")
                 student_line = f" {cur_rec:4d}  Roll {roll_str:<7}  {s_name:<30}  GPA={grade_res:<6} {status_color}{status_label}{RESET}\n"
@@ -682,6 +684,7 @@ def run_ctg_eiin_scraper(
     print(f"=======================================================")
     print(f"⏱️ {BOLD}PIPELINED PROCESS EXECUTION TIME & PERFORMANCE:{RESET}")
     print(f"  • Total Pipeline Time:    {CYAN}{BOLD}{time_str}{RESET}")
+    print(f"  • Extraction Mode:        {GREEN}{BOLD}{mode_label}{RESET}")
     print(f"  • Institutions Processed: {len(pending_eiins)} ({already_scraped_count} already cached)")
     print(f"  • Total Student Records:  {GREEN}{BOLD}{len(mgr.master_students)} Students{RESET}")
     print(f"  • Live Scraped in Batch:  {batch_received_count} rolls")
@@ -694,12 +697,13 @@ def run_ctg_eiin_scraper(
 
 
 # =========================================================================
-# 2. ROLL RANGE / FILE SCRAPING ENGINE (Persistent Session Pool)
+# 2. ROLL RANGE / FILE SCRAPING ENGINE
 # =========================================================================
 def run_ctg_scraper(
     rolls: List[str],
     results_root: Optional[str] = None,
-    force_recheck: bool = False
+    force_recheck: bool = False,
+    with_subjects: bool = False
 ):
     rolls = sorted(list(dict.fromkeys(str(r).strip() for r in rolls if str(r).strip().isdigit())))
     if not rolls:
@@ -712,9 +716,12 @@ def run_ctg_scraper(
     num_workers = min(20, len(proxies)) if len(proxies) >= 10 else max(6, len(proxies))
     spare_proxies = max(0, len(proxies) - num_workers)
 
+    mode_label = "Subject-Wise Marks Detailed" if with_subjects else "Standard 8-Field Clean"
+
     print(f"\n=======================================================")
     print(f"🚀 {BOLD}ENGINE PIPELINE CONFIGURATION:{RESET}")
     print(f"  • Target Board:            {CYAN}{BOLD}Chittagong Education Board (BISE CTG){RESET}")
+    print(f"  • Extraction Mode:         {GREEN}{BOLD}{mode_label}{RESET}")
     print(f"  • Active Proxy Pool:       {GREEN}{BOLD}{len(proxies)} Verified Ultra-Fast Nodes{RESET}")
     print(f"  • Concurrent Workers:      {CYAN}{BOLD}{num_workers} Parallel Threads{RESET}")
     print(f"  • Standby Failover Spares: {YELLOW}{BOLD}{spare_proxies} Spare Proxies{RESET}")
@@ -731,12 +738,20 @@ def run_ctg_scraper(
         except Exception:
             pass
 
-    if force_recheck:
-        pending_rolls = [r for r in rolls if r not in mgr.master_students]
-    else:
-        pending_rolls = [r for r in rolls if r not in mgr.master_students and r not in dead_slots]
+    # If with_subjects requested, check if existing cached records lack subjects
+    def is_cached(r_str):
+        if r_str not in mgr.master_students:
+            return False
+        if with_subjects and "subjects" not in mgr.master_students[r_str]:
+            return False
+        return True
 
-    skipped_success = sum(1 for r in rolls if r in mgr.master_students)
+    if force_recheck:
+        pending_rolls = [r for r in rolls if not is_cached(r)]
+    else:
+        pending_rolls = [r for r in rolls if not is_cached(r) and r not in dead_slots]
+
+    skipped_success = sum(1 for r in rolls if is_cached(r))
     skipped_dead = sum(1 for r in rolls if r in dead_slots and r not in mgr.master_students)
 
     if skipped_success > 0 or skipped_dead > 0:
@@ -764,7 +779,6 @@ def run_ctg_scraper(
     last_roll_time = [None]
     batch_start_time = time.time()
 
-    # Pre-allocated persistent sessions (one per thread worker index)
     worker_sessions = []
     for i in range(num_workers):
         p = proxies[i % len(proxies)] if proxies else None
@@ -780,15 +794,14 @@ def run_ctg_scraper(
         try:
             r = sess.post(INDIVIDUAL_ENDPOINT, data={"roll": roll_str, "button2": "Submit"}, timeout=7.0)
             if r.status_code == 200:
-                res = parse_ctg_student_html(r.text, roll_str)
+                res = parse_ctg_student_html(r.text, roll_str, with_subjects=with_subjects)
         except Exception:
-            # Fallback to secondary spare session
             alt_worker_id = (worker_id + 7) % num_workers
             sess_alt = worker_sessions[alt_worker_id]
             try:
                 r = sess_alt.post(INDIVIDUAL_ENDPOINT, data={"roll": roll_str, "button2": "Submit"}, timeout=7.0)
                 if r.status_code == 200:
-                    res = parse_ctg_student_html(r.text, roll_str)
+                    res = parse_ctg_student_html(r.text, roll_str, with_subjects=with_subjects)
             except Exception:
                 pass
 
@@ -854,7 +867,6 @@ def run_ctg_scraper(
         except KeyboardInterrupt:
             print(f"\n\n{YELLOW}[!] Pipeline stopped by user (Ctrl+C). Preserved all scraped records!{RESET}", flush=True)
 
-    # Clean up persistent worker sessions
     for s in worker_sessions:
         try:
             s.close()
@@ -893,6 +905,7 @@ def run_ctg_scraper(
     print(f"=======================================================")
     print(f"⏱️ {BOLD}PIPELINED PROCESS EXECUTION TIME & PERFORMANCE:{RESET}")
     print(f"  • Total Pipeline Time:    {CYAN}{BOLD}{time_str}{RESET}")
+    print(f"  • Extraction Mode:        {GREEN}{BOLD}{mode_label}{RESET}")
     print(f"  • Total Candidate Rolls:  {len(rolls)} ({skipped_success} already cached)")
     print(f"  • Live Scraped in Batch:  {scraped_count}/{len(pending_rolls)} ({100.0 * scraped_count / max(1, len(pending_rolls)):.1f}%)")
     print(f"  • Active Scraping Speed:  {GREEN}{BOLD}{pure_speed_str}{RESET}")
@@ -916,10 +929,12 @@ def interactive_ctg_menu():
     print(f"  {GREEN}[2]{RESET} {BOLD}District / Upazila Bulk Scraper{RESET} — Select Upazila and scrape all schools")
     print(f"  {CYAN}[3]{RESET} Roll Number Range (e.g. 100001-105000, 129000-129100)")
     print(f"  {CYAN}[4]{RESET} Single / Multiple Candidate Rolls (e.g. 129051, 100001)")
-    print(f"  {GREEN}[5]{RESET} {BOLD}Load Rolls / EIINs from File{RESET} (e.g. chittagong_all_rolls.txt) {GREEN}⚡ Recommended{RESET}")
+    print(f"  {GREEN}[5]{RESET} {BOLD}Load Rolls from File{RESET} (e.g. chittagong_all_rolls.txt)")
+    print(f"  {YELLOW}{BOLD}[6]{RESET} {BOLD}Scrape Top 51 Institutes Rolls{RESET} ({CYAN}top_51_institutes_all_rolls.txt{RESET} — 14,586 examinees)")
+    print(f"  {GREEN}{BOLD}[7]{RESET} {BOLD}Scrape with Subject-Wise Marks Breakdown{RESET} (Include all subject scores)")
     print(f"  {CYAN}[0]{RESET} Exit\n", flush=True)
 
-    choice = input(f"{BOLD}Enter choice [1-5]: {RESET}").strip()
+    choice = input(f"{BOLD}Enter choice [1-7]: {RESET}").strip()
 
     if choice == "1":
         print(f"\n{BOLD}Enter EIIN number(s) (e.g. 103086 or space/comma-separated list):{RESET}")
@@ -979,7 +994,9 @@ def interactive_ctg_menu():
         if rolls:
             run_ctg_scraper(rolls)
     elif choice == "5":
-        path = input(f"\n{BOLD}Enter filepath (txt/json, e.g. chittagong_all_rolls.txt): {RESET}").strip().strip('"')
+        path = input(f"\n{BOLD}Enter filepath (txt/json, default chittagong_all_rolls.txt): {RESET}").strip().strip('"')
+        if not path:
+            path = "chittagong_all_rolls.txt"
         if not os.path.exists(path):
             local_cand = os.path.join(BASE_DIR, path)
             if os.path.exists(local_cand):
@@ -994,17 +1011,64 @@ def interactive_ctg_menu():
                 run_ctg_scraper(items)
         else:
             print(f"{RED}[!] File not found: {path}{RESET}", flush=True)
+    elif choice == "6":
+        path = os.path.join(BASE_DIR, "top_51_institutes_all_rolls.txt")
+        if not os.path.exists(path):
+            path = r"C:\Users\labib_n4\Documents\Project\Result-Scraper-Antygravity-Project\top_51_institutes_all_rolls.txt"
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as f:
+                items = [r.strip() for r in re.split(r'[,\s\n"\[\]]+', f.read()) if r.strip().isdigit()]
+            print(f"{GREEN}✓ Loaded {len(items):,} candidate rolls from Top 51 Institutes!{RESET}\n")
+            sub_opt = input(f"{BOLD}Include Subject-Wise Marks Breakdown? [Y/n]: {RESET}").strip().lower()
+            with_sub = sub_opt != 'n'
+            run_ctg_scraper(items, with_subjects=with_sub)
+        else:
+            print(f"{RED}[!] File top_51_institutes_all_rolls.txt not found.{RESET}", flush=True)
+    elif choice == "7":
+        print(f"\n{BOLD}Select Source for Subject-Wise Marks Scrape:{RESET}")
+        print(f"  [1] Top 51 Institutes ({CYAN}top_51_institutes_all_rolls.txt{RESET})")
+        print(f"  [2] Master Roll File ({CYAN}chittagong_all_rolls.txt{RESET})")
+        print(f"  [3] Custom Roll Range (e.g. 112250-112300)")
+        print(f"  [4] Custom File Path")
+        sub_choice = input(f"{BOLD}Enter choice [1-4]: {RESET}").strip()
+        
+        rolls_to_scrape = []
+        if sub_choice == "1":
+            p = os.path.join(BASE_DIR, "top_51_institutes_all_rolls.txt")
+            if os.path.exists(p):
+                with open(p, "r", encoding="utf-8") as f:
+                    rolls_to_scrape = [r.strip() for r in re.split(r'[,\s\n"\[\]]+', f.read()) if r.strip().isdigit()]
+        elif sub_choice == "2":
+            p = os.path.join(BASE_DIR, "chittagong_all_rolls.txt")
+            if os.path.exists(p):
+                with open(p, "r", encoding="utf-8") as f:
+                    rolls_to_scrape = [r.strip() for r in re.split(r'[,\s\n"\[\]]+', f.read()) if r.strip().isdigit()]
+        elif sub_choice == "3":
+            raw = input(f"{BOLD}Enter Roll Range: {RESET}").strip()
+            m = re.match(r'(\d+)\s*[-:]\s*(\d+)', raw)
+            if m:
+                s, e = int(m.group(1)), int(m.group(2))
+                rolls_to_scrape = [str(x) for x in range(min(s, e), max(s, e) + 1)]
+        elif sub_choice == "4":
+            p = input(f"{BOLD}Enter file path: {RESET}").strip().strip('"')
+            if os.path.exists(p):
+                with open(p, "r", encoding="utf-8") as f:
+                    rolls_to_scrape = [r.strip() for r in re.split(r'[,\s\n"\[\]]+', f.read()) if r.strip().isdigit()]
+
+        if rolls_to_scrape:
+            run_ctg_scraper(rolls_to_scrape, with_subjects=True, force_recheck=True)
 
 
 if __name__ == "__main__":
     force_flag = "--force" in sys.argv
-    args = [a for a in sys.argv[1:] if a != "--force"]
+    with_sub_flag = "--with-marks" in sys.argv or "--subjects" in sys.argv
+    args = [a for a in sys.argv[1:] if a not in ("--force", "--with-marks", "--subjects")]
     
     if "--eiin" in args:
         e_idx = args.index("--eiin")
         eiin_args = args[e_idx + 1:]
         if eiin_args:
-            run_ctg_eiin_scraper(eiin_args)
+            run_ctg_eiin_scraper(eiin_args, with_subjects=with_sub_flag)
         else:
             interactive_ctg_menu()
     elif args:
@@ -1021,7 +1085,7 @@ if __name__ == "__main__":
             elif a.isdigit():
                 arg_rolls.append(a)
         if arg_rolls:
-            run_ctg_scraper(arg_rolls, force_recheck=force_flag)
+            run_ctg_scraper(arg_rolls, force_recheck=force_flag, with_subjects=with_sub_flag)
         else:
             interactive_ctg_menu()
     else:

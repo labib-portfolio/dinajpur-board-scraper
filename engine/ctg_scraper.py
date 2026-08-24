@@ -1,6 +1,6 @@
 """
 Chittagong Education Board (BISE CTG) Result Scraping Engine
-Ultra-Fast Pre-Compiled Regex Parsing Architecture
+Ultra-Fast Pre-Compiled Regex Parsing Architecture with Subject-Wise Marks Support
 """
 
 import re
@@ -19,7 +19,7 @@ RE_RESULT = re.compile(r'>Result</td>\s*<td[^>]*>([^<]+)</td>', re.IGNORECASE)
 RE_INSTITUTE = re.compile(r'>Institute</td>\s*<td[^>]*>([^<]+)</td>', re.IGNORECASE)
 RE_GPA = re.compile(r'GPA\s*=?\s*([\d.]+)', re.IGNORECASE)
 RE_SUBJECT_ROWS = re.compile(
-    r'<td class="bg_grey">(\d+)</td>\s*<td class="bg_grey cap_lt">[^<]+</td>\s*<td class="bg_grey cap_lt">(\d{2,3})\(([A-Za-z0-9+\s-]+)\)</td>'
+    r'<td class="bg_grey">(\d+)</td>\s*<td class="bg_grey cap_lt">([^<]+)</td>\s*<td class="bg_grey cap_lt">(\d{2,3})\(([A-Za-z0-9+\s-]+)\)</td>'
 )
 RE_RAW_MARKS = re.compile(r'<td[^>]*>(\d{2,3})\([A-Za-z0-9+\s-]+\)</td>')
 
@@ -60,7 +60,7 @@ def create_ctg_session(proxy: Optional[str] = None) -> requests.Session:
     return session
 
 
-def parse_ctg_student_html(html_text: str, roll_no: str) -> Optional[Dict[str, Any]]:
+def parse_ctg_student_html(html_text: str, roll_no: str, with_subjects: bool = False) -> Optional[Dict[str, Any]]:
     if not html_text or "No Result Found" in html_text or "Invalid Roll" in html_text or "Record Not Found" in html_text:
         return {"success": False, "error": "Record Not Found", "roll": roll_no}
 
@@ -89,10 +89,20 @@ def parse_ctg_student_html(html_text: str, roll_no: str) -> Optional[Dict[str, A
 
     subject_rows = RE_SUBJECT_ROWS.findall(html_text)
     total_marks = 0
+    subjects_list = []
+
     if subject_rows:
-        for code, mark_str, _ in subject_rows:
+        for code, sub_name, mark_str, grade_str in subject_rows:
+            mark_int = int(mark_str)
             if code not in ('147', '152', '156'):
-                total_marks += int(mark_str)
+                total_marks += mark_int
+            if with_subjects:
+                subjects_list.append({
+                    "code": code.strip(),
+                    "subject": html.unescape(sub_name).strip(),
+                    "mark": mark_int,
+                    "grade": grade_str.strip()
+                })
     else:
         raw_marks = RE_RAW_MARKS.findall(html_text)
         if raw_marks:
@@ -101,7 +111,7 @@ def parse_ctg_student_html(html_text: str, roll_no: str) -> Optional[Dict[str, A
         else:
             total_marks = None
 
-    return {
+    record = {
         "success": True,
         "name": student_name,
         "roll": str(roll_no),
@@ -113,8 +123,13 @@ def parse_ctg_student_html(html_text: str, roll_no: str) -> Optional[Dict[str, A
         "upazilla": ""
     }
 
+    if with_subjects and subjects_list:
+        record["subjects"] = subjects_list
 
-def parse_ctg_institute_gazette(html_text: str, eiin: str) -> Optional[Dict[str, Any]]:
+    return record
+
+
+def parse_ctg_institute_gazette(html_text: str, eiin: str, with_subjects: bool = False) -> Optional[Dict[str, Any]]:
     if not html_text or "No Result Found" in html_text or "Invalid EIIN" in html_text:
         return {"success": False, "error": "EIIN Not Found", "eiin": eiin}
 
@@ -142,12 +157,19 @@ def parse_ctg_institute_gazette(html_text: str, eiin: str) -> Optional[Dict[str,
         raw_marks_block = p_match.group(3).strip()
 
         calc_total = 0
+        parsed_subs = []
         for entry in raw_marks_block.split(','):
+            entry = entry.strip()
             score_m = RE_SCORE.search(entry)
             if score_m:
-                calc_total += int(score_m.group(1))
+                m_val = int(score_m.group(1))
+                calc_total += m_val
+                if with_subjects:
+                    c_code = entry.split(':')[0].strip() if ':' in entry else ""
+                    g_code = entry.split('(')[-1].replace(')', '').strip() if '(' in entry else ""
+                    parsed_subs.append({"code": c_code, "mark": m_val, "grade": g_code})
 
-        students.append({
+        s_obj = {
             "name": "",
             "roll": r_no,
             "total_mark": calc_total if calc_total > 0 else None,
@@ -156,7 +178,11 @@ def parse_ctg_institute_gazette(html_text: str, eiin: str) -> Optional[Dict[str,
             "institution_eiin": str(eiin),
             "zilla": zilla_name,
             "upazilla": thana_name
-        })
+        }
+        if with_subjects and parsed_subs:
+            s_obj["subjects"] = parsed_subs
+
+        students.append(s_obj)
 
     for f_match in RE_FAILED_STUDENTS.finditer(html_text):
         r_no = f_match.group(1).strip()
@@ -189,13 +215,13 @@ def parse_ctg_institute_gazette(html_text: str, eiin: str) -> Optional[Dict[str,
     }
 
 
-def fetch_ctg_student(roll: str, proxy: Optional[str] = None, timeout: float = 7.0) -> Optional[Dict[str, Any]]:
+def fetch_ctg_student(roll: str, proxy: Optional[str] = None, timeout: float = 7.0, with_subjects: bool = False) -> Optional[Dict[str, Any]]:
     session = create_ctg_session(proxy=proxy)
     try:
         payload = {"roll": str(roll).strip(), "button2": "Submit"}
         r = session.post(INDIVIDUAL_ENDPOINT, data=payload, timeout=timeout)
         if r.status_code == 200:
-            return parse_ctg_student_html(r.text, str(roll).strip())
+            return parse_ctg_student_html(r.text, str(roll).strip(), with_subjects=with_subjects)
         return {"success": False, "status_code": r.status_code, "error": f"HTTP {r.status_code}", "roll": roll}
     except Exception as e:
         return {"success": False, "error": type(e).__name__, "roll": roll}
@@ -203,7 +229,7 @@ def fetch_ctg_student(roll: str, proxy: Optional[str] = None, timeout: float = 7
         session.close()
 
 
-def fetch_ctg_institute(eiin: str, proxy: Optional[str] = None, timeout: float = 8.0) -> Optional[Dict[str, Any]]:
+def fetch_ctg_institute(eiin: str, proxy: Optional[str] = None, timeout: float = 8.0, with_subjects: bool = False) -> Optional[Dict[str, Any]]:
     session = create_ctg_session(proxy=proxy)
     session.headers.update({
         "Referer": "https://sresult.bise-ctg.gov.bd/to_ssc_26_ctg/resultm.php",
@@ -213,7 +239,7 @@ def fetch_ctg_institute(eiin: str, proxy: Optional[str] = None, timeout: float =
         payload = {"eiin": str(eiin).strip()}
         r = session.post(INSTITUTION_ENDPOINT, data=payload, timeout=timeout)
         if r.status_code == 200:
-            return parse_ctg_institute_gazette(r.text, str(eiin).strip())
+            return parse_ctg_institute_gazette(r.text, str(eiin).strip(), with_subjects=with_subjects)
         return {"success": False, "status_code": r.status_code, "error": f"HTTP {r.status_code}", "eiin": eiin}
     except Exception as e:
         return {"success": False, "error": type(e).__name__, "eiin": eiin}
