@@ -406,6 +406,47 @@ class CtgResultsManager:
             u_entry["students_map"][roll_str] = record
             self.dirty_upazilas.add(key)
 
+    def _build_institutions_summary(self, records: List[Dict[str, Any]], existing_insts: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
+        groups = collections.defaultdict(list)
+        for r in records:
+            eiin_raw = str(r.get("institution_eiin") or "").strip()
+            inst_name_raw = str(r.get("institution_name") or "").strip()
+            key = eiin_raw if (eiin_raw and eiin_raw != "0") else (inst_name_raw or "UNKNOWN")
+            groups[key].append(r)
+
+        inst_map = {}
+        if existing_insts:
+            for k, v in existing_insts.items():
+                inst_map[str(k)] = dict(v)
+
+        for key, studs in groups.items():
+            appeared = len(studs)
+            passed = sum(1 for s in studs if "FAIL" not in str(s.get("grade", "")).upper())
+            gpa5 = sum(1 for s in studs if str(s.get("grade", "")) in ["5.00", "5", "5.0"])
+            pass_pct = f"{(passed / max(1, appeared) * 100):.2f}%"
+            inst_name = studs[0].get("institution_name") or key
+            eiin_val = str(studs[0].get("institution_eiin") or "")
+            z_val = studs[0].get("zilla") or "CHATTOGRAM"
+            u_val = studs[0].get("upazilla") or "UNKNOWN"
+
+            inst_obj = {
+                "eiin": eiin_val,
+                "name": inst_name,
+                "zilla": z_val,
+                "thana": u_val,
+                "appeared": appeared,
+                "passed": passed,
+                "gpa5": gpa5,
+                "pass_percentage": pass_pct,
+                "students_count": appeared
+            }
+            lookup_key = eiin_val if (eiin_val and eiin_val != "0") else key
+            inst_map[lookup_key] = inst_obj
+
+        inst_list = list(inst_map.values())
+        inst_list.sort(key=lambda x: str(x.get("name", "")))
+        return inst_list
+
     def maybe_flush(self, force: bool = False):
         """Flushes dirty upazila files and master file every 15s to keep CPU < 5%."""
         now = time.time()
@@ -417,8 +458,8 @@ class CtgResultsManager:
             keys_to_flush = list(self.dirty_upazilas)
             self.dirty_upazilas.clear()
 
-            all_insts = list(self.master_institutions.values())
             all_studs = list(self.master_students.values())
+            all_insts = self._build_institutions_summary(all_studs, self.master_institutions)
 
             # 1. Save Master File
             passed = sum(1 for x in all_studs if "FAIL" not in str(x.get("grade", "")).upper())
@@ -452,7 +493,7 @@ class CtgResultsManager:
                     continue
                 u_file = entry["file_path"]
                 u_studs = list(entry["students_map"].values())
-                u_insts = list(entry["institutions_map"].values())
+                u_insts = self._build_institutions_summary(u_studs, entry.get("institutions_map", {}))
                 u_passed = sum(1 for x in u_studs if "FAIL" not in str(x.get("grade", "")).upper())
                 u_gpa5 = sum(1 for x in u_studs if str(x.get("grade", "")) in ["5.00", "5", "5.0"])
 
